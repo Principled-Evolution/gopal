@@ -52,4 +52,4 @@ Gopal can also be used independently with any OPA-compatible system. The policie
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [Apache 2.0 License](LICENSE).
