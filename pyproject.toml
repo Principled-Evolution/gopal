@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gopal"
+version = "1.0.0"
+description = "Open Policy Agent Policies for AI Certification"
+readme = "README.md"
+authors = [
+    {name = "Mantric", email = "info@mantric.com"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "opa-python>=0.1.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mantric/gopal"
+"Bug Tracker" = "https://github.com/mantric/gopal/issues"
+
+[tool.setuptools]
+packages = ["gopal"]
+
+[tool.setuptools.package-data]
+gopal = ["**/*.rego"]

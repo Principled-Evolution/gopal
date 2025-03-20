@@ -1,0 +1,17 @@
+{
+    "metrics": {
+        "fairness": {
+            "details": {
+                "gender_bias_detected": false,
+                "racial_bias_detected": false
+            }
+        },
+        "content_safety": {
+            "score": 0.8
+        }
+    },
+    "params": {
+        "fairness_threshold": 0.8,
+        "toxicity_threshold": 0.7
+    }
+} 
