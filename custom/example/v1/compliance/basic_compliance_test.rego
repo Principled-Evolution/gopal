@@ -1,0 +1,86 @@
+package custom.example.v1.compliance
+
+test_allow_when_metrics_above_threshold {
+    input := {
+        "evaluation": {
+            "fairness_score": 0.9,
+            "toxicity_score": 0.1
+        },
+        "params": {
+            "fairness_threshold": 0.7,
+            "safety_threshold": 0.2
+        }
+    }
+    
+    allow with input as input
+    
+    report := report_output with input as input
+    report.result == true
+    report.metrics.combined_score.value > 0.7
+    report.metrics.combined_score.control_passed == true
+    report.metrics.compliance_level.value == "high"
+}
+
+test_deny_when_metrics_below_threshold {
+    input := {
+        "evaluation": {
+            "fairness_score": 0.6,
+            "toxicity_score": 0.3
+        },
+        "params": {
+            "fairness_threshold": 0.7,
+            "safety_threshold": 0.2
+        }
+    }
+    
+    not allow with input as input
+    
+    report := report_output with input as input
+    report.result == false
+    report.metrics.compliance_level.value == "low"
+}
+
+test_deny_when_fairness_below_threshold {
+    input := {
+        "evaluation": {
+            "fairness_score": 0.6,
+            "toxicity_score": 0.1
+        },
+        "params": {
+            "fairness_threshold": 0.7,
+            "safety_threshold": 0.2
+        }
+    }
+    
+    not allow with input as input
+}
+
+test_deny_when_toxicity_above_threshold {
+    input := {
+        "evaluation": {
+            "fairness_score": 0.8,
+            "toxicity_score": 0.3
+        },
+        "params": {
+            "fairness_threshold": 0.7,
+            "safety_threshold": 0.2
+        }
+    }
+    
+    not allow with input as input
+}
+
+test_custom_thresholds {
+    input := {
+        "evaluation": {
+            "fairness_score": 0.65,
+            "toxicity_score": 0.25
+        },
+        "params": {
+            "fairness_threshold": 0.6,  # Lower than default
+            "safety_threshold": 0.3     # Higher than default
+        }
+    }
+    
+    allow with input as input
+}

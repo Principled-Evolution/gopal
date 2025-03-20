@@ -1,0 +1,68 @@
+package custom.example.v1.compliance
+
+import data.helper_functions.reporting
+
+# METADATA
+# Title: Basic Compliance Example
+# Description: A simple example policy demonstrating custom policy creation
+# Version: 1.0.0
+# Category: Example
+# Required Metrics: ["fairness.score", "content_safety.score"]
+# Required Parameters:
+#   fairness_threshold: 0.7 (Default fairness threshold)
+#   safety_threshold: 0.2 (Default safety threshold)
+
+# Default allow/deny
+default allow = false
+
+# Rules for allowing
+allow {
+    # Check fairness score is above threshold
+    input.evaluation.fairness_score > input.params.fairness_threshold
+    
+    # Check toxicity score is below threshold
+    input.evaluation.toxicity_score < input.params.safety_threshold
+}
+
+# Calculate combined score
+combined_score = score {
+    # Custom calculation logic
+    fairness_weight := 0.6
+    safety_weight := 0.4
+    
+    fairness_score := input.evaluation.fairness_score
+    safety_score := 1 - input.evaluation.toxicity_score
+    
+    score := (fairness_weight * fairness_score) + (safety_weight * safety_score)
+}
+
+# Determine compliance level
+compliance_level = "high" {
+    combined_score > 0.9
+}
+
+compliance_level = "medium" {
+    combined_score > 0.7
+    combined_score <= 0.9
+}
+
+compliance_level = "low" {
+    combined_score <= 0.7
+}
+
+# Define metrics for reporting
+policy_metrics = {
+    "combined_score": {
+        "name": "Combined Compliance Score",
+        "value": combined_score,
+        "control_passed": combined_score > 0.7
+    },
+    "compliance_level": {
+        "name": "Compliance Level",
+        "value": compliance_level,
+        "control_passed": compliance_level == "high"
+    }
+}
+
+# Generate standardized report output
+report_output = reporting.compose_report("Basic Compliance Example", allow, policy_metrics)
