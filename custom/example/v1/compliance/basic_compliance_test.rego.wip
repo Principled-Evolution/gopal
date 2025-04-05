@@ -1,4 +1,4 @@
-package custom.example.v1.compliance
+package custom.example.v1.compliance.basic_compliance_test
 
 test_allow_when_metrics_above_threshold {
     input := {
