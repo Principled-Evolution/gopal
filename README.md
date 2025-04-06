@@ -1,6 +1,6 @@
 # Gopal - Open Policy Agent Policies for AI Certification
 
-Gopal is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/mantric/aicertify) but can also be used independently with other OPA-based systems.
+Gopal is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/principled-evolution/aicertify) but can also be used independently with other OPA-based systems.
 
 ## Directory Structure
 
