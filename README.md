@@ -1,6 +1,8 @@
-# Gopal - Open Policy Agent Policies for AI Certification
+# Governance OPA Library (GOPAL) - for AI System Evaluations
 
-Gopal is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/principled-evolution/aicertify) but can also be used independently with other OPA-based systems.
+GOPAL is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/principled-evolution/aicertify) but can also be used independently with other OPA-based systems.
+
+<img src="https://www.mermaidchart.com/raw/3a013c43-9ae3-4194-8bba-86b17004c800?theme=light&version=v0.1&format=svg" alt="Mermaid Chart" width="500" height="400">
 
 ## Directory Structure
 
