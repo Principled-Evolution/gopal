@@ -44,7 +44,7 @@ Each policy category uses versioned directories (e.g., `v1/`) to support evoluti
 
 ## Integration with AICertify
 
-Gopal is designed to work seamlessly with [AICertify](https://github.com/mantric/aicertify), a framework for systematically evaluating AI systems against regulatory requirements. When used with AICertify, Gopal provides the policy rules that determine compliance status.
+Gopal is designed to work seamlessly with [AICertify](https://github.com/principled-evolution/aicertify), a framework for systematically evaluating AI systems against regulatory requirements. When used with AICertify, Gopal provides the policy rules that determine compliance status.
 
 ## Standalone Usage
 
