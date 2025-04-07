@@ -6,7 +6,7 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 
-GOPAL is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/principled-evolution/aicertify) but can also be used independently with other OPA-based systems.
+GOPAL is a collection of [Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/principled-evolution/aicertify) but can also be used independently with other OPA-based systems.
 
 <img src="https://www.mermaidchart.com/raw/3a013c43-9ae3-4194-8bba-86b17004c800?theme=light&version=v0.1&format=svg" alt="Mermaid Chart" width="500" height="400">
 
@@ -87,6 +87,12 @@ sudo mv regal /usr/local/bin/
 # Install the pre-commit hooks
 pre-commit install
 ```
+
+## Related Projects
+
+- [Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) - The policy engine that powers GOPAL
+- [Regal](https://github.com/StyraInc/regal) - A linter for Rego, the policy language used by OPA
+- [AICertify](https://github.com/principled-evolution/aicertify) - A framework for systematically evaluating AI systems against regulatory requirements
 
 ## License
 
