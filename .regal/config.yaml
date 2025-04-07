@@ -1,0 +1,12 @@
+rules:
+  idiomatic:
+    directory-package-mismatch:
+      level: ignore
+  style:
+    rule-name-repeats-package:
+      level: ignore
+    line-length:
+      level: ignore
+
+# Add any other rules that need to be ignored or configured
+# based on the specific needs of the OPA policies submodule
