@@ -19,7 +19,7 @@ default allow = false
 allow {
     # Check fairness score is above threshold
     input.evaluation.fairness_score > input.params.fairness_threshold
-    
+
     # Check toxicity score is below threshold
     input.evaluation.toxicity_score < input.params.safety_threshold
 }
@@ -29,10 +29,10 @@ combined_score = score {
     # Custom calculation logic
     fairness_weight := 0.6
     safety_weight := 0.4
-    
+
     fairness_score := input.evaluation.fairness_score
     safety_score := 1 - input.evaluation.toxicity_score
-    
+
     score := (fairness_weight * fairness_score) + (safety_weight * safety_score)
 }
 

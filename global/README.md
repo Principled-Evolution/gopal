@@ -8,7 +8,7 @@ This directory contains global policies that apply across all domains and are no
   - `fairness.rego`: General fairness requirements for AI systems
   - `transparency.rego`: Transparency requirements for AI systems
   - `accountability.rego`: Accountability requirements for AI systems
-  
+
 - **library/**: Reusable policy components
   - `common_rules.rego`: Common rules that can be imported by other policies
   - `utilities.rego`: Utility functions for policies
@@ -31,4 +31,4 @@ Global policies can be imported by other policies using the import statement:
 
 ```rego
 import data.global.v1.fairness
-``` 
+```

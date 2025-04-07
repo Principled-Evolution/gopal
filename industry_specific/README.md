@@ -37,4 +37,4 @@ Industry-specific policies can import global and international policies to exten
 ```rego
 import data.global.v1.fairness
 import data.international.eu_ai_act.v1.transparency
-``` 
+```
