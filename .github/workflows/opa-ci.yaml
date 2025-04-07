@@ -29,7 +29,7 @@ jobs:
           curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64
           chmod +x regal
           sudo mv regal /usr/local/bin/
-          regal --version
+          regal version
 
       - name: Run OPA Check
         run: opa check .
