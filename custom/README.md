@@ -75,10 +75,10 @@ calculate_custom_metric(input_data) := score {
     # Custom calculation logic
     fairness_weight := 0.6
     safety_weight := 0.4
-    
+
     fairness_score := input_data.evaluation.fairness_score
     safety_score := 1 - input_data.evaluation.toxicity_score
-    
+
     score := (fairness_weight * fairness_score) + (safety_weight * safety_score)
 }
 
@@ -111,9 +111,9 @@ test_allow_when_metrics_above_threshold {
             "threshold": 0.8
         }
     }
-    
+
     allow with input as input
-    
+
     report := report_output with input as input
     report.result == true
     report.metrics.custom_metric.value > 0.7
@@ -131,9 +131,9 @@ test_deny_when_metrics_below_threshold {
             "threshold": 0.8
         }
     }
-    
+
     not allow with input as input
-    
+
     report := report_output with input as input
     report.result == false
     report.metrics.compliance_level.value == "medium"

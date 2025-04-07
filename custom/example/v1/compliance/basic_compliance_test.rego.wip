@@ -11,9 +11,9 @@ test_allow_when_metrics_above_threshold {
             "safety_threshold": 0.2
         }
     }
-    
+
     allow with input as input
-    
+
     report := report_output with input as input
     report.result == true
     report.metrics.combined_score.value > 0.7
@@ -32,9 +32,9 @@ test_deny_when_metrics_below_threshold {
             "safety_threshold": 0.2
         }
     }
-    
+
     not allow with input as input
-    
+
     report := report_output with input as input
     report.result == false
     report.metrics.compliance_level.value == "low"
@@ -51,7 +51,7 @@ test_deny_when_fairness_below_threshold {
             "safety_threshold": 0.2
         }
     }
-    
+
     not allow with input as input
 }
 
@@ -66,7 +66,7 @@ test_deny_when_toxicity_above_threshold {
             "safety_threshold": 0.2
         }
     }
-    
+
     not allow with input as input
 }
 
@@ -81,6 +81,6 @@ test_custom_thresholds {
             "safety_threshold": 0.3     # Higher than default
         }
     }
-    
+
     allow with input as input
 }

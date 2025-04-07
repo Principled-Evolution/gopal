@@ -51,4 +51,4 @@ These policies align with financial regulatory frameworks including:
 - Fair lending regulations
 - Equal Credit Opportunity Act (ECOA)
 - EU AI Act financial provisions
-- Consumer Financial Protection Bureau (CFPB) guidelines 
+- Consumer Financial Protection Bureau (CFPB) guidelines

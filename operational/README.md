@@ -38,4 +38,4 @@ Operational policies can be combined with other policy types to provide a compre
 ```rego
 import data.global.v1.accountability
 import data.operational.aiops.v1.performance
-``` 
+```

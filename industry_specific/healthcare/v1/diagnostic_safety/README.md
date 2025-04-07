@@ -50,4 +50,4 @@ The `Medical-Diagnosis-MultiSpecialist-Agents.py` example demonstrates how to:
 These policies align with healthcare regulatory frameworks including:
 - HIPAA compliance requirements
 - EU AI Act healthcare provisions
-- General medical ethics guidelines 
+- General medical ethics guidelines

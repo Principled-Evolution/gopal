@@ -14,4 +14,4 @@
         "fairness_threshold": 0.8,
         "toxicity_threshold": 0.7
     }
-} 
+}

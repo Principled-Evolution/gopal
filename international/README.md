@@ -36,4 +36,4 @@ International policies can import global policies to extend them with specific r
 
 ```rego
 import data.global.v1.fairness
-``` 
+```
