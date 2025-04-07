@@ -31,8 +31,8 @@ chmod 755 opa
 sudo mv opa /usr/local/bin/
 
 # Install Regal
-curl -L -o regal.tar.gz https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64.tar.gz
-tar -xzf regal.tar.gz
+curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64
+chmod +x regal
 sudo mv regal /usr/local/bin/
 
 # Install the pre-commit hooks
