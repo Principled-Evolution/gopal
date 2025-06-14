@@ -1,4 +1,4 @@
-# Governance OPA Library (GOPAL) - for AI System Evaluations
+# Governance Open Policy Agent Library (_GOPAL_) for AI System Evaluations
 
 [![OPA Policies CI](https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml/badge.svg)](https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml)
 [![OPA Version](https://img.shields.io/badge/OPA-Latest-blue.svg)](https://www.openpolicyagent.org/)
