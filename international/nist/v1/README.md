@@ -10,3 +10,7 @@ The policies are organized according to the four functions of the NIST AI RMF:
 - **Manage:** Policies related to managing the risks associated with AI systems.
 
 The `ai_600_1/ai_600_1.rego` policy acts as an orchestrator, importing and applying the policies from each of these functions.
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.

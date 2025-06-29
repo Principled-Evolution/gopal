@@ -32,3 +32,7 @@ Global policies can be imported by other policies using the import statement:
 ```rego
 import data.global.v1.fairness
 ```
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.

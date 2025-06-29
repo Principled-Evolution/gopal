@@ -38,3 +38,7 @@ Industry-specific policies can import global and international policies to exten
 import data.global.v1.fairness
 import data.international.eu_ai_act.v1.transparency
 ```
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.

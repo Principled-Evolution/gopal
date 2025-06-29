@@ -164,3 +164,7 @@ result = await evaluate_by_policy(
 5. **Document Dependencies**: If your policy depends on other policies, document them.
 6. **Use Helper Functions**: Leverage the reporting helper functions for consistent output.
 7. **Parameterize Thresholds**: Make thresholds configurable via the `params` object.
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.

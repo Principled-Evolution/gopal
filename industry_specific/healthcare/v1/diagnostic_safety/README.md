@@ -51,3 +51,7 @@ These policies align with healthcare regulatory frameworks including:
 - HIPAA compliance requirements
 - EU AI Act healthcare provisions
 - General medical ethics guidelines
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.

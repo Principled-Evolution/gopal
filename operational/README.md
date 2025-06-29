@@ -39,3 +39,7 @@ Operational policies can be combined with other policy types to provide a compre
 import data.global.v1.accountability
 import data.operational.aiops.v1.performance
 ```
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.

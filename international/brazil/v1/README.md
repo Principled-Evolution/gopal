@@ -14,3 +14,7 @@ Key principles and rights emphasized in the policies include:
 - Right to a human review of automated decisions.
 
 Compliance requirements for high-risk systems cover algorithmic impact assessments, robustness, accuracy, reliability, and engagement with oversight authorities.
+
+## Disclaimer
+
+The policies provided in this directory are for informational purposes only and do not constitute legal advice. These policies are based on publicly available information and interpretations of relevant regulations and frameworks. Users are advised to consult with legal professionals for specific guidance related to their AI systems and compliance obligations.
