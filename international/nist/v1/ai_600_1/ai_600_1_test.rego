@@ -1,7 +1,7 @@
 package international.nist.v1.ai_600_1_test
 
-import rego.v1
 import data.international.nist.v1.ai_600_1
+import rego.v1
 
 # Helper function to create valid input
 valid_input := {

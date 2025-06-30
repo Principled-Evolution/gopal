@@ -1,7 +1,7 @@
 package international.nist.v1.map_test
 
-import rego.v1
 import data.international.nist.v1.map
+import rego.v1
 
 test_allow if {
 	map.allow with input as {"map": {

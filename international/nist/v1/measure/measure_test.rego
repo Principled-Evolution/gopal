@@ -1,7 +1,7 @@
 package international.nist.v1.measure_test
 
-import rego.v1
 import data.international.nist.v1.measure
+import rego.v1
 
 test_allow if {
 	measure.allow with input as {"measure": {

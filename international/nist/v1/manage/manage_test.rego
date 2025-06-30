@@ -1,7 +1,7 @@
 package international.nist.v1.manage_test
 
-import rego.v1
 import data.international.nist.v1.manage
+import rego.v1
 
 test_allow if {
 	manage.allow with input as {"manage": {

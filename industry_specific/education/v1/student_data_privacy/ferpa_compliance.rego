@@ -19,7 +19,7 @@ ferpa_compliant if {
 	every item in input.data_requested {
 		is_directory_information(item)
 	}
-	input.student.directory_information_opt_out == false
+	not input.student.directory_information_opt_out
 }
 
 # Allow if the request is from a school official with a legitimate educational interest.
