@@ -8,7 +8,7 @@
 6. Do not exceed 600 lines per file
 7. While working in a project with multiple git repositories, always ensure you are in the correct git repository for the current task - esp if you are changing directories
 8. When the specific chat or working session context starts getting too long, suggest updating your memory, creating a github issue, and continuing in a fresh session
-9. When unable to authenticate to an enabled integration such as JIRA or Confluence, stop and ask me tocheck authentication.
+9. When unable to authenticate to an enabled integration such as JIRA or Confluence, stop and ask me to check authentication.
 
 # Gemini Workspace Context: AI Governance Policies (Rego)
 

@@ -65,10 +65,11 @@
 
 2. **✅ Latest commit pushed**: Final fix for last remaining lint violation
 
-3. **⏳ CI Status**: Latest run shows only 1 violation remaining (down from 6-7)
-   - Previous run: 6 violations (opa-fmt + non-loop-expression)
-   - Latest run: 1 violation (non-loop-expression only)
-   - Final fix: Extracted helper function to resolve non-loop-expression warning
+3. **⏳ CI Status**: Progressive improvement across multiple runs
+   - Run #28: 6 violations (opa-fmt + rule-length + non-loop-expression)
+   - Run #29: 1 violation (non-loop-expression only)
+   - Run #30: 2 violations (non-loop-expression + messy-rule)
+   - Latest fix: Moved helper function to resolve messy-rule violation
 
 ### Verification Commands:
 
