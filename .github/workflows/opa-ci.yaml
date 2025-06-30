@@ -38,3 +38,4 @@ jobs:
       - name: Run Regal Lint
         run: regal lint --ignore-files custom/ .
         working-directory: ${{ github.workspace }}
+# CI trigger
