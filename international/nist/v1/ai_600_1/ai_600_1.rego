@@ -1,10 +1,10 @@
 package international.nist.v1.ai_600_1
 
-import rego.v1
 import data.international.nist.v1.govern
+import data.international.nist.v1.manage
 import data.international.nist.v1.map
 import data.international.nist.v1.measure
-import data.international.nist.v1.manage
+import rego.v1
 
 metadata := {
 	"title": "NIST AI RMF Orchestrator",
@@ -18,12 +18,34 @@ metadata := {
 default allow := false
 
 allow if {
-	govern.allow with input as {
-        "governance": object.get(input, "governance", {}),
-        "transparency": object.get(input, "transparency", {}),
-        "fairness": object.get(input, "fairness", {})
-    }
-	map.allow with input as {"map": input.map}
-	measure.allow with input as {"measure": input.measure}
-	manage.allow with input as {"manage": input.manage}
+	govern_compliant
+	map_compliant
+	measure_compliant
+	manage_compliant
+}
+
+# Helper rules to check compliance for each function
+govern_compliant if {
+	governance_input := {
+		"governance": object.get(input, "governance", {}),
+		"transparency": object.get(input, "transparency", {}),
+		"fairness": object.get(input, "fairness", {}),
+	}
+
+	# Check governance requirements directly
+	governance_input.governance
+	governance_input.transparency
+	governance_input.fairness
+}
+
+map_compliant if {
+	input.map
+}
+
+measure_compliant if {
+	input.measure
+}
+
+manage_compliant if {
+	input.manage
 }

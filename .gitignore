@@ -38,3 +38,6 @@ ENV/
 
 # Local configuration
 .env
+
+# Custom policies - excluded from PRs to origin repo
+custom/

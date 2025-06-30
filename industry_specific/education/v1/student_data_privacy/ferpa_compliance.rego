@@ -22,10 +22,6 @@ ferpa_compliant if {
 	student_has_not_opted_out
 }
 
-student_has_not_opted_out if {
-	not input.student.directory_information_opt_out
-}
-
 # Allow if the request is from a school official with a legitimate educational interest.
 ferpa_compliant if {
 	is_school_official(input.request.recipient)
@@ -35,6 +31,11 @@ ferpa_compliant if {
 # Allow in a health or safety emergency.
 ferpa_compliant if {
 	input.request.purpose == "health_or_safety_emergency"
+}
+
+# Helper rule for directory information opt-out check
+student_has_not_opted_out if {
+	not input.student.directory_information_opt_out
 }
 
 # --- Deny Messages ---

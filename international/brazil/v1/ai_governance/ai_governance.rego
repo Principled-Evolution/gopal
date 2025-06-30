@@ -9,21 +9,18 @@ metadata := {
 	"category": "International",
 	"references": [
 		"Brazil Bill of Law No. 2,338/2023 (PL 2338/23)",
-		"Brazilian Artificial Intelligence Strategy (EBIA) 2021"
+		"Brazilian Artificial Intelligence Strategy (EBIA) 2021",
 	],
 }
 
 # Default deny
 default allow := false
 
-# Excessive Risk: Prohibited systems
-allow := false if {
-	input.ai_system.risk_category == "excessive_risk"
-	input.ai_system.type == "autonomous_weapons_system" # Example of a prohibited system
-}
-
-# High-Risk: Subject to stringent compliance
+# Allow based on risk category and compliance requirements
 allow if {
+	not excessive_risk_prohibited
+
+	# High-Risk systems: Subject to stringent compliance
 	input.ai_system.risk_category == "high_risk"
 	right_to_explanation.allow
 	right_to_contest.allow
@@ -33,40 +30,62 @@ allow if {
 	oversight_authority.allow
 }
 
-# Other Systems: Basic requirements
 allow if {
+	not excessive_risk_prohibited
+
+	# Other Systems: Basic requirements
 	input.ai_system.risk_category == "other_systems"
 	input.ai_system.basic_requirements_met
 }
 
+# Excessive Risk: Prohibited systems
+default excessive_risk_prohibited := false
+
+excessive_risk_prohibited if {
+	input.ai_system.risk_category == "excessive_risk"
+	input.ai_system.type == "autonomous_weapons_system" # Example of a prohibited system
+}
+
 # Right to Explanation
-right_to_explanation := { "allow": true, "msg": "Right to explanation met." } if {
+default right_to_explanation := {"allow": false, "msg": "Right to explanation not met."}
+
+right_to_explanation := {"allow": true, "msg": "Right to explanation met."} if {
 	input.rights.explanation_provided
-} else := { "allow": false, "msg": "Right to explanation not met." }
+}
 
 # Right to Contest
-right_to_contest := { "allow": true, "msg": "Right to contest met." } if {
+default right_to_contest := {"allow": false, "msg": "Right to contest not met."}
+
+right_to_contest := {"allow": true, "msg": "Right to contest met."} if {
 	input.rights.contest_mechanism_available
-} else := { "allow": false, "msg": "Right to contest not met." }
+}
 
 # Right to Human Review
-right_to_human_review := { "allow": true, "msg": "Right to human review met." } if {
+default right_to_human_review := {"allow": false, "msg": "Right to human review not met."}
+
+right_to_human_review := {"allow": true, "msg": "Right to human review met."} if {
 	input.rights.human_review_available
-} else := { "allow": false, "msg": "Right to human review not met." }
+}
 
 # Algorithmic Impact Assessment
-algorithmic_impact_assessment := { "allow": true, "msg": "Algorithmic impact assessment conducted." } if {
+default algorithmic_impact_assessment := {"allow": false, "msg": "Algorithmic impact assessment not conducted."}
+
+algorithmic_impact_assessment := {"allow": true, "msg": "Algorithmic impact assessment conducted."} if {
 	input.compliance.algorithmic_impact_assessment_conducted
-} else := { "allow": false, "msg": "Algorithmic impact assessment not conducted." }
+}
 
 # Robustness, Accuracy, Reliability
-robustness_accuracy_reliability := { "allow": true, "msg": "Robustness, accuracy, and reliability ensured." } if {
+default robustness_accuracy_reliability := {"allow": false, "msg": "Robustness, accuracy, or reliability not ensured."}
+
+robustness_accuracy_reliability := {"allow": true, "msg": "Robustness, accuracy, and reliability ensured."} if {
 	input.compliance.robustness_ensured
 	input.compliance.accuracy_ensured
 	input.compliance.reliability_ensured
-} else := { "allow": false, "msg": "Robustness, accuracy, or reliability not ensured." }
+}
 
 # Oversight Authority
-oversight_authority := { "allow": true, "msg": "Oversight authority requirements met." } if {
+default oversight_authority := {"allow": false, "msg": "Oversight authority requirements not met."}
+
+oversight_authority := {"allow": true, "msg": "Oversight authority requirements met."} if {
 	input.compliance.oversight_authority_engaged
-} else := { "allow": false, "msg": "Oversight authority requirements not met." }
+}

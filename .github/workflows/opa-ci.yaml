@@ -32,9 +32,9 @@ jobs:
           regal version
 
       - name: Run OPA Check
-        run: opa check .
+        run: opa check --ignore custom/ .
         working-directory: ${{ github.workspace }}
 
       - name: Run Regal Lint
-        run: regal lint .
+        run: regal lint --ignore-files custom/ .
         working-directory: ${{ github.workspace }}
