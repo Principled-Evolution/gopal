@@ -33,7 +33,6 @@ ferpa_compliant if {
 	input.request.purpose == "health_or_safety_emergency"
 }
 
-
 # --- Deny Messages ---
 
 deny contains msg if {
@@ -70,5 +69,3 @@ has_valid_consent(student, requested_data) if {
 		item in student.consent.scope
 	}
 }
-
-
