@@ -1,4 +1,4 @@
-package international.nist.v1.ai_600_1
+package international.nist.v1.ai_600_1_test
 
 import rego.v1
 

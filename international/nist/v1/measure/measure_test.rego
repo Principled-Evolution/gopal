@@ -1,4 +1,4 @@
-package international.nist.v1.measure
+package international.nist.v1.measure_test
 
 import rego.v1
 

@@ -21,28 +21,34 @@ allow if {
 }
 
 # Performance Metrics: Check for regular measurement of system performance
+default performance_metrics := {"allow": false, "msg": "Performance metrics requirements not met."}
+
 performance_metrics := {"allow": true, "msg": "Performance metrics requirements met."} if {
 	# Placeholder: Check for defined performance metrics
 	input.measure.performance_metrics_defined
 
 	# Placeholder: Check for regular tracking of performance metrics
 	input.measure.performance_metrics_tracked
-} else := {"allow": false, "msg": "Performance metrics requirements not met."}
+}
 
 # Bias Metrics: Check for regular measurement of bias
+default bias_metrics := {"allow": false, "msg": "Bias metrics requirements not met."}
+
 bias_metrics := {"allow": true, "msg": "Bias metrics requirements met."} if {
 	# Placeholder: Check for defined bias metrics
 	input.measure.bias_metrics_defined
 
 	# Placeholder: Check for regular tracking of bias metrics
 	input.measure.bias_metrics_tracked
-} else := {"allow": false, "msg": "Bias metrics requirements not met."}
+}
 
 # Robustness Metrics: Check for regular measurement of system robustness
+default robustness_metrics := {"allow": false, "msg": "Robustness metrics requirements not met."}
+
 robustness_metrics := {"allow": true, "msg": "Robustness metrics requirements met."} if {
 	# Placeholder: Check for defined robustness metrics
 	input.measure.robustness_metrics_defined
 
 	# Placeholder: Check for regular tracking of robustness metrics
 	input.measure.robustness_metrics_tracked
-} else := {"allow": false, "msg": "Robustness metrics requirements not met."}
+}

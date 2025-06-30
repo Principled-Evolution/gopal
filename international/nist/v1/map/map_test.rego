@@ -1,4 +1,4 @@
-package international.nist.v1.map
+package international.nist.v1.map_test
 
 import rego.v1
 

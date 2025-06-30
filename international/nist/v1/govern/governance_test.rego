@@ -1,4 +1,4 @@
-package international.nist.v1.govern
+package international.nist.v1.govern_test
 
 import rego.v1
 

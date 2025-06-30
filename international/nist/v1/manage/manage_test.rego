@@ -1,9 +1,10 @@
-package international.nist.v1.manage
+package international.nist.v1.manage_test
 
 import rego.v1
+import data.international.nist.v1.manage
 
 test_allow if {
-	allow with input as {"manage": {
+	manage.allow with input as {"manage": {
 		"risk_mitigation_strategies_documented": true,
 		"risk_mitigation_strategies_implemented": true,
 		"continuous_monitoring_plan_in_place": true,
@@ -14,7 +15,7 @@ test_allow if {
 }
 
 test_deny_risk_mitigation if {
-	not allow with input as {"manage": {
+	not manage.allow with input as {"manage": {
 		"risk_mitigation_strategies_documented": false,
 		"risk_mitigation_strategies_implemented": true,
 		"continuous_monitoring_plan_in_place": true,
