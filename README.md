@@ -18,13 +18,15 @@ gopal/
 │   ├── v1/               # Version 1 of global policies
 │   └── library/          # Reusable policy components
 ├── international/        # International regulatory frameworks
+│   ├── brazil/           # Brazilian AI governance frameworks
 │   ├── eu_ai_act/        # European Union AI Act
-│   ├── india/            # Indian AI regulatory frameworks
-│   └── nist/             # NIST AI standards
+│   ├── india/            # Indian Digital India Policy and AI frameworks
+│   └── nist/             # NIST AI Risk Management Framework (AI RMF 1.0)
 ├── industry_specific/    # Industry-specific requirements
+│   ├── automotive/       # Automotive industry
 │   ├── bfs/              # Banking & Financial Services
-│   ├── healthcare/       # Healthcare industry
-│   └── automotive/       # Automotive industry
+│   ├── education/        # Educational institutions and EdTech
+│   └── healthcare/       # Healthcare industry
 ├── operational/          # Operational policies
 │   ├── aiops/            # AI Operations policies
 │   ├── cost/             # Cost management policies
@@ -43,6 +45,33 @@ Policies are organized in a modular structure to allow for clear separation of c
 4. **Operational Policies**: Requirements related to operational aspects
 5. **Custom Policies**: User-defined policy categories (local development only)
 
+### International Regulatory Frameworks
+
+GOPAL includes comprehensive policy implementations for major international AI regulatory frameworks:
+
+- **Brazil**: AI governance policies aligned with Brazilian regulatory initiatives
+- **European Union**: Complete implementation of the EU AI Act requirements
+- **India**: Digital India Policy compliance and AI governance frameworks
+- **NIST**: Full implementation of the NIST AI Risk Management Framework (AI RMF 1.0) including:
+  - **GOVERN**: Governance and oversight functions
+  - **MAP**: AI system mapping and categorization
+  - **MEASURE**: Risk measurement and assessment
+  - **MANAGE**: Risk management and mitigation
+
+### Industry-Specific Policies
+
+GOPAL provides specialized policies for key industry verticals:
+
+- **Automotive**: Safety-critical AI systems in vehicles
+- **Banking & Financial Services**: Financial AI compliance and risk management
+- **Education**: Comprehensive educational AI policies covering:
+  - Academic integrity and AI plagiarism detection
+  - Assessment and evaluation with human oversight
+  - Fairness and equity in educational AI systems
+  - Safe learning environments and age-appropriate content
+  - Student data privacy (FERPA, COPPA compliance)
+- **Healthcare**: Medical AI systems and patient data protection
+
 ## Versioning
 
 Each policy category uses versioned directories (e.g., `v1/`) to support evolution while maintaining backward compatibility. When referencing policies:
@@ -57,6 +86,22 @@ Gopal is designed to work seamlessly with [AICertify](https://github.com/princip
 ## Standalone Usage
 
 Gopal can also be used independently with any OPA-compatible system. The policies follow standard OPA patterns and can be evaluated using the OPA CLI or API.
+
+## Recent Additions
+
+GOPAL continues to expand with new regulatory frameworks and industry-specific policies:
+
+### New International Frameworks
+- **Brazil AI Governance**: Policies aligned with Brazilian AI regulatory initiatives
+- **Enhanced NIST Implementation**: Complete AI Risk Management Framework with all four core functions
+- **Expanded India Policies**: Digital India Policy compliance frameworks
+
+### New Industry Verticals
+- **Education Sector**: Comprehensive policies for educational institutions and EdTech companies, including:
+  - Academic integrity and responsible AI use in education
+  - Fair and unbiased automated assessment systems
+  - Student privacy protection (FERPA/COPPA compliance)
+  - Safe learning environments with age-appropriate AI tools
 
 ## Custom Policies
 
