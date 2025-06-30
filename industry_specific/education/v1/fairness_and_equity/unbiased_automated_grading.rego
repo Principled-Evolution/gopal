@@ -5,12 +5,12 @@ package education.v1.fairness_and_equity
 # @version 1.1
 
 # Default to not compliant if fairness metrics are not met.
-default compliant = false
+default unbiased_automated_grading_compliant = false
 
 # --- Compliance Rules ---
 
 # Compliant if the model's bias metrics are within acceptable thresholds for all demographic groups.
-compliant if {
+unbiased_automated_grading_compliant if {
     every group in input.bias_report.demographic_groups {
         every metric in group.fairness_metrics {
             is_within_threshold(metric)
@@ -22,7 +22,7 @@ compliant if {
 # --- Deny Messages ---
 
 deny contains msg if {
-    not compliant
+    not unbiased_automated_grading_compliant
     failing_metrics := {metric |
         some group in input.bias_report.demographic_groups
         some metric in group.fairness_metrics

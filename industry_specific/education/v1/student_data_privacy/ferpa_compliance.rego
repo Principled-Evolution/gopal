@@ -5,17 +5,17 @@ package education.v1.student_data_privacy
 # @version 1.1
 
 # Default to deny unless a specific condition allows access.
-default allow = false
+default ferpa_compliant = false
 
 # --- Allow Rules ---
 
 # Allow if the student has provided explicit, valid consent for the requested data.
-allow if {
+ferpa_compliant if {
     has_valid_consent(input.student, input.data_requested)
 }
 
 # Allow if ALL requested data is "directory information" AND the student has NOT opted out.
-allow if {
+ferpa_compliant if {
     every item in input.data_requested {
         is_directory_information(item)
     }
@@ -23,13 +23,13 @@ allow if {
 }
 
 # Allow if the request is from a school official with a legitimate educational interest.
-allow if {
+ferpa_compliant if {
     is_school_official(input.request.recipient)
     has_legitimate_interest(input.request.purpose)
 }
 
 # Allow in a health or safety emergency.
-allow if {
+ferpa_compliant if {
     input.request.purpose == "health_or_safety_emergency"
 }
 
@@ -37,7 +37,7 @@ allow if {
 # --- Deny Messages ---
 
 deny contains msg if {
-    not allow
+    not ferpa_compliant
     msg := sprintf("Access denied. The request for data (%v) does not meet any FERPA exceptions.", [input.data_requested])
 }
 
@@ -67,9 +67,9 @@ is_directory_information(field) if {
 }
 
 # Checks for valid consent (placeholder logic).
-has_valid_consent(student, data) if {
+has_valid_consent(student, requested_data) if {
     student.consent.status == "active"
-    every item in data {
+    every item in requested_data {
         item in student.consent.scope
     }
 }

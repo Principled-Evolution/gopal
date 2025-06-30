@@ -5,23 +5,23 @@ package education.v1.student_data_privacy
 # @version 1.1
 
 # Default to deny unless a specific condition allows data collection.
-default allow = false
+default coppa_compliant = false
 
 # --- Allow Rules ---
 
 # Allow if the user is 13 or older.
-allow if {
+coppa_compliant if {
     input.user.age >= 13
 }
 
 # Allow if the user is under 13 but verifiable parental consent has been obtained.
-allow if {
+coppa_compliant if {
     input.user.age < 13
     has_verifiable_parental_consent(input.user)
 }
 
 # Allow for internal operations of the service (e.g., analytics, debugging).
-allow if {
+coppa_compliant if {
     input.request.purpose == "internal_operations"
 }
 

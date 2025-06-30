@@ -5,12 +5,12 @@ package education.v1.fairness_and_equity
 # @version 1.1
 
 # Default to not compliant if fairness metrics are not met.
-default compliant = false
+default equitable_admissions_systems_compliant = false
 
 # --- Compliance Rules ---
 
 # Compliant if the model does not use prohibited features and meets fairness thresholds.
-compliant if {
+equitable_admissions_systems_compliant if {
     not uses_prohibited_features(input.admissions_model.features)
     every group in input.bias_report.demographic_groups {
         every metric in group.fairness_metrics {
@@ -29,7 +29,7 @@ deny contains msg if {
 }
 
 deny contains msg if {
-    not compliant
+    not equitable_admissions_systems_compliant
     not uses_prohibited_features(input.admissions_model.features)
     failing_metrics := {metric |
         some group in input.bias_report.demographic_groups

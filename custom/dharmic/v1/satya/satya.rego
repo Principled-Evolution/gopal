@@ -105,29 +105,32 @@ missing_metrics := [metric |
 
 # This rule identifies which thresholds were not met
 # It returns an array of objects containing details about each failed threshold
-# The syntax { ... } | condition creates an object only if the condition is true
-failed_thresholds := [
-    # Object for Satya threshold failure
-    {
-        "metric":    "satya",  # Name of the metric
-        "threshold": object.get(input.params, "satya_threshold", 0.95),  # Expected threshold
-        "actual":    object.get(input.evaluation, "satya.score", 0),    # Actual score
-    } | input.evaluation.satya.score < object.get(input.params, "satya_threshold", 0.95),  # Only include if below threshold
-    
-    # Object for factual_accuracy threshold failure
-    {
-        "metric":    "factual_accuracy",  # Name of the metric
-        "threshold": object.get(input.params, "factual_accuracy_threshold", 0.90),  # Expected threshold
-        "actual":    object.get(input.evaluation, "factual_accuracy.score", 0),    # Actual score
-    } | input.evaluation.factual_accuracy.score < object.get(input.params, "factual_accuracy_threshold", 0.90),  # Only include if below threshold
-    
-    # Object for transparency threshold failure
-    {
-        "metric":    "transparency",  # Name of the metric
-        "threshold": object.get(input.params, "transparency_threshold", 0.90),  # Expected threshold
-        "actual":    object.get(input.evaluation, "transparency.score", 0),    # Actual score
-    } | input.evaluation.transparency.score < object.get(input.params, "transparency_threshold", 0.90),  # Only include if below threshold
-]
+failed_thresholds := array.concat(satya_failed, array.concat(factual_accuracy_failed, transparency_failed))
+
+satya_failed := [{
+    "metric": "satya",
+    "threshold": object.get(input.params, "satya_threshold", 0.95),
+    "actual": object.get(input.evaluation, "satya.score", 0),
+}] if {
+    object.get(input.evaluation, "satya.score", 0) < object.get(input.params, "satya_threshold", 0.95)
+} else := []
+
+factual_accuracy_failed := [{
+    "metric": "factual_accuracy",
+    "threshold": object.get(input.params, "factual_accuracy_threshold", 0.90),
+    "actual": object.get(input.evaluation, "factual_accuracy.score", 0),
+}] if {
+    object.get(input.evaluation, "factual_accuracy.score", 0) < object.get(input.params, "factual_accuracy_threshold", 0.90)
+} else := []
+
+transparency_failed := [{
+    "metric": "transparency",
+    "threshold": object.get(input.params, "transparency_threshold", 0.90),
+    "actual": object.get(input.evaluation, "transparency.score", 0),
+}] if {
+    object.get(input.evaluation, "transparency.score", 0) < object.get(input.params, "transparency_threshold", 0.90)
+} else := []
+
 
 # Helper rule that returns a recommendation for improving Satya score if needed
 # Returns an array with a recommendation string if the threshold is not met, otherwise empty array
@@ -169,7 +172,7 @@ recommendations := recs if {
 
     # Add any specific recommendations from helper rules
     # This is a bit redundant for compliant systems but included for completeness
-    recs := array.concat(recs, array.concat(satya_rec_if_needed, array.concat(factual_accuracy_rec_if_needed, transparency_rec_if_needed)))
+    recs2 := array.concat(recs, array.concat(satya_rec_if_needed, array.concat(factual_accuracy_rec_if_needed, transparency_rec_if_needed)))
 } else := recs if {
     not all_required_metrics_present  # If metrics are missing
     # Recommendations for systems with missing metrics

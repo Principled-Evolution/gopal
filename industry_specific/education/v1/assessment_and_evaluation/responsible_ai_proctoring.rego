@@ -5,12 +5,12 @@ package education.v1.assessment_and_evaluation
 # @version 1.1
 
 # Default to not compliant.
-default compliant = false
+default responsible_ai_proctoring_compliant = false
 
 # --- Compliance Rules ---
 
 # Compliant if student consent is obtained, data handling is secure, and an appeals process exists.
-compliant if {
+responsible_ai_proctoring_compliant if {
     input.proctoring_session.student_consent_given == true
     is_data_handling_secure(input.proctoring_session.data_handling)
     has_human_review_and_appeals(input.proctoring_session.review_process)
@@ -20,7 +20,7 @@ compliant if {
 # --- Deny Messages ---
 
 deny contains msg if {
-    not compliant
+    not responsible_ai_proctoring_compliant
     failures := {failure |
         not input.proctoring_session.student_consent_given; failure := "Student consent not given"
     } | {failure |

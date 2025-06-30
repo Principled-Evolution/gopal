@@ -1,3 +1,15 @@
+# General Principles
+1. Use poetry for python package management, not pip
+1.1 Use commands like: poetry run python, poetry add, poetry update
+2. Do not make more changes than are asked for - be conservative and surgical
+3. Confirm with me, your senior partner, always when in any doubt about the next steps
+4. You may ask me to run any commands and share outputs with you, or to make manual changes if you are unable to accomplish these reliably yourself
+5. Always wear a worlds best senior programmer hat and critique and review your own design and plan at least once for elegance, DRY, KISS and explainability. Present it to me.
+6. Do not exceed 600 lines per file
+7. While working in a project with multiple git repositories, always ensure you are in the correct git repository for the current task - esp if you are changing directories
+8. When the specific chat or working session context starts getting too long, suggest updating your memory, creating a github issue, and continuing in a fresh session
+9. When unable to authenticate to an enabled integration such as JIRA or Confluence, stop and ask me tocheck authentication.
+
 # Gemini Workspace Context: AI Governance Policies (Rego)
 
 This repository contains a collection of Rego policies for AI governance and risk management. The policies are organized into a clear, hierarchical structure to ensure consistency and ease of navigation.

@@ -5,12 +5,12 @@ package education.v1.student_data_privacy
 # @version 1.1
 
 # Default to deny unless the data requested is deemed necessary.
-default allow = false
+default data_minimization_compliant = false
 
 # --- Allow Rules ---
 
 # Allow if every piece of data requested is necessary for the stated purpose.
-allow if {
+data_minimization_compliant if {
     every field in input.data_requested {
         is_necessary_for_purpose(field, input.request.purpose)
     }
@@ -20,7 +20,7 @@ allow if {
 # --- Deny Messages ---
 
 deny contains msg if {
-    not allow
+    not data_minimization_compliant
     superfluous_data := {field | field := input.data_requested[_]; not is_necessary_for_purpose(field, input.request.purpose)}
     msg := sprintf("Data minimization violation: The following data fields are not necessary for the purpose '%v': %v", [input.request.purpose, superfluous_data])
 }
