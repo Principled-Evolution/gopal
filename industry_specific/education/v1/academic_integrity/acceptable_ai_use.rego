@@ -10,19 +10,19 @@ default allow = false
 # --- Allow Rules ---
 
 # Allow if the specific AI use case is permitted in the course's AI policy.
-allow {
+allow if {
     is_permitted_use(input.ai_use_case, input.course.ai_policy)
 }
 
 # Allow if the student is using a generally accepted tool for a common task (e.g., spell check).
-allow {
+allow if {
     is_common_assistive_tool(input.ai_tool)
 }
 
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     not allow
     msg := sprintf("The use of AI tool '%v' for '%v' is not permitted for this assignment according to the course policy.", [input.ai_tool, input.ai_use_case])
 }
@@ -38,12 +38,12 @@ permitted_uses := {
 }
 
 # Checks if a use case is permitted under the given policy level.
-is_permitted_use(use_case, policy) {
+is_permitted_use(use_case, policy) if {
     use_case in permitted_uses[policy.level]
 }
 
 # Checks if the tool is a common, generally accepted assistive tool.
-is_common_assistive_tool(tool) {
+is_common_assistive_tool(tool) if {
     common_tools := {"grammarly", "spell_check_pro"}
     tool in common_tools
 }

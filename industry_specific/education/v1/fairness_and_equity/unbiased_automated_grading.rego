@@ -10,7 +10,7 @@ default compliant = false
 # --- Compliance Rules ---
 
 # Compliant if the model's bias metrics are within acceptable thresholds for all demographic groups.
-compliant {
+compliant if {
     every group in input.bias_report.demographic_groups {
         every metric in group.fairness_metrics {
             is_within_threshold(metric)
@@ -21,7 +21,7 @@ compliant {
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     not compliant
     failing_metrics := {metric |
         some group in input.bias_report.demographic_groups
@@ -42,12 +42,12 @@ thresholds := {
 }
 
 # Checks if a given metric is within its acceptable threshold.
-is_within_threshold(metric) {
+is_within_threshold(metric) if {
     metric.name == "disparate_impact"
     metric.value >= thresholds[metric.name]
 }
 
-is_within_threshold(metric) {
+is_within_threshold(metric) if {
     metric.name != "disparate_impact"
     abs(metric.value) < thresholds[metric.name]
 }

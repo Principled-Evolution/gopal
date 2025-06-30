@@ -10,7 +10,7 @@ default allow = false
 # --- Allow Rules ---
 
 # Allow if every piece of data requested is necessary for the stated purpose.
-allow {
+allow if {
     every field in input.data_requested {
         is_necessary_for_purpose(field, input.request.purpose)
     }
@@ -19,7 +19,7 @@ allow {
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     not allow
     superfluous_data := {field | field := input.data_requested[_]; not is_necessary_for_purpose(field, input.request.purpose)}
     msg := sprintf("Data minimization violation: The following data fields are not necessary for the purpose '%v': %v", [input.request.purpose, superfluous_data])
@@ -36,6 +36,6 @@ necessary_data := {
 }
 
 # Checks if a field is necessary for a given purpose.
-is_necessary_for_purpose(field, purpose) {
+is_necessary_for_purpose(field, purpose) if {
     field in necessary_data[purpose]
 }

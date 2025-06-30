@@ -10,19 +10,19 @@ default appropriate = false
 # --- Appropriateness Rules ---
 
 # Appropriate if the content's age rating is suitable for the student's age.
-appropriate {
+appropriate if {
     is_suitable_for_age(input.content.age_rating, input.student.age)
 }
 
 # Appropriate if the content has been explicitly approved by the instructor for this lesson.
-appropriate {
+appropriate if {
     input.content.id in input.lesson.approved_content_ids
 }
 
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     not appropriate
     msg := sprintf("Content with age rating '%v' is not appropriate for a student of age %v.", [input.content.age_rating, input.student.age])
 }
@@ -40,7 +40,7 @@ age_rating_map := {
 }
 
 # Checks if the content's age rating is suitable for the student's age.
-is_suitable_for_age(rating, age) {
+is_suitable_for_age(rating, age) if {
     min_age := age_rating_map[rating]
     age >= min_age
 }

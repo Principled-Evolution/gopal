@@ -10,7 +10,7 @@ default compliant = false
 # --- Compliance Rules ---
 
 # Compliant if student consent is obtained, data handling is secure, and an appeals process exists.
-compliant {
+compliant if {
     input.proctoring_session.student_consent_given == true
     is_data_handling_secure(input.proctoring_session.data_handling)
     has_human_review_and_appeals(input.proctoring_session.review_process)
@@ -19,7 +19,7 @@ compliant {
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     not compliant
     failures := {failure |
         not input.proctoring_session.student_consent_given; failure := "Student consent not given"
@@ -35,13 +35,13 @@ deny[msg] {
 # --- Helper Functions ---
 
 # Checks for secure data handling practices.
-is_data_handling_secure(handling) {
+is_data_handling_secure(handling) if {
     handling.encryption_enabled == true
     handling.data_retention_period_days <= 30
 }
 
 # Checks for a robust human review and appeals process.
-has_human_review_and_appeals(process) {
+has_human_review_and_appeals(process) if {
     process.human_review_required_for_all_flags == true
     process.student_appeal_possible == true
 }

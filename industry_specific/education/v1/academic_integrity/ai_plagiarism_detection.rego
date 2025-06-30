@@ -10,22 +10,21 @@ default flag_for_review = false
 # --- Flagging Rules ---
 
 # Flag if the average score from multiple AI detection tools exceeds a threshold.
-flag_for_review {
+flag_for_review if {
     avg(get_all_scores(input.submission.ai_detection_reports)) > 0.90
 }
 
 # Flag if any single high-confidence detector flags the content.
-flag_for_review {
-    some report in input.submission.ai_detection_reports {
-        report.detector_confidence == "high"
-        report.ai_score > 0.95
-    }
+flag_for_review if {
+    some report in input.submission.ai_detection_reports
+    report.detector_confidence == "high"
+    report.ai_score > 0.95
 }
 
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     flag_for_review
     scores := get_all_scores(input.submission.ai_detection_reports)
     msg := sprintf("Submission flagged for potential AI plagiarism. Detection scores: %v", [scores])
@@ -35,6 +34,6 @@ deny[msg] {
 # --- Helper Functions ---
 
 # Extracts all AI detection scores from the reports.
-get_all_scores(reports) = scores {
+get_all_scores(reports) = scores if {
     scores := {score | score := reports[_].ai_score}
 }

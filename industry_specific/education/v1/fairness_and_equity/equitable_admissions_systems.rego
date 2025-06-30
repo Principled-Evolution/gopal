@@ -10,7 +10,7 @@ default compliant = false
 # --- Compliance Rules ---
 
 # Compliant if the model does not use prohibited features and meets fairness thresholds.
-compliant {
+compliant if {
     not uses_prohibited_features(input.admissions_model.features)
     every group in input.bias_report.demographic_groups {
         every metric in group.fairness_metrics {
@@ -22,13 +22,13 @@ compliant {
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     uses_prohibited_features(input.admissions_model.features)
     prohibited := {feature | feature := input.admissions_model.features[_]; is_prohibited(feature)}
     msg := sprintf("Admissions model is not compliant. It uses prohibited features: %v", [prohibited])
 }
 
-deny[msg] {
+deny contains msg if {
     not compliant
     not uses_prohibited_features(input.admissions_model.features)
     failing_metrics := {metric |
@@ -45,14 +45,13 @@ deny[msg] {
 # Defines prohibited features for admissions models.
 prohibited_features := {"race", "gender", "zip_code_proxy"}
 
-is_prohibited(feature) {
+is_prohibited(feature) if {
     feature in prohibited_features
 }
 
-uses_prohibited_features(features) {
-    some feature in features {
-        is_prohibited(feature)
-    }
+uses_prohibited_features(features) if {
+    some feature in features
+    is_prohibited(feature)
 }
 
 # Defines acceptable thresholds for different fairness metrics.
@@ -61,6 +60,6 @@ thresholds := {
     "equalized_odds": 0.1
 }
 
-is_within_threshold(metric) {
+is_within_threshold(metric) if {
     abs(metric.value) < thresholds[metric.name]
 }

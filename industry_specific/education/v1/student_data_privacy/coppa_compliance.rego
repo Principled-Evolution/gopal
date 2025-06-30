@@ -10,25 +10,25 @@ default allow = false
 # --- Allow Rules ---
 
 # Allow if the user is 13 or older.
-allow {
+allow if {
     input.user.age >= 13
 }
 
 # Allow if the user is under 13 but verifiable parental consent has been obtained.
-allow {
+allow if {
     input.user.age < 13
     has_verifiable_parental_consent(input.user)
 }
 
 # Allow for internal operations of the service (e.g., analytics, debugging).
-allow {
+allow if {
     input.request.purpose == "internal_operations"
 }
 
 
 # --- Deny Messages ---
 
-deny[msg] {
+deny contains msg if {
     input.user.age < 13
     not has_verifiable_parental_consent(input.user)
     not input.request.purpose == "internal_operations"
@@ -40,7 +40,7 @@ deny[msg] {
 
 # Checks for verifiable parental consent.
 # This could involve checking a consent form, a government ID, or other methods.
-has_verifiable_parental_consent(user) {
+has_verifiable_parental_consent(user) if {
     user.consent.parental_consent_status == "verified"
     user.consent.method in {"consent_form", "government_id_verification", "video_conference"}
 }
