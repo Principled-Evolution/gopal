@@ -29,7 +29,7 @@ gopal/
 │   ├── aiops/            # AI Operations policies
 │   ├── cost/             # Cost management policies
 │   └── corporate/        # Corporate internal policies
-├── custom/               # Custom policy categories
+├── custom/               # Custom policy categories (local only, excluded from PRs)
 └── helper_functions/     # Shared utility functions for policies
 ```
 
@@ -41,7 +41,7 @@ Policies are organized in a modular structure to allow for clear separation of c
 2. **International Policies**: Requirements from specific regulatory frameworks
 3. **Industry-Specific Policies**: Requirements specific to industry verticals
 4. **Operational Policies**: Requirements related to operational aspects
-5. **Custom Policies**: User-defined policy categories
+5. **Custom Policies**: User-defined policy categories (local development only)
 
 ## Versioning
 
@@ -57,6 +57,36 @@ Gopal is designed to work seamlessly with [AICertify](https://github.com/princip
 ## Standalone Usage
 
 Gopal can also be used independently with any OPA-compatible system. The policies follow standard OPA patterns and can be evaluated using the OPA CLI or API.
+
+## Custom Policies
+
+The `custom/` directory is provided for local development of organization-specific policies. This directory is:
+
+- **Excluded from git tracking** - Custom policies are not included in commits or PRs to the origin repository
+- **Ignored by CI/CD** - Custom policies do not affect the build or linting processes
+- **Local development only** - Allows organizations to develop proprietary policies alongside the standard GOPAL policies
+
+To create custom policies:
+
+1. Create your policy structure under `custom/your_category/v1/`
+2. Follow the same naming conventions as standard policies
+3. Use the package name `custom.your_category.v1.policy_name`
+4. Include comprehensive tests and documentation
+
+Example structure:
+```
+custom/
+├── my_org/
+│   ├── v1/
+│   │   ├── compliance/
+│   │   │   ├── policy.rego
+│   │   │   └── policy_test.rego
+│   │   └── security/
+│   │       ├── policy.rego
+│   │       └── policy_test.rego
+```
+
+**Note**: Custom policies remain local to your development environment and are not shared with the broader GOPAL community.
 
 ## Development
 

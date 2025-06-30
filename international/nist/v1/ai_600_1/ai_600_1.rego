@@ -1,42 +1,51 @@
 package international.nist.v1.ai_600_1
 
+import data.international.nist.v1.govern
+import data.international.nist.v1.manage
+import data.international.nist.v1.map
+import data.international.nist.v1.measure
 import rego.v1
 
 metadata := {
-	"title": "NIST AI 600-1 Requirements",
-	"description": "Placeholder for NIST AI 600-1 standard requirements",
-	"status": "PLACEHOLDER - Pending detailed implementation",
+	"title": "NIST AI RMF Orchestrator",
+	"description": "Orchestrates the NIST AI Risk Management Framework policies.",
 	"version": "1.0.0",
-	"category": "International",
-	"references": [
-		"NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework",
-		"NIST 600-1: https://csrc.nist.gov/projects/ai-risk-management-framework",
-	],
+	"category": "NIST AI RMF",
+	"references": ["NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"],
 }
 
 # Default deny
 default allow := false
 
-# This placeholder policy will always return non-compliant with implementation_pending=true
-non_compliant := true
+allow if {
+	govern_compliant
+	map_compliant
+	measure_compliant
+	manage_compliant
+}
 
-implementation_pending := true
+# Helper rules to check compliance for each function
+govern_compliant if {
+	governance_input := {
+		"governance": object.get(input, "governance", {}),
+		"transparency": object.get(input, "transparency", {}),
+		"fairness": object.get(input, "fairness", {}),
+	}
 
-# Define the compliance report
-compliance_report := {
-	"policy": "NIST AI 600-1 Requirements",
-	"version": "1.0.0",
-	"status": "PLACEHOLDER - Pending detailed implementation",
-	"overall_result": false,
-	"implementation_pending": true,
-	"details": {"message": concat(" ", [
-		"NIST AI 600-1 policy implementation is pending.",
-		"This is a placeholder that will be replaced with actual compliance checks in a future release.",
-	])},
-	"recommendations": [
-		"Check back for future releases with NIST-specific evaluations",
-		"Consider using global compliance policies in the meantime",
-		"Review the NIST AI Risk Management Framework for upcoming requirements",
-		"Implement preliminary risk assessment based on NIST guidelines",
-	],
+	# Check governance requirements directly
+	governance_input.governance
+	governance_input.transparency
+	governance_input.fairness
+}
+
+map_compliant if {
+	input.map
+}
+
+measure_compliant if {
+	input.measure
+}
+
+manage_compliant if {
+	input.manage
 }

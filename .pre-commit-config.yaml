@@ -11,14 +11,16 @@ repos:
     hooks:
     -   id: opa-check
         name: OPA Policy Check
-        entry: opa check .
+        entry: opa check --ignore custom/ .
         language: system
         pass_filenames: false
         files: \.rego$
+        exclude: ^custom/
 
     -   id: regal-lint
         name: Regal Lint
-        entry: regal lint .
+        entry: regal lint --ignore-files custom/ .
         language: system
         pass_filenames: false
         files: \.rego$
+        exclude: ^custom/
