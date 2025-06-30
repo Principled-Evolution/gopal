@@ -16,10 +16,10 @@ ferpa_compliant if {
 
 # Allow if ALL requested data is "directory information" AND the student has NOT opted out.
 ferpa_compliant if {
+	input.student.directory_information_opt_out == false
 	every item in input.data_requested {
 		is_directory_information(item)
 	}
-	student_allows_directory_sharing
 }
 
 # Allow if the request is from a school official with a legitimate educational interest.
@@ -33,10 +33,6 @@ ferpa_compliant if {
 	input.request.purpose == "health_or_safety_emergency"
 }
 
-# Helper rule for directory information opt-out check
-student_has_not_opted_out if {
-	not input.student.directory_information_opt_out
-}
 
 # --- Deny Messages ---
 
@@ -75,7 +71,4 @@ has_valid_consent(student, requested_data) if {
 	}
 }
 
-# Helper function to check if student allows directory information sharing
-student_allows_directory_sharing if {
-	input.student.directory_information_opt_out == false
-}
+
