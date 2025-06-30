@@ -14,12 +14,17 @@ ferpa_compliant if {
 	has_valid_consent(input.student, input.data_requested)
 }
 
+# Helper function to check if student has opted out of directory information sharing
+student_opted_out if {
+	input.student.directory_information_opt_out
+}
+
 # Allow if ALL requested data is "directory information" AND the student has NOT opted out.
 ferpa_compliant if {
 	every item in input.data_requested {
 		is_directory_information(item)
 	}
-	not input.student.directory_information_opt_out
+	not student_opted_out
 }
 
 # Allow if the request is from a school official with a legitimate educational interest.
