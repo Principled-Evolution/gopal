@@ -1,9 +1,10 @@
 package international.nist.v1.map_test
 
 import rego.v1
+import data.international.nist.v1.map
 
 test_allow if {
-	allow with input as {"map": {
+	map.allow with input as {"map": {
 		"intended_use_documented": true,
 		"architecture_documented": true,
 		"data_sources_documented": true,
@@ -14,7 +15,7 @@ test_allow if {
 }
 
 test_deny_system_context if {
-	not allow with input as {"map": {
+	not map.allow with input as {"map": {
 		"intended_use_documented": false,
 		"architecture_documented": true,
 		"data_sources_documented": true,

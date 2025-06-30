@@ -1,9 +1,10 @@
 package international.nist.v1.govern_test
 
 import rego.v1
+import data.international.nist.v1.govern
 
 test_allow if {
-	allow with input as {
+	govern.allow with input as {
 		"governance": {
 			"roles_and_responsibilities_defined": true,
 			"oversight_mechanisms_in_place": true,
@@ -20,7 +21,7 @@ test_allow if {
 }
 
 test_deny_accountability if {
-	not allow with input as {
+	not govern.allow with input as {
 		"governance": {
 			"roles_and_responsibilities_defined": false,
 			"oversight_mechanisms_in_place": true,

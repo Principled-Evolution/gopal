@@ -1,9 +1,10 @@
 package international.nist.v1.ai_600_1_test
 
 import rego.v1
+import data.international.nist.v1.ai_600_1
 
 test_allow if {
-	allow with input as {
+	ai_600_1.allow with input as {
 		"governance": {
 			"roles_and_responsibilities_defined": true,
 			"oversight_mechanisms_in_place": true,

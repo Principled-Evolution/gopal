@@ -1,9 +1,10 @@
 package international.nist.v1.measure_test
 
 import rego.v1
+import data.international.nist.v1.measure
 
 test_allow if {
-	allow with input as {"measure": {
+	measure.allow with input as {"measure": {
 		"performance_metrics_defined": true,
 		"performance_metrics_tracked": true,
 		"bias_metrics_defined": true,
@@ -14,7 +15,7 @@ test_allow if {
 }
 
 test_deny_performance_metrics if {
-	not allow with input as {"measure": {
+	not measure.allow with input as {"measure": {
 		"performance_metrics_defined": false,
 		"performance_metrics_tracked": true,
 		"bias_metrics_defined": true,
