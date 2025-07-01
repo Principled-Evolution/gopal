@@ -21,9 +21,6 @@ default hara_analysis_is_compliant := false
 hara_analysis_is_compliant if {
 	# Check for the presence of a comprehensive safety assessment in the input
 	input.safety_assessment
-
-	# Check for the presence of a HARA analysis
-	input.safety_assessment.hara_analysis
 	input.safety_assessment.hara_analysis.status == "completed"
 	count(input.safety_assessment.hara_analysis.identified_hazards) > 0
 }
