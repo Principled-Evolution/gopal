@@ -2,47 +2,72 @@ package industry_specific.automotive.v1.vehicle_safety
 
 import rego.v1
 
-# Metadata
-metadata := {
-	"title": "Automotive Vehicle Safety Requirements",
-	"description": "Placeholder for automotive vehicle safety requirements for AI systems",
-	"status": "PLACEHOLDER - Pending detailed implementation",
-	"version": "1.0.0",
-	"category": "Industry-Specific",
-	"references": [
-		"ISO 26262: https://www.iso.org/standard/68383.html",
-		"ISO/PAS 21448 SOTIF: https://www.iso.org/standard/70939.html",
-		concat("", [
-			"UNECE Regulations on Automated Driving: ",
-			"https://unece.org/transport/vehicle-regulations/wp29/wp29-regulations-under-1958-agreement",
-		]),
-	],
+# @title Automotive Vehicle Safety Requirements
+# @description This policy evaluates AI systems in automotive applications for compliance with key safety standards, including ISO 26262 and ISO/PAS 21448 (SOTIF).
+# @version 1.0
+# @source ISO 26262: https://www.iso.org/standard/68383.html
+# @source ISO/PAS 21448 SOTIF: https://www.iso.org/standard/70939.html
+# @source UNECE Regulations on Automated Driving: https://unece.org/transport/vehicle-regulations/wp29/wp29-regulations-under-1958-agreement
+
+default compliant := false
+
+compliant if {
+	count(deny) == 0
 }
 
-# Default deny
-default allow := false
+# Hazard Analysis and Risk Assessment (HARA)
+default hara_analysis_is_compliant := false
 
-# This placeholder policy will always return non-compliant with implementation_pending=true
-non_compliant := true
+hara_analysis_is_compliant if {
+	# Check for the presence of a comprehensive safety assessment in the input
+	input.safety_assessment.hara_analysis.status == "completed"
+	count(input.safety_assessment.hara_analysis.identified_hazards) > 0
+}
 
-implementation_pending := true
+# Automotive Safety Integrity Level (ASIL) Determination
+asil_determination_is_compliant if {
+	object.get(input.safety_assessment, "asil_determination", false)
+	is_object(input.safety_assessment.asil_determination)
+	input.safety_assessment.asil_determination.status == "completed"
+	is_string(input.safety_assessment.asil_determination.final_asil_level)
+	input.safety_assessment.asil_determination.final_asil_level in ["ASIL A", "ASIL B", "ASIL C", "ASIL D", "QM"]
+}
 
-# Define the compliance report
-compliance_report := {
-	"policy": "Automotive Vehicle Safety Requirements",
-	"version": "1.0.0",
-	"status": "PLACEHOLDER - Pending detailed implementation",
-	"overall_result": false,
-	"implementation_pending": true,
-	"details": {"message": concat(" ", [
-		"Automotive vehicle safety policy implementation is pending.",
-		"This is a placeholder that will be replaced with actual compliance checks in a future release.",
-	])},
-	"recommendations": [
-		"Check back for future releases with automotive-specific evaluations",
-		"Consider using global compliance policies in the meantime",
-		"Review ISO 26262 for functional safety requirements",
-		"Consider ISO/PAS 21448 (SOTIF) for safety of the intended functionality",
-		"Implement preliminary safety assessment based on automotive industry standards",
-	],
+# Safety of the Intended Functionality (SOTIF) Analysis
+sotif_analysis_is_compliant if {
+	object.get(input.safety_assessment, "sotif_analysis", false)
+	is_object(input.safety_assessment.sotif_analysis)
+	input.safety_assessment.sotif_analysis.status == "completed"
+	count(input.safety_assessment.sotif_analysis.scenarios_analyzed) > 0
+}
+
+# Operational Design Domain (ODD) Definition
+odd_definition_is_compliant if {
+	object.get(input.safety_assessment, "odd_definition", false)
+	is_object(input.safety_assessment.odd_definition)
+	input.safety_assessment.odd_definition.status == "defined"
+	object.get(input.safety_assessment.odd_definition.conditions, "road_types", false)
+	object.get(input.safety_assessment.odd_definition.conditions, "weather", false)
+	object.get(input.safety_assessment.odd_definition.conditions, "traffic", false)
+}
+
+# Deny rule with detailed messages
+deny[msg] if {
+	not hara_analysis_is_compliant
+	msg := "Hazard Analysis and Risk Assessment (HARA) is incomplete or missing."
+}
+
+deny[msg] if {
+	not asil_determination_is_compliant
+	msg := "ASIL Determination is incomplete or invalid."
+}
+
+deny[msg] if {
+	not sotif_analysis_is_compliant
+	msg := "Safety of the Intended Functionality (SOTIF) analysis is incomplete or missing."
+}
+
+deny[msg] if {
+	not odd_definition_is_compliant
+	msg := "Operational Design Domain (ODD) is not clearly defined or is missing required conditions."
 }

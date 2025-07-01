@@ -1,4 +1,4 @@
-package education.v1.fairness_and_equity
+package industry_specific.education.v1.fairness_and_equity
 
 # @title Detailed Unbiased Automated Grading
 # @description This policy evaluates automated grading systems to ensure they are fair and equitable across different demographic groups.

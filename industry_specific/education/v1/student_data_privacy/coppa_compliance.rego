@@ -1,4 +1,4 @@
-package education.v1.student_data_privacy
+package industry_specific.education.v1.student_data_privacy
 
 # @title Detailed COPPA Compliance
 # @description This policy ensures that the collection and processing of personal information from children under 13 complies with COPPA.

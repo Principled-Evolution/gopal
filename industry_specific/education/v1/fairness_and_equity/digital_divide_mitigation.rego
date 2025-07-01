@@ -1,4 +1,4 @@
-package education.v1.fairness_and_equity
+package industry_specific.education.v1.fairness_and_equity
 
 # @title Detailed Digital Divide Mitigation
 # @description This policy ensures that technology-based assignments provide equitable alternatives for students facing a digital divide.

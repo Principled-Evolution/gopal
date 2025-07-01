@@ -1,4 +1,4 @@
-package education.v1.academic_integrity
+package industry_specific.education.v1.academic_integrity
 
 # @title Detailed Acceptable AI Use
 # @description This policy defines the acceptable use of AI tools by students based on the course policy and the type of assignment.
