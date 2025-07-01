@@ -57,15 +57,17 @@ deny[msg] if {
 	msg := "Hazard Analysis and Risk Assessment (HARA) is incomplete or missing."
 }
 
-# deny[msg] if {
-# 	not asil_determination_is_compliant
-# 	msg := "ASIL Determination is incomplete or invalid."
-# }
-# deny[msg] if {
-# 	not sotif_analysis_is_compliant
-# 	msg := "Safety of the Intended Functionality (SOTIF) analysis is incomplete or missing."
-# }
-# deny[msg] if {
-# 	not odd_definition_is_compliant
-# 	msg := "Operational Design Domain (ODD) is not clearly defined or is missing required conditions."
-# }
+deny[msg] if {
+	not asil_determination_is_compliant
+	msg := "ASIL Determination is incomplete or invalid."
+}
+
+deny[msg] if {
+	not sotif_analysis_is_compliant
+	msg := "Safety of the Intended Functionality (SOTIF) analysis is incomplete or missing."
+}
+
+deny[msg] if {
+	not odd_definition_is_compliant
+	msg := "Operational Design Domain (ODD) is not clearly defined or is missing required conditions."
+}
