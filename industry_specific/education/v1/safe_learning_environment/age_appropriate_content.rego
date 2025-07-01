@@ -1,4 +1,4 @@
-package education.v1.safe_learning_environment
+package industry_specific.education.v1.safe_learning_environment
 
 # @title Detailed Age-Appropriate Content
 # @description This policy evaluates whether AI-generated content is appropriate for the student's age and the educational context.

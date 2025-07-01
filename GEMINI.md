@@ -81,3 +81,9 @@ The policies in this directory are based on the official text of the EU AI Act.
 -   For every `my_policy.rego` file, you must create a corresponding `my_policy_test.rego` in the same directory.
 -   Tests should cover both `allow`/`compliant` and `deny`/`non-compliant` scenarios.
 -   Use mock `input` data to simulate realistic policy evaluation scenarios.
+
+## github workflows MUST pass
+- opa check . 
+- regal lint . 
+- above must pass
+- use web search for hints on how to fix regal lint issues if necessary

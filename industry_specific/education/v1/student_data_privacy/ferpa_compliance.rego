@@ -1,4 +1,4 @@
-package education.v1.student_data_privacy
+package industry_specific.education.v1.student_data_privacy
 
 # @title Detailed FERPA Compliance
 # @description This policy evaluates data access requests against the Family Educational Rights and Privacy Act (FERPA).

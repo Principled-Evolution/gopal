@@ -1,4 +1,4 @@
-package education.v1.fairness_and_equity
+package industry_specific.education.v1.fairness_and_equity
 
 # @title Detailed Equitable Admissions Systems
 # @description This policy evaluates AI-driven admissions systems to ensure they do not create or amplify inequities.

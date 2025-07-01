@@ -1,4 +1,4 @@
-package education.v1.assessment_and_evaluation
+package industry_specific.education.v1.assessment_and_evaluation
 
 # @title Detailed Responsible AI Proctoring
 # @description This policy ensures that AI proctoring systems are used responsibly, respecting student privacy and providing due process.

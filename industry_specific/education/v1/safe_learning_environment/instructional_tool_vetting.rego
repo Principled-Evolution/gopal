@@ -1,4 +1,4 @@
-package education.v1.safe_learning_environment
+package industry_specific.education.v1.safe_learning_environment
 
 # @title Detailed Instructional Tool Vetting
 # @description This policy ensures that third-party AI tools are properly vetted against security, privacy, and pedagogical standards before use.

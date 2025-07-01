@@ -1,4 +1,4 @@
-package education.v1.student_data_privacy
+package industry_specific.education.v1.student_data_privacy
 
 # @title Detailed Data Minimization
 # @description This policy ensures that data collection is limited to what is strictly necessary for a specified purpose.

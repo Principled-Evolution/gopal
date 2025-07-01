@@ -1,4 +1,4 @@
-package education.v1.academic_integrity
+package industry_specific.education.v1.academic_integrity
 
 import rego.v1
 

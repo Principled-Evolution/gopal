@@ -16,27 +16,27 @@ import data.global.v1.common.risk_management
 
 # Define helper rules to check which evaluations failed/passed
 fairness_eval_fails if {
-	not common_fairness.passes_fairness_threshold(input.evaluation, object.get(input.params, "fairness_threshold", 0.85))
+	input.evaluation.fairness.score < object.get(input.params, "fairness_threshold", 0.85)
 }
 
 content_safety_eval_fails if {
-	not content_safety.passes_content_safety_threshold(input.evaluation, object.get(input.params, "content_safety_threshold", 0.90))
+	input.evaluation.content_safety.score < object.get(input.params, "content_safety_threshold", 0.90)
 }
 
 risk_management_eval_fails if {
-	not risk_management.passes_risk_threshold(input.evaluation, object.get(input.params, "risk_management_threshold", 0.90))
+	input.evaluation.risk_management.score < object.get(input.params, "risk_management_threshold", 0.90)
 }
 
 fairness_passes if {
-	common_fairness.passes_fairness_threshold(input.evaluation, object.get(input.params, "fairness_threshold", 0.85))
+	input.evaluation.fairness.score >= object.get(input.params, "fairness_threshold", 0.85)
 }
 
 content_safety_passes if {
-	content_safety.passes_content_safety_threshold(input.evaluation, object.get(input.params, "content_safety_threshold", 0.90))
+	input.evaluation.content_safety.score >= object.get(input.params, "content_safety_threshold", 0.90)
 }
 
 risk_management_passes if {
-	risk_management.passes_risk_threshold(input.evaluation, object.get(input.params, "risk_management_threshold", 0.90))
+	input.evaluation.risk_management.score >= object.get(input.params, "risk_management_threshold", 0.90)
 }
 
 # Create individual arrays based on evaluation results

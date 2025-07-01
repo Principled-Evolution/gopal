@@ -1,4 +1,4 @@
-package education.v1.assessment_and_evaluation
+package industry_specific.education.v1.assessment_and_evaluation
 
 # @title Detailed Human-in-the-Loop Grading
 # @description This policy mandates human oversight for automated grading systems, especially for high-stakes assessments.
