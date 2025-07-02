@@ -18,6 +18,25 @@ This directory contains policies specific to different industry verticals and th
   - **v1/**: Version 1 implementation
     - `vehicle_safety.rego`: Vehicle safety requirements for automotive AI systems
 
+- **aviation/**: Aviation industry
+  - **v1/**: Version 1 implementation
+    - **autonomous_systems/**: Policies for autonomous AI systems in aviation
+      - `ai_safety.rego`: AI safety requirements for autonomous aviation systems
+      - `decision_making.rego`: AI decision-making transparency and accountability
+      - `human_oversight.rego`: Human oversight requirements for autonomous operations
+    - **flight_operations/**: Flight operations and safety policies
+      - `bvlos_operations.rego`: Beyond Visual Line of Sight (BVLOS) operations
+      - `urban_air_mobility.rego`: Urban Air Mobility (UAM) operations
+      - `emergency_procedures.rego`: Emergency response and contingency procedures
+    - **airworthiness/**: Aircraft certification and airworthiness policies
+      - `certification.rego`: Aircraft certification requirements
+      - `maintenance.rego`: Maintenance and inspection requirements
+      - `design_standards.rego`: Design and manufacturing standards
+    - **data_management/**: Data handling and privacy policies
+      - `flight_data.rego`: Flight data recording and management
+      - `privacy_protection.rego`: Privacy protection for collected data
+      - `data_sharing.rego`: Data sharing protocols and requirements
+
 ## Usage
 
 Industry-specific policies address the unique requirements and risks associated with AI systems deployed in particular sectors. These should be applied in addition to global and applicable international policies to ensure comprehensive compliance.
