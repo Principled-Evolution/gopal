@@ -1,0 +1,25 @@
+{
+  "system": {
+    "name": "loan-approval-model-v2",
+    "provider": "Acme Bank",
+    "use_case": "consumer credit decisioning"
+  },
+  "governance": {
+    "roles_and_responsibilities_defined": true,
+    "oversight_mechanisms_in_place": true,
+    "policy_documents": [
+      "model-risk-policy-v3.pdf",
+      "ai-ethics-charter.pdf"
+    ]
+  },
+  "transparency": {
+    "public_documentation_available": true,
+    "decision_explanations_provided": true,
+    "explanation_method": "adverse-action codes per Reg B + SHAP feature attribution"
+  },
+  "fairness": {
+    "bias_assessments_conducted": true,
+    "bias_mitigation_strategies_in_place": true,
+    "protected_attributes_evaluated": ["race", "gender", "age", "national_origin"]
+  }
+}

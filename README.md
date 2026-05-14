@@ -14,7 +14,10 @@
 </p>
 
 <p align="center">
-  <em>94 policies. 15+ regulatory frameworks. 5 industry verticals. Policy-as-code your auditor can read.</em>
+  <em>AI compliance rules you can read, run, diff, and prove.</em>
+</p>
+<p align="center">
+  <sub>94 policies · 15+ regulatory frameworks · 5 industry verticals</sub>
 </p>
 
 <p align="center">
@@ -31,7 +34,9 @@
 
 <br>
 
-**Governance Open Policy Agent Library** — a curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules in banking, and more.
+**GOPAL: Governance Open Policy Agent Library.** Think of it as an open policy pack for AI regulation.
+
+A curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules in banking, and more.
 
 Run them against your AI system's metadata, model cards, or evaluation results — and get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
 
@@ -44,6 +49,30 @@ Run them against your AI system's metadata, model cards, or evaluation results �
 
 ---
 
+## AI compliance rules you can read, run, diff, and prove
+
+GOPAL turns regulatory and governance requirements — the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA, fair lending, and healthcare safety — into executable OPA policies.
+
+Use GOPAL when you want AI governance checks that are:
+
+- **Readable** — every rule is Rego, not a black-box score
+- **Reviewable** — policy changes go through pull requests
+- **Testable** — every policy can have allow/deny test cases
+- **Versioned** — frameworks evolve without breaking pinned users
+- **Automatable** — run checks in CI/CD, audit workflows, or AICertify
+
+---
+
+## Why now
+
+The EU AI Act is in force. The NIST AI RMF is the de facto US baseline. The UK, India, Brazil, Singapore, and California are all moving. Aviation regulators are publishing AI/UAS guidance. Financial supervisors are issuing model-risk requirements.
+
+Engineering teams need AI governance checks that run in CI — not PDFs that sit on a shared drive, not screenshots pasted into review-board decks.
+
+GOPAL ships executable Rego policies for each of those regimes. They are versioned, testable, and reviewable in pull requests. The same tooling your platform team already uses for Kubernetes admission control can now enforce AI-system requirements.
+
+---
+
 ## Quick Start
 
 <p align="center">
@@ -52,6 +81,16 @@ Run them against your AI system's metadata, model cards, or evaluation results �
     <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="How GOPAL evaluation works — input JSON, Rego policy, OPA evaluation, verdict" width="85%" />
   </picture>
 </p>
+
+### Try GOPAL in 30 seconds
+
+```bash
+git clone https://github.com/Principled-Evolution/gopal.git
+cd gopal/examples/eu-ai-act-transparency
+./run.sh
+```
+
+You'll see a structured EU AI Act transparency verdict against a sample AI system. See [`examples/`](examples/) for NIST AI RMF, customer-support LLM, and more.
 
 ### Standalone with the OPA CLI
 
@@ -96,6 +135,22 @@ GOPAL is different on three axes:
 1. **AI-specific by construction.** Every policy targets an AI-system concern — bias, transparency, human oversight, model risk, content safety, safety-critical certification — not generic infrastructure.
 2. **Readable.** The rules are Rego. You can `cat` them, diff them in a PR, and reason about them. No black-box scorecards.
 3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees — see [COMPATIBILITY.md](COMPATIBILITY.md). When the EU AI Act amends, the old version stays put.
+
+---
+
+## For OPA / Rego users
+
+If you already run OPA for Kubernetes admission, cloud authorization, CI/CD, or service mesh, GOPAL gives you a policy library targeted at AI systems instead of infrastructure.
+
+The packages, conventions, and test patterns are idiomatic Rego — no DSL on top, no Python required to evaluate. You can:
+
+- pull individual frameworks (`international/eu_ai_act/v1/`, `industry_specific/aviation/v1/`) into a bundle
+- evaluate with `opa eval`, [Conftest](https://www.conftest.dev/), or your existing OPA server
+- pin to a major version (`v1/`) and review upgrades as PRs
+- compose GOPAL rules with your private `custom/` rules in the same evaluation
+- lint with [Regal](https://github.com/StyraInc/regal) — the same linter GOPAL itself runs in CI
+
+If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify).
 
 ---
 
@@ -164,6 +219,19 @@ gopal/
 
 ---
 
+## GOPAL vs AICertify
+
+| Need | Use |
+|---|---|
+| I want raw Rego policies | GOPAL |
+| I want to evaluate an AI app and generate reports | AICertify |
+| I want to plug policies into existing OPA tooling | GOPAL |
+| I want PDF/Markdown/JSON audit reports | AICertify |
+
+AICertify uses GOPAL underneath. Pick GOPAL if you already have an OPA workflow you want to extend with AI-specific rules. Pick AICertify if you want a Python framework that captures AI-application interactions and produces audit-ready evidence end-to-end.
+
+---
+
 ## Authoring Policies
 
 <p align="center">
@@ -205,6 +273,23 @@ Then a sibling `*_test.rego` covers the rule. CI enforces:
 2. **`regal lint`** — Rego style + best practices
 
 The [helper_functions/](helper_functions/) library gives you `compose_report()`, `validate_required_fields()`, and `field_exists()` so reports come out in a uniform shape no matter who wrote the rule.
+
+See [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md) for a walkthrough, and [`docs/coverage/`](docs/coverage/) for per-framework coverage matrices.
+
+---
+
+## Policy correctness
+
+GOPAL is not legal advice. The policies here are executable interpretations of public regulatory and governance requirements, written by engineers who care about getting them right.
+
+If you believe a rule misreads a regulation or misses an obligation, please open an issue with:
+
+- the regulation, section, or article in question
+- your interpretation
+- the input/output behavior you'd expect
+- any official guidance, regulator text, or precedent
+
+Policy-correctness disagreements are not security vulnerabilities — see [SECURITY.md](SECURITY.md) for the latter. They are exactly the kind of issue we want public so the community can review and improve the rules together.
 
 ---
 

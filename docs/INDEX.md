@@ -7,6 +7,8 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 ## 🎓 Tutorials — your first GOPAL evaluation
 
 - [Quick Start in the README](../README.md#quick-start) — standalone `opa eval`, or via AICertify.
+- [Add your first GOPAL policy](tutorials/add-your-first-policy.md) — write a working policy + test + CI check in 20 minutes.
+- [Runnable examples](../examples/README.md) — `examples/` with input/output pairs for EU AI Act, NIST AI RMF, and customer-support LLM.
 - [Add a brand-new regulatory framework](../skills/add-framework/SKILL.md) (Claude Code skill) — bootstraps the directory tree, framework README, and first policy.
 - [FAQ](FAQ.md) — comprehensive Q&A on what GOPAL is, when to use it, and how to extend it.
 
@@ -19,6 +21,7 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 
 ## 📚 Reference — look up specific names
 
+- [Policy coverage matrices](coverage/) — per-framework view of what's Implemented / Scaffold / Planned.
 - [Coverage table](../README.md#whats-inside) — every framework with its policy count.
 - [helper_functions/reporting.rego](../helper_functions/reporting.rego) — `compose_report()`, validators.
 - [helper_functions/validation.rego](../helper_functions/validation.rego) — `field_exists()`, `validate_required_fields()`.

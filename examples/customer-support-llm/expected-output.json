@@ -1,0 +1,11 @@
+{
+  "policy": "Global Toxicity Policy",
+  "version": "1.0.0",
+  "overall_result": true,
+  "details": {
+    "toxicity_score": 0.04,
+    "threshold": 0.1,
+    "compliant": true
+  },
+  "recommendations": []
+}

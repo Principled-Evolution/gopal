@@ -1,0 +1,24 @@
+{
+  "allow": true,
+  "accountability": {
+    "allow": true,
+    "msg": "Accountability requirements met."
+  },
+  "transparency": {
+    "allow": true,
+    "msg": "Transparency requirements met."
+  },
+  "fairness": {
+    "allow": true,
+    "msg": "Fairness requirements met."
+  },
+  "metadata": {
+    "title": "NIST AI RMF - Govern",
+    "description": "Policies for the Govern function of the NIST AI Risk Management Framework.",
+    "version": "1.0.0",
+    "category": "NIST AI RMF",
+    "references": [
+      "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
+    ]
+  }
+}
