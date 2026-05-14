@@ -5,16 +5,43 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gopal"
 version = "1.0.0"
-description = "Open Policy Agent Policies for AI Certification"
+description = "GOPAL — the Rego policy library for AI compliance. 94 OPA policies across 15+ regulatory frameworks (EU AI Act, NIST AI RMF, aviation standards, FERPA/COPPA, fair lending) and 5 industry verticals."
 readme = "README.md"
 authors = [
-    {name = "Mantric", email = "info@mantric.com"}
+    {name = "Principled Evolution", email = "info@principledevolution.ai"},
+    {name = "Mantric", email = "info@mantric.com"},
 ]
-license = {file = "LICENSE"}
+license = "Apache-2.0"
+keywords = [
+    "ai-governance",
+    "ai-compliance",
+    "ai-act",
+    "eu-ai-act",
+    "nist-ai-rmf",
+    "open-policy-agent",
+    "opa",
+    "rego",
+    "policy-as-code",
+    "regulatory-compliance",
+    "aviation-safety",
+    "ferpa",
+    "coppa",
+    "fair-lending",
+    "responsible-ai",
+]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Legal Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
 ]
 requires-python = ">=3.8"
 dependencies = [
@@ -22,8 +49,12 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/mantric/gopal"
-"Bug Tracker" = "https://github.com/mantric/gopal/issues"
+Homepage = "https://github.com/Principled-Evolution/gopal"
+Repository = "https://github.com/Principled-Evolution/gopal"
+Documentation = "https://github.com/Principled-Evolution/gopal#readme"
+Issues = "https://github.com/Principled-Evolution/gopal/issues"
+Changelog = "https://github.com/Principled-Evolution/gopal/blob/main/CHANGELOG.md"
+"Consumer (AICertify)" = "https://github.com/Principled-Evolution/aicertify"
 
 [tool.setuptools]
 packages = ["gopal"]
