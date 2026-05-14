@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+<title>GOPAL — The Rego policy library for AI compliance</title>
+<desc>GOPAL social card with logo, wordmark, tagline, framework chips, and project URL.</desc>
+
+<rect x="0" y="0" width="1200" height="630" fill="#0d1117"/>
+
+<g transform="translate(310, 130) scale(2.6)">
+<polygon points="8,40 24,12 56,12 72,40 56,68 24,68" fill="#6366f1"/>
+<g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M 34 24 Q 26 24 26 32 Q 26 40 22 40 Q 26 40 26 48 Q 26 56 34 56"/>
+<path d="M 46 24 Q 54 24 54 32 Q 54 40 58 40 Q 54 40 54 48 Q 54 56 46 56"/>
+</g>
+</g>
+
+<text x="540" y="280" font-size="120" font-weight="500" fill="#f0f6fc" letter-spacing="-0.025em">GOPAL</text>
+
+<text x="600" y="365" font-size="38" font-weight="500" fill="#a5b4fc" text-anchor="middle">The Rego policy library for AI compliance</text>
+<text x="600" y="405" font-size="22" font-weight="400" fill="#8b949e" text-anchor="middle">94 policies · 15+ frameworks · 5 industries · Apache 2.0</text>
+
+<g>
+<rect x="296" y="476" width="120" height="36" rx="18" fill="#312e81"/>
+<text x="356" y="494" font-size="16" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">EU AI Act</text>
+</g>
+<g>
+<rect x="432" y="476" width="148" height="36" rx="18" fill="#312e81"/>
+<text x="506" y="494" font-size="16" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">NIST AI RMF</text>
+</g>
+<g>
+<rect x="596" y="476" width="172" height="36" rx="18" fill="#533404"/>
+<text x="682" y="494" font-size="16" font-weight="500" fill="#fde68a" text-anchor="middle" dominant-baseline="central">ICAO Doc 10019</text>
+</g>
+<g>
+<rect x="784" y="476" width="120" height="36" rx="18" fill="#312e81"/>
+<text x="844" y="494" font-size="16" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">+13 more</text>
+</g>
+
+<line x1="120" y1="568" x2="1080" y2="568" stroke="#30363d" stroke-width="1"/>
+<text x="120" y="600" font-size="18" font-weight="400" fill="#8b949e">github.com/Principled-Evolution/gopal</text>
+<text x="1080" y="600" font-size="18" font-weight="400" fill="#8b949e" text-anchor="end">94 Rego policies · Apache 2.0</text>
+</svg>
