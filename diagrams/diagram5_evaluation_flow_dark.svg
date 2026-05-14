@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" role="img" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+<title>How GOPAL evaluation works</title>
+<desc>Four-step flow from input data and Rego policy through the OPA engine to a verdict.</desc>
+<defs>
+<marker id="ad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#6e7681" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<g>
+<rect x="22" y="30" width="138" height="120" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="34" y="42" width="26" height="18" rx="9" fill="#312e81"/>
+<text x="47" y="51" font-size="10" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">01</text>
+<g transform="translate(77, 68)" fill="none" stroke="#a5b4fc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M6 3 L17 3 L22 8 L22 25 L6 25 Z"/><path d="M17 3 L17 8 L22 8"/>
+<line x1="10" y1="13" x2="19" y2="13"/><line x1="10" y1="17" x2="19" y2="17"/><line x1="10" y1="21" x2="15" y2="21"/>
+</g>
+<text x="91" y="120" font-size="13" font-weight="500" fill="#f0f6fc" text-anchor="middle">Input JSON</text>
+<text x="91" y="138" font-size="11" font-weight="400" fill="#8b949e" text-anchor="middle">AI system data</text>
+</g>
+
+<line x1="164" y1="90" x2="184" y2="90" stroke="#6e7681" stroke-width="1.5" marker-end="url(#ad)"/>
+
+<g>
+<rect x="188" y="30" width="138" height="120" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="200" y="42" width="26" height="18" rx="9" fill="#312e81"/>
+<text x="213" y="51" font-size="10" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">02</text>
+<g transform="translate(243, 68)" fill="none" stroke="#a5b4fc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M6 3 L17 3 L22 8 L22 25 L6 25 Z"/><path d="M17 3 L17 8 L22 8"/>
+<path d="M11 15 L9 17 L11 19" /><path d="M17 15 L19 17 L17 19" /><line x1="13" y1="20" x2="15" y2="14"/>
+</g>
+<text x="257" y="120" font-size="13" font-weight="500" fill="#f0f6fc" text-anchor="middle">Rego policy</text>
+<text x="257" y="138" font-size="11" font-weight="400" fill="#8b949e" text-anchor="middle">gopal library</text>
+</g>
+
+<line x1="330" y1="90" x2="350" y2="90" stroke="#6e7681" stroke-width="1.5" marker-end="url(#ad)"/>
+
+<g>
+<rect x="354" y="30" width="138" height="120" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+<rect x="366" y="42" width="26" height="18" rx="9" fill="#312e81"/>
+<text x="379" y="51" font-size="10" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">03</text>
+<g transform="translate(409, 68)" fill="none" stroke="#a5b4fc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M14 3 L22 6 L22 14 C22 19 18 23 14 25 C10 23 6 19 6 14 L6 6 Z"/>
+<polyline points="10,14 13,17 18,11"/>
+</g>
+<text x="423" y="120" font-size="13" font-weight="500" fill="#f0f6fc" text-anchor="middle">OPA evaluation</text>
+<text x="423" y="138" font-size="11" font-weight="400" fill="#8b949e" text-anchor="middle">Engine runs the rule</text>
+</g>
+
+<line x1="496" y1="90" x2="516" y2="90" stroke="#6e7681" stroke-width="1.5" marker-end="url(#ad)"/>
+
+<g>
+<rect x="520" y="30" width="138" height="120" rx="10" fill="#2a1f06" stroke="#5a4216" stroke-width="1"/>
+<rect x="532" y="42" width="26" height="18" rx="9" fill="#533404"/>
+<text x="545" y="51" font-size="10" font-weight="500" fill="#fde68a" text-anchor="middle" dominant-baseline="central">04</text>
+<g transform="translate(575, 68)" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="14" cy="14" r="11"/><polyline points="9,14 13,18 19,10"/>
+</g>
+<text x="589" y="120" font-size="13" font-weight="500" fill="#f0f6fc" text-anchor="middle">Verdict</text>
+<text x="589" y="138" font-size="11" font-weight="400" fill="#fcd34d" text-anchor="middle">Allow · Deny · Reason</text>
+</g>
+</svg>

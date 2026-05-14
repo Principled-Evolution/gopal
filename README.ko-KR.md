@@ -1,4 +1,9 @@
-<h1 align="center">GOPAL</h1>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+  </picture>
+</div>
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -6,10 +11,6 @@
   <a href="README.ja-JP.md">日本語</a> |
   <strong>한국어</strong> |
   <a href="README.hi-IN.md">हिन्दी</a>
-</p>
-
-<p align="center">
-  <strong>AI 컴플라이언스를 위한 Rego 정책 라이브러리.</strong>
 </p>
 
 <p align="center">
@@ -34,13 +35,23 @@
 
 여러분의 AI 시스템 메타데이터, 모델 카드 또는 평가 결과에 대해 이러한 정책을 실행하면, CI, 감사 로그 또는 규제 당국 제출 자료에 그대로 적용할 수 있는 구조화된 기계 판독 가능 컴플라이언스 결과를 얻을 수 있습니다.
 
-<p align="center"><img src="diagrams/diagram1_hero_numbers.png" alt="GOPAL — 94개 정책, 15개 이상 프레임워크, 5개 수직 영역" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 94개 정책, 국제 표준 · 항공 · 산업 수직 · 공통 원칙의 4개 카테고리" width="85%" />
+  </picture>
+</p>
 
 ---
 
 ## 빠른 시작
 
-<p align="center"><img src="diagrams/diagram5_evaluation_flow.png" alt="GOPAL 평가 동작 방식 — 입력 JSON, OPA 엔진, 정책, 판정 결과" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 평가 동작 방식 — 입력 JSON, Rego 정책, OPA 평가, 판정 결과" width="85%" />
+  </picture>
+</p>
 
 ### OPA CLI를 사용한 단독 실행
 
@@ -90,7 +101,12 @@ GOPAL은 세 가지 측면에서 다릅니다.
 
 ## 구성 내용
 
-<p align="center"><img src="diagrams/diagram2_directory_tree.png" alt="GOPAL 디렉터리 레이아웃 — 5개의 최상위 분기, 관할권 및 수직 영역별로 구성된 정책" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 디렉터리 레이아웃 — 4개의 최상위 분기, 관할권 및 수직 영역별로 구성된 정책" width="85%" />
+  </picture>
+</p>
 
 ```
 gopal/
@@ -133,8 +149,6 @@ gopal/
 
 ## 비교
 
-<p align="center"><img src="diagrams/diagram4_framework_grid.png" alt="GOPAL이 커버하는 프레임워크 — EU AI Act, NIST, FAA, EASA, RTCA 등" width="85%" /></p>
-
 | | GOPAL | 범용 OPA 번들 | 벤더 거버넌스 SaaS |
 |---|---|---|---|
 | AI 시스템을 특정해 대상화 | ✅ | ❌ | ✅ |
@@ -152,7 +166,12 @@ gopal/
 
 ## 정책 작성
 
-<p align="center"><img src="diagrams/diagram3_policy_anatomy.png" alt="GOPAL 정책의 구조 — 패키지 경로, 임포트, 메타데이터, 기본 거부, 허용 규칙, 리포트" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 정책의 구조 — 패키지 경로, 임포트, 메타데이터, 기본 거부, 허용 규칙, 리포트" width="85%" />
+  </picture>
+</p>
 
 모든 정책은 동일한 형태를 따릅니다.
 

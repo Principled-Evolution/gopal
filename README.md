@@ -1,4 +1,9 @@
-<h1 align="center">GOPAL</h1>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+  </picture>
+</div>
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -6,10 +11,6 @@
   <a href="README.ja-JP.md">日本語</a> |
   <a href="README.ko-KR.md">한국어</a> |
   <a href="README.hi-IN.md">हिन्दी</a>
-</p>
-
-<p align="center">
-  <strong>The Rego policy library for AI compliance.</strong>
 </p>
 
 <p align="center">
@@ -34,13 +35,23 @@
 
 Run them against your AI system's metadata, model cards, or evaluation results — and get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
 
-<p align="center"><img src="diagrams/diagram1_hero_numbers.png" alt="GOPAL — 94 policies, 15+ frameworks, 5 verticals" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 94 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+  </picture>
+</p>
 
 ---
 
 ## Quick Start
 
-<p align="center"><img src="diagrams/diagram5_evaluation_flow.png" alt="How GOPAL evaluation works — input JSON, OPA engine, policy, verdict" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="How GOPAL evaluation works — input JSON, Rego policy, OPA evaluation, verdict" width="85%" />
+  </picture>
+</p>
 
 ### Standalone with the OPA CLI
 
@@ -90,7 +101,12 @@ GOPAL is different on three axes:
 
 ## What's Inside
 
-<p align="center"><img src="diagrams/diagram2_directory_tree.png" alt="GOPAL directory layout — 5 top-level branches, policies organized by jurisdiction and vertical" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL directory layout — 4 top-level branches, policies organized by jurisdiction and vertical" width="85%" />
+  </picture>
+</p>
 
 ```
 gopal/
@@ -133,8 +149,6 @@ gopal/
 
 ## Comparison
 
-<p align="center"><img src="diagrams/diagram4_framework_grid.png" alt="Frameworks GOPAL covers — EU AI Act, NIST, FAA, EASA, RTCA and more" width="85%" /></p>
-
 | | GOPAL | Generic OPA bundle | Vendor governance SaaS |
 |---|---|---|---|
 | Targets AI systems specifically | ✅ | ❌ | ✅ |
@@ -152,7 +166,12 @@ gopal/
 
 ## Authoring Policies
 
-<p align="center"><img src="diagrams/diagram3_policy_anatomy.png" alt="Anatomy of a GOPAL policy — package path, imports, metadata, default deny, allow rule, report" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="Anatomy of a GOPAL policy — package path, imports, metadata, default deny, allow rule, report" width="85%" />
+  </picture>
+</p>
 
 Every policy follows the same shape:
 

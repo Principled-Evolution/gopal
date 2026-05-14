@@ -1,4 +1,9 @@
-<h1 align="center">GOPAL</h1>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+  </picture>
+</div>
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -6,10 +11,6 @@
   <a href="README.ja-JP.md">日本語</a> |
   <a href="README.ko-KR.md">한국어</a> |
   <a href="README.hi-IN.md">हिन्दी</a>
-</p>
-
-<p align="center">
-  <strong>面向 AI 合规的 Rego 策略库。</strong>
 </p>
 
 <p align="center">
@@ -34,13 +35,23 @@
 
 在您 AI 系统的元数据、模型卡片或评估结果上运行这些策略,即可获得结构化、机器可读的合规判定,可直接接入 CI、审计日志或监管报送。
 
-<p align="center"><img src="diagrams/diagram1_hero_numbers.png" alt="GOPAL —— 94 条策略,15+ 框架,5 个垂直领域" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:94 条策略,覆盖国际标准、航空、行业垂直与跨领域原则" width="85%" />
+  </picture>
+</p>
 
 ---
 
 ## 快速开始
 
-<p align="center"><img src="diagrams/diagram5_evaluation_flow.png" alt="GOPAL 评估流程 —— 输入 JSON、OPA 引擎、策略、判定" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 评估流程 —— 输入 JSON、Rego 策略、OPA 评估、判定" width="85%" />
+  </picture>
+</p>
 
 ### 搭配 OPA CLI 独立使用
 
@@ -90,7 +101,12 @@ GOPAL 在三个维度上与众不同:
 
 ## 内容一览
 
-<p align="center"><img src="diagrams/diagram2_directory_tree.png" alt="GOPAL 目录结构 —— 5 个顶级分支,按司法管辖区与行业组织的策略" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 目录结构 —— 4 个顶级分支,按司法管辖区与行业组织的策略" width="85%" />
+  </picture>
+</p>
 
 ```
 gopal/
@@ -133,8 +149,6 @@ gopal/
 
 ## 对比
 
-<p align="center"><img src="diagrams/diagram4_framework_grid.png" alt="GOPAL 覆盖的框架 —— EU AI Act、NIST、FAA、EASA、RTCA 等" width="85%" /></p>
-
 | | GOPAL | 通用 OPA 规则包 | 厂商治理 SaaS |
 |---|---|---|---|
 | 专门面向 AI 系统 | ✅ | ❌ | ✅ |
@@ -152,7 +166,12 @@ gopal/
 
 ## 策略编写
 
-<p align="center"><img src="diagrams/diagram3_policy_anatomy.png" alt="GOPAL 策略的结构 —— 包路径、imports、元数据、默认拒绝、allow 规则、报告" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 策略的结构 —— 包路径、imports、元数据、默认拒绝、allow 规则、报告" width="85%" />
+  </picture>
+</p>
 
 每条策略都遵循相同的结构:
 
