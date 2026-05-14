@@ -8,14 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Centered HTML hero, ordered badge wall, three big-number value-prop cards, and 5 programmatically-generated marketing diagrams in the README (hero numbers, directory tree, policy anatomy, framework grid, evaluation flow).
-- `AGENTS.md` and `CLAUDE.md` — operational instructions for AI coding agents working in this repository. `GEMINI.md` refreshed to inherit from `AGENTS.md` while preserving the author's working principles.
-- `skills/` directory with 3 Claude Code skills: `draft-rego-policy`, `explain-framework`, `add-framework`. Each ships as a slash command once installed into `~/.claude/skills/`.
-- Comparison table vs generic OPA bundles and vendor governance SaaS in the README.
-- `diagrams/generate_diagrams.py` — reproducible matplotlib script that regenerates every marketing PNG.
+- **Hand-authored, theme-aware SVG diagrams** under [`diagrams/`](diagrams/) — paired `_light.svg` + `_dark.svg` for hero banner, hero numbers, directory tree, policy anatomy, and evaluation flow. Embedded via `<picture>` so GitHub light- and dark-theme readers each see the matching variant.
+- **Brand assets** — standalone `logo_{light,dark}.svg` (hexagon + `{}` curly braces, signalling policy-as-code), `og_card_{light,dark}.svg` + a 1200×630 `og_card.png` for GitHub Settings → Social preview.
+- **[`diagrams/STYLE.md`](diagrams/STYLE.md)** — design-system reference (palette, typography, shape language, light/dark pattern, contribution flow) shared with sister project AICertify.
+- **[`CONTRIBUTING.md`](CONTRIBUTING.md)** — policy-authoring conventions, local-checks recipe, PR review criteria, and a "adding a new framework" guide. Resolves the broken link the README had been carrying.
+- **[`SECURITY.md`](SECURITY.md)** — private vulnerability-disclosure flow at `security@principledevolution.ai`, 5-business-day acknowledgement, coordinated disclosure. Explicitly distinguishes security issues from policy-correctness disputes.
+- **`AGENTS.md`** — new "Diagrams and visual assets" section pointing future agents at the SVG system and explicitly retiring the matplotlib generator.
+- Previously (still in this Unreleased line): `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` operational instructions for AI coding agents; `skills/` directory with 3 Claude Code skills (`draft-rego-policy`, `explain-framework`, `add-framework`); comparison table vs generic OPA bundles and vendor governance SaaS in the README.
 
 ### Changed
+- **Top of README** — replaced the `<h1>GOPAL</h1>` + bold tagline with a hero banner SVG that bakes in the wordmark and value prop, tightening the top fold across all 5 language READMEs (en, zh-CN, ja-JP, ko-KR, hi-IN).
 - README rewritten for product-page clarity: hero numbers, then quick start, then differentiation, then directory map.
+
+### Removed
+- **`diagrams/generate_diagrams.py`** — matplotlib generator retired. Hand-authored SVGs are now the source of truth; see [`diagrams/STYLE.md`](diagrams/STYLE.md) for how to add new ones.
+- **`diagram4_framework_grid.png`** — the markdown comparison table directly below it does the same job; the embedded image was redundant.
 
 ## [1.0.0] — 2025-07
 
