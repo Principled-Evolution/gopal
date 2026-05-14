@@ -3,7 +3,7 @@
 <title>GOPAL</title>
 <desc>GOPAL hero banner with logo, wordmark, tagline, and framework badges.</desc>
 <polygon points="40,88 56,60 88,60 104,88 88,116 56,116" fill="#4f46e5"/>
-<g fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="translate(32, 62) scale(0.65)">
+<g fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" transform="translate(46, 62) scale(0.65)">
 <path d="M 34 24 Q 26 24 26 32 Q 26 40 22 40 Q 26 40 26 48 Q 26 56 34 56"/>
 <path d="M 46 24 Q 54 24 54 32 Q 54 40 58 40 Q 54 40 54 48 Q 54 56 46 56"/>
 </g>
