@@ -1,129 +1,246 @@
-# Governance Open Policy Agent Library (_GOPAL_) for AI System Evaluations
+<h1 align="center">GOPAL</h1>
 
-[![OPA Policies CI](https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml/badge.svg)](https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml)
-[![OPA Version](https://img.shields.io/badge/OPA-Latest-blue.svg)](https://www.openpolicyagent.org/)
-[![Regal Linting](https://img.shields.io/badge/linting-regal-yellow.svg)](https://github.com/StyraInc/regal)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+<p align="center">
+  <a href="README.md">English</a> |
+  <a href="README.zh-CN.md">简体中文</a> |
+  <a href="README.ja-JP.md">日本語</a> |
+  <a href="README.ko-KR.md">한국어</a> |
+  <a href="README.hi-IN.md">हिन्दी</a>
+</p>
 
-GOPAL is a collection of [Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/principled-evolution/aicertify) but can also be used independently with other OPA-based systems.
+<p align="center">
+  <strong>The Rego policy library for AI compliance.</strong>
+</p>
 
-<img src="https://www.mermaidchart.com/raw/3a013c43-9ae3-4194-8bba-86b17004c800?theme=light&version=v0.1&format=svg" alt="Mermaid Chart" width="500" height="400">
+<p align="center">
+  <em>94 policies. 15+ regulatory frameworks. 5 industry verticals. Policy-as-code your auditor can read.</em>
+</p>
 
-## Directory Structure
+<p align="center">
+  <a href="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml"><img src="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml/badge.svg" alt="OPA CI"></a>
+  <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
+  <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/badge/version-1.0.0-brightgreen.svg?style=flat-square" alt="Version 1.0.0"></a>
+  <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
+  <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
+  <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
+  <img src="https://img.shields.io/badge/policies-94-orange.svg?style=flat-square" alt="94 Policies">
+  <img src="https://img.shields.io/badge/frameworks-15%2B-purple.svg?style=flat-square" alt="15+ Frameworks">
+  <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
+</p>
+
+<br>
+
+**Governance Open Policy Agent Library** — a curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules in banking, and more.
+
+Run them against your AI system's metadata, model cards, or evaluation results — and get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
+
+<p align="center"><img src="diagrams/diagram1_hero_numbers.png" alt="GOPAL — 94 policies, 15+ frameworks, 5 verticals" width="85%" /></p>
+
+---
+
+## Quick Start
+
+<p align="center"><img src="diagrams/diagram5_evaluation_flow.png" alt="How GOPAL evaluation works — input JSON, OPA engine, policy, verdict" width="85%" /></p>
+
+### Standalone with the OPA CLI
+
+```bash
+# Get OPA
+curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa
+
+# Clone gopal
+git clone https://github.com/Principled-Evolution/gopal.git && cd gopal
+
+# Evaluate your input against the EU AI Act
+./opa eval -d international/eu_ai_act/v1 \
+  --input my_ai_system.json \
+  "data.international.eu_ai_act.v1.transparency.allow"
+```
+
+### As the policy engine for AICertify
+
+```python
+from aicertify import regulations, application
+
+regs = regulations.create("eu_compliance")
+regs.add("eu_ai_act")  # gopal policies under the hood
+
+app = application.create(name="my-llm-app", ...)
+await app.evaluate(regulations=regs, report_format="pdf")
+```
+
+See [AICertify](https://github.com/Principled-Evolution/aicertify) for the full Python framework.
+
+---
+
+## Why GOPAL
+
+Most "AI governance" lives in slide decks. The few open implementations are either:
+
+- **Generic OPA bundles** (great for Kubernetes admission, not for the EU AI Act), or
+- **Closed SaaS** that hides the rules you're being judged against.
+
+GOPAL is different on three axes:
+
+1. **AI-specific by construction.** Every policy targets an AI-system concern — bias, transparency, human oversight, model risk, content safety, safety-critical certification — not generic infrastructure.
+2. **Readable.** The rules are Rego. You can `cat` them, diff them in a PR, and reason about them. No black-box scorecards.
+3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees — see [COMPATIBILITY.md](COMPATIBILITY.md). When the EU AI Act amends, the old version stays put.
+
+---
+
+## What's Inside
+
+<p align="center"><img src="diagrams/diagram2_directory_tree.png" alt="GOPAL directory layout — 5 top-level branches, policies organized by jurisdiction and vertical" width="85%" /></p>
 
 ```
 gopal/
-├── global/               # Global policies applicable across all domains
-│   ├── v1/               # Version 1 of global policies
-│   └── library/          # Reusable policy components
-├── international/        # International regulatory frameworks
-│   ├── eu_ai_act/        # European Union AI Act
-│   ├── india/            # Indian AI regulatory frameworks
-│   └── nist/             # NIST AI standards
-├── industry_specific/    # Industry-specific requirements
-│   ├── bfs/              # Banking & Financial Services
-│   ├── healthcare/       # Healthcare industry
-│   └── automotive/       # Automotive industry
-├── operational/          # Operational policies
-│   ├── aiops/            # AI Operations policies
-│   ├── cost/             # Cost management policies
-│   └── corporate/        # Corporate internal policies
-├── custom/               # Custom policy categories (local only, excluded from PRs)
-└── helper_functions/     # Shared utility functions for policies
+├── international/        Frameworks crossing borders
+│   ├── eu_ai_act/v1/         29 policies — EU AI Act 2024/1689
+│   ├── nist/v1/              5  policies — NIST AI RMF + AI 600-1
+│   ├── india/v1/             1  policy   — Digital India Policy
+│   ├── brazil/v1/            1  policy   — AI Governance Bill
+│   ├── icao/v1/              1  policy   — ICAO Doc 10019
+│   ├── faa/v1/               2  policies — FAA Part 107, Remote ID
+│   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
+│   └── standards/v1/         4  policies — RTCA DO-365/366, ASTM F3442, ISO 21384
+│
+├── industry_specific/    Vertical-specific requirements
+│   ├── aviation/v1/          17 policies — detect & avoid, certification, design
+│   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
+│   ├── healthcare/v1/         2 policies — patient & diagnostic safety
+│   ├── bfs/v1/                2 policies — model risk, fair lending
+│   └── automotive/v1/         1 policy   — vehicle safety integration
+│
+├── global/v1/             9  policies — accountability, fairness, transparency,
+│                                       explainability, content safety,
+│                                       risk management, security, common rules
+│
+├── operational/          DevOps & corporate
+│   ├── aiops/v1/              1 policy   — scalability
+│   ├── cost/v1/               1 policy   — resource efficiency
+│   └── corporate/v1/          2 policies — InfoSec, governance
+│
+├── helper_functions/     Shared utilities for policy authors
+│   ├── reporting.rego        Standardized report-output helpers
+│   └── validation.rego       Field-presence and required-field checks
+│
+└── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-## Policy Organization
+**94 production policies. 125 Rego files including tests.**
 
-Policies are organized in a modular structure to allow for clear separation of concerns and flexible composition:
+---
 
-1. **Global Policies**: Baseline requirements applicable to all AI systems
-2. **International Policies**: Requirements from specific regulatory frameworks
-3. **Industry-Specific Policies**: Requirements specific to industry verticals
-4. **Operational Policies**: Requirements related to operational aspects
-5. **Custom Policies**: User-defined policy categories (local development only)
+## Comparison
 
-## Versioning
+<p align="center"><img src="diagrams/diagram4_framework_grid.png" alt="Frameworks GOPAL covers — EU AI Act, NIST, FAA, EASA, RTCA and more" width="85%" /></p>
 
-Each policy category uses versioned directories (e.g., `v1/`) to support evolution while maintaining backward compatibility. When referencing policies:
+| | GOPAL | Generic OPA bundle | Vendor governance SaaS |
+|---|---|---|---|
+| Targets AI systems specifically | ✅ | ❌ | ✅ |
+| Open source (Apache 2.0) | ✅ | ✅ | ❌ |
+| You can read every rule | ✅ Rego | ✅ Rego | ❌ Hidden |
+| Tracks named regulations (EU AI Act, NIST RMF, FAA) | ✅ 15+ | ❌ | Partial |
+| Industry-specific verticals out of the box | ✅ 5 | ❌ | Limited |
+| Aviation / safety-critical coverage | ✅ ICAO, RTCA, FAA, EASA, ASTM | ❌ | ❌ |
+| Education sector (FERPA / COPPA) | ✅ | ❌ | Rare |
+| Versioned policies (`v1/`, `v2/` …) | ✅ Semver | Varies | N/A |
+| CI/CD integration | ✅ `opa check` + Regal | ✅ | Varies |
+| Custom local policies (not shared upstream) | ✅ `custom/` is git-ignored | ❌ | Paid tier |
 
-- Use specific versions when policy stability is required
-- Use the latest version when up-to-date compliance is more important
+---
 
-## Integration with AICertify
+## Authoring Policies
 
-Gopal is designed to work seamlessly with [AICertify](https://github.com/principled-evolution/aicertify), a framework for systematically evaluating AI systems against regulatory requirements. When used with AICertify, Gopal provides the policy rules that determine compliance status.
+<p align="center"><img src="diagrams/diagram3_policy_anatomy.png" alt="Anatomy of a GOPAL policy — package path, imports, metadata, default deny, allow rule, report" width="85%" /></p>
 
-## Standalone Usage
+Every policy follows the same shape:
 
-Gopal can also be used independently with any OPA-compatible system. The policies follow standard OPA patterns and can be evaluated using the OPA CLI or API.
+```rego
+package international.eu_ai_act.v1.transparency
+
+import data.helper_functions.reporting
+
+# Metadata describes the rule for tooling and auditors.
+# METADATA
+# title: Transparency for general-purpose AI systems
+# description: GPAI providers must publish technical documentation per Article 53.
+
+default allow := false
+
+allow if {
+    input.system.technical_documentation_published == true
+    input.system.training_data_summary_published == true
+}
+
+report := reporting.compose_report(
+    "eu_ai_act.transparency",
+    allow,
+    [{"name": "documentation_present", "value": allow, "control_passed": allow}],
+)
+```
+
+Then a sibling `*_test.rego` covers the rule. CI enforces:
+
+1. **`opa check`** — syntax + reference correctness across all packages
+2. **`regal lint`** — Rego style + best practices
+
+The [helper_functions/](helper_functions/) library gives you `compose_report()`, `validate_required_fields()`, and `field_exists()` so reports come out in a uniform shape no matter who wrote the rule.
+
+---
 
 ## Custom Policies
 
-The `custom/` directory is provided for local development of organization-specific policies. This directory is:
+The `custom/` directory is for **your organization's proprietary policies**. It's:
 
-- **Excluded from git tracking** - Custom policies are not included in commits or PRs to the origin repository
-- **Ignored by CI/CD** - Custom policies do not affect the build or linting processes
-- **Local development only** - Allows organizations to develop proprietary policies alongside the standard GOPAL policies
+- `.gitignore`d — never pushed to this repo
+- Skipped by CI
+- Structured identically to the public tree (`custom/your_org/v1/...`)
 
-To create custom policies:
+Drop in your internal AI use-case rules without forking. They evaluate alongside the public set.
 
-1. Create your policy structure under `custom/your_category/v1/`
-2. Follow the same naming conventions as standard policies
-3. Use the package name `custom.your_category.v1.policy_name`
-4. Include comprehensive tests and documentation
-
-Example structure:
-```
-custom/
-├── my_org/
-│   ├── v1/
-│   │   ├── compliance/
-│   │   │   ├── policy.rego
-│   │   │   └── policy_test.rego
-│   │   └── security/
-│   │       ├── policy.rego
-│   │       └── policy_test.rego
-```
-
-**Note**: Custom policies remain local to your development environment and are not shared with the broader GOPAL community.
+---
 
 ## Development
 
-### Pre-commit Hooks
-
-This repository includes pre-commit hooks to ensure code quality. The hooks run:
-
-1. Basic file checks (trailing whitespace, end-of-file, etc.)
-2. OPA check (`opa check .`)
-3. Regal lint (`regal lint .`)
-
-To use the pre-commit hooks locally, install pre-commit, OPA, and Regal, then run:
-
 ```bash
-# Install pre-commit
+# One-time setup
 pip install pre-commit
-
-# Install OPA
-curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
-chmod 755 opa
-sudo mv opa /usr/local/bin/
-
-# Install Regal
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64
-chmod +x regal
-sudo mv regal /usr/local/bin/
-
-# Install the pre-commit hooks
+curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa && sudo mv opa /usr/local/bin/
+curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
+
+# Run the same checks CI runs
+opa check --ignore custom/ .
+regal lint --ignore-files custom/ .
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
+
+---
+
+## Roadmap
+
+- **More NIST coverage** — fleshing out Measure / Manage controls
+- **UK AI regulation principles** — pro-innovation framework rules
+- **California SB-1047 successor** — when finalized
+- **MAS / HKMA banking AI guidance** — APAC financial supervision
+- **More aviation verticals** — UAS-specific airworthiness
+
+Open an issue if there's a framework you need.
+
+---
 
 ## Related Projects
 
-- [Open Policy Agent (OPA)](https://github.com/open-policy-agent/opa) - The policy engine that powers GOPAL
-- [Regal](https://github.com/StyraInc/regal) - A linter for Rego, the policy language used by OPA
-- [AICertify](https://github.com/principled-evolution/aicertify) - A framework for systematically evaluating AI systems against regulatory requirements
+- **[AICertify](https://github.com/Principled-Evolution/aicertify)** — Python framework that uses GOPAL to evaluate AI applications and produce audit-ready PDF/MD/JSON reports.
+- **[Open Policy Agent](https://www.openpolicyagent.org/)** — The policy engine.
+- **[Regal](https://github.com/StyraInc/regal)** — The Rego linter we use in CI.
+
+---
 
 ## License
 
-This project is licensed under the [Apache 2.0 License](LICENSE).
+Apache License 2.0 — see [LICENSE](LICENSE).
+
+<p align="center"><sub>Maintained by <a href="https://github.com/Principled-Evolution">Principled Evolution</a> · Compliance you can read, run, and prove.</sub></p>
