@@ -8,6 +8,7 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 
 - [Quick Start in the README](../README.md#quick-start) — standalone `opa eval`, or via AICertify.
 - [Add a brand-new regulatory framework](../skills/add-framework/SKILL.md) (Claude Code skill) — bootstraps the directory tree, framework README, and first policy.
+- [FAQ](FAQ.md) — comprehensive Q&A on what GOPAL is, when to use it, and how to extend it.
 
 ## 🛠️ How-To Guides — solve a specific problem
 
