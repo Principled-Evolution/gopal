@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" role="img" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+<title>GOPAL repository layout</title>
+<desc>Four top-level directories — international, industry-specific, global, operational — with policy counts and versioned children.</desc>
+
+<g>
+<rect x="22" y="20" width="636" height="84" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+<rect x="22" y="20" width="4" height="84" fill="#4f46e5"/>
+<g transform="translate(46, 38)" fill="none" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 4 H7 L9 6 H18 V18 H2 Z"/>
+</g>
+<text x="70" y="48" font-size="14" font-weight="500" fill="#0f172a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">international/</text>
+<text x="266" y="48" font-size="12" fill="#64748b">45 policies · 8 frameworks</text>
+<g font-size="11" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+<text x="70" y="72">eu_ai_act/v1/ (29)</text>
+<text x="220" y="72">nist/v1/ (5)</text>
+<text x="320" y="72">india/v1/ (1)</text>
+<text x="410" y="72">brazil/v1/ (1)</text>
+<text x="70" y="90">icao/v1/ (1)</text>
+<text x="220" y="90">faa/v1/ (2)</text>
+<text x="320" y="90">easa/v1/ (2)</text>
+<text x="410" y="90">standards/v1/ (4)</text>
+</g>
+</g>
+
+<g>
+<rect x="22" y="116" width="636" height="84" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+<rect x="22" y="116" width="4" height="84" fill="#4f46e5"/>
+<g transform="translate(46, 134)" fill="none" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 4 H7 L9 6 H18 V18 H2 Z"/>
+</g>
+<text x="70" y="144" font-size="14" font-weight="500" fill="#0f172a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">industry_specific/</text>
+<text x="266" y="144" font-size="12" fill="#64748b">34 policies · 5 verticals</text>
+<g font-size="11" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+<text x="70" y="168">aviation/v1/ (17)</text>
+<text x="220" y="168">education/v1/ (12)</text>
+<text x="370" y="168">healthcare/v1/ (2)</text>
+<text x="70" y="186">bfs/v1/ (2)</text>
+<text x="220" y="186">automotive/v1/ (1)</text>
+</g>
+</g>
+
+<g>
+<rect x="22" y="212" width="636" height="84" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+<rect x="22" y="212" width="4" height="84" fill="#4f46e5"/>
+<g transform="translate(46, 230)" fill="none" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 4 H7 L9 6 H18 V18 H2 Z"/>
+</g>
+<text x="70" y="240" font-size="14" font-weight="500" fill="#0f172a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">global/v1/</text>
+<text x="266" y="240" font-size="12" fill="#64748b">9 cross-cutting policies</text>
+<g font-size="11" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+<text x="70" y="264">fairness.rego</text>
+<text x="220" y="264">transparency.rego</text>
+<text x="370" y="264">content_safety.rego</text>
+<text x="70" y="282">risk_management.rego</text>
+<text x="220" y="282">explainability.rego</text>
+<text x="370" y="282">security.rego  · accountability.rego</text>
+</g>
+</g>
+
+<g>
+<rect x="22" y="308" width="636" height="84" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+<rect x="22" y="308" width="4" height="84" fill="#4f46e5"/>
+<g transform="translate(46, 326)" fill="none" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 4 H7 L9 6 H18 V18 H2 Z"/>
+</g>
+<text x="70" y="336" font-size="14" font-weight="500" fill="#0f172a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">operational/</text>
+<text x="266" y="336" font-size="12" fill="#64748b">4 policies · 3 categories</text>
+<g font-size="11" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+<text x="70" y="360">aiops/v1/ (1)</text>
+<text x="220" y="360">cost/v1/ (1)</text>
+<text x="320" y="360">corporate/v1/ (2)</text>
+</g>
+</g>
+
+<text x="340" y="412" font-size="11" font-style="italic" fill="#94a3b8" text-anchor="middle">Every framework is pinned at v1/. When a regulation amends, v2/ ships alongside.</text>
+</svg>

@@ -1,4 +1,9 @@
-<h1 align="center">GOPAL</h1>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+  </picture>
+</div>
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -6,10 +11,6 @@
   <a href="README.ja-JP.md">日本語</a> |
   <a href="README.ko-KR.md">한국어</a> |
   <strong>हिन्दी</strong>
-</p>
-
-<p align="center">
-  <strong>AI कंप्लायंस के लिए Rego पॉलिसी लाइब्रेरी।</strong>
 </p>
 
 <p align="center">
@@ -34,13 +35,23 @@
 
 इन्हें अपने AI सिस्टम के metadata, model cards, या मूल्यांकन परिणामों के विरुद्ध चलाइए — और एक संरचित, मशीन-रीडेबल कंप्लायंस वर्डिक्ट प्राप्त कीजिए जिसे आप CI, ऑडिट लॉग, या रेगुलेटर सबमिशन में डाल सकते हैं।
 
-<p align="center"><img src="diagrams/diagram1_hero_numbers.png" alt="GOPAL — 94 पॉलिसीज़, 15+ फ्रेमवर्क्स, 5 वर्टिकल्स" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 94 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
+  </picture>
+</p>
 
 ---
 
 ## Quick Start
 
-<p align="center"><img src="diagrams/diagram5_evaluation_flow.png" alt="GOPAL मूल्यांकन कैसे काम करता है — इनपुट JSON, OPA इंजन, पॉलिसी, वर्डिक्ट" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है — इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
+  </picture>
+</p>
 
 ### OPA CLI के साथ स्टैंडअलोन
 
@@ -90,7 +101,12 @@ GOPAL तीन आयामों में अलग है:
 
 ## अंदर क्या है
 
-<p align="center"><img src="diagrams/diagram2_directory_tree.png" alt="GOPAL डायरेक्टरी लेआउट — 5 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट — 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
+  </picture>
+</p>
 
 ```
 gopal/
@@ -133,8 +149,6 @@ gopal/
 
 ## तुलना
 
-<p align="center"><img src="diagrams/diagram4_framework_grid.png" alt="GOPAL जिन फ्रेमवर्क्स को कवर करता है — EU AI Act, NIST, FAA, EASA, RTCA और अधिक" width="85%" /></p>
-
 | | GOPAL | जेनेरिक OPA बंडल | वेंडर गवर्नेंस SaaS |
 |---|---|---|---|
 | विशेष रूप से AI सिस्टम्स को लक्ष्य करता है | ✅ | ❌ | ✅ |
@@ -152,7 +166,12 @@ gopal/
 
 ## पॉलिसीज़ लिखना
 
-<p align="center"><img src="diagrams/diagram3_policy_anatomy.png" alt="एक GOPAL पॉलिसी की संरचना — package path, imports, metadata, default deny, allow rule, report" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना — package path, imports, metadata, default deny, allow rule, report" width="85%" />
+  </picture>
+</p>
 
 हर पॉलिसी एक ही आकार का अनुसरण करती है:
 

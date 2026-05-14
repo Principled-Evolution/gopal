@@ -1,4 +1,9 @@
-<h1 align="center">GOPAL</h1>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+  </picture>
+</div>
 
 <p align="center">
   <a href="README.md">English</a> |
@@ -6,10 +11,6 @@
   <strong>日本語</strong> |
   <a href="README.ko-KR.md">한국어</a> |
   <a href="README.hi-IN.md">हिन्दी</a>
-</p>
-
-<p align="center">
-  <strong>AI コンプライアンスのための Rego ポリシーライブラリ。</strong>
 </p>
 
 <p align="center">
@@ -34,13 +35,23 @@
 
 AI システムのメタデータ、モデルカード、評価結果に対してこれらのポリシーを実行すると、構造化された機械可読のコンプライアンス判定が得られます。CI、監査ログ、規制当局への提出資料にそのまま組み込めます。
 
-<p align="center"><img src="diagrams/diagram1_hero_numbers.png" alt="GOPAL — 94 ポリシー、15 以上のフレームワーク、5 つの業種" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 94 ポリシー、国際規格、航空、業種別、共通原則の 4 カテゴリ" width="85%" />
+  </picture>
+</p>
 
 ---
 
 ## クイックスタート
 
-<p align="center"><img src="diagrams/diagram5_evaluation_flow.png" alt="GOPAL の評価フロー — 入力 JSON、OPA エンジン、ポリシー、判定" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL の評価フロー — 入力 JSON、Rego ポリシー、OPA 評価、判定" width="85%" />
+  </picture>
+</p>
 
 ### OPA CLI で単体利用する
 
@@ -90,7 +101,12 @@ GOPAL は次の 3 点で異なります。
 
 ## 同梱内容
 
-<p align="center"><img src="diagrams/diagram2_directory_tree.png" alt="GOPAL のディレクトリ構成 — 5 つのトップレベル分岐、管轄区域と業種ごとに整理されたポリシー" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL のディレクトリ構成 — 4 つのトップレベル分岐、管轄区域と業種ごとに整理されたポリシー" width="85%" />
+  </picture>
+</p>
 
 ```
 gopal/
@@ -133,8 +149,6 @@ gopal/
 
 ## 比較
 
-<p align="center"><img src="diagrams/diagram4_framework_grid.png" alt="GOPAL がカバーするフレームワーク — EU AI Act、NIST、FAA、EASA、RTCA など" width="85%" /></p>
-
 | | GOPAL | 汎用 OPA バンドル | ベンダー製ガバナンス SaaS |
 |---|---|---|---|
 | AI システムを明確に対象 | ✅ | ❌ | ✅ |
@@ -152,7 +166,12 @@ gopal/
 
 ## ポリシーの記述
 
-<p align="center"><img src="diagrams/diagram3_policy_anatomy.png" alt="GOPAL ポリシーの構造 — パッケージパス、import、メタデータ、default deny、allow ルール、レポート" width="85%" /></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL ポリシーの構造 — パッケージパス、import、メタデータ、default deny、allow ルール、レポート" width="85%" />
+  </picture>
+</p>
 
 すべてのポリシーは同じ構造に従います。
 
