@@ -1,0 +1,29 @@
+{
+  "system": {
+    "name": "exam-proctor-ai",
+    "vendor": "Acme EdTech",
+    "use_case": "Remote-proctoring AI for university final exams"
+  },
+  "proctoring_session": {
+    "session_id": "exam-2026-spring-final-cs101-student-42",
+    "student_consent_given": true,
+    "consent_artifacts": {
+      "consent_form_url": "https://example.edu/proctoring/consent-2026.pdf",
+      "consent_timestamp": "2026-04-30T18:00:00Z",
+      "opt_out_available": true,
+      "accommodations_offered": ["non-AI proctor on request", "extended time"]
+    },
+    "data_handling": {
+      "encryption_enabled": true,
+      "encryption_method": "AES-256 at rest, TLS 1.3 in transit",
+      "data_retention_period_days": 14,
+      "deletion_verified": true
+    },
+    "review_process": {
+      "human_review_required_for_all_flags": true,
+      "student_appeal_possible": true,
+      "appeal_deadline_days": 30,
+      "appeal_outcomes_tracked": true
+    }
+  }
+}
