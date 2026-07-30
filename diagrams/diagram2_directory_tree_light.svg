@@ -10,12 +10,16 @@
 <path d="M2 4 H7 L9 6 H18 V18 H2 Z"/>
 </g>
 <text x="70" y="48" font-size="14" font-weight="500" fill="#0f172a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">international/</text>
-<text x="266" y="48" font-size="12" fill="#64748b">36 policies · 4 frameworks</text>
+<text x="266" y="48" font-size="12" fill="#64748b">43 policies · 8 frameworks</text>
 <g font-size="11" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
 <text x="70" y="72">eu_ai_act/v1/ (29)</text>
 <text x="220" y="72">nist/v1/ (5)</text>
 <text x="320" y="72">india/v1/ (1)</text>
 <text x="410" y="72">brazil/v1/ (1)</text>
+<text x="70" y="90">icao/v1/ (1)</text>
+<text x="220" y="90">faa/v1/ (2)</text>
+<text x="320" y="90">easa/v1/ (2)</text>
+<text x="410" y="90">standards/v1/ (2)</text>
 </g>
 </g>
 
@@ -26,10 +30,11 @@
 <path d="M2 4 H7 L9 6 H18 V18 H2 Z"/>
 </g>
 <text x="70" y="144" font-size="14" font-weight="500" fill="#0f172a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">industry_specific/</text>
-<text x="266" y="144" font-size="12" fill="#64748b">17 policies · 4 verticals</text>
+<text x="266" y="144" font-size="12" fill="#64748b">29 policies · 5 verticals</text>
 <g font-size="11" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
 <text x="70" y="168">education/v1/ (12)</text>
-<text x="220" y="168">healthcare/v1/ (2)</text>
+<text x="220" y="168">aviation/v1/ (12)</text>
+<text x="370" y="168">healthcare/v1/ (2)</text>
 <text x="70" y="186">bfs/v1/ (2)</text>
 <text x="220" y="186">automotive/v1/ (1)</text>
 </g>

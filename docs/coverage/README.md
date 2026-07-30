@@ -18,6 +18,8 @@ These frameworks already have real policies in the repo (not scaffolds); nobody 
 - FERPA / COPPA (education) — `industry_specific/education/v1/`
 - Healthcare AI safety — `industry_specific/healthcare/v1/`
 - BFS — fair lending, model risk — `industry_specific/bfs/v1/`
+- ICAO Doc 10019, FAA Part 107/Remote ID, EASA 2019/947/SORA, RTCA DO-365, ISO 21384 — `international/icao/`, `international/faa/`, `international/easa/`, `international/standards/`
+- Aviation industry-vertical policies (airworthiness, autonomous systems, data management, flight operations) — `industry_specific/aviation/v1/`
 
 ## Coming soon
 
@@ -27,7 +29,6 @@ Nothing implemented yet.
 - India DPDP Act (distinct from the Digital India Policy above)
 - California SB-1047 successor
 - MAS / HKMA banking AI guidance
-- Aviation AI/UAS safety (ICAO, FAA, EASA) — drafted on an unmerged feature branch, blocked on test coverage; see the README's Roadmap section
 
 If you want to help expand coverage for a framework, open an issue or send a PR. The matrices are the best place to start — they show contributors exactly which articles, controls, or sections are still open.
 
