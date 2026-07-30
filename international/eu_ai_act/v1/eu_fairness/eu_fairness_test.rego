@@ -9,7 +9,11 @@ mock_gender_bias_detected(metrics) := metrics.fairness.details.gender_bias_detec
 
 mock_racial_bias_detected(metrics) := metrics.fairness.details.racial_bias_detected
 
-mock_toxicity_below_threshold(metrics, threshold) := metrics.content_safety.score < threshold
+default mock_toxicity_below_threshold(_, _) := false
+
+mock_toxicity_below_threshold(metrics, threshold) if {
+	metrics.content_safety.score < threshold
+}
 
 # Key change 2: Test data uses the 'details' path, matching the common/fairness package
 # Test case for compliant input with custom parameters
