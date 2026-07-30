@@ -26,7 +26,7 @@ hara_analysis_is_compliant if {
 
 # Automotive Safety Integrity Level (ASIL) Determination
 asil_determination_is_compliant if {
-	object.get(input.safety_assessment, "asil_determination", false)
+	object.get(input.safety_assessment, "asil_determination", false) != false
 	is_object(input.safety_assessment.asil_determination)
 	input.safety_assessment.asil_determination.status == "completed"
 	is_string(input.safety_assessment.asil_determination.final_asil_level)
@@ -35,7 +35,7 @@ asil_determination_is_compliant if {
 
 # Safety of the Intended Functionality (SOTIF) Analysis
 sotif_analysis_is_compliant if {
-	object.get(input.safety_assessment, "sotif_analysis", false)
+	object.get(input.safety_assessment, "sotif_analysis", false) != false
 	is_object(input.safety_assessment.sotif_analysis)
 	input.safety_assessment.sotif_analysis.status == "completed"
 	count(input.safety_assessment.sotif_analysis.scenarios_analyzed) > 0
@@ -43,12 +43,12 @@ sotif_analysis_is_compliant if {
 
 # Operational Design Domain (ODD) Definition
 odd_definition_is_compliant if {
-	object.get(input.safety_assessment, "odd_definition", false)
+	object.get(input.safety_assessment, "odd_definition", false) != false
 	is_object(input.safety_assessment.odd_definition)
 	input.safety_assessment.odd_definition.status == "defined"
-	object.get(input.safety_assessment.odd_definition.conditions, "road_types", false)
-	object.get(input.safety_assessment.odd_definition.conditions, "weather", false)
-	object.get(input.safety_assessment.odd_definition.conditions, "traffic", false)
+	object.get(input.safety_assessment.odd_definition.conditions, "road_types", false) != false
+	object.get(input.safety_assessment.odd_definition.conditions, "weather", false) != false
+	object.get(input.safety_assessment.odd_definition.conditions, "traffic", false) != false
 }
 
 # Deny rule with detailed messages
