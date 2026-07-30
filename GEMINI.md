@@ -16,7 +16,7 @@
 
 ## What you're working on
 
-**GOPAL** is a 94-policy Rego library for AI compliance covering EU AI Act, NIST RMF, aviation standards, FERPA/COPPA, fair lending, and more. See [README.md](README.md) for the full coverage table and [AGENTS.md](AGENTS.md) for the authoring conventions.
+**GOPAL** is a 66-policy Rego library for AI compliance covering EU AI Act, NIST RMF, FERPA/COPPA, fair lending, and more. See [README.md](README.md) for the full coverage table and [AGENTS.md](AGENTS.md) for the authoring conventions.
 
 ## Quick reference (Rego policy authoring)
 

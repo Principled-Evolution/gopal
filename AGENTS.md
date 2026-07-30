@@ -4,7 +4,7 @@ This file is the canonical operational guide for AI coding agents working in thi
 
 ## What this project is
 
-**GOPAL** (Governance Open Policy Agent Library) is a curated set of [OPA](https://www.openpolicyagent.org/) Rego policies encoding real-world AI-governance requirements — the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules, and more.
+**GOPAL** (Governance Open Policy Agent Library) is a curated set of [OPA](https://www.openpolicyagent.org/) Rego policies encoding real-world AI-governance requirements — the EU AI Act, NIST AI RMF, FERPA/COPPA in education, fair-lending rules, and more.
 
 It is consumable two ways:
 
@@ -20,11 +20,8 @@ gopal/
 │   ├── eu_ai_act/v1/         29 policies — EU AI Act 2024/1689
 │   ├── nist/v1/              NIST AI RMF + AI 600-1
 │   ├── india/v1/             India Digital Policy
-│   ├── brazil/v1/            Brazil AI Governance Bill
-│   ├── icao/, faa/, easa/    Aviation regulators
-│   └── standards/v1/         RTCA DO-365/366, ASTM F3442, ISO 21384
+│   └── brazil/v1/            Brazil AI Governance Bill
 ├── industry_specific/
-│   ├── aviation/v1/          17 policies — detect & avoid, certification, design
 │   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
 │   ├── healthcare/v1/        Patient & diagnostic safety
 │   ├── bfs/v1/               Model risk, fair lending
@@ -37,7 +34,7 @@ gopal/
 └── .github/workflows/        OPA + Regal CI
 ```
 
-**94 production policies. 125 Rego files including tests.**
+**66 production policies. 86 Rego files including tests.**
 
 ## Useful commands
 

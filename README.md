@@ -17,7 +17,7 @@
   <em>AI compliance rules you can read, run, diff, and prove.</em>
 </p>
 <p align="center">
-  <sub>94 policies · 15+ regulatory frameworks · 5 industry verticals</sub>
+  <sub>66 policies · 4 international frameworks · 4 industry verticals</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,8 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-94-orange.svg?style=flat-square" alt="94 Policies">
-  <img src="https://img.shields.io/badge/frameworks-15%2B-purple.svg?style=flat-square" alt="15+ Frameworks">
+  <img src="https://img.shields.io/badge/policies-66-orange.svg?style=flat-square" alt="66 Policies">
+  <img src="https://img.shields.io/badge/frameworks-4-purple.svg?style=flat-square" alt="4 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -36,14 +36,14 @@
 
 **GOPAL: Governance Open Policy Agent Library.** Think of it as an open policy pack for AI regulation.
 
-A curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules in banking, and more.
+A curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, FERPA/COPPA in education, fair-lending rules in banking, and more.
 
 Run them against your AI system's metadata, model cards, or evaluation results — and get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 94 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 66 policies across international standards, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
 
@@ -51,7 +51,7 @@ Run them against your AI system's metadata, model cards, or evaluation results �
 
 ## AI compliance rules you can read, run, diff, and prove
 
-GOPAL turns regulatory and governance requirements — the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA, fair lending, and healthcare safety — into executable OPA policies.
+GOPAL turns regulatory and governance requirements — the EU AI Act, NIST AI RMF, FERPA/COPPA, fair lending, and healthcare safety — into executable OPA policies.
 
 Use GOPAL when you want AI governance checks that are:
 
@@ -144,7 +144,7 @@ If you already run OPA for Kubernetes admission, cloud authorization, CI/CD, or 
 
 The packages, conventions, and test patterns are idiomatic Rego — no DSL on top, no Python required to evaluate. You can:
 
-- pull individual frameworks (`international/eu_ai_act/v1/`, `industry_specific/aviation/v1/`) into a bundle
+- pull individual frameworks (`international/eu_ai_act/v1/`, `industry_specific/healthcare/v1/`) into a bundle
 - evaluate with `opa eval`, [Conftest](https://www.conftest.dev/), or your existing OPA server
 - pin to a major version (`v1/`) and review upgrades as PRs
 - compose GOPAL rules with your private `custom/` rules in the same evaluation
@@ -169,14 +169,9 @@ gopal/
 │   ├── eu_ai_act/v1/         29 policies — EU AI Act 2024/1689
 │   ├── nist/v1/              5  policies — NIST AI RMF + AI 600-1
 │   ├── india/v1/             1  policy   — Digital India Policy
-│   ├── brazil/v1/            1  policy   — AI Governance Bill
-│   ├── icao/v1/              1  policy   — ICAO Doc 10019
-│   ├── faa/v1/               2  policies — FAA Part 107, Remote ID
-│   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
-│   └── standards/v1/         4  policies — RTCA DO-365/366, ASTM F3442, ISO 21384
+│   └── brazil/v1/            1  policy   — AI Governance Bill
 │
 ├── industry_specific/    Vertical-specific requirements
-│   ├── aviation/v1/          17 policies — detect & avoid, certification, design
 │   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
 │   ├── healthcare/v1/         2 policies — patient & diagnostic safety
 │   ├── bfs/v1/                2 policies — model risk, fair lending
@@ -198,7 +193,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**94 production policies. 125 Rego files including tests.**
+**66 production policies. 86 Rego files including tests.**
 
 ---
 
@@ -209,15 +204,14 @@ gopal/
 | Targets AI systems specifically | ✅ | ❌ | ✅ |
 | Open source (Apache 2.0) | ✅ | ✅ | ❌ |
 | You can read every rule | ✅ Rego | ✅ Rego | ❌ Hidden |
-| Tracks named regulations (EU AI Act, NIST RMF, FAA) | ✅ 15+ | ❌ | Partial |
-| Industry-specific verticals out of the box | ✅ 5 | ❌ | Limited |
-| Aviation / safety-critical coverage | ✅ ICAO, RTCA, FAA, EASA, ASTM | ❌ | ❌ |
+| Tracks named regulations (EU AI Act, NIST RMF, FERPA/COPPA) | ✅ 6+ | ❌ | Partial |
+| Industry-specific verticals out of the box | ✅ 4 | ❌ | Limited |
 | Education sector (FERPA / COPPA) | ✅ | ❌ | Rare |
 | Versioned policies (`v1/`, `v2/` …) | ✅ Semver | Varies | N/A |
 | CI/CD integration | ✅ `opa check` + Regal | ✅ | Varies |
 | Custom local policies (not shared upstream) | ✅ `custom/` is git-ignored | ❌ | Paid tier |
 
-A few other open-source projects worth knowing about: [VerifyWise](https://github.com/verifywise-ai/verifywise) and [Compl-AI](https://github.com/compl-ai/compl-ai) both evaluate AI systems against the EU AI Act and other frameworks. [airblackbox](https://github.com/airblackbox) scans agent frameworks like LangChain, CrewAI, and AutoGen for compliance gaps at runtime. GOPAL's difference is that it's plain Rego/OPA, so it slots into policy tooling you may already run for Kubernetes or cloud authorization, and it isn't limited to the EU AI Act. Aviation, education, and banking frameworks are in the same tree, all versioned and tested the same way.
+A few other open-source projects worth knowing about: [VerifyWise](https://github.com/verifywise-ai/verifywise) and [Compl-AI](https://github.com/compl-ai/compl-ai) both evaluate AI systems against the EU AI Act and other frameworks. [airblackbox](https://github.com/airblackbox) scans agent frameworks like LangChain, CrewAI, and AutoGen for compliance gaps at runtime. GOPAL's difference is that it's plain Rego/OPA, so it slots into policy tooling you may already run for Kubernetes or cloud authorization, and it isn't limited to the EU AI Act. Education and banking frameworks are in the same tree, all versioned and tested the same way.
 
 ---
 
@@ -331,7 +325,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
 - **UK AI regulation principles** — pro-innovation framework rules
 - **California SB-1047 successor** — when finalized
 - **MAS / HKMA banking AI guidance** — APAC financial supervision
-- **More aviation verticals** — UAS-specific airworthiness
+- **Aviation AI/UAS safety** — ICAO, FAA, EASA, and industry-vertical policies are drafted on a feature branch (detect & avoid, certification, airworthiness) but not yet merged: they're missing test coverage, which this project requires for every policy before it ships
 
 Open an issue if there's a framework you need.
 

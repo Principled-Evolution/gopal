@@ -1,16 +1,16 @@
-# Gopal - Frequently Asked Questions
+# GOPAL - Frequently Asked Questions
 
-## 1. What is Gopal and how does it work?
+## 1. What is GOPAL and how does it work?
 
-**Q: What is Gopal and what problem does it solve?**
+**Q: What is GOPAL and what problem does it solve?**
 
-A: Gopal is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/mantric/aicertify) but can also be used independently.
+A: GOPAL is a collection of Open Policy Agent (OPA) policies designed for evaluating AI systems against regulatory requirements, compliance standards, and operational criteria. It serves as the policy engine for [AICertify](https://github.com/Principled-Evolution/aicertify) but can also be used independently.
 
-Gopal solves the challenge of systematically evaluating AI systems for compliance across multiple frameworks simultaneously. Instead of manually checking each requirement, Gopal provides automated policy evaluation using OPA's Rego language.
+GOPAL solves the challenge of systematically evaluating AI systems for compliance across multiple frameworks simultaneously. Instead of manually checking each requirement, GOPAL provides automated policy evaluation using OPA's Rego language.
 
-**Q: How does Gopal work with OPA?**
+**Q: How does GOPAL work with OPA?**
 
-A: Gopal policies are written in Rego (OPA's policy language) and follow a standardized structure:
+A: GOPAL policies are written in Rego (OPA's policy language) and follow a standardized structure:
 
 ```rego
 package global.v1.fairness
@@ -27,9 +27,9 @@ allow if {
 
 Each policy evaluates input data (AI system metrics) against defined thresholds and returns compliance decisions with detailed reports.
 
-**Q: What types of policies does Gopal include?**
+**Q: What types of policies does GOPAL include?**
 
-A: Gopal organizes policies into five main categories:
+A: GOPAL organizes policies into five main categories:
 
 - **Global Policies**: Baseline requirements applicable to all AI systems (fairness, toxicity, transparency)
 - **International Policies**: Specific regulatory frameworks (EU AI Act, NIST, India regulations)
@@ -106,30 +106,38 @@ test_allow_when_compliant {
 
 **Q: What input format should my policies expect?**
 
-A: Policies should expect input in this standardized format:
+A: There isn't one universal shape; each policy's metadata comment lists its `RequiredMetrics` and `RequiredParams`. Two shapes show up often enough to be worth knowing:
+
+Flat `_score` fields, used by policies like `industry_specific/healthcare/v1/diagnostic_safety/`:
 
 ```json
 {
     "evaluation": {
         "fairness_score": 0.85,
-        "toxicity_score": 0.05
-    },
-    "metrics": {
-        "toxicity": {"score": 0.05},
-        "stereotype": {"metrics": {"Stereotype Association": 0.03}}
-    },
-    "summary": {
-        "stereotype_values": {
-            "gender_bias_detected": false,
-            "racial_bias_detected": false
-        }
+        "content_safety_score": 0.95,
+        "risk_management_score": 0.90
     },
     "params": {
-        "toxicity_threshold": 0.1,
         "fairness_threshold": 0.7
     }
 }
 ```
+
+Nested `metrics.<category>.details.*` fields, used by policies like `international/eu_ai_act/v1/eu_fairness/`:
+
+```json
+{
+    "metrics": {
+        "fairness": {"details": {"gender_bias_detected": false, "racial_bias_detected": false}},
+        "content_safety": {"score": 0.05}
+    },
+    "params": {
+        "toxicity_threshold": 0.1
+    }
+}
+```
+
+Read the target policy's `.rego` file before writing an evaluator, its top-of-file comment and its `_test.rego` sibling show the exact shape it expects.
 
 **Q: How do I use the helper functions for reporting?**
 
@@ -177,7 +185,7 @@ A: Choose policy categories based on your compliance requirements:
 
 **Q: Can I combine policies from different categories?**
 
-A: Yes! Gopal is designed for policy composition. You can evaluate an AI system against multiple policy categories simultaneously:
+A: Yes! GOPAL is designed for policy composition. You can evaluate an AI system against multiple policy categories simultaneously:
 
 ```python
 # Example: Evaluate against multiple categories
@@ -200,11 +208,11 @@ A: Each category maintains independent versioning:
 - Different categories can be at different versions simultaneously
 - Backward compatibility is maintained within major versions
 
-## 4. How do I integrate Gopal with my existing systems?
+## 4. How do I integrate GOPAL with my existing systems?
 
-**Q: Can I use Gopal without AICertify?**
+**Q: Can I use GOPAL without AICertify?**
 
-A: Yes! Gopal is designed to work independently with any OPA-compatible system. You can:
+A: Yes! GOPAL is designed to work independently with any OPA-compatible system. You can:
 
 1. **Use OPA CLI directly:**
 ```bash
@@ -221,9 +229,9 @@ curl -X POST http://localhost:8181/v1/data/global/v1/fairness/allow \
 
 3. **Integrate with your application using OPA SDKs** (available for Go, Java, Python, etc.)
 
-**Q: How do I integrate Gopal with AICertify?**
+**Q: How do I integrate GOPAL with AICertify?**
 
-A: When using AICertify, Gopal policies are automatically loaded and evaluated:
+A: When using AICertify, GOPAL policies are automatically loaded and evaluated:
 
 ```python
 from aicertify.api.policy import evaluate_by_policy

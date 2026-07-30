@@ -12,7 +12,7 @@ Legend: ✅ **Implemented** — checks real input fields against the obligation.
 |---|---|---|---|
 | Article 5(1)(a) — Manipulative techniques | [`prohibited_practices/manipulation`](../../international/eu_ai_act/v1/prohibited_practices/manipulation.rego) | ✅ | Detects deployment of subliminal / manipulative techniques |
 | Article 5(1)(a) — Emotion recognition (workplace/edu) | [`prohibited_practices/emotion_recognition`](../../international/eu_ai_act/v1/prohibited_practices/emotion_recognition.rego) | ✅ | Detects emotion-recognition systems in workplace/educational contexts |
-| Article 5(1)(b) — Vulnerability exploitation | [`prohibited_practices/vulnerability_exploitation`](../../international/eu_ai_act/v1/prohibited_practices/vulnerability_exploitation.rego) | ✅ | Detects exploitation of age/disability/social vulnerabilities |
+| Article 5(1)(b) — Vulnerability exploitation | [`prohibited_practices/vulnerability_exploitation`](../../international/eu_ai_act/v1/prohibited_practices/vulnerability_exploitation.rego) | ⚠️ | Package exists; logic placeholder |
 | Article 5(1)(c) — Social scoring | [`prohibited_practices/social_scoring`](../../international/eu_ai_act/v1/prohibited_practices/social_scoring.rego) | ✅ | Detects social-scoring systems leading to detrimental treatment |
 | Article 5(1)(d) — Criminal-offense profiling | [`prohibited_practices/criminal_profiling`](../../international/eu_ai_act/v1/prohibited_practices/criminal_profiling.rego) | ⚠️ | Package exists; logic placeholder |
 | Article 5(1)(e) — Untargeted facial-recognition scraping | [`prohibited_practices/facial_recognition_scraping`](../../international/eu_ai_act/v1/prohibited_practices/facial_recognition_scraping.rego) | ⚠️ | Package exists; logic placeholder |

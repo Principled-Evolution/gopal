@@ -16,7 +16,7 @@
 <text x="540" y="280" font-size="120" font-weight="500" fill="#f0f6fc" letter-spacing="-0.025em">GOPAL</text>
 
 <text x="600" y="365" font-size="38" font-weight="500" fill="#a5b4fc" text-anchor="middle">The Rego policy library for AI compliance</text>
-<text x="600" y="405" font-size="22" font-weight="400" fill="#8b949e" text-anchor="middle">94 policies · 15+ frameworks · 5 industries · Apache 2.0</text>
+<text x="600" y="405" font-size="22" font-weight="400" fill="#8b949e" text-anchor="middle">66 policies · 4 frameworks · 4 industries · Apache 2.0</text>
 
 <g>
 <rect x="296" y="476" width="120" height="36" rx="18" fill="#312e81"/>

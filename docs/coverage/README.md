@@ -9,15 +9,25 @@ The matrices are deliberately honest. A policy is only marked **Implemented** wh
 - [EU AI Act](eu-ai-act.md) — Regulation (EU) 2024/1689
 - [NIST AI RMF](nist-ai-rmf.md) — NIST Special Publication 1270 + AI 600-1
 
+## Implemented, matrix not yet written
+
+These frameworks already have real policies in the repo (not scaffolds); nobody has written the per-obligation matrix for them yet. Good first contribution if you want to help without writing Rego.
+
+- India Digital Policy — `international/india/v1/`
+- Brazil AI Governance Bill — `international/brazil/v1/`
+- FERPA / COPPA (education) — `industry_specific/education/v1/`
+- Healthcare AI safety — `industry_specific/healthcare/v1/`
+- BFS — fair lending, model risk — `industry_specific/bfs/v1/`
+
 ## Coming soon
 
+Nothing implemented yet.
+
 - UK AI principles (pro-innovation framework)
-- India / DPDP Act
-- Brazil AI Governance Bill
-- ICAO Doc 10019 (aviation)
-- FERPA / COPPA (education)
-- Healthcare AI safety
-- BFS — fair lending, model risk
+- India DPDP Act (distinct from the Digital India Policy above)
+- California SB-1047 successor
+- MAS / HKMA banking AI guidance
+- Aviation AI/UAS safety (ICAO, FAA, EASA) — drafted on an unmerged feature branch, blocked on test coverage; see the README's Roadmap section
 
 If you want to help expand coverage for a framework, open an issue or send a PR. The matrices are the best place to start — they show contributors exactly which articles, controls, or sections are still open.
 

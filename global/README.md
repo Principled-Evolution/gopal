@@ -1,29 +1,31 @@
 # Global Policies
 
-This directory contains global policies that apply across all domains and are not specific to any regulatory framework or industry.
+This directory contains cross-cutting policies that apply across domains and are not tied to any single regulatory framework or industry.
 
 ## Directory Structure
 
 - **v1/**: Version 1 of global policies
-  - `fairness.rego`: General fairness requirements for AI systems
-  - `transparency.rego`: Transparency requirements for AI systems
-  - `accountability.rego`: Accountability requirements for AI systems
+  - `accountability/accountability.rego`
+  - `fairness/fairness.rego`
+  - `toxicity/toxicity.rego`
+  - `transparency/transparency.rego`
+  - `common/` — shared building blocks imported by policies elsewhere in the repo (`common_rules.rego`, `compliance.rego`, `content_safety.rego`, `fairness.rego`, `risk_management.rego`). These aren't standalone policies with their own verdict; they're functions other packages import, e.g. `import data.global.v1.common.fairness as common_fairness`.
 
-- **library/**: Reusable policy components
-  - `common_rules.rego`: Common rules that can be imported by other policies
-  - `utilities.rego`: Utility functions for policies
+9 policies total, including the `common/` helpers.
 
 ## Usage
 
-Global policies provide a baseline set of requirements that all AI systems should meet regardless of their specific industry or regulatory domain. They can be used standalone or combined with more specific policies.
+Global policies provide a baseline set of requirements that most AI systems should meet regardless of industry or jurisdiction. Use them standalone, or compose them with a more specific international or industry-specific policy.
 
 ## Adding New Policies
 
 When adding new global policies:
-1. Place them in the appropriate version directory (e.g., v1/)
-2. Follow the naming convention: `<policy_area>.rego`
-3. Use the package name `global.<version>.<policy_area>`
-4. Include comprehensive metadata and documentation
+1. Place them under `v1/<policy_area>/`
+2. Follow the naming convention: `<policy_area>.rego` (+ sibling `<policy_area>_test.rego`)
+3. Use the package name `global.v1.<policy_area>`
+4. Include a `# METADATA` block with title, description, version, and source references
+
+If you're adding a function meant to be reused by other packages rather than a standalone policy, it belongs under `common/`, following the existing files there as the pattern.
 
 ## Composition
 
@@ -31,6 +33,7 @@ Global policies can be imported by other policies using the import statement:
 
 ```rego
 import data.global.v1.fairness
+import data.global.v1.common.fairness as common_fairness
 ```
 
 ## Disclaimer

@@ -1,35 +1,31 @@
 # Operational Policies
 
-This directory contains policies focused on the operational aspects of AI systems, including AIOps, cost management, and corporate requirements.
+This directory contains policies focused on the operational aspects of running AI systems, rather than regulatory compliance.
 
 ## Directory Structure
 
-- **aiops/**: AI Operations policies
-  - **v1/**: Version 1 implementation
-    - `scalability.rego`: Scalability requirements for AI systems
-    - `performance.rego`: Performance requirements for AI systems
+- **aiops/**: AI Operations
+  - **v1/**: `scalability/scalability.rego`
 
-- **cost/**: Cost management policies
-  - **v1/**: Version 1 implementation
-    - `resource_efficiency.rego`: Resource efficiency requirements
-    - `budget_compliance.rego`: Budget compliance requirements
+- **cost/**: Cost management
+  - **v1/**: `resource_efficiency/resource_efficiency.rego`
 
 - **corporate/**: Corporate internal policies
-  - **v1/**: Version 1 implementation
-    - `infosec.rego`: Information security requirements
-    - `governance.rego`: AI governance requirements
+  - **v1/**: `governance/governance.rego`, `infosec/infosec.rego`
+
+4 policies total across 3 categories. All four are currently scaffolds (`default allow := false` placeholders establishing the package path); none has enforceable logic yet. Picking one up and implementing it against a real operational metric is a good first contribution.
 
 ## Usage
 
-Operational policies address the practical aspects of deploying and maintaining AI systems at scale within organizations. These policies focus on efficiency, cost, security, and governance concerns rather than regulatory compliance.
+Operational policies address the practical aspects of deploying and maintaining AI systems at scale within organizations: efficiency, cost, security, and internal governance concerns, rather than external regulatory compliance.
 
 ## Adding New Policies
 
 When adding new operational policies:
-1. Place them in the appropriate category and version directory (e.g., aiops/v1/)
-2. Follow the naming convention: `<policy_area>.rego`
-3. Use the package name `operational.<category>.<version>.<policy_area>`
-4. Include comprehensive metadata and documentation with clear operational metrics and thresholds
+1. Place them in the appropriate category and version directory (e.g., `aiops/v1/<policy_area>/`)
+2. Follow the naming convention: `<policy_area>.rego` (+ sibling `<policy_area>_test.rego`)
+3. Use the package name `operational.<category>.v1.<policy_area>`
+4. Include a `# METADATA` block with clear operational metrics and thresholds
 
 ## Composition
 
@@ -37,7 +33,7 @@ Operational policies can be combined with other policy types to provide a compre
 
 ```rego
 import data.global.v1.accountability
-import data.operational.aiops.v1.performance
+import data.operational.aiops.v1.scalability
 ```
 
 ## Disclaimer
