@@ -217,6 +217,8 @@ gopal/
 | CI/CD integration | ✅ `opa check` + Regal | ✅ | Varies |
 | Custom local policies (not shared upstream) | ✅ `custom/` is git-ignored | ❌ | Paid tier |
 
+A few other open-source projects worth knowing about: [VerifyWise](https://github.com/verifywise-ai/verifywise) and [Compl-AI](https://github.com/compl-ai/compl-ai) both evaluate AI systems against the EU AI Act and other frameworks. [airblackbox](https://github.com/airblackbox) scans agent frameworks like LangChain, CrewAI, and AutoGen for compliance gaps at runtime. GOPAL's difference is that it's plain Rego/OPA, so it slots into policy tooling you may already run for Kubernetes or cloud authorization, and it isn't limited to the EU AI Act. Aviation, education, and banking frameworks are in the same tree, all versioned and tested the same way.
+
 ---
 
 ## GOPAL vs AICertify
