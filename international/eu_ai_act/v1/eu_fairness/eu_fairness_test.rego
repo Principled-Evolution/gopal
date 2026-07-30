@@ -4,35 +4,26 @@ import data.global.v1.common.content_safety
 import data.global.v1.common.fairness as common_fairness
 import data.international.eu_ai_act.v1.eu_fairness
 
-# Mock the imported functions
-mock_gender_bias_detected(metrics) if {
-	metrics.fairness.gender_bias == true
-}
+# Key change 1: Use functions (=) instead of rules (if) to return values directly
+mock_gender_bias_detected(metrics) := metrics.fairness.details.gender_bias_detected
 
-mock_gender_bias_detected(metrics) if {
-	metrics.gender_bias_detected == true
-}
+mock_racial_bias_detected(metrics) := metrics.fairness.details.racial_bias_detected
 
-mock_racial_bias_detected(metrics) if {
-	metrics.fairness.racial_bias == true
-}
-
-mock_racial_bias_detected(metrics) if {
-	metrics.racial_bias_detected == true
-}
+default mock_toxicity_below_threshold(_, _) := false
 
 mock_toxicity_below_threshold(metrics, threshold) if {
 	metrics.content_safety.score < threshold
 }
 
+# Key change 2: Test data uses the 'details' path, matching the common/fairness package
 # Test case for compliant input with custom parameters
 test_allow_with_custom_params if {
 	eu_fairness.allow with input as {
 		"metrics": {
-			"fairness": {
-				"gender_bias": false,
-				"racial_bias": false,
-			},
+			"fairness": {"details": {
+				"gender_bias_detected": false,
+				"racial_bias_detected": false,
+			}},
 			"content_safety": {"score": 0.5},
 		},
 		"summary": {"stereotype_values": {
@@ -53,10 +44,10 @@ test_allow_with_custom_params if {
 test_allow_with_default_params if {
 	eu_fairness.allow with input as {
 		"metrics": {
-			"fairness": {
-				"gender_bias": false,
-				"racial_bias": false,
-			},
+			"fairness": {"details": {
+				"gender_bias_detected": false,
+				"racial_bias_detected": false,
+			}},
 			"content_safety": {"score": 0.5},
 		},
 		"summary": {"stereotype_values": {
@@ -74,10 +65,10 @@ test_allow_with_default_params if {
 test_deny_gender_bias if {
 	not eu_fairness.allow with input as {
 		"metrics": {
-			"fairness": {
-				"gender_bias": true,
-				"racial_bias": false,
-			},
+			"fairness": {"details": {
+				"gender_bias_detected": true,
+				"racial_bias_detected": false,
+			}},
 			"content_safety": {"score": 0.5},
 		},
 		"summary": {"stereotype_values": {
@@ -98,10 +89,10 @@ test_deny_gender_bias if {
 test_deny_racial_bias if {
 	not eu_fairness.allow with input as {
 		"metrics": {
-			"fairness": {
-				"gender_bias": false,
-				"racial_bias": true,
-			},
+			"fairness": {"details": {
+				"gender_bias_detected": false,
+				"racial_bias_detected": true,
+			}},
 			"content_safety": {"score": 0.5},
 		},
 		"summary": {"stereotype_values": {
@@ -122,10 +113,10 @@ test_deny_racial_bias if {
 test_deny_high_toxicity if {
 	not eu_fairness.allow with input as {
 		"metrics": {
-			"fairness": {
-				"gender_bias": false,
-				"racial_bias": false,
-			},
+			"fairness": {"details": {
+				"gender_bias_detected": false,
+				"racial_bias_detected": false,
+			}},
 			"content_safety": {"score": 0.8},
 		},
 		"summary": {"stereotype_values": {
@@ -146,10 +137,10 @@ test_deny_high_toxicity if {
 test_recommendations_gender_bias if {
 	eu_fairness.recommendations == ["Address gender bias in the AI system to comply with EU AI Act fairness requirements"] with input as {
 		"metrics": {
-			"fairness": {
-				"gender_bias": true,
-				"racial_bias": false,
-			},
+			"fairness": {"details": {
+				"gender_bias_detected": true,
+				"racial_bias_detected": false,
+			}},
 			"content_safety": {"score": 0.5},
 		},
 		"summary": {"stereotype_values": {
