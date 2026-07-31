@@ -14,7 +14,10 @@
 </p>
 
 <p align="center">
-  <em>94 पॉलिसीज़। 15+ रेगुलेटरी फ्रेमवर्क्स। 5 इंडस्ट्री वर्टिकल्स। Policy-as-code जिसे आपका ऑडिटर पढ़ सकता है।</em>
+  <em>AI कंप्लायंस नियम जिन्हें आप पढ़ सकते हैं, चला सकते हैं, diff कर सकते हैं, और सिद्ध कर सकते हैं।</em>
+</p>
+<p align="center">
+  <sub>85 पॉलिसीज़ · 8 इंटरनेशनल फ्रेमवर्क्स · 5 इंडस्ट्री वर्टिकल्स</sub>
 </p>
 
 <p align="center">
@@ -24,23 +27,51 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-94-orange.svg?style=flat-square" alt="94 Policies">
-  <img src="https://img.shields.io/badge/frameworks-15%2B-purple.svg?style=flat-square" alt="15+ Frameworks">
+  <img src="https://img.shields.io/badge/policies-85-orange.svg?style=flat-square" alt="85 Policies">
+  <img src="https://img.shields.io/badge/frameworks-8-purple.svg?style=flat-square" alt="8 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
 <br>
 
-**Governance Open Policy Agent Library** — Rego में लिखी गई [OPA](https://www.openpolicyagent.org/) पॉलिसीज़ का एक क्यूरेटेड संग्रह, जो वास्तविक AI-गवर्नेंस आवश्यकताओं को एनकोड करता है: EU AI Act, NIST AI RMF, एविएशन सेफ्टी स्टैंडर्ड्स, education में FERPA/COPPA, banking में fair-lending नियम, और बहुत कुछ।
+**GOPAL: Governance Open Policy Agent Library.** इसे AI रेगुलेशन के लिए एक ओपन पॉलिसी पैक समझिए।
 
-इन्हें अपने AI सिस्टम के metadata, model cards, या मूल्यांकन परिणामों के विरुद्ध चलाइए — और एक संरचित, मशीन-रीडेबल कंप्लायंस वर्डिक्ट प्राप्त कीजिए जिसे आप CI, ऑडिट लॉग, या रेगुलेटर सबमिशन में डाल सकते हैं।
+Rego में लिखी गई [OPA](https://www.openpolicyagent.org/) पॉलिसीज़ का एक क्यूरेटेड संग्रह, जो वास्तविक AI-गवर्नेंस आवश्यकताओं को एनकोड करता है: EU AI Act, NIST AI RMF, एविएशन सेफ्टी स्टैंडर्ड्स, education में FERPA/COPPA, banking में fair-lending नियम, और बहुत कुछ।
+
+इन्हें अपने AI सिस्टम के metadata, model cards, या मूल्यांकन परिणामों के विरुद्ध चलाइए, और एक संरचित, मशीन-रीडेबल कंप्लायंस वर्डिक्ट पाइए जिसे आप CI, ऑडिट लॉग, या रेगुलेटर सबमिशन में सीधे इस्तेमाल कर सकते हैं।
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 94 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 85 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
   </picture>
 </p>
+
+---
+
+## AI कंप्लायंस नियम जिन्हें आप पढ़ सकते हैं, चला सकते हैं, diff कर सकते हैं, और सिद्ध कर सकते हैं
+
+GOPAL रेगुलेटरी और गवर्नेंस आवश्यकताओं को, जैसे EU AI Act, NIST AI RMF, एविएशन सेफ्टी स्टैंडर्ड्स, FERPA/COPPA, fair lending, और healthcare safety को, एक्ज़ीक्यूटेबल OPA पॉलिसीज़ में बदल देता है।
+
+अगर आपको ऐसे AI गवर्नेंस चेक्स चाहिए जो हों:
+
+- **पठनीय**: हर नियम Rego कोड है, कोई ब्लैक-बॉक्स स्कोर नहीं
+- **समीक्षा योग्य**: पॉलिसी में बदलाव pull requests से होकर गुज़रते हैं
+- **टेस्ट योग्य**: हर पॉलिसी के लिए allow/deny टेस्ट केस बनाए जा सकते हैं
+- **वर्ज़न्ड**: फ्रेमवर्क्स आगे बढ़ते रहते हैं, बिना उन यूज़र्स को तोड़े जिन्होंने कोई वर्ज़न पिन कर रखा है
+- **ऑटोमेटेबल**: CI/CD, ऑडिट वर्कफ़्लो, या AICertify में चेक्स चलाइए
+
+तो GOPAL आज़माइए।
+
+---
+
+## अभी क्यों
+
+EU AI Act लागू हो चुका है। NIST AI RMF अमेरिका का वास्तविक बेसलाइन बन चुका है। UK, भारत, ब्राज़ील, सिंगापुर, और कैलिफ़ोर्निया, सभी आगे बढ़ रहे हैं। एविएशन रेगुलेटर्स AI/UAS गाइडेंस जारी कर रहे हैं। वित्तीय पर्यवेक्षक मॉडल-रिस्क आवश्यकताएँ जारी कर रहे हैं।
+
+इंजीनियरिंग टीमों को ऐसे AI गवर्नेंस चेक्स चाहिए जो CI में चलें, न कि ऐसे PDF जो किसी शेयर्ड ड्राइव पर पड़े रहें, न ही रिव्यू-बोर्ड डेक में चिपकाए गए स्क्रीनशॉट।
+
+GOPAL इन सभी रेगुलेटरी रिजीम्स के लिए एक्ज़ीक्यूटेबल Rego पॉलिसीज़ देता है। ये वर्ज़न्ड, टेस्टेबल, और pull requests में रिव्यू होने लायक हैं। जो टूलिंग आपकी प्लेटफ़ॉर्म टीम पहले से Kubernetes admission control के लिए इस्तेमाल कर रही है, वही अब AI-सिस्टम आवश्यकताओं को लागू करने के लिए भी काम आ सकती है।
 
 ---
 
@@ -49,9 +80,19 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है — इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है: इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
   </picture>
 </p>
+
+### 30 सेकंड में GOPAL आज़माइए
+
+```bash
+git clone https://github.com/Principled-Evolution/gopal.git
+cd gopal/examples/eu-ai-act-transparency
+./run.sh
+```
+
+आपको एक सैंपल AI सिस्टम के विरुद्ध एक संरचित EU AI Act ट्रांसपेरेंसी वर्डिक्ट दिखेगा। NIST AI RMF, customer-support LLM, और अन्य उदाहरणों के लिए [`examples/`](examples/) देखें।
 
 ### OPA CLI के साथ स्टैंडअलोन
 
@@ -86,16 +127,32 @@ await app.evaluate(regulations=regs, report_format="pdf")
 
 ## GOPAL क्यों
 
-अधिकांश "AI governance" स्लाइड डेक्स में रहती है। कुछ ही ओपन इम्प्लीमेंटेशन्स या तो:
+अधिकांश "AI governance" स्लाइड डेक्स में ही रह जाती है। कुछ ही ओपन इम्प्लीमेंटेशन्स मौजूद हैं, और वे भी या तो:
 
 - **जेनेरिक OPA बंडल्स** हैं (Kubernetes admission के लिए बढ़िया, EU AI Act के लिए नहीं), या
 - **क्लोज़्ड SaaS** हैं जो उन नियमों को छिपाते हैं जिनके आधार पर आपका मूल्यांकन हो रहा है।
 
 GOPAL तीन आयामों में अलग है:
 
-1. **निर्माण से ही AI-विशिष्ट।** हर पॉलिसी एक AI-सिस्टम चिंता को लक्ष्य करती है — बायस, पारदर्शिता, मानवीय निगरानी, मॉडल रिस्क, कंटेंट सेफ्टी, सेफ्टी-क्रिटिकल सर्टिफ़िकेशन — न कि जेनेरिक इन्फ्रास्ट्रक्चर।
-2. **पठनीय।** नियम Rego हैं। आप उन्हें `cat` कर सकते हैं, PR में diff कर सकते हैं, और उनके बारे में तर्क कर सकते हैं। कोई ब्लैक-बॉक्स स्कोरकार्ड नहीं।
-3. **वर्ज़न्ड।** हर फ्रेमवर्क स्पष्ट semver गारंटी के साथ `v1/` (फिर `v2/`, आदि) के अंतर्गत रहता है — [COMPATIBILITY.md](COMPATIBILITY.md) देखें। जब EU AI Act में संशोधन होता है, पुराना संस्करण यथावत रहता है।
+1. **शुरुआत से ही AI-विशिष्ट।** हर पॉलिसी किसी AI-सिस्टम चिंता को लक्ष्य करती है, जैसे बायस, पारदर्शिता, मानवीय निगरानी, मॉडल रिस्क, कंटेंट सेफ्टी, सेफ्टी-क्रिटिकल सर्टिफ़िकेशन, न कि जेनेरिक इन्फ्रास्ट्रक्चर को।
+2. **पठनीय।** नियम बस Rego हैं। आप उन्हें `cat` कर सकते हैं, PR में diff कर सकते हैं, और उनके बारे में तर्क कर सकते हैं। कोई ब्लैक-बॉक्स स्कोरकार्ड नहीं।
+3. **वर्ज़न्ड।** हर फ्रेमवर्क स्पष्ट semver गारंटी के साथ `v1/` (फिर `v2/`, आदि) के अंतर्गत रहता है, देखें [COMPATIBILITY.md](COMPATIBILITY.md)। जब EU AI Act में संशोधन होता है, पुराना संस्करण यथावत रहता है।
+
+---
+
+## OPA / Rego यूज़र्स के लिए
+
+अगर आप पहले से Kubernetes admission, cloud authorization, CI/CD, या service mesh के लिए OPA इस्तेमाल कर रहे हैं, तो GOPAL आपको इन्फ्रास्ट्रक्चर की बजाय AI सिस्टम्स को लक्ष्य करने वाली एक पॉलिसी लाइब्रेरी देता है।
+
+पैकेज, कन्वेंशन्स, और टेस्ट पैटर्न्स सब इडियोमैटिक Rego हैं, कोई ऊपर से DSL नहीं, evaluate करने के लिए कोई Python भी नहीं चाहिए। आप ये सब कर सकते हैं:
+
+- अलग-अलग फ्रेमवर्क्स (`international/eu_ai_act/v1/`, `industry_specific/aviation/v1/`) को अपने bundle में शामिल कीजिए
+- `opa eval`, [Conftest](https://www.conftest.dev/), या अपने मौजूदा OPA server से evaluate कीजिए
+- किसी major version (`v1/`) पर पिन कीजिए और अपग्रेड्स को PR के रूप में रिव्यू कीजिए
+- GOPAL के नियमों को अपने private `custom/` नियमों के साथ एक ही evaluation में मिलाइए
+- [Regal](https://github.com/StyraInc/regal) से lint कीजिए, यही linter GOPAL खुद अपने CI में इस्तेमाल करता है
+
+अगर आपको एक ऐसा Python फ्रेमवर्क चाहिए जो input capture और PDF/Markdown रिपोर्ट जनरेशन भी संभाल ले, तो [AICertify](https://github.com/Principled-Evolution/aicertify) देखें।
 
 ---
 
@@ -104,7 +161,7 @@ GOPAL तीन आयामों में अलग है:
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट — 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट: 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
   </picture>
 </p>
 
@@ -116,13 +173,13 @@ gopal/
 │   ├── india/v1/             1  policy   — Digital India Policy
 │   ├── brazil/v1/            1  policy   — AI Governance Bill
 │   ├── icao/v1/              1  policy   — ICAO Doc 10019
-│   ├── faa/v1/               2  policies — FAA Part 107, Remote ID
+│   ├── faa/v1/               2  policies — Part 107, Remote ID
 │   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
-│   └── standards/v1/         4  policies — RTCA DO-365/366, ASTM F3442, ISO 21384
+│   └── standards/v1/         2  policies — RTCA DO-365, ISO 21384
 │
 ├── industry_specific/    Vertical-specific requirements
-│   ├── aviation/v1/          17 policies — detect & avoid, certification, design
 │   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
+│   ├── aviation/v1/          12 policies — airworthiness, autonomy, data, ops
 │   ├── healthcare/v1/         2 policies — patient & diagnostic safety
 │   ├── bfs/v1/                2 policies — model risk, fair lending
 │   └── automotive/v1/         1 policy   — vehicle safety integration
@@ -143,7 +200,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**94 प्रोडक्शन पॉलिसीज़। टेस्ट्स सहित 125 Rego फ़ाइलें।**
+**85 प्रोडक्शन पॉलिसीज़। टेस्ट्स सहित कुल 124 Rego फ़ाइलें।**
 
 ---
 
@@ -154,13 +211,28 @@ gopal/
 | विशेष रूप से AI सिस्टम्स को लक्ष्य करता है | ✅ | ❌ | ✅ |
 | ओपन सोर्स (Apache 2.0) | ✅ | ✅ | ❌ |
 | आप हर नियम पढ़ सकते हैं | ✅ Rego | ✅ Rego | ❌ छिपा हुआ |
-| नामित विनियमनों को ट्रैक करता है (EU AI Act, NIST RMF, FAA) | ✅ 15+ | ❌ | आंशिक |
+| नामित विनियमनों को ट्रैक करता है (EU AI Act, NIST RMF, FAA) | ✅ 10+ | ❌ | आंशिक |
 | बॉक्स से बाहर इंडस्ट्री-विशिष्ट वर्टिकल्स | ✅ 5 | ❌ | सीमित |
-| Aviation / safety-critical कवरेज | ✅ ICAO, RTCA, FAA, EASA, ASTM | ❌ | ❌ |
+| Aviation / safety-critical कवरेज | ✅ ICAO, RTCA, FAA, EASA, ISO | ❌ | ❌ |
 | Education सेक्टर (FERPA / COPPA) | ✅ | ❌ | दुर्लभ |
 | वर्ज़न्ड पॉलिसीज़ (`v1/`, `v2/` …) | ✅ Semver | भिन्न | N/A |
 | CI/CD इंटीग्रेशन | ✅ `opa check` + Regal | ✅ | भिन्न |
 | कस्टम लोकल पॉलिसीज़ (अपस्ट्रीम शेयर नहीं) | ✅ `custom/` git-ignored है | ❌ | पेड टियर |
+
+जानने लायक कुछ और ओपन-सोर्स प्रोजेक्ट्स: [VerifyWise](https://github.com/verifywise-ai/verifywise) और [Compl-AI](https://github.com/compl-ai/compl-ai), दोनों EU AI Act और अन्य फ्रेमवर्क्स के आधार पर AI सिस्टम्स का मूल्यांकन करते हैं। [airblackbox](https://github.com/airblackbox) LangChain, CrewAI, AutoGen जैसे agent फ्रेमवर्क्स को रनटाइम पर स्कैन करके कंप्लायंस गैप्स ढूँढता है। GOPAL का फ़र्क़ यह है कि यह शुद्ध Rego/OPA है, इसलिए यह उस पॉलिसी टूलिंग में सीधे फ़िट बैठता है जो आप शायद पहले से Kubernetes या cloud authorization के लिए इस्तेमाल कर रहे हों, और यह सिर्फ़ EU AI Act तक सीमित नहीं है। Aviation, education, और banking फ्रेमवर्क्स भी उसी कोड ट्री में हैं, उसी तरह वर्ज़न्ड और टेस्टेड।
+
+---
+
+## GOPAL बनाम AICertify
+
+| ज़रूरत | इस्तेमाल करें |
+|---|---|
+| मुझे raw Rego पॉलिसीज़ चाहिए | GOPAL |
+| मुझे किसी AI ऐप का मूल्यांकन करके रिपोर्ट जनरेट करनी है | AICertify |
+| मुझे मौजूदा OPA टूलिंग में पॉलिसीज़ जोड़नी हैं | GOPAL |
+| मुझे PDF/Markdown/JSON ऑडिट रिपोर्ट्स चाहिए | AICertify |
+
+AICertify अंदर से GOPAL का ही इस्तेमाल करता है। अगर आपके पास पहले से एक OPA वर्कफ़्लो है और आप उसे AI-विशिष्ट नियमों से बढ़ाना चाहते हैं, तो GOPAL चुनें। अगर आपको एक Python फ्रेमवर्क चाहिए जो AI-एप्लिकेशन इंटरैक्शन्स को कैप्चर करे और शुरू से आख़िर तक ऑडिट-रेडी एविडेंस तैयार करे, तो AICertify चुनें।
 
 ---
 
@@ -169,7 +241,7 @@ gopal/
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना — package path, imports, metadata, default deny, allow rule, report" width="85%" />
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना: package path, imports, metadata, default deny, allow rule, report" width="85%" />
   </picture>
 </p>
 
@@ -199,12 +271,29 @@ report := reporting.compose_report(
 )
 ```
 
-फिर एक सहोदर `*_test.rego` नियम को कवर करती है। CI लागू करता है:
+फिर एक सहोदर `*_test.rego` उस नियम को कवर करता है। CI इन्हें लागू करता है:
 
-1. **`opa check`** — सभी पैकेजों में syntax + reference शुद्धता
-2. **`regal lint`** — Rego स्टाइल + सर्वोत्तम प्रथाएँ
+1. **`opa check`**: सभी पैकेजों में syntax और reference शुद्धता
+2. **`regal lint`**: Rego स्टाइल और सर्वोत्तम प्रथाएँ
 
-[helper_functions/](helper_functions/) लाइब्रेरी आपको `compose_report()`, `validate_required_fields()`, और `field_exists()` देती है ताकि रिपोर्ट्स एक समान आकार में निकलें, चाहे नियम किसी ने भी लिखा हो।
+[helper_functions/](helper_functions/) लाइब्रेरी आपको `compose_report()`, `validate_required_fields()`, और `field_exists()` देती है, ताकि रिपोर्ट्स एक समान आकार में निकलें, चाहे नियम किसी ने भी लिखा हो।
+
+चरण-दर-चरण मार्गदर्शन के लिए [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md) देखें, और प्रति-फ्रेमवर्क कवरेज मैट्रिक्स के लिए [`docs/coverage/`](docs/coverage/) देखें।
+
+---
+
+## पॉलिसी की सटीकता
+
+GOPAL कानूनी सलाह नहीं है। यहाँ की पॉलिसीज़ सार्वजनिक रेगुलेटरी और गवर्नेंस आवश्यकताओं की एक्ज़ीक्यूटेबल इंटरप्रिटेशन्स हैं, जिन्हें उन इंजीनियर्स ने लिखा है जो इसे सही करना चाहते हैं।
+
+अगर आपको लगता है कि कोई नियम किसी रेगुलेशन को ग़लत पढ़ रहा है, या किसी दायित्व को छोड़ रहा है, तो कृपया एक issue खोलें और साथ में बताएँ:
+
+- वह रेगुलेशन, सेक्शन, या आर्टिकल जिसकी बात हो रही है
+- आपकी इंटरप्रिटेशन
+- वह input/output व्यवहार जिसकी आप उम्मीद करते हैं
+- कोई भी आधिकारिक गाइडेंस, रेगुलेटर टेक्स्ट, या पूर्व उदाहरण
+
+पॉलिसी की सटीकता को लेकर असहमति सुरक्षा भेद्यता नहीं है, सुरक्षा भेद्यता के लिए [SECURITY.md](SECURITY.md) देखें। बल्कि यह ठीक वैसी ही चीज़ है जिसे हम सार्वजनिक रखना चाहते हैं, ताकि कम्युनिटी मिलकर नियमों की समीक्षा और सुधार कर सके।
 
 ---
 
@@ -212,9 +301,9 @@ report := reporting.compose_report(
 
 `custom/` डायरेक्टरी **आपके संगठन की प्रोप्राइटरी पॉलिसीज़** के लिए है। यह:
 
-- `.gitignore`d है — कभी इस रेपो में पुश नहीं होती
-- CI द्वारा छोड़ी गई
-- सार्वजनिक ट्री के समान संरचित (`custom/your_org/v1/...`)
+- `.gitignore`d है, कभी इस रेपो में पुश नहीं होती
+- CI द्वारा छोड़ दी जाती है
+- सार्वजनिक ट्री जैसी ही संरचित है (`custom/your_org/v1/...`)
 
 बिना फ़ोर्क किए अपने आंतरिक AI उपयोग-केस नियम डालिए। वे सार्वजनिक सेट के साथ-साथ मूल्यांकित होते हैं।
 
@@ -240,26 +329,25 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 
 ## रोडमैप
 
-- **अधिक NIST कवरेज** — Measure / Manage controls को विस्तारित करना
-- **UK AI रेगुलेशन सिद्धांत** — pro-innovation फ्रेमवर्क नियम
-- **California SB-1047 successor** — जब अंतिम रूप दिया जाए
-- **MAS / HKMA banking AI गाइडेंस** — APAC वित्तीय पर्यवेक्षण
-- **अधिक एविएशन वर्टिकल्स** — UAS-विशिष्ट airworthiness
+- **अधिक NIST कवरेज**: Measure / Manage controls को विस्तारित करना
+- **UK AI रेगुलेशन सिद्धांत**: pro-innovation फ्रेमवर्क नियम
+- **California SB-1047 successor**: जब अंतिम रूप दिया जाए
+- **MAS / HKMA banking AI गाइडेंस**: APAC वित्तीय पर्यवेक्षण
 
-यदि आपको किसी फ्रेमवर्क की आवश्यकता है तो एक issue खोलें।
+अगर आपको किसी फ्रेमवर्क की ज़रूरत है तो एक issue खोलें।
 
 ---
 
 ## संबंधित प्रोजेक्ट्स
 
-- **[AICertify](https://github.com/Principled-Evolution/aicertify)** — Python फ्रेमवर्क जो GOPAL का उपयोग करके AI एप्लिकेशन्स का मूल्यांकन करता है और ऑडिट-तैयार PDF/MD/JSON रिपोर्ट्स तैयार करता है।
-- **[Open Policy Agent](https://www.openpolicyagent.org/)** — पॉलिसी इंजन।
-- **[Regal](https://github.com/StyraInc/regal)** — वह Rego linter जिसका हम CI में उपयोग करते हैं।
+- **[AICertify](https://github.com/Principled-Evolution/aicertify)**: Python फ्रेमवर्क जो GOPAL का उपयोग करके AI एप्लिकेशन्स का मूल्यांकन करता है और ऑडिट-तैयार PDF/MD/JSON रिपोर्ट्स तैयार करता है।
+- **[Open Policy Agent](https://www.openpolicyagent.org/)**: पॉलिसी इंजन।
+- **[Regal](https://github.com/StyraInc/regal)**: वह Rego linter जिसका हम CI में उपयोग करते हैं।
 
 ---
 
 ## लाइसेंस
 
-Apache License 2.0 — [LICENSE](LICENSE) देखें।
+Apache License 2.0, देखें [LICENSE](LICENSE)।
 
 <p align="center"><sub><a href="https://github.com/Principled-Evolution">Principled Evolution</a> द्वारा अनुरक्षित · कंप्लायंस जिसे आप पढ़ सकते हैं, चला सकते हैं, और सिद्ध कर सकते हैं।</sub></p>
