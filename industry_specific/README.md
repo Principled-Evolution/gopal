@@ -16,7 +16,10 @@ This directory contains policies specific to particular industry verticals and t
 - **automotive/**: Automotive
   - **v1/**: `vehicle_safety/vehicle_safety.rego`
 
-17 policies total across 4 verticals.
+- **aviation/**: Aviation
+  - **v1/**: 12 policies across `airworthiness/`, `autonomous_systems/`, `data_management/`, and `flight_operations/`. See regulator-specific policies under [`international/icao/`](../international/icao/), [`international/faa/`](../international/faa/), [`international/easa/`](../international/easa/), and [`international/standards/`](../international/standards/).
+
+29 policies total across 5 verticals.
 
 ## Usage
 

@@ -16,7 +16,19 @@ This directory contains policies for named regulatory frameworks that cross a si
 - **brazil/**: Brazil
   - **v1/**: `ai_governance/ai_governance.rego` (AI Governance Bill)
 
-36 policies total across 4 frameworks.
+- **icao/**: ICAO Doc 10019 (Manual on RPAS)
+  - **v1/**: `doc_10019.rego`
+
+- **faa/**: US Federal Aviation Administration
+  - **v1/**: 2 policies — `part_107.rego` (small UAS operating rules), `remote_id.rego` (Remote ID)
+
+- **easa/**: EU Aviation Safety Agency
+  - **v1/**: 2 policies — `regulation_2019_947.rego` (UAS operation categories), `sora.rego` (Specific Operations Risk Assessment)
+
+- **standards/**: Aviation industry standards (not tied to one regulator)
+  - **v1/**: 2 policies — `rtca_do_365.rego` (Detect and Avoid MOPS), `iso_21384.rego` (UAS general requirements)
+
+43 policies total across 8 frameworks.
 
 ## Usage
 
