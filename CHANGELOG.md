@@ -7,7 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing yet.
+### Changed
+- **Every EU AI Act obligation is now implemented.** 22 of the 29 policies in `international/eu_ai_act/v1/` were stubs: `allow := false` with a "not yet implemented" message and no reference to `input` at all, while the headline policy count and the coverage matrix both counted them. All 22 now check concrete fields and carry sibling tests. The matrix has no ⚠️ Scaffold rows left.
+
+  The implementations encode the conditional structure of the Articles rather than flattening it:
+  - **Article 5 prohibitions** are cumulative. 5(1)(b) needs a recognised vulnerability basis *and* behavioural distortion *and* significant harm. 5(1)(d) carves out systems supporting a human assessment grounded in objective verifiable facts, and both halves are required. 5(1)(e) turns on untargeted collection, not on facial recognition. 5(1)(g) exempts dataset labelling and law enforcement. 5(1)(h) admits a closed list of objectives, and Article 5(3) still requires prior authorisation on top of one.
+  - **Article 26** deployer duties are partly conditional: 26(7) on workplace deployment, 26(11) on the system affecting natural persons, and 26(4) only to the extent the deployer controls the input data.
+  - **Article 43** allows internal control for Annex III point 1 systems only where the harmonised standards were applied.
+  - **Article 48** requires a digitally accessible marking for a digital-only system and the notified body number where one was involved.
+  - **Article 49(2)** requires a provider claiming the Article 6(3) exemption to register that assessment, which is the limb most likely to be overlooked entirely.
+  - **Article 53(2)** open-source exemption reaches the technical documentation and downstream information duties only, falls away completely for a systemic risk model, and never touches the copyright policy or training content summary.
+  - **Article 51(2)** systemic risk presumption at cumulative training compute above 10^25 FLOPs, with Article 52(1) notification and the four Article 55 obligations tested separately.
+- **The README hero leads with domains rather than counts.** The policy and framework count badges are gone from all five READMEs, and the subtitle names the frameworks people actually search for. A user looking for FCA or SRA coverage cares whether their domain is covered, not how many policies exist in total.
+
+### Fixed
+- Test coverage: policies without a sibling test file went from 44 to 22. The remaining gap is almost entirely `industry_specific/education/v1/`.
 
 ## [1.1.0]: 2026-08-25
 

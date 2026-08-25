@@ -17,7 +17,7 @@
   <em>읽고, 실행하고, 비교하고, 증명할 수 있는 AI 컴플라이언스 규칙.</em>
 </p>
 <p align="center">
-  <sub>96개 정책 · 국제 프레임워크 9개 · 산업 수직 영역 6개</sub>
+  <sub>EU AI법 · 영국 AI 프레임워크 · NIST AI RMF · 항공 · 금융 서비스 · 교육 · 의료 · 법률 실무</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,6 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-96-orange.svg?style=flat-square" alt="96 Policies">
-  <img src="https://img.shields.io/badge/frameworks-9-purple.svg?style=flat-square" alt="9 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 

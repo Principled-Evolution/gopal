@@ -6,7 +6,7 @@ The matrices are deliberately honest. A policy is only marked **Implemented** wh
 
 ## Test coverage
 
-Worth stating plainly, because the matrices below say nothing about it: **44 of the 96 policies have no sibling test file**, despite [CONTRIBUTING.md](../../CONTRIBUTING.md) making them mandatory. Most of the gap is in `international/eu_ai_act/v1/` and `industry_specific/education/v1/`. CI now runs `opa test`, so a test added today is enforced from then on, and writing one for an existing policy is a genuinely useful contribution that needs no new Rego logic.
+Worth stating plainly, because the matrices below say nothing about it: **22 of the 96 policies have no sibling test file**, despite [CONTRIBUTING.md](../../CONTRIBUTING.md) making them mandatory. The remaining gap is almost entirely `industry_specific/education/v1/`. CI now runs `opa test`, so a test added today is enforced from then on, and writing one for an existing policy is a genuinely useful contribution that needs no new Rego logic.
 
 A policy without a test is not necessarily wrong. It is unverified, which is a different claim from the ✅ marks below.
 

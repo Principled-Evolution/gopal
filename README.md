@@ -17,7 +17,7 @@
   <em>AI compliance rules you can read, run, diff, and prove.</em>
 </p>
 <p align="center">
-  <sub>96 policies · 9 international frameworks · 6 industry verticals</sub>
+  <sub>EU AI Act · UK AI framework · NIST AI RMF · aviation · financial services · education · healthcare · legal practice</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,6 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-96-orange.svg?style=flat-square" alt="96 Policies">
-  <img src="https://img.shields.io/badge/frameworks-9-purple.svg?style=flat-square" alt="9 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
