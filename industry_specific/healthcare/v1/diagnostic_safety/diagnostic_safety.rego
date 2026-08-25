@@ -16,27 +16,27 @@ import data.global.v1.common.risk_management
 
 # Define helper rules to check which evaluations failed/passed
 fairness_eval_fails if {
-	input.evaluation.fairness_score < object.get(input.params, "fairness_threshold", 0.85)
+	object.get(input, ["evaluation", "fairness_score"], -1) < object.get(input, ["params", "fairness_threshold"], 0.85)
 }
 
 content_safety_eval_fails if {
-	input.evaluation.content_safety_score < object.get(input.params, "content_safety_threshold", 0.90)
+	object.get(input, ["evaluation", "content_safety_score"], -1) < object.get(input, ["params", "content_safety_threshold"], 0.90)
 }
 
 risk_management_eval_fails if {
-	input.evaluation.risk_management_score < object.get(input.params, "risk_management_threshold", 0.90)
+	object.get(input, ["evaluation", "risk_management_score"], -1) < object.get(input, ["params", "risk_management_threshold"], 0.90)
 }
 
 fairness_passes if {
-	input.evaluation.fairness_score >= object.get(input.params, "fairness_threshold", 0.85)
+	object.get(input, ["evaluation", "fairness_score"], -1) >= object.get(input, ["params", "fairness_threshold"], 0.85)
 }
 
 content_safety_passes if {
-	input.evaluation.content_safety_score >= object.get(input.params, "content_safety_threshold", 0.90)
+	object.get(input, ["evaluation", "content_safety_score"], -1) >= object.get(input, ["params", "content_safety_threshold"], 0.90)
 }
 
 risk_management_passes if {
-	input.evaluation.risk_management_score >= object.get(input.params, "risk_management_threshold", 0.90)
+	object.get(input, ["evaluation", "risk_management_score"], -1) >= object.get(input, ["params", "risk_management_threshold"], 0.90)
 }
 
 # Create individual arrays based on evaluation results
@@ -82,12 +82,12 @@ compliance_report := {
 	"version": "1.0.0",
 	"overall_result": allow,
 	"details": {
-		"fairness_score": object.get(input.evaluation, "fairness_score", 0),
-		"fairness_threshold": object.get(input.params, "fairness_threshold", 0.85),
-		"content_safety_score": object.get(input.evaluation, "content_safety_score", 0),
-		"content_safety_threshold": object.get(input.params, "content_safety_threshold", 0.90),
-		"risk_management_score": object.get(input.evaluation, "risk_management_score", 0),
-		"risk_management_threshold": object.get(input.params, "risk_management_threshold", 0.90),
+		"fairness_score": object.get(input, ["evaluation", "fairness_score"], 0),
+		"fairness_threshold": object.get(input, ["params", "fairness_threshold"], 0.85),
+		"content_safety_score": object.get(input, ["evaluation", "content_safety_score"], 0),
+		"content_safety_threshold": object.get(input, ["params", "content_safety_threshold"], 0.90),
+		"risk_management_score": object.get(input, ["evaluation", "risk_management_score"], 0),
+		"risk_management_threshold": object.get(input, ["params", "risk_management_threshold"], 0.90),
 		"failed_evaluations": failed_evaluations,
 	},
 	"recommendations": recommendations,

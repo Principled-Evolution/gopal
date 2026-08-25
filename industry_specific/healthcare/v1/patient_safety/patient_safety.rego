@@ -10,60 +10,87 @@
 #
 package industry_specific.healthcare.v1.patient_safety
 
+import data.helper_functions.reporting
 import rego.v1
 
-# Metadata
 metadata := {
 	"title": "Healthcare Patient Safety Requirements",
-	"description": "Placeholder for healthcare patient safety requirements for AI systems",
-	"status": "PLACEHOLDER - Pending detailed implementation",
+	"description": "Evaluates a clinical AI system against patient-safety thresholds together with the human-oversight and adverse-event controls that FDA Good Machine Learning Practice expects. Thresholds are deliberately higher than the diagnostic_safety sibling, because these controls sit closest to patient harm. Every score is looked up with a failing default, so an absent score fails its threshold rather than dropping out of the assessment.",
 	"version": "1.0.0",
-	"category": "Industry-Specific",
+	"category": "Industry Specific",
 	"references": [
-		concat("", [
-			"FDA AI/ML Guidance: ",
-			"https://www.fda.gov/medical-devices/software-medical-device-samd/",
-			"artificial-intelligence-and-machine-learning-medical-device-software",
-		]),
-		"HIPAA: https://www.hhs.gov/hipaa/index.html",
-		concat("", [
-			"Good Machine Learning Practice: ",
-			"https://www.fda.gov/medical-devices/software-medical-device-samd/",
-			"good-machine-learning-practice-medical-device-development-guiding-principles",
-		]),
+		"FDA, Artificial Intelligence and Machine Learning in Software as a Medical Device",
+		"FDA, Good Machine Learning Practice for Medical Device Development: Guiding Principles",
+		"HIPAA, 45 CFR Parts 160 and 164",
 	],
 }
 
-# Default deny
+score(name, fallback) := object.get(input, ["evaluation", name, "score"], fallback)
+
+threshold(name, fallback) := object.get(input, ["params", name], fallback)
+
+default patient_safety_met := false
+
+patient_safety_met if {
+	score("patient_safety", -1) >= threshold("patient_safety_threshold", 0.95)
+}
+
+default clinical_validation_met := false
+
+clinical_validation_met if {
+	score("clinical_validation", -1) >= threshold("clinical_validation_threshold", 0.90)
+}
+
+default risk_assessment_met := false
+
+risk_assessment_met if {
+	score("risk_assessment", -1) >= threshold("risk_assessment_threshold", 0.90)
+}
+
+# Good Machine Learning Practice expects a clinician in the loop for decisions
+# that affect care, and a route for reporting adverse events.
+default oversight_met := false
+
+oversight_met if {
+	input.oversight.clinician_in_the_loop == true
+	input.oversight.adverse_event_reporting_in_place == true
+}
+
 default allow := false
 
-# This placeholder policy will always return non-compliant with implementation_pending=true
-non_compliant := true
+allow if {
+	patient_safety_met
+	clinical_validation_met
+	risk_assessment_met
+	oversight_met
+}
 
-implementation_pending := true
+failed_controls := [name |
+	some name, satisfied in {
+		"patient safety score": patient_safety_met,
+		"clinical validation score": clinical_validation_met,
+		"risk assessment score": risk_assessment_met,
+		"clinician oversight and adverse event reporting": oversight_met,
+	}
+	satisfied == false
+]
 
-# Define the compliance report
-compliance_report := {
-	"policy": "Healthcare Patient Safety Requirements",
-	"version": "0.0.1",
-	"overall_result": false,
-	"compliant": false,
-	"details": {
-		"message": concat(" ", [
-			"Healthcare patient safety policy implementation is pending.",
-			"This is a placeholder that will be replaced with actual compliance checks in a future release.",
-		]),
-		"thresholds": {
-			"patient_safety": object.get(input.params, "patient_safety_threshold", 0.95),
-			"clinical_validation": object.get(input.params, "clinical_validation_threshold", 0.90),
-			"risk_assessment": object.get(input.params, "risk_assessment_threshold", 0.90),
-		},
-		"recommendations": [
-			"Check back for future releases with healthcare-specific evaluations",
-			"Consider using global compliance policies in the meantime",
-			"Review FDA guidance on AI/ML in medical devices",
-			"Implement preliminary risk assessment based on Good Machine Learning Practice principles",
-			"Consider HIPAA compliance for any patient data handling",
-		],
+policy_metrics := {
+	"patient_safety_controls_failed": {
+		"name": "Patient Safety Controls Not Satisfied",
+		"value": sort(failed_controls),
+		"control_passed": count(failed_controls) == 0,
+	},
+	"patient_safety_score": {
+		"name": "Patient Safety Score",
+		"value": score("patient_safety", -1),
+		"control_passed": patient_safety_met,
+	},
+	"clinician_in_the_loop": {
+		"name": "Clinician In The Loop For Care-Affecting Decisions",
+		"value": object.get(input, ["oversight", "clinician_in_the_loop"], false),
+		"control_passed": oversight_met,
 	},
 }
+
+report := reporting.compose_report("healthcare.patient_safety", allow, policy_metrics)

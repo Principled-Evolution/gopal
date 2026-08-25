@@ -1,0 +1,18 @@
+# Normalise line endings in the repository. Rego files were previously a mix of
+# LF and CRLF, which meant `opa fmt` on a CRLF file produced a whole-file diff
+# unrelated to the actual change.
+* text=auto eol=lf
+
+# Rego and the tooling around it are line-oriented; keep them LF everywhere.
+*.rego   text eol=lf
+*.md     text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.json   text eol=lf
+*.toml   text eol=lf
+*.sh     text eol=lf
+
+# Binary assets: never touch.
+*.png    binary
+*.pdf    binary
+*.ico    binary

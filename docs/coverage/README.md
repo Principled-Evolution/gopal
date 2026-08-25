@@ -4,6 +4,12 @@ This directory documents, per framework, **which obligations are encoded in GOPA
 
 The matrices are deliberately honest. A policy is only marked **Implemented** when the Rego rule actually validates input fields against the regulation's requirement. Many directories ship a **Scaffold** that establishes the package path and a `default allow := false` placeholder, useful as a starting point for contributors but not yet enforceable.
 
+## Test coverage
+
+Worth stating plainly, because the matrices below say nothing about it: **44 of the 96 policies have no sibling test file**, despite [CONTRIBUTING.md](../../CONTRIBUTING.md) making them mandatory. Most of the gap is in `international/eu_ai_act/v1/` and `industry_specific/education/v1/`. CI now runs `opa test`, so a test added today is enforced from then on, and writing one for an existing policy is a genuinely useful contribution that needs no new Rego logic.
+
+A policy without a test is not necessarily wrong. It is unverified, which is a different claim from the ✅ marks below.
+
 ## Available matrices
 
 - [EU AI Act](eu-ai-act.md): Regulation (EU) 2024/1689

@@ -3,7 +3,7 @@
 This directory encodes general healthcare-AI safety principles (patient safety, diagnostic-system fairness and content-safety thresholds), informed by HIPAA and EU AI Act healthcare-relevant provisions rather than one single named statute.
 
 - `diagnostic_safety/diagnostic_safety.rego`: fairness, content-safety, and risk-management thresholds for multi-specialist diagnostic AI systems. See its own [README](diagnostic_safety/README.md) for details and an AICertify usage example.
-- `patient_safety/patient_safety.rego`: currently a scaffold (`default allow := false` placeholder); not yet implemented.
+- `patient_safety/patient_safety.rego`: patient-safety, clinical-validation and risk-assessment score thresholds, plus the clinician-in-the-loop and adverse-event-reporting controls FDA Good Machine Learning Practice expects. Thresholds are higher than `diagnostic_safety` because these controls sit closest to patient harm.
 
 ## Disclaimer
 

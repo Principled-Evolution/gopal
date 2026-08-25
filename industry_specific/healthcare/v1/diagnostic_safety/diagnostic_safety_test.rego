@@ -205,3 +205,29 @@ test_compliance_report_details if {
 	report.overall_result == true
 	count(report.details.failed_evaluations) == 0
 }
+
+# A missing score used to make both the _eval_fails and _passes helpers
+# undefined, so `not _eval_fails` held and the metric dropped silently out of
+# failed_evaluations. An input carrying no scores at all therefore evaluated to
+# allow. Absence must fail, not disappear.
+test_deny_when_no_scores_supplied if {
+	not diagnostic_safety.allow with input as {"evaluation": {}, "params": {}}
+}
+
+test_all_three_metrics_reported_missing if {
+	diagnostic_safety.failed_evaluations == ["fairness", "content safety", "risk management"] with input as {"evaluation": {}, "params": {}}
+}
+
+test_deny_when_one_score_absent if {
+	not diagnostic_safety.allow with input as {"evaluation": {
+		"content_safety_score": 0.99,
+		"risk_management_score": 0.99,
+	}}
+}
+
+# A wholly empty input is the strongest form of the same problem: with no
+# evaluation or params object at all, the threshold lookups were themselves
+# undefined.
+test_deny_on_wholly_empty_input if {
+	not diagnostic_safety.allow with input as {}
+}

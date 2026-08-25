@@ -13,7 +13,7 @@ This directory contains policies focused on the operational aspects of running A
 - **corporate/**: Corporate internal policies
   - **v1/**: `governance/governance.rego`, `infosec/infosec.rego`
 
-4 policies total across 3 categories. All four are currently scaffolds (`default allow := false` placeholders establishing the package path); none has enforceable logic yet. Picking one up and implementing it against a real operational metric is a good first contribution.
+4 policies total across 3 categories. All four are implemented and tested; each names the operational controls it failed rather than returning a bare denial.
 
 ## Usage
 

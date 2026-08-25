@@ -1,34 +1,109 @@
 package industry_specific.bfs.v1.model_risk_test
 
-import data.industry_specific.bfs.v1.model_risk
+import data.industry_specific.bfs.v1.model_risk as policy
+import rego.v1
 
-# Test that the policy is correctly marked as a placeholder
-test_implementation_pending if {
-	model_risk.implementation_pending
+compliant := {
+	"model": {"in_inventory": true, "risk_rating": "high"},
+	"governance": {"board_approved_policy": true, "owner_named": true},
+	"development": {"conceptual_soundness_documented": true},
+	"data": {"lineage_documented": true},
+	"validation": {
+		"independent_review_completed": true,
+		"outcomes_analysis_performed": true,
+		"last_review_days_ago": 90,
+	},
+	"monitoring": {"ongoing_monitoring_in_place": true},
 }
 
-test_non_compliant if {
-	model_risk.non_compliant
+test_allow_when_all_pillars_satisfied if {
+	policy.allow with input as compliant
 }
 
-# Test that the thresholds are correctly parameterized
-test_compliance_report_thresholds if {
-	report := model_risk.compliance_report with input as {"params": {
-		"model_risk_threshold": 0.80,
-		"documentation_threshold": 0.85,
-		"validation_threshold": 0.80,
-	}}
-
-	report.thresholds.model_risk == 0.80
-	report.thresholds.documentation == 0.85
-	report.thresholds.validation == 0.80
+test_deny_when_model_not_in_inventory if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/model/in_inventory", "value": false,
+	}])
 }
 
-# Test that the thresholds use default values when params are not provided
-test_compliance_report_default_thresholds if {
-	report := model_risk.compliance_report with input as {"params": {}}
+test_deny_when_unrated if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/model/risk_rating", "value": "",
+	}])
+}
 
-	report.thresholds.model_risk == 0.85
-	report.thresholds.documentation == 0.90
-	report.thresholds.validation == 0.85
+test_deny_without_board_approved_policy if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/governance/board_approved_policy", "value": false,
+	}])
+}
+
+# BCBS 239: the data feeding the model needs known lineage.
+test_deny_without_data_lineage if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/data/lineage_documented", "value": false,
+	}])
+}
+
+# SR 11-7 treats conceptual soundness review and outcomes analysis as distinct
+# validation activities. Doing one is not doing both.
+test_deny_without_outcomes_analysis if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/validation/outcomes_analysis_performed", "value": false,
+	}])
+}
+
+test_deny_without_independent_review if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/validation/independent_review_completed", "value": false,
+	}])
+}
+
+# Review cadence scales with the risk rating.
+test_deny_high_rated_model_with_stale_review if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/validation/last_review_days_ago", "value": 500,
+	}])
+}
+
+test_allow_low_rated_model_with_same_review_age if {
+	policy.allow with input as json.patch(compliant, [
+		{"op": "replace", "path": "/model/risk_rating", "value": "low"},
+		{"op": "replace", "path": "/validation/last_review_days_ago", "value": 500},
+	])
+}
+
+test_risk_rating_matching_is_case_insensitive if {
+	not policy.allow with input as json.patch(compliant, [
+		{"op": "replace", "path": "/model/risk_rating", "value": "HIGH"},
+		{"op": "replace", "path": "/validation/last_review_days_ago", "value": 500},
+	])
+}
+
+# A missing review date must not read as recently reviewed.
+test_deny_when_review_date_absent if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "remove", "path": "/validation/last_review_days_ago",
+	}])
+}
+
+test_deny_without_ongoing_monitoring if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/monitoring/ongoing_monitoring_in_place", "value": false,
+	}])
+}
+
+test_report_names_the_failed_pillars if {
+	report := policy.report with input as json.patch(compliant, [
+		{"op": "replace", "path": "/model/in_inventory", "value": false},
+		{"op": "replace", "path": "/monitoring/ongoing_monitoring_in_place", "value": false},
+	])
+	report.metrics.model_risk_pillars_failed.value == [
+		"model identification and risk rating",
+		"ongoing monitoring",
+	]
+}
+
+test_deny_on_empty_input if {
+	not policy.allow with input as {}
 }
