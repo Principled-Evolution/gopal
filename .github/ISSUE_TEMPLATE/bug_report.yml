@@ -1,0 +1,106 @@
+name: Bug report
+description: A policy returns the wrong verdict, a test fails, or CI is broken.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. If you think a policy is too strict or too lax
+        rather than outright wrong, that's a policy-design question. Still worth
+        raising here, just say so and we'll treat it as one.
+
+        If this is a **security vulnerability**, please don't file it here. See
+        [SECURITY.md](https://github.com/Principled-Evolution/gopal/blob/main/SECURITY.md).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of bug?
+      options:
+        - "A policy returns the wrong allow/deny verdict"
+        - "A policy errors out or won't evaluate"
+        - "A test fails"
+        - "opa check or regal lint fails"
+        - "The report output shape is wrong or inconsistent"
+        - "A policy misreads the regulation it claims to encode"
+        - "Documentation is wrong or misleading"
+        - "Something else"
+    validations:
+      required: true
+
+  - type: input
+    id: policy
+    attributes:
+      label: Which policy or file?
+      placeholder: international/eu_ai_act/v1/transparency.rego
+    validations:
+      required: false
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong?
+      description: One or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: The exact commands you ran.
+      render: shell
+      placeholder: |
+        opa eval -d . -i input.json "data.international.eu_ai_act.v1.transparency"
+    validations:
+      required: true
+
+  - type: textarea
+    id: input
+    attributes:
+      label: Input document
+      description: A minimal input.json that triggers it. Please redact anything sensitive; a synthetic example beats a real one.
+      render: json
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What should the policy have returned, and why? Cite the regulation if the disagreement is about interpretation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What did it return? Paste the output.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      value: |
+        - OPA version (`opa version`):
+        - Regal version (`regal version`):
+        - OS:
+    validations:
+      required: true
+
+  - type: dropdown
+    id: modified
+    attributes:
+      label: Did you modify any policies before running?
+      options:
+        - "No, this is stock GOPAL from main"
+        - "No, stock GOPAL from a release tag"
+        - "Yes, I have local changes"
+        - "Yes, and I'm also loading policies from custom/"
+    validations:
+      required: true

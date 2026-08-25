@@ -346,6 +346,25 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 
 ---
 
+## कम्युनिटी और सहायता
+
+जवाब पाने के लिए Rego, OPA या GitHub की परंपराओं की जानकारी ज़रूरी नहीं है।
+
+| आप क्या करना चाहते हैं | कहाँ जाएँ |
+| --- | --- |
+| अपने CI, OPA सर्वर या प्लैटफ़ॉर्म में GOPAL जोड़ने का तरीका पूछना | [इंटीग्रेशन सहायता फ़ॉर्म](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml) या [Q&A डिस्कशन](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a) |
+| ऐसे नियम या मानक की मांग करना जो GOPAL में अभी नहीं है | [नए फ़्रेमवर्क का अनुरोध](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) |
+| पहले से समर्थित फ़्रेमवर्क में किसी विशिष्ट पॉलिसी की मांग करना | [नई पॉलिसी का अनुरोध](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
+| किसी पॉलिसी के गलत नतीजे की रिपोर्ट करना | [बग रिपोर्ट](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
+| GitHub की जगह सीधे ईमेल करना | **gopal@principledevolution.ai** |
+| सुरक्षा भेद्यता की रिपोर्ट करना | [SECURITY.md](SECURITY.md) देखें। कृपया सार्वजनिक issue न खोलें |
+
+अनुरोध दर्ज करने से पहले दो जगहें ज़्यादातर सवालों का जवाब दे देती हैं। [कवरेज मैट्रिक्स](docs/coverage) अनुच्छेद-दर-अनुच्छेद बताता है कि क्या लागू हो चुका है, और [FAQ](docs/FAQ.md) दायरे, इनपुट फ़ॉर्मैट तथा AICertify से संबंध को समझाता है।
+
+हर आकार का योगदान स्वागत योग्य है, [CONTRIBUTING.md](CONTRIBUTING.md) देखें। भागीदारी हमारी [आचार संहिता](CODE_OF_CONDUCT.md) के अंतर्गत आती है।
+
+---
+
 ## लाइसेंस
 
 Apache License 2.0, देखें [LICENSE](LICENSE)।

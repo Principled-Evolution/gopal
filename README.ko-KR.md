@@ -344,6 +344,25 @@ PR 워크플로는 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.
 
 ---
 
+## 커뮤니티 및 지원
+
+Rego, OPA, GitHub 관례를 몰라도 답변을 받을 수 있습니다.
+
+| 하려는 일 | 이동할 곳 |
+| --- | --- |
+| GOPAL을 사내 CI, OPA 서버, 플랫폼에 연동하는 방법 문의 | [연동 지원 양식](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml) 또는 [Q&A 토론](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a) |
+| GOPAL이 아직 다루지 않는 규제나 표준 요청 | [신규 프레임워크 요청](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) |
+| 이미 지원하는 프레임워크 내 특정 정책 요청 | [신규 정책 요청](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
+| 정책이 잘못된 판정을 반환하는 문제 신고 | [버그 신고](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
+| GitHub 대신 이메일로 연락 | **gopal@principledevolution.ai** |
+| 보안 취약점 신고 | [SECURITY.md](SECURITY.md) 참조. 공개 이슈로 등록하지 마세요 |
+
+등록하기 전에 다음 두 곳을 보면 대부분의 질문이 해결됩니다. [커버리지 매트릭스](docs/coverage)는 조항별 구현 현황을 보여 주고, [FAQ](docs/FAQ.md)는 적용 범위와 입력 형식, AICertify와의 관계를 다룹니다.
+
+규모와 무관하게 모든 기여를 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요. 참여에는 [행동 규범](CODE_OF_CONDUCT.md)이 적용됩니다.
+
+---
+
 ## 라이선스
 
 Apache License 2.0. 자세한 내용은 [LICENSE](LICENSE)를 참고하세요.

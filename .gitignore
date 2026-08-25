@@ -42,3 +42,6 @@ ENV/
 
 # Custom policies - excluded from PRs to origin repo
 custom/
+# LaTeX build artefacts
+texput.log
+*.aux

@@ -1,0 +1,17 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Ask a question or get integration help
+    url: https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a
+    about: Trying to wire GOPAL into your CI, OPA server, or platform? Not sure which framework applies to your system? Ask here. We don't assume any Rego or OPA experience.
+  - name: Check what GOPAL already covers
+    url: https://github.com/Principled-Evolution/gopal/tree/main/docs/coverage
+    about: The coverage matrices list every framework article by article. The thing you need may already be in there.
+  - name: Read the FAQ
+    url: https://github.com/Principled-Evolution/gopal/blob/main/docs/FAQ.md
+    about: Scope, legal standing, input shapes, and how GOPAL relates to AICertify.
+  - name: Email the maintainers
+    url: mailto:gopal@principledevolution.ai
+    about: If you would rather not use GitHub, send us a regulation request, an integration question, or anything else and we will route it.
+  - name: Report a security vulnerability
+    url: https://github.com/Principled-Evolution/gopal/blob/main/SECURITY.md
+    about: Please don't open a public issue for a vulnerability. Email security@principledevolution.ai instead.

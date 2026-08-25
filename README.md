@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL: the Rego policy library for AI compliance" width="100%">
   </picture>
 </div>
 
@@ -38,7 +38,7 @@
 
 A curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules in banking, and more.
 
-Run them against your AI system's metadata, model cards, or evaluation results — and get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
+Run them against your AI system's metadata, model cards, or evaluation results. You get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
 
 <p align="center">
   <picture>
@@ -51,15 +51,15 @@ Run them against your AI system's metadata, model cards, or evaluation results �
 
 ## AI compliance rules you can read, run, diff, and prove
 
-GOPAL turns regulatory and governance requirements — the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA, fair lending, and healthcare safety — into executable OPA policies.
+GOPAL turns regulatory and governance requirements (the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA, fair lending, healthcare safety) into executable OPA policies.
 
 Use GOPAL when you want AI governance checks that are:
 
-- **Readable** — every rule is Rego, not a black-box score
-- **Reviewable** — policy changes go through pull requests
-- **Testable** — every policy can have allow/deny test cases
-- **Versioned** — frameworks evolve without breaking pinned users
-- **Automatable** — run checks in CI/CD, audit workflows, or AICertify
+- **Readable.** Every rule is Rego, not a black-box score.
+- **Reviewable.** Policy changes go through pull requests.
+- **Testable.** Every policy can have allow/deny test cases.
+- **Versioned.** Frameworks evolve without breaking pinned users.
+- **Automatable.** Run checks in CI/CD, audit workflows, or AICertify.
 
 ---
 
@@ -67,7 +67,7 @@ Use GOPAL when you want AI governance checks that are:
 
 The EU AI Act is in force. The NIST AI RMF is the de facto US baseline. The UK, India, Brazil, Singapore, and California are all moving. Aviation regulators are publishing AI/UAS guidance. Financial supervisors are issuing model-risk requirements.
 
-Engineering teams need AI governance checks that run in CI — not PDFs that sit on a shared drive, not screenshots pasted into review-board decks.
+Engineering teams need AI governance checks that run in CI, not PDFs sitting on a shared drive or screenshots pasted into review-board decks.
 
 GOPAL ships executable Rego policies for each of those regimes. They are versioned, testable, and reviewable in pull requests. The same tooling your platform team already uses for Kubernetes admission control can now enforce AI-system requirements.
 
@@ -78,7 +78,7 @@ GOPAL ships executable Rego policies for each of those regimes. They are version
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="How GOPAL evaluation works — input JSON, Rego policy, OPA evaluation, verdict" width="85%" />
+    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="How GOPAL evaluation works: input JSON, Rego policy, OPA evaluation, verdict" width="85%" />
   </picture>
 </p>
 
@@ -130,11 +130,11 @@ Most "AI governance" lives in slide decks. The few open implementations are eith
 - **Generic OPA bundles** (great for Kubernetes admission, not for the EU AI Act), or
 - **Closed SaaS** that hides the rules you're being judged against.
 
-GOPAL is different on three axes:
+Where GOPAL differs:
 
-1. **AI-specific by construction.** Every policy targets an AI-system concern — bias, transparency, human oversight, model risk, content safety, safety-critical certification — not generic infrastructure.
+1. **AI-specific by construction.** Every policy targets an AI-system concern: bias, transparency, human oversight, model risk, content safety, safety-critical certification. Not generic infrastructure.
 2. **Readable.** The rules are Rego. You can `cat` them, diff them in a PR, and reason about them. No black-box scorecards.
-3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees — see [COMPATIBILITY.md](COMPATIBILITY.md). When the EU AI Act amends, the old version stays put.
+3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees (see [COMPATIBILITY.md](COMPATIBILITY.md)). When the EU AI Act amends, the old version stays put.
 
 ---
 
@@ -142,13 +142,13 @@ GOPAL is different on three axes:
 
 If you already run OPA for Kubernetes admission, cloud authorization, CI/CD, or service mesh, GOPAL gives you a policy library targeted at AI systems instead of infrastructure.
 
-The packages, conventions, and test patterns are idiomatic Rego — no DSL on top, no Python required to evaluate. You can:
+The packages, conventions, and test patterns are idiomatic Rego. There is no DSL on top, and you don't need Python to evaluate. You can:
 
 - pull individual frameworks (`international/eu_ai_act/v1/`, `industry_specific/aviation/v1/`) into a bundle
 - evaluate with `opa eval`, [Conftest](https://www.conftest.dev/), or your existing OPA server
 - pin to a major version (`v1/`) and review upgrades as PRs
 - compose GOPAL rules with your private `custom/` rules in the same evaluation
-- lint with [Regal](https://github.com/StyraInc/regal) — the same linter GOPAL itself runs in CI
+- lint with [Regal](https://github.com/StyraInc/regal), the same linter GOPAL runs in CI
 
 If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify).
 
@@ -159,7 +159,7 @@ If you want a Python framework that handles input capture and PDF/Markdown repor
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL directory layout — 4 top-level branches, policies organized by jurisdiction and vertical" width="85%" />
+    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL directory layout: 4 top-level branches, policies organized by jurisdiction and vertical" width="85%" />
   </picture>
 </p>
 
@@ -239,7 +239,7 @@ AICertify uses GOPAL underneath. Pick GOPAL if you already have an OPA workflow 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="Anatomy of a GOPAL policy — package path, imports, metadata, default deny, allow rule, report" width="85%" />
+    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="Anatomy of a GOPAL policy: package path, imports, metadata, default deny, allow rule, report" width="85%" />
   </picture>
 </p>
 
@@ -271,8 +271,8 @@ report := reporting.compose_report(
 
 Then a sibling `*_test.rego` covers the rule. CI enforces:
 
-1. **`opa check`** — syntax + reference correctness across all packages
-2. **`regal lint`** — Rego style + best practices
+1. **`opa check`** for syntax and reference correctness across all packages
+2. **`regal lint`** for Rego style and best practices
 
 The [helper_functions/](helper_functions/) library gives you `compose_report()`, `validate_required_fields()`, and `field_exists()` so reports come out in a uniform shape no matter who wrote the rule.
 
@@ -291,7 +291,7 @@ If you believe a rule misreads a regulation or misses an obligation, please open
 - the input/output behavior you'd expect
 - any official guidance, regulator text, or precedent
 
-Policy-correctness disagreements are not security vulnerabilities — see [SECURITY.md](SECURITY.md) for the latter. They are exactly the kind of issue we want public so the community can review and improve the rules together.
+Policy-correctness disagreements are not security vulnerabilities; see [SECURITY.md](SECURITY.md) for those. We want disagreements about interpretation in the open, where the community can review the rules and improve them.
 
 ---
 
@@ -299,7 +299,7 @@ Policy-correctness disagreements are not security vulnerabilities — see [SECUR
 
 The `custom/` directory is for **your organization's proprietary policies**. It's:
 
-- `.gitignore`d — never pushed to this repo
+- `.gitignore`d, so nothing in it reaches this repo
 - Skipped by CI
 - Structured identically to the public tree (`custom/your_org/v1/...`)
 
@@ -327,25 +327,44 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
 
 ## Roadmap
 
-- **More NIST coverage** — fleshing out Measure / Manage controls
-- **UK AI regulation principles** — pro-innovation framework rules
-- **California SB-1047 successor** — when finalized
-- **MAS / HKMA banking AI guidance** — APAC financial supervision
+- **More NIST coverage**: filling out the Measure and Manage controls
+- **UK AI regulation principles**: the pro-innovation framework rules
+- **California SB-1047 successor**, once it is finalized
+- **MAS / HKMA banking AI guidance** for APAC financial supervision
 
-Open an issue if there's a framework you need.
+Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml). You don't have to write any Rego to make the request.
 
 ---
 
 ## Related Projects
 
-- **[AICertify](https://github.com/Principled-Evolution/aicertify)** — Python framework that uses GOPAL to evaluate AI applications and produce audit-ready PDF/MD/JSON reports.
-- **[Open Policy Agent](https://www.openpolicyagent.org/)** — The policy engine.
-- **[Regal](https://github.com/StyraInc/regal)** — The Rego linter we use in CI.
+- **[AICertify](https://github.com/Principled-Evolution/aicertify)**: Python framework that uses GOPAL to evaluate AI applications and produce audit-ready PDF/MD/JSON reports.
+- **[Open Policy Agent](https://www.openpolicyagent.org/)**: the policy engine.
+- **[Regal](https://github.com/StyraInc/regal)**: the Rego linter we use in CI.
+
+---
+
+## Community and support
+
+You don't need to know Rego, OPA, or GitHub conventions to get an answer here.
+
+| If you want to | Use this |
+| --- | --- |
+| Ask how to integrate GOPAL into your CI, OPA server, or platform | [Integration help form](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml) or a [Q&A discussion](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a) |
+| Request a regulation or standard GOPAL doesn't cover yet | [New framework request](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) |
+| Request a specific policy inside a framework we already cover | [New policy request](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
+| Report a policy that returns the wrong verdict | [Bug report](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
+| Email us instead of using GitHub | **gopal@principledevolution.ai** |
+| Report a security vulnerability | See [SECURITY.md](SECURITY.md). Please don't open a public issue. |
+
+Two things answer most questions before you file anything. The [coverage matrices](docs/coverage) list what's already implemented, article by article. The [FAQ](docs/FAQ.md) covers scope, input shapes, and how GOPAL relates to AICertify.
+
+Contributions of any size are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
 ## License
 
-Apache License 2.0 — see [LICENSE](LICENSE).
+Apache License 2.0. See [LICENSE](LICENSE).
 
 <p align="center"><sub>Maintained by <a href="https://github.com/Principled-Evolution">Principled Evolution</a> · Compliance you can read, run, and prove.</sub></p>

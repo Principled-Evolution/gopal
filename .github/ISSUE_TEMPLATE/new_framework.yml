@@ -1,0 +1,119 @@
+name: Request a new framework
+description: Propose a regulation, standard, or industry framework that GOPAL doesn't cover yet.
+title: "[framework] "
+labels: ["enhancement", "framework-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Asking is enough. You don't have to write the policies, know Rego, or even
+        be sure of the article numbers. Telling us which regulation you're up
+        against and why is how we decide what to build next.
+
+        One thing first: the
+        [coverage matrices](https://github.com/Principled-Evolution/gopal/tree/main/docs/coverage)
+        list what's already implemented, article by article.
+
+        If you would prefer email, write to **gopal@principledevolution.ai**.
+
+  - type: input
+    id: name
+    attributes:
+      label: Framework name
+      description: The common name is fine. We can find the official title.
+      placeholder: UK AI Principles / California SB-1047 / Singapore AI Verify / ISO 21448 (SOTIF)
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Official source URL
+      description: A link to the regulation, standard, or guidance text. If it's paywalled or you only have a PDF, say so and we will track it down.
+      placeholder: https://eur-lex.europa.eu/...
+    validations:
+      required: false
+
+  - type: input
+    id: jurisdiction
+    attributes:
+      label: Jurisdiction or industry
+      placeholder: UK government / US federal / global aviation / EU automotive
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Where is it in its lifecycle?
+      options:
+        - "In force now"
+        - "Adopted, with a future compliance deadline"
+        - "Draft or in consultation"
+        - "Proposed, not yet adopted"
+        - "An amendment to something GOPAL already covers"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Where do you think it belongs in the repo?
+      description: A guess is fine. We will place it correctly.
+      options:
+        - "international/ for a national or supranational regulation"
+        - "industry_specific/ for a sector framework (aviation, health, finance, education, automotive)"
+        - "global/ for a cross-cutting principle (fairness, transparency, accountability)"
+        - "operational/ for an operational or cost concern"
+        - "Not sure"
+    validations:
+      required: false
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+      description: Two or three sentences. Which AI systems are affected, who carries the risk, and what you would do with the policies once they exist.
+      placeholder: |
+        We ship driver-assistance models into the EU. Type approval under UN R157
+        requires us to evidence that the system's operational design domain is
+        documented and enforced. Right now we assert that in a spreadsheet. We
+        would rather it failed a CI job.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: What should the first iteration cover?
+      description: Specific articles, sections, or controls, or just "the transparency obligations" if that's what you know.
+      placeholder: |
+        - Article 5, risk management
+        - Article 9, data governance
+        - Annex III, the high-risk classification list
+    validations:
+      required: false
+
+  - type: textarea
+    id: prior_art
+    attributes:
+      label: Existing implementations
+      description: Any reference implementations, checklists, or other Rego policies that already encode this? Links help a lot.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Could you help?
+      description: Every box here is optional. "No" is a fine answer; flagging the gap is already useful.
+      options:
+        - label: I can write the initial `.rego` policies and tests
+          required: false
+        - label: I can review someone else's PR for regulatory accuracy
+          required: false
+        - label: I can't write Rego, but I can answer questions about this framework
+          required: false
+        - label: I can supply a realistic (anonymised) input document to test against
+          required: false
