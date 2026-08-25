@@ -8,8 +8,8 @@ Thanks for considering a contribution. GOPAL is an open, community-curated libra
 - **New frameworks** (e.g. UK AI Principles, California SB-1047 successor, MAS banking AI guidance)
 - **New industry verticals** (e.g. media, energy, defence)
 - **Fixes** for bugs in existing policy logic
-- **Tests** — every policy should have a sibling `*_test.rego`. Missing tests on existing policies are open invitations.
-- **Translations** — the README ships in 5 languages. Native-speaker review of any of them is gold.
+- **Tests.** Every policy should have a sibling `*_test.rego`. Missing tests on existing policies are open invitations.
+- **Translations.** The README ships in 5 languages, and native-speaker review of any of them is genuinely useful.
 - **Documentation** improvements (CONTRIBUTING, README, AGENTS, STYLE)
 
 ## Before you open a PR
@@ -46,7 +46,7 @@ If `opa check` fails it usually means a typo in a package path or an undeclared 
 - **Package path mirrors the directory.** `international/eu_ai_act/v1/transparency.rego` declares `package international.eu_ai_act.v1.transparency`.
 - **Default deny.** Every policy starts with `default allow := false` so a missing rule produces a safe (deny) result, never an accidental allow.
 - **Metadata comments.** Use `# METADATA` followed by `# title:` and `# description:` so the rule is human-readable in audit reports.
-- **Report composition.** Use `data.helper_functions.reporting.compose_report(...)` to produce the standardized output shape — don't roll your own report dict. The helper guarantees the field names auditors expect.
+- **Report composition.** Use `data.helper_functions.reporting.compose_report(...)` to produce the standardized output shape rather than rolling your own report dict. The helper guarantees the field names auditors expect.
 - **Versioning.** New frameworks go under `<framework>/v1/`. When a regulation amends, the old `v1/` stays put and a new `v2/` ships alongside. See [COMPATIBILITY.md](COMPATIBILITY.md).
 - **Reference data needed?** Add it as a constant inside the policy or under a sibling `_data.rego`. Avoid runtime dependencies on external services.
 
@@ -65,22 +65,23 @@ The fastest path:
 
 PRs are reviewed for:
 
-1. **Correctness** — does the policy logic accurately encode the regulation?
-2. **Test coverage** — does the test cover both allow and deny? Edge cases?
-3. **Style** — `opa check` + `regal lint` clean? Matches existing patterns?
-4. **Scope** — single concern per PR, easier to revert.
+1. **Correctness.** Does the policy logic accurately encode the regulation?
+2. **Test coverage.** Does the test cover both allow and deny? Any edge cases?
+3. **Style.** Are `opa check` and `regal lint` clean? Does it match existing patterns?
+4. **Scope.** One concern per PR, which makes it easier to revert.
 
 We aim to respond within 5 business days. Larger framework additions may take longer if the regulator's text needs verification.
 
 ## Custom policies
 
-The `custom/` directory is `.gitignore`d and CI-skipped — that's where your organization's proprietary rules go. They evaluate alongside the public set without ever being pushed to this repo. See the [README's Custom Policies section](README.md#custom-policies).
+The `custom/` directory is `.gitignore`d and skipped by CI. That is where your organization's proprietary rules go. They evaluate alongside the public set without ever being pushed to this repo. See the [README's Custom Policies section](README.md#custom-policies).
 
 ## Community
 
-- **Questions** — open a [Discussion](https://github.com/Principled-Evolution/gopal/discussions) or comment on the relevant issue.
-- **Security disclosures** — see [SECURITY.md](SECURITY.md). Do not file public issues for vulnerabilities.
-- **Code of conduct** — be kind, assume good faith, focus on the work.
+- **Questions and integration help.** Use the [integration help form](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml), open a [Q&A discussion](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a), or email **gopal@principledevolution.ai**. We don't assume any Rego or OPA experience.
+- **Requesting coverage.** Open a [new framework](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) or [new policy](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) request. You don't have to write the Rego to ask for it.
+- **Security disclosures.** See [SECURITY.md](SECURITY.md). Please don't file public issues for vulnerabilities.
+- **Code of conduct.** Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md). The short version: argue about the policy rather than the person, cite the regulation you're relying on, and assume good faith across jurisdictions and languages. Report concerns to **conduct@principledevolution.ai**.
 
 ## License
 

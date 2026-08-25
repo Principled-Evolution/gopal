@@ -20,9 +20,9 @@ We aim to acknowledge within **5 business days**. We follow a coordinated-disclo
 
 ## What's NOT in scope
 
-- **Policy correctness disputes** — if you think a specific Rego rule is too strict, too lax, or misinterprets a regulation, please file a **public issue** rather than emailing security. That's a policy-design discussion, not a vulnerability, and is best done in the open with the community.
-- **The regulations themselves** — GOPAL encodes published regulatory frameworks (EU AI Act, NIST AI RMF, etc.). Concerns about the underlying regulation belong with the regulator that issued it.
-- **Generic OPA / Rego issues** — please report those to [open-policy-agent/opa](https://github.com/open-policy-agent/opa) or [StyraInc/regal](https://github.com/StyraInc/regal) directly.
+- **Policy correctness disputes.** If you think a specific Rego rule is too strict, too lax, or misinterprets a regulation, please file a **public issue** rather than emailing security. That's a policy-design discussion, not a vulnerability, and is best done in the open with the community.
+- **The regulations themselves.** GOPAL encodes published regulatory frameworks (EU AI Act, NIST AI RMF, and so on). Concerns about the underlying regulation belong with the regulator that issued it.
+- **Generic OPA / Rego issues.** Please report those to [open-policy-agent/opa](https://github.com/open-policy-agent/opa) or [StyraInc/regal](https://github.com/StyraInc/regal) directly.
 
 ## Supported versions
 
@@ -31,7 +31,7 @@ GOPAL ships under semver (see [COMPATIBILITY.md](COMPATIBILITY.md)). Security fi
 - The current `main` branch
 - The current `vN/` directory under each framework
 
-Older versioned policy directories (`v1/` once `v2/` ships) are treated as frozen reference artefacts — they will not receive security updates. If your deployment pins to an older policy version, plan to migrate.
+Older versioned policy directories (`v1/` once `v2/` ships) are treated as frozen reference artefacts and will not receive security updates. If your deployment pins to an older policy version, plan to migrate.
 
 ## Public attribution
 

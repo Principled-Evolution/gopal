@@ -1,0 +1,104 @@
+name: Request a new policy
+description: Propose a specific check inside a framework GOPAL already covers.
+title: "[policy] "
+labels: ["enhancement", "policy"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when the framework is already in GOPAL but a particular rule is
+        missing. If the whole framework is missing, use
+        [Request a new framework](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml)
+        instead.
+
+        You don't need to write the Rego. A clear rule in plain English plus a
+        source reference is enough for someone else to implement it.
+
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Which framework does this belong to?
+      options:
+        - "international/eu_ai_act, EU AI Act"
+        - "international/nist, NIST AI RMF"
+        - "international/icao, ICAO aviation"
+        - "international/faa, FAA"
+        - "international/easa, EASA"
+        - "international/standards, ISO / RTCA and other standards"
+        - "international/brazil"
+        - "international/india"
+        - "industry_specific/aviation"
+        - "industry_specific/automotive"
+        - "industry_specific/bfs, banking and financial services"
+        - "industry_specific/healthcare"
+        - "industry_specific/education, FERPA and COPPA"
+        - "global, fairness / transparency / accountability / toxicity"
+        - "operational, aiops / corporate / cost"
+        - "Not sure, please route it"
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source article or section
+      description: As specific as you can be. "Somewhere in the transparency chapter" is still useful.
+      placeholder: EU AI Act Article 13(2)
+    validations:
+      required: true
+
+  - type: textarea
+    id: rule
+    attributes:
+      label: The rule, in plain English
+      description: What has to be true for the system to pass, and what makes it fail?
+      placeholder: |
+        A high-risk system must ship instructions for use that state the system's
+        intended purpose, its accuracy metrics, and its known limitations. Missing
+        any of the three should deny.
+    validations:
+      required: true
+
+  - type: textarea
+    id: input_shape
+    attributes:
+      label: What input would the policy read?
+      description: Which fields should the check look at? A rough JSON sketch is ideal, but prose is fine.
+      render: json
+      placeholder: |
+        {
+          "system": {
+            "risk_level": "high",
+            "instructions_for_use": {
+              "intended_purpose": "...",
+              "accuracy_metrics": {},
+              "known_limitations": []
+            }
+          }
+        }
+    validations:
+      required: false
+
+  - type: textarea
+    id: cases
+    attributes:
+      label: Test cases
+      description: What should clearly pass, and what should clearly fail? Edge cases are especially welcome, since they are the hard part.
+      placeholder: |
+        Allow: all three fields present and non-empty.
+        Deny: known_limitations is an empty list.
+        Edge case: risk_level is "limited", so the rule shouldn't apply at all.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Could you help?
+      options:
+        - label: I'll open a PR with the policy and its test
+          required: false
+        - label: I can review someone else's implementation
+          required: false
+        - label: I'm flagging the gap for someone else to pick up
+          required: false

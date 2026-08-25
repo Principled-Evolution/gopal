@@ -344,6 +344,25 @@ PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ---
 
+## 社区与支持
+
+不了解 Rego、OPA 或 GitHub 的惯例，同样可以在这里得到回答。
+
+| 如果你想 | 请到这里 |
+| --- | --- |
+| 询问如何把 GOPAL 接入你的 CI、OPA 服务器或平台 | [集成帮助表单](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml)，或发一个[问答讨论](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a) |
+| 申请 GOPAL 尚未覆盖的法规或标准 | [新框架申请](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) |
+| 申请已覆盖框架内的某条具体策略 | [新策略申请](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
+| 报告某条策略给出了错误结论 | [缺陷报告](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
+| 不用 GitHub，直接发邮件 | **gopal@principledevolution.ai** |
+| 报告安全漏洞 | 请参阅 [SECURITY.md](SECURITY.md)，请勿公开提交 issue |
+
+有两处能提前解答大部分疑问。[覆盖矩阵](docs/coverage)逐条款列出了已经实现的内容；[常见问题](docs/FAQ.md)说明了适用范围、输入格式，以及 GOPAL 与 AICertify 的关系。
+
+欢迎任何规模的贡献，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。参与本项目须遵守我们的[行为准则](CODE_OF_CONDUCT.md)。
+
+---
+
 ## 许可证
 
 Apache License 2.0,详见 [LICENSE](LICENSE)。

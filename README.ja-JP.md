@@ -344,6 +344,25 @@ PR のワークフローについては [CONTRIBUTING.md](CONTRIBUTING.md) を�
 
 ---
 
+## コミュニティとサポート
+
+Rego や OPA、GitHub の作法を知らなくても回答は得られます。
+
+| やりたいこと | 行き先 |
+| --- | --- |
+| GOPAL を自社の CI・OPA サーバー・プラットフォームに組み込む方法を聞く | [統合ヘルプフォーム](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml)、または [Q&A ディスカッション](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a) |
+| GOPAL が未対応の規制・標準をリクエストする | [新規フレームワークのリクエスト](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) |
+| 対応済みフレームワーク内の個別ポリシーをリクエストする | [新規ポリシーのリクエスト](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
+| ポリシーが誤った判定を返すことを報告する | [バグ報告](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
+| GitHub ではなくメールで連絡する | **gopal@principledevolution.ai** |
+| セキュリティ脆弱性を報告する | [SECURITY.md](SECURITY.md) を参照してください。公開 issue は立てないでください |
+
+多くの疑問は、投稿前に次の 2 つで解決します。[カバレッジマトリクス](docs/coverage)は条文単位で実装状況を示しています。[FAQ](docs/FAQ.md)では適用範囲、入力形式、AICertify との関係を説明しています。
+
+規模の大小を問わず貢献を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) をご覧ください。参加にあたっては[行動規範](CODE_OF_CONDUCT.md)が適用されます。
+
+---
+
 ## ライセンス
 
 Apache License 2.0。詳細は [LICENSE](LICENSE) を参照してください。
