@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="diagrams/hero_banner_light.svg" alt="GOPAL — The Rego policy library for AI compliance" width="100%">
+    <img src="diagrams/hero_banner_light.svg" alt="GOPAL: AI 컴플라이언스를 위한 Rego 정책 라이브러리" width="100%">
   </picture>
 </div>
 

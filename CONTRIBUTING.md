@@ -9,7 +9,7 @@ Thanks for considering a contribution. GOPAL is an open, community-curated libra
 - **New industry verticals** (e.g. media, energy, defence)
 - **Fixes** for bugs in existing policy logic
 - **Tests.** Every policy should have a sibling `*_test.rego`. Missing tests on existing policies are open invitations.
-- **Translations.** The README ships in 5 languages, and native-speaker review of any of them is genuinely useful.
+- **Translations.** The README ships in 5 languages, and a native speaker's review of any of them helps a lot.
 - **Documentation** improvements (CONTRIBUTING, README, AGENTS, STYLE)
 
 ## Before you open a PR
