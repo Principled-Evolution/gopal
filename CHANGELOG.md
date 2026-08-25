@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [1.2.0]: 2026-08-25
+
 ### Changed
 - **Every EU AI Act obligation is now implemented.** 22 of the 29 policies in `international/eu_ai_act/v1/` were stubs: `allow := false` with a "not yet implemented" message and no reference to `input` at all, while the headline policy count and the coverage matrix both counted them. All 22 now check concrete fields and carry sibling tests. The matrix has no ⚠️ Scaffold rows left.
 
@@ -95,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 For changes prior to 1.0.0, see the [Git log](https://github.com/Principled-Evolution/gopal/commits/main).
 
-[Unreleased]: https://github.com/Principled-Evolution/gopal/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Principled-Evolution/gopal/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/Principled-Evolution/gopal/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Principled-Evolution/gopal/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Principled-Evolution/gopal/releases/tag/v1.0.0
