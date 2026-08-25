@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [1.1.0]: 2026-08-25
+
 ### Changed
 - **All seven placeholder policies are now real implementations.** They were counted in the headline policy total while returning an unconditional denial and carrying `"status": "PLACEHOLDER"`, which overstated coverage. Each now checks concrete input fields, reports which controls failed, and has a sibling test file:
   - `international/eu_ai_act/v1/prohibited_practices/manipulation` now encodes the Article 5(1)(a) prohibition as the cumulative test it actually is. All three limbs (a subliminal, purposefully manipulative or deceptive technique; material distortion of behaviour; significant harm caused or reasonably likely) must be met before the practice is prohibited, so Recital 29 lawful persuasion is not caught.
@@ -77,5 +81,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 For changes prior to 1.0.0, see the [Git log](https://github.com/Principled-Evolution/gopal/commits/main).
 
-[Unreleased]: https://github.com/Principled-Evolution/gopal/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/Principled-Evolution/gopal/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Principled-Evolution/gopal/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Principled-Evolution/gopal/releases/tag/v1.0.0
