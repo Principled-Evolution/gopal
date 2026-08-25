@@ -16,7 +16,7 @@
 <text x="540" y="280" font-size="120" font-weight="500" fill="#f0f6fc" letter-spacing="-0.025em">GOPAL</text>
 
 <text x="600" y="365" font-size="38" font-weight="500" fill="#a5b4fc" text-anchor="middle">The Rego policy library for AI compliance</text>
-<text x="600" y="405" font-size="22" font-weight="400" fill="#8b949e" text-anchor="middle">85 policies · 8 frameworks · 5 industries · Apache 2.0</text>
+<text x="600" y="405" font-size="22" font-weight="400" fill="#8b949e" text-anchor="middle">96 policies · 9 frameworks · 6 industries · Apache 2.0</text>
 
 <g>
 <rect x="296" y="476" width="120" height="36" rx="18" fill="#312e81"/>
@@ -32,10 +32,10 @@
 </g>
 <g>
 <rect x="784" y="476" width="120" height="36" rx="18" fill="#312e81"/>
-<text x="844" y="494" font-size="16" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">+13 more</text>
+<text x="844" y="494" font-size="16" font-weight="500" fill="#c7d2fe" text-anchor="middle" dominant-baseline="central">+15 more</text>
 </g>
 
 <line x1="120" y1="568" x2="1080" y2="568" stroke="#30363d" stroke-width="1"/>
 <text x="120" y="600" font-size="18" font-weight="400" fill="#8b949e">github.com/Principled-Evolution/gopal</text>
-<text x="1080" y="600" font-size="18" font-weight="400" fill="#8b949e" text-anchor="end">94 Rego policies · Apache 2.0</text>
+<text x="1080" y="600" font-size="18" font-weight="400" fill="#8b949e" text-anchor="end">96 Rego policies · Apache 2.0</text>
 </svg>

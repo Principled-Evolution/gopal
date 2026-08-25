@@ -17,7 +17,7 @@
   <em>읽고, 실행하고, 비교하고, 증명할 수 있는 AI 컴플라이언스 규칙.</em>
 </p>
 <p align="center">
-  <sub>85개 정책 · 국제 프레임워크 8개 · 산업 수직 영역 5개</sub>
+  <sub>96개 정책 · 국제 프레임워크 9개 · 산업 수직 영역 6개</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,8 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-85-orange.svg?style=flat-square" alt="85 Policies">
-  <img src="https://img.shields.io/badge/frameworks-8-purple.svg?style=flat-square" alt="8 Frameworks">
+  <img src="https://img.shields.io/badge/policies-96-orange.svg?style=flat-square" alt="96 Policies">
+  <img src="https://img.shields.io/badge/frameworks-9-purple.svg?style=flat-square" alt="9 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -43,7 +43,7 @@ Rego로 작성된 [OPA](https://www.openpolicyagent.org/) 정책을 엄선한 �
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 85개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 96개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
   </picture>
 </p>
 
@@ -170,6 +170,7 @@ gopal/
 │   ├── nist/v1/              5  policies — NIST AI RMF + AI 600-1
 │   ├── india/v1/             1  policy   — Digital India Policy
 │   ├── brazil/v1/            1  policy   — AI Governance Bill
+│   ├── uk/v1/                6  policies — 친혁신 원칙, UK GDPR 제22A-22D조
 │   ├── icao/v1/              1  policy   — ICAO Doc 10019
 │   ├── faa/v1/               2  policies — Part 107, Remote ID
 │   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
@@ -179,7 +180,8 @@ gopal/
 │   ├── education/v1/         12 policies — FERPA, COPPA, 시험 감독, 채점
 │   ├── aviation/v1/          12 policies — 감항성, 자율성, 데이터, 운항
 │   ├── healthcare/v1/         2 policies — 환자 및 진단 안전
-│   ├── bfs/v1/                2 policies — 모델 리스크, 공정 대출
+│   ├── bfs/v1/                4 policies — 모델 리스크, 공정 대출, PRA SS1/23, FCA 소비자 의무
+│   ├── legal/v1/              3 policies — 인용 검증, 비닉특권, 감독
 │   └── automotive/v1/         1 policy   — 차량 안전 통합
 │
 ├── global/v1/             9  policies — 책임성, 공정성, 투명성,
@@ -198,7 +200,7 @@ gopal/
 └── custom/               비공개 정책 (git-ignored, CI 제외)
 ```
 
-**프로덕션 정책 85개, 테스트를 포함해 총 124개의 Rego 파일.**
+**프로덕션 정책 96개, 테스트를 포함해 총 146개의 Rego 파일.**
 
 ---
 

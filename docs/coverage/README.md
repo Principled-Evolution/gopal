@@ -8,6 +8,7 @@ The matrices are deliberately honest. A policy is only marked **Implemented** wh
 
 - [EU AI Act](eu-ai-act.md) — Regulation (EU) 2024/1689
 - [NIST AI RMF](nist-ai-rmf.md) — NIST Special Publication 1270 + AI 600-1
+- [UK AI governance](uk.md) — the five pro-innovation principles, UK GDPR Articles 22A-22D, and UK financial services (PRA SS1/23, FCA Consumer Duty)
 
 ## Implemented, matrix not yet written
 
@@ -18,6 +19,7 @@ These frameworks already have real policies in the repo (not scaffolds); nobody 
 - FERPA / COPPA (education) — `industry_specific/education/v1/`
 - Healthcare AI safety — `industry_specific/healthcare/v1/`
 - BFS — fair lending, model risk — `industry_specific/bfs/v1/`
+- Legal services AI — `industry_specific/legal/v1/`
 - ICAO Doc 10019, FAA Part 107/Remote ID, EASA 2019/947/SORA, RTCA DO-365, ISO 21384 — `international/icao/`, `international/faa/`, `international/easa/`, `international/standards/`
 - Aviation industry-vertical policies (airworthiness, autonomous systems, data management, flight operations) — `industry_specific/aviation/v1/`
 
