@@ -1,10 +1,10 @@
-# Agent Instructions — GOPAL
+# Agent Instructions: GOPAL
 
 This file is the canonical operational guide for AI coding agents working in this repository (Claude Code, Cursor, Codex, Windsurf, Gemini CLI, Copilot, etc.). Tool-specific files (`CLAUDE.md`, `GEMINI.md`) inherit from this and add only platform-specific notes.
 
 ## What this project is
 
-**GOPAL** (Governance Open Policy Agent Library) is a curated set of [OPA](https://www.openpolicyagent.org/) Rego policies encoding real-world AI-governance requirements — the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules, and more.
+**GOPAL** (Governance Open Policy Agent Library) is a curated set of [OPA](https://www.openpolicyagent.org/) Rego policies encoding real-world AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules, and more.
 
 It is consumable two ways:
 
@@ -31,7 +31,7 @@ gopal/
 │   └── automotive/v1/        Vehicle safety integration
 ├── operational/              AIOps, cost, corporate
 ├── helper_functions/         Shared utilities (reporting.rego, validation.rego)
-├── custom/                   Local-only org policies — git-ignored, CI-skipped
+├── custom/                   Local-only org policies, git-ignored and CI-skipped
 ├── pyproject.toml            Distribution as a Python package (Rego files included)
 ├── .regal/config.yaml        Regal linter configuration
 └── .github/workflows/        OPA + Regal CI
@@ -82,7 +82,7 @@ import data.helper_functions.reporting
 
 # METADATA
 # title: Transparency obligations for GPAI providers
-# description: Article 53 — technical documentation must be published.
+# description: Article 53: technical documentation must be published.
 # version: 1
 # source: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
 
@@ -107,8 +107,8 @@ Every `policy.rego` ships with `policy_test.rego` covering both the `allow` and 
 
 At each `international/<framework>/v1/` and `industry_specific/<industry>/v1/`, include a `README.md` with:
 
-- **Source** — link to the official regulation/standard
-- **Disclaimer** — "These policies are not legal advice; they encode the authors' reading of the source text in Rego."
+- **Source**: link to the official regulation/standard
+- **Disclaimer**: "These policies are not legal advice; they encode the authors' reading of the source text in Rego."
 
 ### 5. Helpers
 
@@ -123,31 +123,31 @@ opa check --ignore custom/ .
 regal lint --ignore-files custom/ .
 ```
 
-If Regal flags an issue, look it up in the [Regal rule catalog](https://docs.styra.com/regal/rules) — don't disable rules without a documented reason.
+If Regal flags an issue, look it up in the [Regal rule catalog](https://docs.styra.com/regal/rules): don't disable rules without a documented reason.
 
 ## Conventions
 
-- **One concept per file** — don't bundle unrelated checks. A policy file should answer one regulatory question.
-- **Boolean output** — every policy exposes `allow` (or equivalent) and a `report` composed via `helper_functions.reporting`.
-- **No external HTTP/file I/O** — policies must be pure functions of `input` and `data`. They evaluate offline.
-- **Stable package paths** — the package path is the public API. Don't rename without bumping a major version.
+- **One concept per file**: don't bundle unrelated checks. A policy file should answer one regulatory question.
+- **Boolean output**: every policy exposes `allow` (or equivalent) and a `report` composed via `helper_functions.reporting`.
+- **No external HTTP/file I/O**: policies must be pure functions of `input` and `data`. They evaluate offline.
+- **Stable package paths**: the package path is the public API. Don't rename without bumping a major version.
 
 ## Versioning
 
-Each framework lives under `v1/`. When the upstream regulation changes materially, add `v2/` alongside — don't mutate `v1/` in place. See [COMPATIBILITY.md](COMPATIBILITY.md).
+Each framework lives under `v1/`. When the upstream regulation changes materially, add `v2/` alongside rather than mutate `v1/` in place. See [COMPATIBILITY.md](COMPATIBILITY.md).
 
 ## Diagrams and visual assets
 
 All README diagrams live in [`diagrams/`](diagrams/) as paired **light and dark SVGs**, embedded via `<picture>` for GitHub theme switching. The full design system (palette, type, shape language, naming, contribution flow) is documented in [`diagrams/STYLE.md`](diagrams/STYLE.md). Read it before adding or modifying any diagram.
 
-- **Edit existing diagrams in place** — they are hand-authored SVGs, not generated. Open the file, change it, validate with `python3 -c "import xml.etree.ElementTree as ET; ET.parse('<path>')"`.
-- **Do not reintroduce a matplotlib generator** — the previous `generate_diagrams.py` was deliberately removed. Hand-authored SVGs are the source of truth.
+- **Edit existing diagrams in place**: they are hand-authored SVGs, not generated. Open the file, change it, validate with `python3 -c "import xml.etree.ElementTree as ET; ET.parse('<path>')"`.
+- **Do not reintroduce a matplotlib generator**: the previous `generate_diagrams.py` was deliberately removed. Hand-authored SVGs are the source of truth.
 - **New diagrams must ship both `_light.svg` and `_dark.svg` variants.** Use `<picture>` markup; verify GitHub theme switching by viewing the rendered README on both light and dark settings.
-- **Rego syntax-coloured text** in `diagram3_policy_anatomy` uses `<tspan>` with `xml:space="preserve"` on the parent — without that attribute Inkscape and some browsers normalise whitespace and keywords run into the next token.
+- **Rego syntax-coloured text** in `diagram3_policy_anatomy` uses `<tspan>` with `xml:space="preserve"` on the parent. Without that attribute Inkscape and some browsers normalise whitespace, and keywords run into the next token.
 
 ## What NOT to do
 
-- Don't edit policies under `custom/` — that's a local-only space for downstream consumers.
+- Don't edit policies under `custom/`: that's a local-only space for downstream consumers.
 - Don't add a policy without tests. CI will pass but Regal lint reviews will catch you.
 - Don't introduce dependencies on Styra-only Regal features that aren't in mainline OPA.
 - Don't claim a regulation is "fully covered" unless every named article/section has a corresponding policy. Partial coverage is fine, just be explicit.

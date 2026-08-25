@@ -2,7 +2,7 @@
 
 A short, opinionated reference so future diagrams (yours, mine, or a contributor's) stay visually coherent with the existing set. If you can read [diagram5_evaluation_flow_light.svg](diagram5_evaluation_flow_light.svg) and the matching `_dark.svg`, you have already seen the whole system applied.
 
-GOPAL and its sister project [AICertify](https://github.com/Principled-Evolution/aicertify) share this design system on purpose — readers seeing both repos should recognise a family resemblance.
+GOPAL and its sister project [AICertify](https://github.com/Principled-Evolution/aicertify) share this design system on purpose, so readers seeing both repos should recognise a family resemblance.
 
 ## The principle
 
@@ -15,7 +15,7 @@ Two colors with intent, flat fills, no animation, no shadows. The polish is in r
 | **Indigo (primary)** | `#4f46e5` | `#6366f1` | Process, structure, the "happy path" |
 | **Indigo (light fill)** | `#eef2ff` | `#312e81` | Card backgrounds for indigo elements |
 | **Indigo (text on fill)** | `#4338ca` | `#c7d2fe` | Text inside indigo chips/badges |
-| **Amber (accent)** | `#d97706` | `#fbbf24` | The **deliverable** — verdict, report, the thing the reader walks away with |
+| **Amber (accent)** | `#d97706` | `#fbbf24` | The **deliverable**: verdict, report, the thing the reader walks away with |
 | **Amber (light fill)** | `#fffbeb` / `#fef3c7` | `#2a1f06` / `#533404` | Card / chip backgrounds for amber elements |
 | **Amber (text on fill)** | `#92400e` / `#b45309` | `#fcd34d` / `#fde68a` | Text inside amber chips |
 | **Foreground (text)** | `#0f172a` | `#f0f6fc` | Primary body / heading text |
@@ -35,7 +35,7 @@ Two colors with intent, flat fills, no animation, no shadows. The polish is in r
 - **Stat numerals** (e.g. "94"): 36px, `font-weight="500"`, amber.
 - Wordmark on the hero banner / OG card uses `letter-spacing="-0.025em"` for tightness at large sizes.
 
-**On multi-coloured text** (e.g. Rego syntax highlighting in `diagram3_policy_anatomy`): use `<tspan>` inside `<text>` and set `xml:space="preserve"` on the containing element — without it, Inkscape and some browsers normalise whitespace between tspans and your colored keywords run together.
+**On multi-coloured text** (e.g. Rego syntax highlighting in `diagram3_policy_anatomy`): use `<tspan>` inside `<text>` and set `xml:space="preserve"` on the containing element. Without it, Inkscape and some browsers normalise whitespace between tspans and your colored keywords run together.
 
 ## Shape language
 
@@ -55,7 +55,7 @@ Diagrams ship as **paired files** with matching `_light.svg` and `_dark.svg`. RE
 </picture>
 ```
 
-That gives GitHub-light readers the light variant and GitHub-dark readers the dark variant — same on mobile, on PR previews, and anywhere else `<picture>` is honored.
+That gives GitHub-light readers the light variant and GitHub-dark readers the dark variant, the same on mobile, on PR previews, and anywhere else `<picture>` is honored.
 
 - Light variants use white card surfaces, slate text.
 - Dark variants use `#161b22` cards (GitHub's `--color-canvas-subtle`) and `#30363d` borders so cards sit into the page rather than floating on top of it.
@@ -76,12 +76,12 @@ diagrams/
 └── diagram5_evaluation_flow_{light,dark}.svg         input → policy → OPA → verdict
 ```
 
-A previous `diagram4_framework_grid` was retired — the markdown comparison table in the README is the single source of truth.
+A previous `diagram4_framework_grid` was retired because the markdown comparison table in the README is the single source of truth.
 
 ## Adding a new diagram
 
 1. Sketch the content first in markdown (what does the reader need to understand?). Cut anything that is also said in nearby text.
-2. Pick a layout that mirrors an existing diagram if you can — most additions are variations of "flow", "accordion", "stats + cards", or "mockup + callouts".
+2. Pick a layout that mirrors an existing diagram if you can: most additions are variations of "flow", "accordion", "stats + cards", or "mockup + callouts".
 3. Hand-author the SVG. Use the existing files as templates; copy a card definition, swap the content.
 4. Validate XML: `python3 -c "import xml.etree.ElementTree as ET; ET.parse('diagrams/<name>_light.svg')"`. Repeat for the dark variant.
 5. Embed with the `<picture>` snippet above in every README that should reference it (en + 4 translated).
@@ -89,7 +89,7 @@ A previous `diagram4_framework_grid` was retired — the markdown comparison tab
 
 ## Rasterizing (only when needed)
 
-The only raster output we keep in the repo is `og_card.png` — GitHub's Social Preview upload requires PNG/JPG. To regenerate:
+The only raster output we keep in the repo is `og_card.png`: GitHub's Social Preview upload requires PNG/JPG. To regenerate:
 
 ```bash
 inkscape --export-type=png --export-width=1200 --export-height=630 \

@@ -4,10 +4,10 @@ Runnable, copyable examples of evaluating an AI system against a GOPAL policy.
 
 Each example contains:
 
-- `input.json` — a sample AI-system payload (the thing being evaluated)
-- `run.sh` — invokes `opa eval` against a GOPAL policy with that input
-- `expected-output.json` — what the verdict should look like
-- `README.md` — what the example shows and how to adapt it
+- `input.json`: a sample AI-system payload (the thing being evaluated)
+- `run.sh`: invokes `opa eval` against a GOPAL policy with that input
+- `expected-output.json`: what the verdict should look like
+- `README.md`: what the example shows and how to adapt it
 
 ## Prerequisites
 
@@ -35,4 +35,4 @@ Open an issue with the framework and use case, or send a PR following the layout
 
 - self-contained (no external services)
 - runnable with `opa eval` only
-- minimal — one policy, one input, one verdict
+- minimal: one policy, one input, one verdict

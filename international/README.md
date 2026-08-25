@@ -8,7 +8,7 @@ This directory contains policies for named regulatory frameworks that cross a si
   - **v1/**: 29 policies across `compliance/`, `data_governance/`, `documentation/`, `eu_fairness/`, `gpai/`, `human_oversight/`, `obligations/`, `prohibited_practices/`, `risk_management/`, and `technical_robustness/`
 
 - **nist/**: NIST AI Risk Management Framework
-  - **v1/**: 5 policies — `govern/`, `manage/`, `map/`, `measure/`, and `ai_600_1/` (the GenAI-specific companion profile)
+  - **v1/**: 5 policies: `govern/`, `manage/`, `map/`, `measure/`, and `ai_600_1/` (the GenAI-specific companion profile)
 
 - **india/**: India
   - **v1/**: `digital_india_policy/digital_india_policy.rego`
@@ -20,13 +20,13 @@ This directory contains policies for named regulatory frameworks that cross a si
   - **v1/**: `doc_10019.rego`
 
 - **faa/**: US Federal Aviation Administration
-  - **v1/**: 2 policies — `part_107.rego` (small UAS operating rules), `remote_id.rego` (Remote ID)
+  - **v1/**: 2 policies: `part_107.rego` (small UAS operating rules), `remote_id.rego` (Remote ID)
 
 - **easa/**: EU Aviation Safety Agency
-  - **v1/**: 2 policies — `regulation_2019_947.rego` (UAS operation categories), `sora.rego` (Specific Operations Risk Assessment)
+  - **v1/**: 2 policies: `regulation_2019_947.rego` (UAS operation categories), `sora.rego` (Specific Operations Risk Assessment)
 
 - **standards/**: Aviation industry standards (not tied to one regulator)
-  - **v1/**: 2 policies — `rtca_do_365.rego` (Detect and Avoid MOPS), `iso_21384.rego` (UAS general requirements)
+  - **v1/**: 2 policies: `rtca_do_365.rego` (Detect and Avoid MOPS), `iso_21384.rego` (UAS general requirements)
 
 43 policies total across 8 frameworks.
 

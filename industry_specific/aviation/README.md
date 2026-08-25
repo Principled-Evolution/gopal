@@ -4,10 +4,10 @@ This directory contains AI-governance policies for aviation systems, organized b
 
 ## Directory Structure
 
-- **v1/airworthiness/** — type certification, design assurance level, continued-airworthiness maintenance
-- **v1/autonomous_systems/** — AI safety validation, decision-making transparency, human oversight
-- **v1/data_management/** — flight-data sharing agreements, recording/retention, sensor-data privacy
-- **v1/flight_operations/** — BVLOS operations, emergency/contingency procedures, urban air mobility
+- **v1/airworthiness/**: type certification, design assurance level, continued-airworthiness maintenance
+- **v1/autonomous_systems/**: AI safety validation, decision-making transparency, human oversight
+- **v1/data_management/**: flight-data sharing agreements, recording/retention, sensor-data privacy
+- **v1/flight_operations/**: BVLOS operations, emergency/contingency procedures, urban air mobility
 
 12 policies total across the four areas.
 

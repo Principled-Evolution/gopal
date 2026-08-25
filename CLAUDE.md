@@ -1,4 +1,4 @@
-# Claude Code — Project Context for GOPAL
+# Claude Code: Project Context for GOPAL
 
 > **Read [AGENTS.md](AGENTS.md) first.** This file inherits all of those instructions and only adds Claude Code-specific notes.
 
@@ -13,7 +13,7 @@ When the user asks about the codebase, in order:
 1. **For "what frameworks are covered?"** → read the top-level `README.md` table.
 2. **For "how is a policy structured?"** → look at a representative one: `international/eu_ai_act/v1/transparency.rego` (with its `_test.rego` sibling).
 3. **For "what helpers exist?"** → `helper_functions/reporting.rego` and `helper_functions/validation.rego`.
-4. **For "how does CI work?"** → `.github/workflows/opa-ci.yaml` — it runs `opa check` and `regal lint`.
+4. **For "how does CI work?"** → `.github/workflows/opa-ci.yaml`: it runs `opa check` and `regal lint`.
 
 ## Conventions Claude Code should respect
 
@@ -23,9 +23,9 @@ When the user asks about the codebase, in order:
   opa check --ignore custom/ .
   regal lint --ignore-files custom/ .
   ```
-- **Don't bypass Regal warnings** by adding ignores to `.regal/config.yaml` — fix the underlying issue, or document the exception in the PR.
+- **Don't bypass Regal warnings** by adding ignores to `.regal/config.yaml`: fix the underlying issue, or document the exception in the PR.
 - **Tests are mandatory**. Every new `*.rego` needs a `*_test.rego` in the same directory.
-- **Metadata block** at the top of every policy is part of the spec — don't elide it.
+- **Metadata block** at the top of every policy is part of the spec, so don't elide it.
 
 ## Useful skills
 
@@ -37,16 +37,16 @@ mkdir -p ~/.claude/skills && cp -r skills/* ~/.claude/skills/
 
 Available slash commands once registered:
 
-- `/draft-rego-policy` — Scaffold a new policy with full metadata, default rule, reporting helper integration, and a sibling test file
-- `/explain-framework` — Walk every policy in a framework directory (e.g. `international/eu_ai_act/v1`) and produce an audit-grade plain-English summary
-- `/add-framework` — Bootstrap a brand-new regulatory framework directory (README + seed policy + test)
+- `/draft-rego-policy`: Scaffold a new policy with full metadata, default rule, reporting helper integration, and a sibling test file
+- `/explain-framework`: Walk every policy in a framework directory (e.g. `international/eu_ai_act/v1`) and produce an audit-grade plain-English summary
+- `/add-framework`: Bootstrap a brand-new regulatory framework directory (README + seed policy + test)
 
 See [`skills/README.md`](skills/README.md) for details.
 
 ## What NOT to do in this repo
 
-- Don't auto-format Rego files with anything other than what Regal recommends — it has style opinions.
-- Don't add `import` statements without using the imported symbol — Regal flags this.
+- Don't auto-format Rego files with anything other than what Regal recommends; it has style opinions.
+- Don't add `import` statements without using the imported symbol, because Regal flags this.
 - Don't introduce Python tooling beyond what's in `pyproject.toml`. The Python presence here is for packaging the Rego files as a wheel; the actual logic lives in `.rego`.
 - Don't refactor the `helper_functions/` library without checking every policy that imports it.
 

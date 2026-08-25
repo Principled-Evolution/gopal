@@ -1,4 +1,4 @@
-# Example — Education AI proctoring
+# Example: Education AI proctoring
 
 Evaluates a remote-proctoring AI system against the [`responsible_ai_proctoring`](../../industry_specific/education/v1/assessment_and_evaluation/responsible_ai_proctoring.rego) policy. The policy enforces a minimum due-process and privacy baseline that's broadly aligned with FERPA, COPPA, ETS guidance, and state-level AI-proctoring rules.
 
@@ -48,12 +48,12 @@ The deny messages compose, so flipping multiple fields at once produces a multi-
 
 AI proctoring is one of the highest-scrutiny consumer-facing AI use cases. The risks are concrete:
 
-- **Privacy** — webcam + microphone + screen capture is highly sensitive
-- **Due process** — a flagged student needs a path to challenge the AI's decision
-- **Bias** — facial-detection failure rates differ across demographics
-- **Consent** — implicit consent in an enrollment agreement is not the same as informed consent for AI surveillance
+- **Privacy**: webcam + microphone + screen capture is highly sensitive
+- **Due process**: a flagged student needs a path to challenge the AI's decision
+- **Bias**: facial-detection failure rates differ across demographics
+- **Consent**: implicit consent in an enrollment agreement is not the same as informed consent for AI surveillance
 
-This policy encodes the minimum signal a university or ed-tech vendor's compliance team needs to demonstrate. It's the floor, not the ceiling — most institutions will want stricter retention windows and broader bias evaluations on top.
+This policy encodes the minimum signal a university or ed-tech vendor's compliance team needs to demonstrate. It's the floor, not the ceiling. Most institutions will want stricter retention windows and broader bias evaluations on top.
 
 ## Plug it into your eval pipeline
 

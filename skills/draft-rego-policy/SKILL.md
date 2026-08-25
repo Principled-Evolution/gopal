@@ -10,20 +10,20 @@ Generate a new Rego policy + test file matching GOPAL's strict authoring convent
 
 ## Inputs
 
-- **domain** — One of: `global`, `international`, `industry_specific`, `operational`.
-- **framework** — Existing framework name (e.g. `eu_ai_act`) OR new. Confirm with the user before creating a new framework directory; prefer [add-framework](../add-framework/SKILL.md) for that.
-- **policy_name** — `snake_case` filename without `.rego` suffix.
+- **domain**: One of: `global`, `international`, `industry_specific`, `operational`.
+- **framework**: Existing framework name (e.g. `eu_ai_act`) OR new. Confirm with the user before creating a new framework directory; prefer [add-framework](../add-framework/SKILL.md) for that.
+- **policy_name**: `snake_case` filename without `.rego` suffix.
 
 ## Steps
 
-1. **Confirm directory layout** —
+1. **Confirm directory layout**:
    ```
    <domain>/<framework>/v1/<policy_name>.rego
    <domain>/<framework>/v1/<policy_name>_test.rego
    ```
    The package path MUST match the directory path. Create the directory if it doesn't exist.
 
-2. **Write the policy file** — fill in title, description, version, source:
+2. **Write the policy file**: fill in title, description, version, source:
 
    ```rego
    package <domain>.<framework>.v1.<policy_name>
@@ -32,7 +32,7 @@ Generate a new Rego policy + test file matching GOPAL's strict authoring convent
 
    # METADATA
    # title: <one-line summary>
-   # description: <what this rule enforces — quote the article/section being encoded>
+   # description: <what this rule enforces; quote the article/section being encoded>
    # version: 1
    # source: <URL to the official regulation or standard>
 
@@ -52,7 +52,7 @@ Generate a new Rego policy + test file matching GOPAL's strict authoring convent
    )
    ```
 
-3. **Write the test file** — both `allow` and `deny` paths must be tested:
+3. **Write the test file**: both `allow` and `deny` paths must be tested:
 
    ```rego
    package <domain>.<framework>.v1.<policy_name>_test
@@ -78,9 +78,9 @@ Generate a new Rego policy + test file matching GOPAL's strict authoring convent
    regal lint --ignore-files custom/ .
    ```
 
-6. **Fix any Regal warnings** — look them up in the [Regal rule catalog](https://docs.styra.com/regal/rules). Do NOT silence rules by adding to `.regal/config.yaml` without explicit user approval.
+6. **Fix any Regal warnings**: look them up in the [Regal rule catalog](https://docs.styra.com/regal/rules). Do NOT silence rules by adding to `.regal/config.yaml` without explicit user approval.
 
 7. **Final reminders**:
-   - The `# METADATA` `source:` URL is mandatory — auditors and downstream tooling rely on it.
+   - The `# METADATA` `source:` URL is mandatory: auditors and downstream tooling rely on it.
    - Helpers in `helper_functions/` (reporting, validation) should be used for output composition. Don't roll your own.
    - GOPAL is consumed by [AICertify](https://github.com/Principled-Evolution/aicertify); a new policy here automatically becomes available there on next vendor sync.
