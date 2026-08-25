@@ -38,4 +38,11 @@ jobs:
       - name: Run Regal Lint
         run: regal lint --ignore-files custom/ .
         working-directory: ${{ github.workspace }}
+
+      # The repo ships 226 policy tests that nothing was running. The YAML and
+      # JSON ignores keep `opa test` from trying to load issue templates and
+      # example inputs as data documents.
+      - name: Run OPA Tests
+        run: opa test --ignore custom/ --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' .
+        working-directory: ${{ github.workspace }}
 # CI trigger
