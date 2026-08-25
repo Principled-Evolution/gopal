@@ -1,56 +1,125 @@
+# RequiredMetrics:
+#   - system.uses_subliminal_techniques
+#   - system.uses_purposefully_manipulative_techniques
+#   - system.uses_deceptive_techniques
+#   - system.distorts_behaviour
+#   - system.causes_or_likely_causes_significant_harm
+#
+# RequiredParams: none
 package international.eu_ai_act.v1.prohibited_practices.manipulation
 
+import data.helper_functions.reporting
 import rego.v1
 
-# Metadata
 metadata := {
 	"title": "EU AI Act Prohibition of Manipulative Techniques",
-	"description": "Policy to evaluate compliance with EU AI Act Article 5(1)(a) prohibition of manipulative or deceptive AI techniques",
-	"status": "PLACEHOLDER - Pending detailed implementation",
+	"description": "Evaluates an AI system against the Article 5(1)(a) prohibition on subliminal, purposefully manipulative or deceptive techniques. The prohibition is cumulative: a technique is banned where it materially distorts behaviour in a way that impairs informed decision-making AND causes or is reasonably likely to cause significant harm. Recital 29 excludes lawful persuasion that does not deploy such techniques, so ordinary advertising is not caught by this rule.",
 	"version": "1.0.0",
 	"category": "International/EU AI Act",
 	"references": [
-		"Article 5(1)(a) of the EU AI Act - Prohibited AI practices",
+		"Article 5(1)(a) of the EU AI Act, prohibited AI practices",
 		"Recital 29 of the EU AI Act",
-		"EU AI Act (Regulation (EU) 2024/1689)",
+		"Regulation (EU) 2024/1689",
 	],
 }
 
-# Default deny
+# The three technique classes named in Article 5(1)(a).
+technique_fields := {
+	"subliminal": "uses_subliminal_techniques",
+	"purposefully manipulative": "uses_purposefully_manipulative_techniques",
+	"deceptive": "uses_deceptive_techniques",
+}
+
+# Inside the comprehension an absent field simply fails the body, so a
+# technique that was never declared is not listed as present.
+techniques_present := [label |
+	some label, field in technique_fields
+	input.system[field] == true
+]
+
+default uses_prohibited_technique := false
+
+uses_prohibited_technique if {
+	count(techniques_present) > 0
+}
+
+default distorts_behaviour := false
+
+distorts_behaviour if {
+	input.system.distorts_behaviour == true
+}
+
+default causes_significant_harm := false
+
+causes_significant_harm if {
+	input.system.causes_or_likely_causes_significant_harm == true
+}
+
+# Article 5(1)(a) bites only when all three limbs are met together.
+default prohibited := false
+
+prohibited if {
+	uses_prohibited_technique
+	distorts_behaviour
+	causes_significant_harm
+}
+
+# The assessment has to be made rather than left blank.
+default assessment_complete := false
+
+assessment_complete if {
+	is_boolean(input.system.distorts_behaviour)
+	is_boolean(input.system.causes_or_likely_causes_significant_harm)
+}
+
+# `not` is a statement rather than an expression, so the negations a report
+# metric needs are expressed as rules.
+default no_prohibited_technique := false
+
+no_prohibited_technique if {
+	not uses_prohibited_technique
+}
+
+default no_behavioural_distortion := false
+
+no_behavioural_distortion if {
+	not distorts_behaviour
+}
+
+default no_significant_harm := false
+
+no_significant_harm if {
+	not causes_significant_harm
+}
+
 default allow := false
 
-# This placeholder policy will always return non-compliant with implementation_pending=true
-non_compliant := true
+allow if {
+	assessment_complete
+	not prohibited
+}
 
-implementation_pending := true
-
-# Define the compliance report
-compliance_report := {
-	"policy": "EU AI Act Prohibition of Manipulative Techniques",
-	"version": "0.0.1",
-	"overall_result": false,
-	"compliant": false,
-	"details": {
-		"message": concat(" ", [
-			"This policy evaluates compliance with EU AI Act Article 5(1)(a), which prohibits",
-			"AI systems that deploy subliminal techniques beyond a person's consciousness or",
-			"purposefully manipulative or deceptive techniques, with the objective or effect of",
-			"materially distorting the behavior of a person or group of persons.",
-			"This is a placeholder that will be replaced with actual compliance checks in a future release.",
-		]),
-		"recommendations": [
-			"Ensure AI systems do not use subliminal techniques beyond a person's consciousness",
-			"Avoid implementing manipulative or deceptive techniques that could distort user behavior",
-			"Implement transparency measures to clearly disclose AI system capabilities and limitations",
-			"Conduct regular audits to detect potential manipulative patterns in AI outputs",
-			"Consider integrating with DeepEval's toxicity and bias metrics for automated assessment",
-		],
+policy_metrics := {
+	"prohibited_techniques_declared": {
+		"name": "Article 5(1)(a) Technique Classes Declared",
+		"value": sort(techniques_present),
+		"control_passed": no_prohibited_technique,
+	},
+	"behavioural_distortion": {
+		"name": "Materially Distorts Behaviour Impairing Informed Decisions",
+		"value": distorts_behaviour,
+		"control_passed": no_behavioural_distortion,
+	},
+	"significant_harm": {
+		"name": "Causes or Is Reasonably Likely to Cause Significant Harm",
+		"value": causes_significant_harm,
+		"control_passed": no_significant_harm,
+	},
+	"assessment_complete": {
+		"name": "Article 5(1)(a) Assessment Recorded",
+		"value": assessment_complete,
+		"control_passed": assessment_complete,
 	},
 }
 
-# Future implementation will include:
-# 1. Detection of subliminal techniques
-# 2. Assessment of manipulative patterns
-# 3. Evaluation of deceptive content
-# 4. Analysis of potential behavioral distortion
-# 5. Integration with DeepEval for automated assessment
+report := reporting.compose_report("eu_ai_act.prohibited_practices.manipulation", allow, policy_metrics)

@@ -11,7 +11,10 @@ This directory contains policies specific to particular industry verticals and t
   - **v1/**: `diagnostic_safety/diagnostic_safety.rego`, `patient_safety/patient_safety.rego`
 
 - **bfs/**: Banking and Financial Services
-  - **v1/**: `loan_evaluation/fair_lending.rego`, `model_risk/model_risk.rego`
+  - **v1/**: `loan_evaluation/fair_lending.rego`, `model_risk/model_risk.rego` (SR 11-7 / OCC 2011-12 / BCBS 239), `uk_ss1_23_model_risk.rego` (PRA SS1/23), `uk_fca_consumer_duty.rego` (FCA Consumer Duty)
+
+- **legal/**: Legal services
+  - **v1/**: `citation_verification.rego`, `client_confidentiality.rego`, `competence_supervision.rego`
 
 - **automotive/**: Automotive
   - **v1/**: `vehicle_safety/vehicle_safety.rego`
@@ -19,7 +22,7 @@ This directory contains policies specific to particular industry verticals and t
 - **aviation/**: Aviation
   - **v1/**: 12 policies across `airworthiness/`, `autonomous_systems/`, `data_management/`, and `flight_operations/`. See regulator-specific policies under [`international/icao/`](../international/icao/), [`international/faa/`](../international/faa/), [`international/easa/`](../international/easa/), and [`international/standards/`](../international/standards/).
 
-29 policies total across 5 verticals.
+34 policies total across 6 verticals.
 
 ## Usage
 
@@ -33,7 +36,7 @@ When adding new industry-specific policies:
 3. Use the package name `industry_specific.<industry>.v1.<policy_area>`
 4. Include a `# METADATA` block referencing the specific standard or regulation it encodes
 
-Adding a brand-new vertical (not one of the four above)? See [`skills/add-framework/SKILL.md`](../skills/add-framework/SKILL.md) for the scaffold, and update the count in this file and the top-level README once it lands.
+Adding a brand-new vertical (not one of the six above)? See [`skills/add-framework/SKILL.md`](../skills/add-framework/SKILL.md) for the scaffold, and update the count in this file and the top-level README once it lands.
 
 ## Composition
 

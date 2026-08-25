@@ -1,45 +1,120 @@
+# RequiredMetrics:
+#   - governance.ai_policy_approved
+#   - governance.system_in_inventory
+#   - governance.accountable_owner_named
+#   - governance.review_cadence_days
+#   - governance.staff_training_completed
+#   - third_party.vendor_in_use
+#   - third_party.due_diligence_completed
+#
+# RequiredParams: none
 package operational.corporate.v1.governance
 
+import data.helper_functions.reporting
 import rego.v1
 
-# Metadata
 metadata := {
 	"title": "Corporate AI Governance Requirements",
-	"description": "Placeholder for corporate AI governance requirements",
-	"status": "PLACEHOLDER - Pending detailed implementation",
+	"description": "Evaluates the organisational scaffolding around an AI system: an approved AI policy, the system recorded in an inventory, a named accountable owner, a defined review cadence, staff training, and due diligence where a third-party vendor supplies the system. These are the controls an ISO/IEC 42001 management system and the NIST AI RMF Govern function both expect, expressed as checks rather than prose.",
 	"version": "1.0.0",
 	"category": "Operational",
 	"references": [
-		"NIST AI RMF: https://www.nist.gov/itl/ai-risk-management-framework",
-		"ISO/IEC 38507: https://www.iso.org/standard/79885.html",
-		"OECD AI Principles: https://oecd.ai/en/ai-principles",
+		"ISO/IEC 42001:2023, AI management systems",
+		"NIST AI RMF 1.0, Govern function",
+		"OECD AI Principles, accountability",
 	],
 }
 
-# Default deny
+default policy_approved := false
+
+policy_approved if {
+	input.governance.ai_policy_approved == true
+}
+
+# An AI system nobody has recorded cannot be governed.
+default inventoried := false
+
+inventoried if {
+	input.governance.system_in_inventory == true
+}
+
+default owner_named := false
+
+owner_named if {
+	input.governance.accountable_owner_named == true
+}
+
+# A review cadence of zero or an absent cadence is not a cadence.
+default review_cadence_defined := false
+
+review_cadence_defined if {
+	cadence := object.get(input, ["governance", "review_cadence_days"], 0)
+	cadence > 0
+	cadence <= 365
+}
+
+default staff_trained := false
+
+staff_trained if {
+	input.governance.staff_training_completed == true
+}
+
+default vendor_in_use := false
+
+vendor_in_use if {
+	input.third_party.vendor_in_use == true
+}
+
+default third_party_cleared := false
+
+third_party_cleared if {
+	not vendor_in_use
+}
+
+third_party_cleared if {
+	vendor_in_use
+	input.third_party.due_diligence_completed == true
+}
+
 default allow := false
 
-# This placeholder policy will always return non-compliant with implementation_pending=true
-non_compliant := true
-
-implementation_pending := true
-
-# Define the compliance report
-compliance_report := {
-	"policy": "Corporate AI Governance Requirements",
-	"version": "1.0.0",
-	"status": "PLACEHOLDER - Pending detailed implementation",
-	"overall_result": false,
-	"implementation_pending": true,
-	"details": {"message": concat(" ", [
-		"Corporate AI governance policy implementation is pending.",
-		"This is a placeholder that will be replaced with actual compliance checks in a future release.",
-	])},
-	"recommendations": [
-		"Check back for future releases with corporate governance evaluations",
-		"Establish an AI governance committee or responsible body",
-		"Develop AI principles and policies aligned with organizational values",
-		"Implement role-based access controls for AI systems",
-		"Define clear lines of accountability for AI system outcomes",
-	],
+allow if {
+	policy_approved
+	inventoried
+	owner_named
+	review_cadence_defined
+	staff_trained
+	third_party_cleared
 }
+
+failed_controls := [name |
+	some name, satisfied in {
+		"approved AI policy": policy_approved,
+		"system recorded in an AI inventory": inventoried,
+		"named accountable owner": owner_named,
+		"review cadence defined and no longer than annual": review_cadence_defined,
+		"staff training completed": staff_trained,
+		"third-party due diligence where a vendor supplies the system": third_party_cleared,
+	}
+	satisfied == false
+]
+
+policy_metrics := {
+	"governance_controls_failed": {
+		"name": "Corporate AI Governance Controls Not Satisfied",
+		"value": sort(failed_controls),
+		"control_passed": count(failed_controls) == 0,
+	},
+	"review_cadence_days": {
+		"name": "Review Cadence (Days)",
+		"value": object.get(input, ["governance", "review_cadence_days"], 0),
+		"control_passed": review_cadence_defined,
+	},
+	"third_party_supply": {
+		"name": "Third-Party Vendor Supplies This System",
+		"value": vendor_in_use,
+		"control_passed": third_party_cleared,
+	},
+}
+
+report := reporting.compose_report("corporate.governance", allow, policy_metrics)

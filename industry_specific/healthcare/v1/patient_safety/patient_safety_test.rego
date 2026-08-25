@@ -1,34 +1,87 @@
 package industry_specific.healthcare.v1.patient_safety_test
 
-import data.industry_specific.healthcare.v1.patient_safety
+import data.industry_specific.healthcare.v1.patient_safety as policy
+import rego.v1
 
-# Test that the policy is correctly marked as a placeholder
-test_implementation_pending if {
-	patient_safety.implementation_pending
+compliant := {
+	"evaluation": {
+		"patient_safety": {"score": 0.97},
+		"clinical_validation": {"score": 0.93},
+		"risk_assessment": {"score": 0.92},
+	},
+	"oversight": {"clinician_in_the_loop": true, "adverse_event_reporting_in_place": true},
 }
 
-test_non_compliant if {
-	patient_safety.non_compliant
+test_allow_when_all_controls_met if {
+	policy.allow with input as compliant
 }
 
-# Test that the thresholds are correctly parameterized
-test_compliance_report_thresholds if {
-	report := patient_safety.compliance_report with input as {"params": {
-		"patient_safety_threshold": 0.90,
-		"clinical_validation_threshold": 0.85,
-		"risk_assessment_threshold": 0.85,
-	}}
-
-	report.details.thresholds.patient_safety == 0.90
-	report.details.thresholds.clinical_validation == 0.85
-	report.details.thresholds.risk_assessment == 0.85
+# The patient-safety threshold is 0.95, higher than the diagnostic_safety
+# sibling, because these controls sit closest to patient harm.
+test_deny_patient_safety_below_default_threshold if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/evaluation/patient_safety/score", "value": 0.94,
+	}])
 }
 
-# Test that the thresholds use default values when params are not provided
-test_compliance_report_default_thresholds if {
-	report := patient_safety.compliance_report with input as {"params": {}}
+test_allow_at_threshold_boundary if {
+	policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/evaluation/patient_safety/score", "value": 0.95,
+	}])
+}
 
-	report.details.thresholds.patient_safety == 0.95
-	report.details.thresholds.clinical_validation == 0.90
-	report.details.thresholds.risk_assessment == 0.90
+test_thresholds_can_be_overridden_by_params if {
+	policy.allow with input as json.patch(compliant, [
+		{"op": "replace", "path": "/evaluation/patient_safety/score", "value": 0.90},
+		{"op": "add", "path": "/params", "value": {"patient_safety_threshold": 0.85}},
+	])
+}
+
+test_deny_clinical_validation_below_threshold if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/evaluation/clinical_validation/score", "value": 0.5,
+	}])
+}
+
+test_deny_risk_assessment_below_threshold if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/evaluation/risk_assessment/score", "value": 0.1,
+	}])
+}
+
+# Good Machine Learning Practice expects a clinician in the loop and a route for
+# reporting adverse events. Strong scores do not substitute for either.
+test_deny_without_clinician_in_the_loop if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/oversight/clinician_in_the_loop", "value": false,
+	}])
+}
+
+test_deny_without_adverse_event_reporting if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "replace", "path": "/oversight/adverse_event_reporting_in_place", "value": false,
+	}])
+}
+
+# An absent score must fail its threshold rather than dropping out of the
+# assessment, which is the failure mode the diagnostic_safety sibling had.
+test_deny_when_a_score_is_absent if {
+	not policy.allow with input as json.patch(compliant, [{
+		"op": "remove", "path": "/evaluation/patient_safety",
+	}])
+}
+
+test_report_names_the_failed_controls if {
+	report := policy.report with input as json.patch(compliant, [
+		{"op": "remove", "path": "/evaluation/risk_assessment"},
+		{"op": "replace", "path": "/oversight/clinician_in_the_loop", "value": false},
+	])
+	report.metrics.patient_safety_controls_failed.value == [
+		"clinician oversight and adverse event reporting",
+		"risk assessment score",
+	]
+}
+
+test_deny_on_empty_input if {
+	not policy.allow with input as {}
 }
