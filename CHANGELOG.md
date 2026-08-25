@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **`international/nist/v1/ai_600_1`: closed a fail-open in the NIST AI RMF orchestrator.** `govern_compliant` used `object.get(input, "governance", {})` and then tested the result for existence. Because a defaulted `{}` is a defined value, the check succeeded even when the input carried no governance data at all, so an AI system with nothing recorded under `governance`, `transparency` or `fairness` was reported compliant. The orchestrator now delegates to the `govern`, `map`, `measure` and `manage` policies it already imported but never called, each of which carries its own `default allow := false`. This makes the four previously dead imports live and deletes the four shallow presence-only helper rules.
+
 ### Added
 - **Hand-authored, theme-aware SVG diagrams** under [`diagrams/`](diagrams/) — paired `_light.svg` + `_dark.svg` for hero banner, hero numbers, directory tree, policy anatomy, and evaluation flow. Embedded via `<picture>` so GitHub light- and dark-theme readers each see the matching variant.
 - **Brand assets** — standalone `logo_{light,dark}.svg` (hexagon + `{}` curly braces, signalling policy-as-code), `og_card_{light,dark}.svg` + a 1200×630 `og_card.png` for GitHub Settings → Social preview.
@@ -17,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Previously (still in this Unreleased line): `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` operational instructions for AI coding agents; `skills/` directory with 3 Claude Code skills (`draft-rego-policy`, `explain-framework`, `add-framework`); comparison table vs generic OPA bundles and vendor governance SaaS in the README.
 
 ### Changed
+- **CI now runs `opa test`.** The workflow ran `opa check` and `regal lint` but never executed the 226 policy tests in the repo, which is why the NIST fail-open above went unnoticed.
 - **Top of README** — replaced the `<h1>GOPAL</h1>` + bold tagline with a hero banner SVG that bakes in the wordmark and value prop, tightening the top fold across all 5 language READMEs (en, zh-CN, ja-JP, ko-KR, hi-IN).
 - README rewritten for product-page clarity: hero numbers, then quick start, then differentiation, then directory map.
 
