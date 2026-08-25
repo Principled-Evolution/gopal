@@ -27,6 +27,7 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
+  <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -362,6 +363,13 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 अनुरोध दर्ज करने से पहले दो जगहें ज़्यादातर सवालों का जवाब दे देती हैं। [कवरेज मैट्रिक्स](docs/coverage) अनुच्छेद-दर-अनुच्छेद बताता है कि क्या लागू हो चुका है, और [FAQ](docs/FAQ.md) दायरे, इनपुट फ़ॉर्मैट तथा AICertify से संबंध को समझाता है।
 
 हर आकार का योगदान स्वागत योग्य है, [CONTRIBUTING.md](CONTRIBUTING.md) देखें। भागीदारी हमारी [आचार संहिता](CODE_OF_CONDUCT.md) के अंतर्गत आती है।
+
+### इन सूचियों में शामिल
+
+- [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa), Open Policy Agent प्रोजेक्ट की अपनी क्यूरेटेड लिस्ट, Policy Packages सेक्शन में
+- [**OPA इकोसिस्टम डायरेक्टरी**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI), Policy as Code सेक्शन में
+- [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation), Policy Engines and Authorisation सेक्शन में
 
 ---
 

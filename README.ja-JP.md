@@ -27,6 +27,7 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
+  <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -360,6 +361,13 @@ Rego や OPA、GitHub の作法を知らなくても回答は得られます。
 多くの疑問は、投稿前に次の 2 つで解決します。[カバレッジマトリクス](docs/coverage)は条文単位で実装状況を示しています。[FAQ](docs/FAQ.md)では適用範囲、入力形式、AICertify との関係を説明しています。
 
 規模の大小を問わず貢献を歓迎します。[CONTRIBUTING.md](CONTRIBUTING.md) をご覧ください。参加にあたっては[行動規範](CODE_OF_CONDUCT.md)が適用されます。
+
+### 掲載先
+
+- [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa)：Open Policy Agent プロジェクト公式のキュレーションリスト、Policy Packages セクション
+- [**OPA エコシステムディレクトリ**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI)：Policy as Code セクション
+- [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation)：Policy Engines and Authorisation セクション
 
 ---
 

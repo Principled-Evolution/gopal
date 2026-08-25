@@ -27,6 +27,7 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
+  <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -360,6 +361,13 @@ Rego, OPA, GitHub 관례를 몰라도 답변을 받을 수 있습니다.
 등록하기 전에 다음 두 곳을 보면 대부분의 질문이 해결됩니다. [커버리지 매트릭스](docs/coverage)는 조항별 구현 현황을 보여 주고, [FAQ](docs/FAQ.md)는 적용 범위와 입력 형식, AICertify와의 관계를 다룹니다.
 
 규모와 무관하게 모든 기여를 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요. 참여에는 [행동 규범](CODE_OF_CONDUCT.md)이 적용됩니다.
+
+### 수록된 목록
+
+- [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa): Open Policy Agent 프로젝트 공식 큐레이션 목록의 Policy Packages 항목
+- [**OPA 에코시스템 디렉터리**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI): Policy as Code 항목
+- [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation): Policy Engines and Authorisation 항목
 
 ---
 

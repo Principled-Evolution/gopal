@@ -27,6 +27,7 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
+  <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -361,6 +362,13 @@ You don't need to know Rego, OPA, or GitHub conventions to get an answer here.
 Two things answer most questions before you file anything. The [coverage matrices](docs/coverage) list what's already implemented, article by article. The [FAQ](docs/FAQ.md) covers scope, input shapes, and how GOPAL relates to AICertify.
 
 Contributions of any size are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+### Listed in
+
+- [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa), the Open Policy Agent project's own curated list, under Policy Packages
+- [**OPA ecosystem directory**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI), under Policy as Code
+- [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation), under Policy Engines and Authorisation
 
 ---
 
