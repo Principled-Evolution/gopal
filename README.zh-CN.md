@@ -17,7 +17,7 @@
   <em>可读、可运行、可对比、可验证的 AI 合规规则。</em>
 </p>
 <p align="center">
-  <sub>85 条策略 · 8 个国际框架 · 5 个行业垂直领域</sub>
+  <sub>96 条策略 · 9 个国际框架 · 6 个行业垂直领域</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,8 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0 许可证"></a>
-  <img src="https://img.shields.io/badge/policies-85-orange.svg?style=flat-square" alt="85 条策略">
-  <img src="https://img.shields.io/badge/frameworks-8-purple.svg?style=flat-square" alt="8 个框架">
+  <img src="https://img.shields.io/badge/policies-96-orange.svg?style=flat-square" alt="96 条策略">
+  <img src="https://img.shields.io/badge/frameworks-9-purple.svg?style=flat-square" alt="9 个框架">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="欢迎提交 PR"></a>
 </p>
 
@@ -43,7 +43,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:85 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:96 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
   </picture>
 </p>
 
@@ -170,6 +170,7 @@ gopal/
 │   ├── nist/v1/              5  policies — NIST AI RMF + AI 600-1
 │   ├── india/v1/             1  policy   — Digital India Policy
 │   ├── brazil/v1/            1  policy   — AI Governance Bill
+│   ├── uk/v1/                6  policies — 亲创新原则、UK GDPR 第 22A-22D 条
 │   ├── icao/v1/              1  policy   — ICAO Doc 10019
 │   ├── faa/v1/               2  policies — Part 107, Remote ID
 │   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
@@ -179,7 +180,8 @@ gopal/
 │   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
 │   ├── aviation/v1/          12 policies — airworthiness, autonomy, data, ops
 │   ├── healthcare/v1/         2 policies — patient & diagnostic safety
-│   ├── bfs/v1/                2 policies — model risk, fair lending
+│   ├── bfs/v1/                4 policies — 模型风险、公平信贷、PRA SS1/23、FCA 消费者责任
+│   ├── legal/v1/              3 policies — 引用核验、保密特权、监督
 │   └── automotive/v1/         1 policy   — vehicle safety integration
 │
 ├── global/v1/             9  policies — accountability, fairness, transparency,
@@ -198,7 +200,7 @@ gopal/
 └── custom/               您的私有策略(已 git-ignore,CI 跳过)
 ```
 
-**85 条生产级策略。包括测试在内共 124 个 Rego 文件。**
+**96 条生产级策略。包括测试在内共 146 个 Rego 文件。**
 
 ---
 

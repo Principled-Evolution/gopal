@@ -17,7 +17,7 @@
   <em>AI compliance rules you can read, run, diff, and prove.</em>
 </p>
 <p align="center">
-  <sub>85 policies · 8 international frameworks · 5 industry verticals</sub>
+  <sub>96 policies · 9 international frameworks · 6 industry verticals</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,8 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-85-orange.svg?style=flat-square" alt="85 Policies">
-  <img src="https://img.shields.io/badge/frameworks-8-purple.svg?style=flat-square" alt="8 Frameworks">
+  <img src="https://img.shields.io/badge/policies-96-orange.svg?style=flat-square" alt="96 Policies">
+  <img src="https://img.shields.io/badge/frameworks-9-purple.svg?style=flat-square" alt="9 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -43,7 +43,7 @@ Run them against your AI system's metadata, model cards, or evaluation results. 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 85 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 96 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
 
@@ -170,6 +170,7 @@ gopal/
 │   ├── nist/v1/              5  policies — NIST AI RMF + AI 600-1
 │   ├── india/v1/             1  policy   — Digital India Policy
 │   ├── brazil/v1/            1  policy   — AI Governance Bill
+│   ├── uk/v1/                6  policies — pro-innovation principles, UK GDPR Arts 22A-22D
 │   ├── icao/v1/              1  policy   — ICAO Doc 10019
 │   ├── faa/v1/               2  policies — Part 107, Remote ID
 │   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
@@ -179,7 +180,8 @@ gopal/
 │   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
 │   ├── aviation/v1/          12 policies — airworthiness, autonomy, data, ops
 │   ├── healthcare/v1/         2 policies — patient & diagnostic safety
-│   ├── bfs/v1/                2 policies — model risk, fair lending
+│   ├── bfs/v1/                4 policies — model risk, fair lending, PRA SS1/23, FCA Consumer Duty
+│   ├── legal/v1/              3 policies — citation verification, privilege, supervision
 │   └── automotive/v1/         1 policy   — vehicle safety integration
 │
 ├── global/v1/             9  policies — accountability, fairness, transparency,
@@ -198,7 +200,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**85 production policies. 124 Rego files including tests.**
+**96 production policies. 146 Rego files including tests.**
 
 ---
 
@@ -210,7 +212,7 @@ gopal/
 | Open source (Apache 2.0) | ✅ | ✅ | ❌ |
 | You can read every rule | ✅ Rego | ✅ Rego | ❌ Hidden |
 | Tracks named regulations (EU AI Act, NIST RMF, FAA) | ✅ 10+ | ❌ | Partial |
-| Industry-specific verticals out of the box | ✅ 5 | ❌ | Limited |
+| Industry-specific verticals out of the box | ✅ 6 | ❌ | Limited |
 | Aviation / safety-critical coverage | ✅ ICAO, RTCA, FAA, EASA, ISO | ❌ | ❌ |
 | Education sector (FERPA / COPPA) | ✅ | ❌ | Rare |
 | Versioned policies (`v1/`, `v2/` …) | ✅ Semver | Varies | N/A |
@@ -328,9 +330,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
 ## Roadmap
 
 - **More NIST coverage**: filling out the Measure and Manage controls
-- **UK AI regulation principles**: the pro-innovation framework rules
+- **ICO statutory code of practice on AI and automated decision-making**, expected 2026
 - **California SB-1047 successor**, once it is finalized
 - **MAS / HKMA banking AI guidance** for APAC financial supervision
+- **Retiring the seven remaining placeholder policies** in favour of real implementations
 
 Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml). You don't have to write any Rego to make the request.
 

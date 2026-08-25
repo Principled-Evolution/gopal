@@ -17,7 +17,7 @@
   <em>読める、動かせる、差分を追える、証明できる AI コンプライアンスルール。</em>
 </p>
 <p align="center">
-  <sub>85 ポリシー・国際フレームワーク 8 件・業種別領域 5 分野</sub>
+  <sub>96 ポリシー・国際フレームワーク 9 件・業種別領域 6 分野</sub>
 </p>
 
 <p align="center">
@@ -27,8 +27,8 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
-  <img src="https://img.shields.io/badge/policies-85-orange.svg?style=flat-square" alt="85 Policies">
-  <img src="https://img.shields.io/badge/frameworks-8-purple.svg?style=flat-square" alt="8 Frameworks">
+  <img src="https://img.shields.io/badge/policies-96-orange.svg?style=flat-square" alt="96 Policies">
+  <img src="https://img.shields.io/badge/frameworks-9-purple.svg?style=flat-square" alt="9 Frameworks">
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
 </p>
 
@@ -43,7 +43,7 @@ AI システムのメタデータ、モデルカード、評価結果に対し�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 85 ポリシー、国際規格、航空、業種別、共通原則の各カテゴリ" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 96 ポリシー、国際規格、航空、業種別、共通原則の各カテゴリ" width="85%" />
   </picture>
 </p>
 
@@ -170,6 +170,7 @@ gopal/
 │   ├── nist/v1/              5  policies — NIST AI RMF + AI 600-1
 │   ├── india/v1/             1  policy   — Digital India Policy
 │   ├── brazil/v1/            1  policy   — AI Governance Bill
+│   ├── uk/v1/                6  policies — プロイノベーション原則、UK GDPR 第22A-22D条
 │   ├── icao/v1/              1  policy   — ICAO Doc 10019
 │   ├── faa/v1/               2  policies — Part 107, Remote ID
 │   ├── easa/v1/              2  policies — Regulation 2019/947, SORA
@@ -179,7 +180,8 @@ gopal/
 │   ├── education/v1/         12 policies — FERPA, COPPA, proctoring, grading
 │   ├── aviation/v1/          12 policies — airworthiness, autonomy, data, ops
 │   ├── healthcare/v1/         2 policies — patient & diagnostic safety
-│   ├── bfs/v1/                2 policies — model risk, fair lending
+│   ├── bfs/v1/                4 policies — モデルリスク、公正融資、PRA SS1/23、FCA 消費者義務
+│   ├── legal/v1/              3 policies — 引用検証、秘匿特権、監督
 │   └── automotive/v1/         1 policy   — vehicle safety integration
 │
 ├── global/v1/             9  policies — accountability, fairness, transparency,
@@ -198,7 +200,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**本番運用可能なポリシー 85 個、テストを含む Rego ファイル 124 個。**
+**本番運用可能なポリシー 96 個、テストを含む Rego ファイル 146 個。**
 
 ---
 

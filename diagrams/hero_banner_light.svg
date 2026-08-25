@@ -9,7 +9,7 @@
 </g>
 <text x="128" y="100" font-size="38" font-weight="500" fill="#0f172a" letter-spacing="-0.02em">GOPAL</text>
 <text x="128" y="126" font-size="15" font-weight="500" fill="#4f46e5">The Rego policy library for AI compliance</text>
-<text x="128" y="148" font-size="12" font-weight="400" fill="#64748b">85 policies · 8 frameworks · Apache 2.0</text>
+<text x="128" y="148" font-size="12" font-weight="400" fill="#64748b">96 policies · 9 frameworks · Apache 2.0</text>
 
 <g>
 <rect x="562" y="52" width="78" height="24" rx="12" fill="#eef2ff"/>
