@@ -27,6 +27,7 @@
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
   <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0 许可证"></a>
+  <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="欢迎提交 PR"></a>
 </p>
 
@@ -360,6 +361,13 @@ PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 有两处能提前解答大部分疑问。[覆盖矩阵](docs/coverage)逐条款列出了已经实现的内容；[常见问题](docs/FAQ.md)说明了适用范围、输入格式，以及 GOPAL 与 AICertify 的关系。
 
 欢迎任何规模的贡献，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。参与本项目须遵守我们的[行为准则](CODE_OF_CONDUCT.md)。
+
+### 收录于
+
+- [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa)：Open Policy Agent 官方精选列表，Policy Packages 分类
+- [**OPA 生态目录**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI)：Policy as Code 分类
+- [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation)：Policy Engines and Authorisation 分类
 
 ---
 
