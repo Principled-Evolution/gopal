@@ -10,7 +10,7 @@ Produce an auditor-readable summary of what every policy under a given framework
 
 ## Steps
 
-1. **Resolve the framework directory** — expect a path like:
+1. **Resolve the framework directory**: expect a path like:
    - `international/eu_ai_act/v1/`
    - `industry_specific/aviation/v1/`
    - `operational/corporate/v1/`
@@ -18,14 +18,14 @@ Produce an auditor-readable summary of what every policy under a given framework
 
    If the path doesn't exist, list adjacent valid options and stop.
 
-2. **Enumerate policies** — list every `.rego` file in the directory except those ending in `_test.rego` or named `README.md`.
+2. **Enumerate policies**: list every `.rego` file in the directory except those ending in `_test.rego` or named `README.md`.
 
 3. **For each policy**:
    - Read it.
    - Extract the `# METADATA` block (title, description, version, source).
    - Identify the package path.
    - Identify the `default allow` line and the body of the `allow if { ... }` rule.
-   - Translate the rule conditions into plain English. Don't paraphrase — describe specifically what fields of `input` must be true/false/set/equal.
+   - Translate the rule conditions into plain English. Don't paraphrase: describe specifically what fields of `input` must be true/false/set/equal.
 
 4. **Produce a structured output**:
 
@@ -60,5 +60,5 @@ Produce an auditor-readable summary of what every policy under a given framework
 ## Notes
 
 - Be brutally honest about placeholders. If a policy file is empty, has only a default rule with no logic, or contains TODO comments, label it clearly: 🚧 placeholder.
-- Don't editorialize about whether the regulation is "good" or "well-written" — just describe what the encoded rules check.
-- If a metadata block is missing, flag that — it's a violation of GOPAL conventions.
+- Don't editorialize about whether the regulation is "good" or "well-written": just describe what the encoded rules check.
+- If a metadata block is missing, flag that: it's a violation of GOPAL conventions.

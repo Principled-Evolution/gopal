@@ -1,4 +1,4 @@
-# Gemini CLI — Project Context for GOPAL
+# Gemini CLI: Project Context for GOPAL
 
 > **Read [AGENTS.md](AGENTS.md) first.** This file inherits all of those instructions and adds Gemini-CLI-specific notes plus the author's general working principles.
 
@@ -10,7 +10,7 @@
 4. You may ask the user to run commands and share outputs, or to make manual changes you can't accomplish reliably.
 5. Always **critique your own design at least once** for elegance, DRY, KISS, and explainability before presenting it.
 6. **Do not exceed 600 lines per file.**
-7. When working across multiple repos, **always confirm you're in the correct git repo** for the current task — especially after `cd`.
+7. When working across multiple repos, **always confirm you're in the correct git repo** for the current task, especially after `cd`.
 8. When the session context gets too long, suggest updating memory, filing a GitHub issue, and continuing in a fresh session.
 9. **When unable to authenticate** to an enabled integration (JIRA, Confluence, etc.), stop and ask the user to check authentication.
 
@@ -33,7 +33,7 @@ Every new `.rego` file must include:
   # @version 1.1
   # @source https://www.ecfr.gov/current/title-34/subtitle-A/part-99
   ```
-- **Default rule** — usually `default allow := false`.
+- **Default rule**: usually `default allow := false`.
 - **Clear deny messages** via `deny[msg]` where applicable.
 - A sibling **`_test.rego`** file covering both compliant and non-compliant scenarios.
 - A framework-level **README.md** at each `international/<framework>/v1/` or `industry_specific/<industry>/v1/` with the source link and a "not legal advice" disclaimer.

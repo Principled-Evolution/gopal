@@ -1,11 +1,11 @@
-# Example — EU AI Act transparency
+# Example: EU AI Act transparency
 
 Evaluates an AI system's documentation and toxicity metrics against the EU AI Act transparency policy at [`international/eu_ai_act/v1/transparency`](../../international/eu_ai_act/v1/transparency).
 
 The policy implements obligations from:
 
-- **Article 13** — Transparency and provision of information to users
-- **Article 52** — Transparency obligations for certain AI systems
+- **Article 13**: Transparency and provision of information to users
+- **Article 52**: Transparency obligations for certain AI systems
 
 ## Run
 

@@ -15,7 +15,7 @@ git clone https://github.com/Principled-Evolution/gopal.git
 cd gopal
 ```
 
-## Step 1 — Decide where the policy lives
+## Step 1: Decide where the policy lives
 
 GOPAL groups policies by **scope**:
 
@@ -25,11 +25,11 @@ GOPAL groups policies by **scope**:
 | `industry_specific/<vertical>/v<n>/` | Vertical-specific (aviation, education, healthcare, bfs, automotive) |
 | `global/v<n>/` | Cross-cutting principles (fairness, transparency, toxicity, accountability) |
 | `operational/<area>/v<n>/` | Internal ops (cost, AIOps, corporate InfoSec) |
-| `custom/` | Your private rules — git-ignored |
+| `custom/` | Your private rules, git-ignored |
 
 For "log every invocation," we'll use `global/v1/logging` because it's cross-cutting.
 
-## Step 2 — Scaffold the package
+## Step 2: Scaffold the package
 
 ```bash
 mkdir -p global/v1/logging
@@ -48,8 +48,8 @@ metadata := {
     "version": "1.0.0",
     "category": "global",
     "references": [
-        "NIST AI RMF MEASURE 3.2 — Track AI risks and trustworthiness over time",
-        "EU AI Act Article 12 — Record-keeping",
+        "NIST AI RMF MEASURE 3.2: Track AI risks and trustworthiness over time",
+        "EU AI Act Article 12: Record-keeping",
     ],
 }
 
@@ -83,10 +83,10 @@ compliance_report := {
 - **Package path** mirrors the directory: `global.v1.logging` lives at `global/v1/logging/`. CI checks this.
 - **`import rego.v1`** opts into the modern Rego dialect (required by GOPAL).
 - **`metadata`** is a structured comment-as-data block. Tooling can read it; auditors can read it.
-- **`default allow := false`** — every GOPAL policy denies by default. The `allow` rule must explicitly establish compliance.
-- **`compliance_report`** — the consumer-facing output. Always returns the same shape (`policy_name`, `compliant`, `reason`, `recommendations`).
+- **`default allow := false`**: every GOPAL policy denies by default. The `allow` rule must explicitly establish compliance.
+- **`compliance_report`**: the consumer-facing output. Always returns the same shape (`policy_name`, `compliant`, `reason`, `recommendations`).
 
-## Step 3 — Write a test
+## Step 3: Write a test
 
 Create `global/v1/logging/logging_test.rego` next to your policy. The trailing `_test.rego` suffix and the matching package name are how OPA finds tests.
 
@@ -130,7 +130,7 @@ test_compliance_report_non_compliant if {
 }
 ```
 
-## Step 4 — Run it locally
+## Step 4: Run it locally
 
 Run the tests:
 
@@ -162,7 +162,7 @@ Expected output:
 
 Flip `enabled` to `false` and you'll get a non-compliant verdict with recommendations.
 
-## Step 5 — Pass CI checks
+## Step 5: Pass CI checks
 
 GOPAL's CI runs two gates. Run them both locally:
 
@@ -173,13 +173,13 @@ regal lint --ignore-files custom/ .
 
 Both must pass. Common Regal fixes:
 
-- **Variable shadowing** — rename a local variable that shadows an import
+- **Variable shadowing**: rename a local variable that shadows an import
 - **Use `every`** instead of comprehensions for clarity
 - **Use `rule.metadata.title`** in opa fmt-friendly metadata blocks
 
 If you need help with a specific Regal violation, see [the Regal docs](https://docs.styra.com/regal).
 
-## Step 6 — (Optional) Add an example
+## Step 6: (Optional) Add an example
 
 If your policy is useful as a standalone demo, drop it under [`examples/`](../../examples/):
 
@@ -194,7 +194,7 @@ examples/
 
 See [`examples/eu-ai-act-transparency/`](../../examples/eu-ai-act-transparency/) for the conventions.
 
-## Step 7 — Open a PR
+## Step 7: Open a PR
 
 Use the `new_policy.md` issue template first if you want to discuss the obligation interpretation before writing code. Otherwise send a PR with:
 
@@ -209,7 +209,7 @@ CI will run `opa check`, `opa test`, and `regal lint`. The CHANGELOG should get 
 
 | Want to … | See |
 |---|---|
-| Add a brand-new regulatory framework | [`skills/add-framework/SKILL.md`](../../skills/add-framework/SKILL.md) — Claude Code skill that scaffolds the directory tree, framework README, and first policy |
-| Use the standard reporting helpers | [`helper_functions/reporting.rego`](../../helper_functions/reporting.rego) — `compose_report()`, `validate_required_fields()` |
+| Add a brand-new regulatory framework | [`skills/add-framework/SKILL.md`](../../skills/add-framework/SKILL.md): Claude Code skill that scaffolds the directory tree, framework README, and first policy |
+| Use the standard reporting helpers | [`helper_functions/reporting.rego`](../../helper_functions/reporting.rego): `compose_report()`, `validate_required_fields()` |
 | Understand authoring conventions in depth | [`AGENTS.md`](../../AGENTS.md) |
 | Check which obligations are still open | [`docs/coverage/`](../coverage/) |

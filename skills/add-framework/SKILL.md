@@ -1,6 +1,6 @@
 ---
 name: add-framework
-description: Scaffold a brand-new regulatory framework directory in GOPAL — creates the directory tree, framework README with source and disclaimer, and an initial seed policy + test. Use this when the user wants to start covering a new regulation that GOPAL doesn't track yet.
+description: Scaffold a brand-new regulatory framework directory in GOPAL. Creates the directory tree, framework README with source and disclaimer, and an initial seed policy + test. Use this when the user wants to start covering a new regulation that GOPAL doesn't track yet.
 argument-hint: "<domain> <framework_name> <official_source_url>"
 ---
 
@@ -10,13 +10,13 @@ Bootstrap a new regulatory framework directory in GOPAL.
 
 ## Inputs
 
-- **domain** — One of: `international`, `industry_specific`, `operational`.
-- **framework_name** — Short kebab-case or snake_case name (e.g. `uk_ai_principles`, `singapore_ai_verify`, `california_sb1047`).
-- **official_source_url** — A canonical link to the regulation's text. This goes in the README and the seed policy metadata. If the user doesn't have one, stop and ask.
+- **domain**: One of: `international`, `industry_specific`, `operational`.
+- **framework_name**: Short kebab-case or snake_case name (e.g. `uk_ai_principles`, `singapore_ai_verify`, `california_sb1047`).
+- **official_source_url**: A canonical link to the regulation's text. This goes in the README and the seed policy metadata. If the user doesn't have one, stop and ask.
 
 ## Steps
 
-1. **Confirm naming** — search for an existing directory under `<domain>/<framework_name>/`. If one exists, stop and refer the user to [draft-rego-policy](../draft-rego-policy/SKILL.md) instead.
+1. **Confirm naming**: search for an existing directory under `<domain>/<framework_name>/`. If one exists, stop and refer the user to [draft-rego-policy](../draft-rego-policy/SKILL.md) instead.
 
 2. **Create the directory structure**:
    ```
@@ -39,10 +39,10 @@ Bootstrap a new regulatory framework directory in GOPAL.
 
    ## Policies
 
-   - `<seed_policy>` — <one-line description>
+   - `<seed_policy>`: <one-line description>
    ```
 
-4. **Write a seed policy** — typically a high-level "framework-applies" gate. For example:
+4. **Write a seed policy**: typically a high-level "framework-applies" gate. For example:
 
    ```rego
    package <domain>.<framework_name>.v1.applicability
@@ -88,7 +88,7 @@ Bootstrap a new regulatory framework directory in GOPAL.
    }
    ```
 
-6. **Update the top-level [README.md](../../README.md)** — add the new framework to the coverage table in the "What's Inside" section with its policy count (`1` initially).
+6. **Update the top-level [README.md](../../README.md)**: add the new framework to the coverage table in the "What's Inside" section with its policy count (`1` initially).
 
 7. **Run the gates**:
    ```bash
@@ -96,10 +96,10 @@ Bootstrap a new regulatory framework directory in GOPAL.
    regal lint --ignore-files custom/ .
    ```
 
-8. **Suggest follow-ups** — list 3-5 specific articles or sections from the source regulation that should become individual policies. Recommend the user run [draft-rego-policy](../draft-rego-policy/SKILL.md) for each.
+8. **Suggest follow-ups**: list 3-5 specific articles or sections from the source regulation that should become individual policies. Recommend the user run [draft-rego-policy](../draft-rego-policy/SKILL.md) for each.
 
 ## Notes
 
 - Frameworks should map to a single published regulation, standard, or guideline. Don't create catch-all directories like `international/misc/`.
-- If the regulation has versioned amendments, prefer `v1/` for the initial publication and add `v2/` later — don't try to encode multiple versions in one directory.
+- If the regulation has versioned amendments, prefer `v1/` for the initial publication and add `v2/` later: don't try to encode multiple versions in one directory.
 - The framework README must include a "Disclaimer" line stating these policies aren't legal advice. This is non-negotiable.

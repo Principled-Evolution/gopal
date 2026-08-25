@@ -9,7 +9,7 @@ This directory contains cross-cutting policies that apply across domains and are
   - `fairness/fairness.rego`
   - `toxicity/toxicity.rego`
   - `transparency/transparency.rego`
-  - `common/` — shared building blocks imported by policies elsewhere in the repo (`common_rules.rego`, `compliance.rego`, `content_safety.rego`, `fairness.rego`, `risk_management.rego`). These aren't standalone policies with their own verdict; they're functions other packages import, e.g. `import data.global.v1.common.fairness as common_fairness`.
+  - `common/`: shared building blocks imported by policies elsewhere in the repo (`common_rules.rego`, `compliance.rego`, `content_safety.rego`, `fairness.rego`, `risk_management.rego`). These aren't standalone policies with their own verdict; they're functions other packages import, e.g. `import data.global.v1.common.fairness as common_fairness`.
 
 9 policies total, including the `common/` helpers.
 

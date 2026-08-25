@@ -1,6 +1,6 @@
 # India AI Policy
 
-Source: **National Strategy for Artificial Intelligence** (NITI Aayog) and India's Digital India programme — https://www.niti.gov.in/national-strategy-artificial-intelligence
+Source: **National Strategy for Artificial Intelligence** (NITI Aayog) and India's Digital India programme: https://www.niti.gov.in/national-strategy-artificial-intelligence
 
 This directory contains `digital_india_policy/digital_india_policy.rego`, a single policy encoding core principles from India's national AI strategy.
 
