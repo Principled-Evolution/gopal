@@ -10,14 +10,16 @@ Legend: ✅ **Implemented**: checks real input fields against the obligation. �
 
 The AI RMF organizes AI risk management into four functions: **Govern, Map, Measure, Manage**. GOPAL ships one package per function plus an orchestrator (`ai_600_1`).
 
+A note on depth before the table. Every function package checks real fields under its own `input` section, so none of them is a stub. What they check is a **declared boolean per control** (for example `input.map.intended_use_documented`) rather than an inspection of the artefact behind it. That is a self-attestation the policy records and gates on, not independent verification, and it is the same standard used across the UK and industry-vertical policies. The per-category tables further down say which NIST subcategories are not yet separately encoded.
+
 The orchestrator delegates to the four function packages rather than checking top-level keys itself. Until that changed it tested only that each section was present, which meant a system with no governance data recorded at all evaluated to allow. Because it now depends on each function's own `allow`, the shallowness of the Map, Measure and Manage checks below propagates to the orchestrator's verdict.
 
 | Function | GOPAL package | Status | Notes |
 |---|---|---|---|
 | Govern | [`govern`](../../international/nist/v1/govern/governance.rego) | ✅ | Composes Accountability + Transparency + Fairness sub-checks against `input.governance`, `input.transparency`, `input.fairness` |
-| Map | [`map`](../../international/nist/v1/map/map.rego) | ⚠️ | Structure in place; sub-checks return placeholder fields |
-| Measure | [`measure`](../../international/nist/v1/measure/measure.rego) | ⚠️ | Structure in place; sub-checks return placeholder fields |
-| Manage | [`manage`](../../international/nist/v1/manage/manage.rego) | ⚠️ | Structure in place; sub-checks return placeholder fields |
+| Map | [`map`](../../international/nist/v1/map/map.rego) | ✅ | Checks six declared fields under `input.map` across three dimensions: system context, data provenance, system limitations |
+| Measure | [`measure`](../../international/nist/v1/measure/measure.rego) | ✅ | Checks six declared fields under `input.measure` across performance, bias and robustness metrics, each defined and tracked |
+| Manage | [`manage`](../../international/nist/v1/manage/manage.rego) | ✅ | Checks six declared fields under `input.manage` across risk mitigation, continuous monitoring and incident response, each documented and exercised |
 | Orchestrator (all four) | [`ai_600_1`](../../international/nist/v1/ai_600_1/ai_600_1.rego) | ✅ | Single entry point. Delegates to `govern.allow`, `map.allow`, `measure.allow` and `manage.allow`, each of which carries its own `default allow := false`, so an incomplete section denies |
 
 ## Govern: sub-categories implemented
@@ -30,9 +32,9 @@ The orchestrator delegates to the four function packages rather than checking to
 
 See [`examples/nist-ai-rmf-govern/`](../../examples/nist-ai-rmf-govern/) for a runnable example.
 
-## Map: categories with scaffolding
+## Map: per-category coverage
 
-The Map function focuses on **context**: who's affected, what the use case is, what risks are known. GOPAL ships package-level scaffolding ready for fleshed-out logic.
+The Map function focuses on **context**: who's affected, what the use case is, what risks are known. The `map` package checks six declared booleans grouped into three dimensions, which is real but coarse. It does not yet map onto the five MAP categories individually, so those are listed as open below.
 
 | Category | Status | Help wanted |
 |---|---|---|
@@ -42,9 +44,9 @@ The Map function focuses on **context**: who's affected, what the use case is, w
 | MAP 4, Risks & benefits mapped | ⚠️ Scaffold | Yes, needs risk-register input |
 | MAP 5, Impacts characterized | ⚠️ Scaffold | Yes, needs stakeholder-impact input |
 
-## Measure: categories with scaffolding
+## Measure: per-category coverage
 
-The Measure function operationalizes risk into metrics. GOPAL has the package structure; the substantive metric thresholds are still open.
+The Measure function operationalizes risk into metrics. The `measure` package checks that performance, bias and robustness metrics are each defined and tracked. Those are declared booleans rather than threshold comparisons against actual values, so the substantive thresholds remain open.
 
 | Category | Status | Help wanted |
 |---|---|---|
@@ -53,7 +55,7 @@ The Measure function operationalizes risk into metrics. GOPAL has the package st
 | MEASURE 3, Tracked over time | ⚠️ Scaffold | Yes |
 | MEASURE 4, Feedback gathered | ⚠️ Scaffold | Yes |
 
-## Manage: categories with scaffolding
+## Manage: per-category coverage
 
 | Category | Status | Help wanted |
 |---|---|---|

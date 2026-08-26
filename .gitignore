@@ -45,3 +45,6 @@ custom/
 # LaTeX build artefacts
 texput.log
 *.aux
+
+# Local social-preview upload candidates, not part of the library
+social-candidates/
