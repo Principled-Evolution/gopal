@@ -366,6 +366,8 @@ Rego, OPA, GitHub 관례를 몰라도 답변을 받을 수 있습니다.
 
 - [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa): Open Policy Agent 프로젝트 공식 큐레이션 목록의 Policy Packages 항목
 - [**OPA 에코시스템 디렉터리**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Europe**](https://github.com/GeiserX/awesome-europe): Digital Regulation 항목
+- [**Awesome AI Governance**](https://github.com/agentrust-io/awesome-ai-governance): Policy as Code 항목
 - [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI): Policy as Code 항목
 - [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation): Policy Engines and Authorisation 항목
 

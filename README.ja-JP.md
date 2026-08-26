@@ -366,6 +366,8 @@ Rego や OPA、GitHub の作法を知らなくても回答は得られます。
 
 - [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa)：Open Policy Agent プロジェクト公式のキュレーションリスト、Policy Packages セクション
 - [**OPA エコシステムディレクトリ**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Europe**](https://github.com/GeiserX/awesome-europe)：Digital Regulation セクション
+- [**Awesome AI Governance**](https://github.com/agentrust-io/awesome-ai-governance)：Policy as Code セクション
 - [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI)：Policy as Code セクション
 - [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation)：Policy Engines and Authorisation セクション
 
