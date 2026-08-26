@@ -24,10 +24,10 @@ allow if {
 default accountability := {"allow": false, "msg": "Accountability requirements not met."}
 
 accountability := {"allow": true, "msg": "Accountability requirements met."} if {
-	# Placeholder: Check for defined roles and responsibilities
+	# Check for defined roles and responsibilities
 	input.governance.roles_and_responsibilities_defined
 
-	# Placeholder: Check for established oversight mechanisms
+	# Check for established oversight mechanisms
 	input.governance.oversight_mechanisms_in_place
 }
 
@@ -35,10 +35,10 @@ accountability := {"allow": true, "msg": "Accountability requirements met."} if 
 default transparency := {"allow": false, "msg": "Transparency requirements not met."}
 
 transparency := {"allow": true, "msg": "Transparency requirements met."} if {
-	# Placeholder: Check for public documentation about the system's purpose and limitations
+	# Check for public documentation about the system's purpose and limitations
 	input.transparency.public_documentation_available
 
-	# Placeholder: Check for clear explanations of the system's decisions
+	# Check for clear explanations of the system's decisions
 	input.transparency.decision_explanations_provided
 }
 
@@ -46,9 +46,9 @@ transparency := {"allow": true, "msg": "Transparency requirements met."} if {
 default fairness := {"allow": false, "msg": "Fairness requirements not met."}
 
 fairness := {"allow": true, "msg": "Fairness requirements met."} if {
-	# Placeholder: Check for regular bias assessments
+	# Check for regular bias assessments
 	input.fairness.bias_assessments_conducted
 
-	# Placeholder: Check for mitigation strategies for identified biases
+	# Check for mitigation strategies for identified biases
 	input.fairness.bias_mitigation_strategies_in_place
 }

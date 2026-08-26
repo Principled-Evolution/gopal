@@ -24,10 +24,10 @@ allow if {
 default system_context := {"allow": false, "msg": "System context requirements not met."}
 
 system_context := {"allow": true, "msg": "System context requirements met."} if {
-	# Placeholder: Check for documentation of the system's intended use
+	# Check for documentation of the system's intended use
 	input.map.intended_use_documented
 
-	# Placeholder: Check for documentation of the system's architecture
+	# Check for documentation of the system's architecture
 	input.map.architecture_documented
 }
 
@@ -35,10 +35,10 @@ system_context := {"allow": true, "msg": "System context requirements met."} if 
 default data_provenance := {"allow": false, "msg": "Data provenance requirements not met."}
 
 data_provenance := {"allow": true, "msg": "Data provenance requirements met."} if {
-	# Placeholder: Check for documentation of data sources
+	# Check for documentation of data sources
 	input.map.data_sources_documented
 
-	# Placeholder: Check for documentation of data processing steps
+	# Check for documentation of data processing steps
 	input.map.data_processing_documented
 }
 
@@ -46,9 +46,9 @@ data_provenance := {"allow": true, "msg": "Data provenance requirements met."} i
 default system_limitations := {"allow": false, "msg": "System limitations requirements not met."}
 
 system_limitations := {"allow": true, "msg": "System limitations requirements met."} if {
-	# Placeholder: Check for documentation of known limitations and potential failure modes
+	# Check for documentation of known limitations and potential failure modes
 	input.map.known_limitations_documented
 
-	# Placeholder: Check for documentation of out-of-scope use cases
+	# Check for documentation of out-of-scope use cases
 	input.map.out_of_scope_use_cases_documented
 }
