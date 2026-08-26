@@ -366,6 +366,8 @@ PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 - [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa)：Open Policy Agent 官方精选列表，Policy Packages 分类
 - [**OPA 生态目录**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Europe**](https://github.com/GeiserX/awesome-europe)：Digital Regulation 分类
+- [**Awesome AI Governance**](https://github.com/agentrust-io/awesome-ai-governance)：Policy as Code 分类
 - [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI)：Policy as Code 分类
 - [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation)：Policy Engines and Authorisation 分类
 

@@ -367,6 +367,8 @@ Contributions of any size are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). P
 
 - [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa), the Open Policy Agent project's own curated list, under Policy Packages
 - [**OPA ecosystem directory**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Europe**](https://github.com/GeiserX/awesome-europe), under Digital Regulation
+- [**Awesome AI Governance**](https://github.com/agentrust-io/awesome-ai-governance), under Policy as Code
 - [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI), under Policy as Code
 - [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation), under Policy Engines and Authorisation
 

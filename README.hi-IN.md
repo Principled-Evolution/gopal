@@ -368,6 +368,8 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 
 - [**awesome-opa**](https://github.com/open-policy-agent/awesome-opa), Open Policy Agent प्रोजेक्ट की अपनी क्यूरेटेड लिस्ट, Policy Packages सेक्शन में
 - [**OPA इकोसिस्टम डायरेक्टरी**](https://www.openpolicyagent.org/ecosystem/entry/principled-evolution)
+- [**Awesome Europe**](https://github.com/GeiserX/awesome-europe), Digital Regulation सेक्शन में
+- [**Awesome AI Governance**](https://github.com/agentrust-io/awesome-ai-governance), Policy as Code सेक्शन में
 - [**Awesome Responsible AI**](https://github.com/AthenaCore/AwesomeResponsibleAI), Policy as Code सेक्शन में
 - [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation), Policy Engines and Authorisation सेक्शन में
 
