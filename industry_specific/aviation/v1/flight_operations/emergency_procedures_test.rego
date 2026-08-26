@@ -27,3 +27,10 @@ test_deny_without_crew_training if {
 	input_data := object.union(compliant_input, {"emergency_procedures": {"lost_link_procedure_defined": true, "contingency_landing_sites_identified": true, "crew_trained": false}})
 	not emergency_procedures.allow with input as input_data
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not emergency_procedures.allow with input as {}
+}

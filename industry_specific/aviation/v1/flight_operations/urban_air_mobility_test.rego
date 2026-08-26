@@ -31,3 +31,10 @@ test_allow_with_custom_noise_param if {
 	input_data := object.union(compliant_input, {"uam": {"vertiport_certified": true, "noise_db": 70, "corridor_authorized": true}, "params": {"max_noise_db": 75}})
 	urban_air_mobility.allow with input as input_data
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not urban_air_mobility.allow with input as {}
+}

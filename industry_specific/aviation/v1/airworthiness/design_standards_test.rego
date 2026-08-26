@@ -30,3 +30,10 @@ test_allow_for_no_effect_severity_with_level_e if {
 		"software": {"design_assurance_level": "E"},
 	}
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not design_standards.allow with input as {}
+}

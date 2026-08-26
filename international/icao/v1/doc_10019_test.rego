@@ -44,3 +44,10 @@ test_report_reflects_compliant_state if {
 	report.result == true
 	report.metrics.remote_pilot_qualified.control_passed == true
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not doc_10019.allow with input as {}
+}

@@ -170,3 +170,10 @@ test_compliance_report_details if {
 	report.overall_result == true
 	report.recommendations == []
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not transparency.allow with input as {}
+}

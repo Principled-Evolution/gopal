@@ -38,3 +38,10 @@ test_report_identifies_compliance_method if {
 	}
 	report.metrics.remote_id_compliance_method.value == "standard_remote_id"
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not remote_id.allow with input as {}
+}
