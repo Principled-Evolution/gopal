@@ -22,7 +22,7 @@ We aim to acknowledge within **5 business days**. We follow a coordinated-disclo
 
 - **Policy correctness disputes.** If you think a specific Rego rule is too strict, too lax, or misinterprets a regulation, please file a **public issue** rather than emailing security. That's a policy-design discussion, not a vulnerability, and is best done in the open with the community.
 - **The regulations themselves.** GOPAL encodes published regulatory frameworks (EU AI Act, NIST AI RMF, and so on). Concerns about the underlying regulation belong with the regulator that issued it.
-- **Generic OPA / Rego issues.** Please report those to [open-policy-agent/opa](https://github.com/open-policy-agent/opa) or [StyraInc/regal](https://github.com/StyraInc/regal) directly.
+- **Generic OPA / Rego issues.** Please report those to [open-policy-agent/opa](https://github.com/open-policy-agent/opa) or [open-policy-agent/regal](https://github.com/open-policy-agent/regal) directly.
 
 ## Supported versions
 
