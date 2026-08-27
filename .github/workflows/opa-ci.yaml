@@ -52,6 +52,15 @@ jobs:
         run: scripts/generate-coverage.sh --check
         working-directory: ${{ github.workspace }}
 
+      # CONTRIBUTING.md has always required a sibling test and an empty-input
+      # test per policy, and nothing enforced it: the gap reached 22 of 96
+      # policies, including both Article 5 prohibited-practice policies. An
+      # external reviewer flipped `default allow := false` to `true` in the
+      # social-scoring gate and the suite still reported 604/604.
+      - name: Check every policy has a test and an empty-input test
+        run: scripts/check-test-coverage.sh
+        working-directory: ${{ github.workspace }}
+
       # The version appears in seven hand-maintained places, including a README
       # command people are told to run. v1.2.0 shipped that command pointing at
       # a release with no assets, and nothing caught it.
