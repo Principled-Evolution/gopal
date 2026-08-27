@@ -97,6 +97,26 @@ while IFS= read -r file; do
 	metrics="$(comment_list "${file}" 'RequiredMetrics' | jq -R -s 'split("\n") | map(select(length > 0))')"
 	params="$(comment_list "${file}" 'RequiredParams' | jq -R -s 'split("\n") | map(select(length > 0))')"
 
+	# The `input` fields the policy actually reads, derived from its AST rather
+	# than from the comment above. Neither source alone is complete: the comment
+	# had drifted to the point where 22 of 98 policies read `input` and declared
+	# nothing, and the AST cannot recover a field name that is computed, as in
+	# `object.get(input, ["datasets", field], false)` where `field` is bound by a
+	# loop. Consumers union the two.
+	input_field_rows="$(scripts/extract-input-fields.sh --types "${file}")"
+	input_fields="$(printf '%s' "${input_field_rows}" | cut -f1 | jq -R -s 'split("\n") | map(select(length > 0))')"
+
+	# Kind per field, inferred from the literal the policy measures it against.
+	# Only fields with actual evidence appear, so a consumer can tell "this is a
+	# yes/no question" from "no idea, ask for text".
+	input_field_types="$(printf '%s' "${input_field_rows}" | jq -R -s '
+		split("\n")
+		| map(select(length > 0) | split("\t"))
+		| map(select(length == 2 and (.[1] | length) > 0))
+		| map({key: .[0], value: .[1]})
+		| from_entries
+	')"
+
 	# A title from the `# @title` comment convention, used by the policies that
 	# do not define a `metadata` rule. The metadata rule wins when both exist.
 	comment_title="$(awk '/^# *@title /{sub(/^# *@title */, ""); print; exit}' "${file}")"
@@ -130,6 +150,8 @@ while IFS= read -r file; do
 		--argjson decision_rules "${decisions}" \
 		--argjson required_metrics "${metrics}" \
 		--argjson required_params "${params}" \
+		--argjson input_fields "${input_fields}" \
+		--argjson input_field_types "${input_field_types}" \
 		--argjson has_test "${has_test}" \
 		--argjson has_empty_input_test "${has_empty}" \
 		'{
@@ -140,6 +162,8 @@ while IFS= read -r file; do
 			decision_rules: $decision_rules,
 			required_metrics: $required_metrics,
 			required_params: $required_params,
+			input_fields: $input_fields,
+			input_field_types: $input_field_types,
 			has_test: $has_test,
 			has_empty_input_test: $has_empty_input_test,
 			test_file: (if $has_test then $test_file else null end)
