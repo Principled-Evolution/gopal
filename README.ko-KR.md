@@ -25,7 +25,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="최신 릴리스"></a>
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
-  <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
+  <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
   <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
@@ -147,7 +147,7 @@ GOPAL은 세 가지 측면에서 다릅니다.
 - `opa eval`, [Conftest](https://www.conftest.dev/), 또는 기존 OPA 서버로 평가하기
 - 메이저 버전(`v1/`)에 고정하고 업그레이드를 PR로 검토하기
 - 같은 평가 안에서 GOPAL 규칙과 여러분 조직의 `custom/` 규칙을 함께 사용하기
-- [Regal](https://github.com/StyraInc/regal)로 린트하기, GOPAL 자체도 CI에서 같은 린터를 사용합니다
+- [Regal](https://github.com/open-policy-agent/regal)로 린트하기, GOPAL 자체도 CI에서 같은 린터를 사용합니다
 
 입력 수집과 PDF/Markdown 리포트 생성까지 처리해 주는 Python 프레임워크가 필요하다면 [AICertify](https://github.com/Principled-Evolution/aicertify)를 참고하세요.
 
@@ -314,7 +314,7 @@ GOPAL은 법률 자문이 아닙니다. 여기 있는 정책들은 공개된 규
 # 일회성 설정
 pip install pre-commit
 curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
 
 # CI가 실행하는 것과 동일한 검사를 실행합니다
@@ -341,7 +341,7 @@ PR 워크플로는 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.
 
 - **[AICertify](https://github.com/Principled-Evolution/aicertify)**: GOPAL을 사용해 AI 애플리케이션을 평가하고 감사 준비 PDF/MD/JSON 리포트를 생성하는 Python 프레임워크.
 - **[Open Policy Agent](https://www.openpolicyagent.org/)**: 정책 엔진.
-- **[Regal](https://github.com/StyraInc/regal)**: CI에서 사용하는 Rego 린터.
+- **[Regal](https://github.com/open-policy-agent/regal)**: CI에서 사용하는 Rego 린터.
 
 ---
 

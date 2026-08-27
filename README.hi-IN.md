@@ -25,7 +25,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="नवीनतम रिलीज़"></a>
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
-  <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
+  <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
   <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
@@ -149,7 +149,7 @@ GOPAL तीन आयामों में अलग है:
 - `opa eval`, [Conftest](https://www.conftest.dev/), या अपने मौजूदा OPA server से evaluate कीजिए
 - किसी major version (`v1/`) पर पिन कीजिए और अपग्रेड्स को PR के रूप में रिव्यू कीजिए
 - GOPAL के नियमों को अपने private `custom/` नियमों के साथ एक ही evaluation में मिलाइए
-- [Regal](https://github.com/StyraInc/regal) से lint कीजिए, यही linter GOPAL खुद अपने CI में इस्तेमाल करता है
+- [Regal](https://github.com/open-policy-agent/regal) से lint कीजिए, यही linter GOPAL खुद अपने CI में इस्तेमाल करता है
 
 अगर आपको एक ऐसा Python फ्रेमवर्क चाहिए जो input capture और PDF/Markdown रिपोर्ट जनरेशन भी संभाल ले, तो [AICertify](https://github.com/Principled-Evolution/aicertify) देखें।
 
@@ -316,7 +316,7 @@ GOPAL कानूनी सलाह नहीं है। यहाँ की
 # One-time setup
 pip install pre-commit
 curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
 
 # Run the same checks CI runs
@@ -343,7 +343,7 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 
 - **[AICertify](https://github.com/Principled-Evolution/aicertify)**: Python फ्रेमवर्क जो GOPAL का उपयोग करके AI एप्लिकेशन्स का मूल्यांकन करता है और ऑडिट-तैयार PDF/MD/JSON रिपोर्ट्स तैयार करता है।
 - **[Open Policy Agent](https://www.openpolicyagent.org/)**: पॉलिसी इंजन।
-- **[Regal](https://github.com/StyraInc/regal)**: वह Rego linter जिसका हम CI में उपयोग करते हैं।
+- **[Regal](https://github.com/open-policy-agent/regal)**: वह Rego linter जिसका हम CI में उपयोग करते हैं।
 
 ---
 

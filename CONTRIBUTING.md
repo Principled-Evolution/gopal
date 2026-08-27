@@ -27,7 +27,7 @@ Thanks for considering a contribution. GOPAL is an open, community-curated libra
 pip install pre-commit
 curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 \
   && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 \
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 \
   && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
 

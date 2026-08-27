@@ -9,7 +9,7 @@ We'll write a simple policy: **"the AI system must log every model invocation."*
 ```bash
 curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 \
   && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 \
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 \
   && chmod +x regal && sudo mv regal /usr/local/bin/
 git clone https://github.com/Principled-Evolution/gopal.git
 cd gopal

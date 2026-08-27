@@ -25,7 +25,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="Latest release"></a>
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
-  <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
+  <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
   <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
@@ -147,7 +147,7 @@ The packages, conventions, and test patterns are idiomatic Rego. There is no DSL
 - evaluate with `opa eval`, [Conftest](https://www.conftest.dev/), or your existing OPA server
 - pin to a major version (`v1/`) and review upgrades as PRs
 - compose GOPAL rules with your private `custom/` rules in the same evaluation
-- lint with [Regal](https://github.com/StyraInc/regal), the same linter GOPAL runs in CI
+- lint with [Regal](https://github.com/open-policy-agent/regal), the same linter GOPAL runs in CI
 
 ### Per-framework bundles
 
@@ -331,7 +331,7 @@ Drop in your internal AI use-case rules without forking. They evaluate alongside
 # One-time setup
 pip install pre-commit
 curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
 
 # Run the same checks CI runs
@@ -359,7 +359,7 @@ Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evo
 
 - **[AICertify](https://github.com/Principled-Evolution/aicertify)**: Python framework that uses GOPAL to evaluate AI applications and produce audit-ready PDF/MD/JSON reports.
 - **[Open Policy Agent](https://www.openpolicyagent.org/)**: the policy engine.
-- **[Regal](https://github.com/StyraInc/regal)**: the Rego linter we use in CI.
+- **[Regal](https://github.com/open-policy-agent/regal)**: the Rego linter we use in CI.
 
 ---
 

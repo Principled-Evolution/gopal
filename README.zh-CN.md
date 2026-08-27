@@ -25,7 +25,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Star 数"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="最新发布"></a>
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
-  <a href="https://github.com/StyraInc/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
+  <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0 许可证"></a>
   <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="欢迎提交 PR"></a>
@@ -147,7 +147,7 @@ GOPAL 在三个维度上与众不同:
 - 使用 `opa eval`、[Conftest](https://www.conftest.dev/) 或您现有的 OPA server 进行评估
 - 锁定某个主版本(`v1/`),把升级作为 PR 来审查
 - 在同一次评估中,将 GOPAL 规则与您私有的 `custom/` 规则组合使用
-- 用 [Regal](https://github.com/StyraInc/regal) 做代码检查,这也是 GOPAL 自己在 CI 中使用的检查工具
+- 用 [Regal](https://github.com/open-policy-agent/regal) 做代码检查,这也是 GOPAL 自己在 CI 中使用的检查工具
 
 如果您需要一个能处理输入采集并生成 PDF/Markdown 报告的 Python 框架,请参见 [AICertify](https://github.com/Principled-Evolution/aicertify)。
 
@@ -314,7 +314,7 @@ GOPAL 不是法律建议。这里的每条策略都是工程师对公开监管�
 # 一次性环境准备
 pip install pre-commit
 curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
 
 # 运行与 CI 相同的检查
@@ -341,7 +341,7 @@ PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 - **[AICertify](https://github.com/Principled-Evolution/aicertify)**:使用 GOPAL 评估 AI 应用并生成审计就绪的 PDF/MD/JSON 报告的 Python 框架。
 - **[Open Policy Agent](https://www.openpolicyagent.org/)**:策略引擎。
-- **[Regal](https://github.com/StyraInc/regal)**:我们在 CI 中使用的 Rego 代码检查工具。
+- **[Regal](https://github.com/open-policy-agent/regal)**:我们在 CI 中使用的 Rego 代码检查工具。
 
 ---
 
