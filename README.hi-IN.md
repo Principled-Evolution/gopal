@@ -42,7 +42,7 @@ Rego में लिखी गई [OPA](https://www.openpolicyagent.org/) प�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 85 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 91 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
   </picture>
 </p>
 
@@ -201,7 +201,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**96 प्रोडक्शन पॉलिसीज़। टेस्ट्स सहित कुल 146 Rego फ़ाइलें।**
+**91 पॉलिसीज़ जो निर्णय देती हैं, साथ ही वे 7 साझा लाइब्रेरीज़ जिन्हें वे इम्पोर्ट करती हैं। टेस्ट्स सहित कुल 196 Rego फ़ाइलें।** ये आंकड़े [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) द्वारा ट्री से जनरेट होते हैं और CI में जाँचे जाते हैं, इसलिए ये कोड से अलग नहीं हो सकते। वर्तमान संख्याओं के लिए `jq .totals docs/coverage/coverage.json` चलाएँ।
 
 ---
 
