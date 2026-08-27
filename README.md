@@ -42,7 +42,7 @@ Run them against your AI system's metadata, model cards, or evaluation results. 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 96 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 91 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
 
@@ -183,9 +183,10 @@ gopal/
 │   ├── legal/v1/              3 policies — citation verification, privilege, supervision
 │   └── automotive/v1/         1 policy   — vehicle safety integration
 │
-├── global/v1/             9  policies — accountability, fairness, transparency,
-│                                       explainability, content safety,
-│                                       risk management, security, common rules
+├── global/v1/             4  policies — accountability, fairness, transparency, toxicity
+│   └── common/            5  libraries — shared fairness, content-safety, risk
+│                                       and compliance helpers, imported by the
+│                                       framework policies rather than run directly
 │
 ├── operational/          DevOps & corporate
 │   ├── aiops/v1/              1 policy   — scalability
@@ -199,7 +200,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**96 production policies. 146 Rego files including tests.**
+**91 policies that reach a verdict, plus 7 shared libraries they import. 196 Rego files including tests.** These figures are generated from the tree by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI, so they cannot drift from the code. Run `jq .totals docs/coverage/coverage.json` for the current numbers.
 
 ---
 
@@ -330,9 +331,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
 
 - **More NIST coverage**: filling out the Measure and Manage controls
 - **ICO statutory code of practice on AI and automated decision-making**, expected 2026
-- **California SB-1047 successor**, once it is finalized
+- **EU GDPR, scoped to the AI-relevant articles**: Article 22 and Recital 71, Article 35 DPIA triggers, Article 9, Articles 5(1)(c) and 5(1)(e), Articles 13 and 14, and Article 25. Deliberately not the whole regulation, because most of GDPR describes organisational practice that an input document cannot evidence. The UK counterpart to the Article 22 regime is already implemented and the two have now diverged, so the pair is worth having side by side
 - **MAS / HKMA banking AI guidance** for APAC financial supervision
-- **Retiring the seven remaining placeholder policies** in favour of real implementations
+- **Per-metric test coverage**: every policy is now tested against empty input, but the stronger check is removing one required metric at a time. That is what surfaced the most recent fail-open
 
 Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml). You don't have to write any Rego to make the request.
 

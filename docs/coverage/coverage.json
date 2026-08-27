@@ -1,0 +1,3797 @@
+{
+  "schema_version": 1,
+  "generated_by": "scripts/generate-coverage.sh",
+  "note": "Derived from the .rego files on disk. Do not edit by hand; run the script.",
+  "totals": {
+    "frameworks": 15,
+    "groups": 20,
+    "policies": 91,
+    "library_files": 7,
+    "rego_files": 98,
+    "policies_with_tests": 91,
+    "policies_with_empty_input_test": 91,
+    "decision_rules": 325,
+    "tests": 769
+  },
+  "frameworks": [
+    {
+      "id": "global",
+      "name": "Global",
+      "kind": "cross-cutting",
+      "policy_count": 9,
+      "policies_with_tests": 9,
+      "policies": [
+        {
+          "path": "global/v1/accountability/accountability.rego",
+          "package": "global.v1.accountability",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "governance.human_oversight.enabled",
+            "governance.audit_logging.enabled",
+            "governance.audit_logging.completeness_score",
+            "governance.responsibility.clearly_assigned",
+            "governance.incident_response.process_defined"
+          ],
+          "required_params": [
+            "audit_logging_completeness_threshold (default 0.8)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "global/v1/accountability/accountability_test.rego",
+          "title": "Global Accountability Policy",
+          "description": "General accountability requirements for AI systems",
+          "references": [
+            "AICertify Accountability Standards"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "global/v1/common/common_rules.rego",
+          "package": "global.v1.common.common_rules",
+          "decision_rules": [],
+          "required_metrics": [
+            "fairness.gender_bias",
+            "fairness.racial_bias",
+            "content_safety.score",
+            "risk_management.score",
+            "toxicity.score"
+          ],
+          "required_params": [
+            "content_safety_threshold (default 0.1)",
+            "risk_management_threshold (default 0.7)",
+            "toxicity_threshold (default 0.1)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "global/v1/common/common_rules_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        },
+        {
+          "path": "global/v1/common/compliance.rego",
+          "package": "global.v1.common.compliance",
+          "decision_rules": [],
+          "required_metrics": [
+            "compliance.score"
+          ],
+          "required_params": [
+            "compliance_threshold (default 0.8)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "global/v1/common/compliance_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        },
+        {
+          "path": "global/v1/common/content_safety.rego",
+          "package": "global.v1.common.content_safety",
+          "decision_rules": [],
+          "required_metrics": [
+            "content_safety_score"
+          ],
+          "required_params": [
+            "content_safety_threshold (default 0.9)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "global/v1/common/content_safety_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        },
+        {
+          "path": "global/v1/common/fairness.rego",
+          "package": "global.v1.common.fairness",
+          "decision_rules": [],
+          "required_metrics": [
+            "fairness_score"
+          ],
+          "required_params": [
+            "fairness_threshold (default 0.8)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "global/v1/common/fairness_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        },
+        {
+          "path": "global/v1/common/risk_management.rego",
+          "package": "global.v1.common.risk_management",
+          "decision_rules": [],
+          "required_metrics": [
+            "risk_management_score"
+          ],
+          "required_params": [
+            "risk_management_threshold (default 0.7)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "global/v1/common/risk_management_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        },
+        {
+          "path": "global/v1/fairness/fairness.rego",
+          "package": "global.v1.fairness",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "fairness.score",
+            "content_safety.toxicity_score",
+            "risk_management.score"
+          ],
+          "required_params": [
+            "toxicity_threshold (default 0.1)",
+            "stereotype_association_threshold (default 0.1)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "global/v1/fairness/fairness_test.rego",
+          "title": "Global Fairness Policy",
+          "description": "Basic fairness requirements for AI systems",
+          "references": [
+            "AICertify Fairness Standards: https://example.com/aicertify/fairness"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "global/v1/toxicity/toxicity.rego",
+          "package": "global.v1.toxicity",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "evaluation.toxicity_score"
+          ],
+          "required_params": [
+            "toxicity_threshold (default 0.1)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "global/v1/toxicity/toxicity_test.rego",
+          "title": "Global Toxicity Policy",
+          "description": "Basic toxicity evaluation requirements for AI systems",
+          "references": [
+            "AICertify Toxicity Standards: https://example.com/aicertify/toxicity"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "global/v1/transparency/transparency.rego",
+          "package": "global.v1.transparency",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "documentation.model_card.exists",
+            "documentation.model_card.completeness_score",
+            "documentation.explainability.provided",
+            "documentation.limitations.documented",
+            "documentation.use_cases.defined"
+          ],
+          "required_params": [
+            "model_card_completeness_threshold (default 0.8)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "global/v1/transparency/transparency_test.rego",
+          "title": "Global Transparency Policy",
+          "description": "General transparency requirements for AI systems",
+          "references": [
+            "AICertify Transparency Standards"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "helper_functions",
+      "name": "Helper Functions",
+      "kind": "library",
+      "policy_count": 2,
+      "policies_with_tests": 2,
+      "policies": [
+        {
+          "path": "helper_functions/reporting.rego",
+          "package": "helper_functions.reporting",
+          "decision_rules": [],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "helper_functions/reporting_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        },
+        {
+          "path": "helper_functions/validation.rego",
+          "package": "helper_functions.validation",
+          "decision_rules": [],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "helper_functions/validation_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true
+        }
+      ]
+    },
+    {
+      "id": "industry_specific/automotive",
+      "name": "Automotive Vehicle Safety",
+      "kind": "vertical",
+      "policy_count": 1,
+      "policies_with_tests": 1,
+      "policies": [
+        {
+          "path": "industry_specific/automotive/v1/vehicle_safety/vehicle_safety.rego",
+          "package": "industry_specific.automotive.v1.vehicle_safety",
+          "decision_rules": [
+            {
+              "name": "compliant",
+              "default": false
+            },
+            {
+              "name": "hara_analysis_is_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/automotive/v1/vehicle_safety/vehicle_safety_test.rego",
+          "title": "Automotive Vehicle Safety Requirements",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "industry_specific/aviation",
+      "name": "Aviation",
+      "kind": "vertical",
+      "policy_count": 12,
+      "policies_with_tests": 12,
+      "policies": [
+        {
+          "path": "industry_specific/aviation/v1/airworthiness/certification.rego",
+          "package": "industry_specific.aviation.v1.airworthiness.certification",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "aircraft.type_certificate_held",
+            "aircraft.airworthiness_directive_compliant"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/airworthiness/certification_test.rego",
+          "title": "Aviation Type Certification",
+          "description": "Evaluates whether an aircraft holds a valid type certificate and is compliant with all applicable airworthiness directives.",
+          "references": [
+            "ICAO Annex 8 - Airworthiness of Aircraft"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/airworthiness/design_standards.rego",
+          "package": "industry_specific.aviation.v1.airworthiness.design_standards",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.failure_condition_severity",
+            "software.design_assurance_level"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/airworthiness/design_standards_test.rego",
+          "title": "Aviation Software/Hardware Design Assurance",
+          "description": "Evaluates whether a system's software Design Assurance Level (DAL) is at least as rigorous as its worst-case failure condition severity requires.",
+          "references": [
+            "RTCA DO-178C - Software Considerations in Airborne Systems and Equipment Certification",
+            "RTCA DO-254 - Design Assurance Guidance for Airborne Electronic Hardware"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/airworthiness/maintenance.rego",
+          "package": "industry_specific.aviation.v1.airworthiness.maintenance",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "maintenance.program_established",
+            "maintenance.inspection_current",
+            "maintenance.records_retained"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/airworthiness/maintenance_test.rego",
+          "title": "Aviation Continued Airworthiness Maintenance",
+          "description": "Evaluates whether an aircraft has an established maintenance program, current inspections, and retained maintenance records for continued airworthiness.",
+          "references": [
+            "ICAO Annex 6 - Operation of Aircraft, Part I, Chapter 8 (Aeroplane Maintenance)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/autonomous_systems/ai_safety.rego",
+          "package": "industry_specific.aviation.v1.autonomous_systems.ai_safety",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "ai_system.safety_validation_completed",
+            "ai_system.fail_safe_mechanism_present",
+            "ai_system.performance_monitoring_enabled"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/autonomous_systems/ai_safety_test.rego",
+          "title": "Aviation AI Safety Requirements",
+          "description": "Evaluates AI safety validation, fail-safe mechanisms, and performance monitoring for autonomous aviation systems.",
+          "references": [
+            "EASA Concept Paper: First usable guidance for Level 1 & 2 machine learning applications, Issue 2",
+            "ICAO Doc 10019 - Manual on RPAS, Chapter 3"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/autonomous_systems/decision_making.rego",
+          "package": "industry_specific.aviation.v1.autonomous_systems.decision_making",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "decision_system.decision_logging_enabled",
+            "decision_system.explainable",
+            "decision_system.override_capability"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/autonomous_systems/decision_making_test.rego",
+          "title": "Aviation Autonomous Decision-Making Transparency",
+          "description": "Evaluates whether an autonomous flight decision system logs its decisions, can explain them, and can be overridden.",
+          "references": [
+            "EASA Concept Paper: First usable guidance for Level 1 & 2 machine learning applications, Issue 2"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/autonomous_systems/human_oversight.rego",
+          "package": "industry_specific.aviation.v1.autonomous_systems.human_oversight",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "oversight.remote_pilot_monitoring",
+            "oversight.intervention_capability",
+            "oversight.handover_procedure_defined"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/autonomous_systems/human_oversight_test.rego",
+          "title": "Aviation Human Oversight of Autonomous Operation",
+          "description": "Evaluates whether an autonomous aviation system maintains active remote-pilot monitoring, a real-time intervention capability, and a defined handover procedure.",
+          "references": [
+            "ICAO Doc 10019 - Manual on RPAS, Chapter 3 (C2 Link and Human Factors)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/data_management/data_sharing.rego",
+          "package": "industry_specific.aviation.v1.data_management.data_sharing",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "data_sharing.agreement_in_place",
+            "data_sharing.recipient_authorized"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/data_management/data_sharing_test.rego",
+          "title": "Aviation Flight Data Sharing",
+          "description": "Evaluates whether flight data shared with third parties (ATC, regulators, fleet operators) has a data-sharing agreement in place and the recipient is authorized.",
+          "references": [
+            "ICAO Doc 10019 - Manual on RPAS, Chapter 3 (C2 Link data)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/data_management/flight_data.rego",
+          "package": "industry_specific.aviation.v1.data_management.flight_data",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "flight_data.recording_enabled",
+            "flight_data.retention_days"
+          ],
+          "required_params": [
+            "min_retention_days (default 90)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/data_management/flight_data_test.rego",
+          "title": "Aviation Flight Data Recording and Retention",
+          "description": "Evaluates whether flight data recording is enabled and retained for at least the minimum required period.",
+          "references": [
+            "ICAO Annex 6 - Operation of Aircraft, Chapter 4 (Flight Recorders)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/data_management/privacy_protection.rego",
+          "package": "industry_specific.aviation.v1.data_management.privacy_protection",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "privacy.data_minimization_applied",
+            "privacy.consent_or_legal_basis"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/data_management/privacy_protection_test.rego",
+          "title": "Aviation Sensor Data Privacy Protection",
+          "description": "Evaluates whether camera and sensor data collected during flight (which may capture third parties or private property) applies data minimization and has a lawful basis for collection.",
+          "references": [
+            "EASA Easy Access Rules for Unmanned Aircraft Systems, Article 5 (Rules for UAS operations conducted... with regard to privacy)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/flight_operations/bvlos_operations.rego",
+          "package": "industry_specific.aviation.v1.flight_operations.bvlos_operations",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "operation.daa_system_equipped",
+            "operation.authorization_held",
+            "operation.ground_risk_mitigations_in_place"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/flight_operations/bvlos_operations_test.rego",
+          "title": "Beyond Visual Line of Sight Operations",
+          "description": "Evaluates whether a BVLOS operation has detect-and-avoid capability, a governing authorization or waiver, and ground-risk mitigations in place.",
+          "references": [
+            "14 CFR Part 107 Subpart D - Waivers (Sec. 107.31 BVLOS)",
+            "EASA SORA methodology, ground risk mitigations"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/flight_operations/emergency_procedures.rego",
+          "package": "industry_specific.aviation.v1.flight_operations.emergency_procedures",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "emergency_procedures.lost_link_procedure_defined",
+            "emergency_procedures.contingency_landing_sites_identified",
+            "emergency_procedures.crew_trained"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/flight_operations/emergency_procedures_test.rego",
+          "title": "Aviation Emergency and Contingency Procedures",
+          "description": "Evaluates whether an operation has a defined lost-link procedure, identified contingency landing sites, and trained crew for emergency response.",
+          "references": [
+            "ICAO Doc 10019 - Manual on RPAS, Chapter 3 (C2 Link failure contingencies)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/aviation/v1/flight_operations/urban_air_mobility.rego",
+          "package": "industry_specific.aviation.v1.flight_operations.urban_air_mobility",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "uam.vertiport_certified",
+            "uam.noise_compliant",
+            "uam.corridor_authorized"
+          ],
+          "required_params": [
+            "max_noise_db (default 65)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/aviation/v1/flight_operations/urban_air_mobility_test.rego",
+          "title": "Urban Air Mobility Operations",
+          "description": "Evaluates Advanced/Urban Air Mobility operations against vertiport certification, community noise limits, and authorized-corridor requirements.",
+          "references": [
+            "FAA Urban Air Mobility (UAM) Concept of Operations v2.0",
+            "EASA Special Condition VTOL (SC-VTOL-01)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "industry_specific/bfs",
+      "name": "Banking & Financial Services",
+      "kind": "vertical",
+      "policy_count": 4,
+      "policies_with_tests": 4,
+      "policies": [
+        {
+          "path": "industry_specific/bfs/v1/loan_evaluation/fair_lending.rego",
+          "package": "industry_specific.bfs.v1.loan_evaluation.fair_lending",
+          "decision_rules": [
+            {
+              "name": "is_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "evaluation.fairness.score",
+            "evaluation.content_safety.score",
+            "evaluation.risk_management.score"
+          ],
+          "required_params": [
+            "fairness_threshold (default 0.90)",
+            "content_safety_threshold (default 0.85)",
+            "risk_management_threshold (default 0.85)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/bfs/v1/loan_evaluation/fair_lending_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/bfs/v1/model_risk/model_risk.rego",
+          "package": "industry_specific.bfs.v1.model_risk",
+          "decision_rules": [
+            {
+              "name": "identified",
+              "default": false
+            },
+            {
+              "name": "governed",
+              "default": false
+            },
+            {
+              "name": "developed",
+              "default": false
+            },
+            {
+              "name": "validated",
+              "default": false
+            },
+            {
+              "name": "validation_current",
+              "default": false
+            },
+            {
+              "name": "high_risk_rating",
+              "default": false
+            },
+            {
+              "name": "monitored",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "model.in_inventory",
+            "model.risk_rating",
+            "governance.board_approved_policy",
+            "governance.owner_named",
+            "development.conceptual_soundness_documented",
+            "validation.independent_review_completed",
+            "validation.outcomes_analysis_performed",
+            "monitoring.ongoing_monitoring_in_place",
+            "data.lineage_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/bfs/v1/model_risk/model_risk_test.rego",
+          "title": "Model Risk Management for AI Models (SR 11-7 / OCC 2011-12 / BCBS 239)",
+          "description": "Evaluates an AI or machine-learning model against the US supervisory expectations for model risk management in SR 11-7 and OCC 2011-12, together with the risk data aggregation expectations in BCBS 239. SR 11-7 rests on three pillars: robust model development and implementation, independent validation covering conceptual soundness and outcomes analysis, and governance with policies and controls. For the equivalent UK expectations see uk_ss1_23_model_risk in this directory.",
+          "references": [
+            "Federal Reserve SR 11-7, Supervisory Guidance on Model Risk Management",
+            "OCC Bulletin 2011-12, Sound Practices for Model Risk Management",
+            "BCBS 239, Principles for effective risk data aggregation and risk reporting"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/bfs/v1/uk_fca_consumer_duty.rego",
+          "package": "industry_specific.bfs.v1.uk_fca_consumer_duty",
+          "decision_rules": [
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "cross_cutting_met",
+              "default": false
+            },
+            {
+              "name": "outcomes_met",
+              "default": false
+            },
+            {
+              "name": "customer_facing",
+              "default": false
+            },
+            {
+              "name": "ai_explainability_met",
+              "default": false
+            },
+            {
+              "name": "accountability_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "firm.retail_customers_affected",
+            "cross_cutting.good_faith_assessment_completed",
+            "cross_cutting.foreseeable_harm_assessment_completed",
+            "outcomes.target_market_defined",
+            "ai.customer_facing",
+            "ai.decision_explainable_in_plain_language",
+            "accountability.smf_owner_assigned"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/bfs/v1/uk_fca_consumer_duty_test.rego",
+          "title": "FCA Consumer Duty for AI-Affected Retail Outcomes (PRIN 2A)",
+          "description": "Evaluates an AI system that touches a retail customer journey against the FCA Consumer Duty. The FCA has introduced no AI-specific rules, so AI is supervised through the existing Consumer Duty, SM&CR and governance expectations. This policy tests the three cross-cutting obligations, the four retail customer outcomes, and the AI-specific consequence the FCA has been clearest about: a firm must be able to explain a customer-affecting decision in terms that customer can understand.",
+          "references": [
+            "FCA Handbook PRIN 2A, the Consumer Duty",
+            "FCA Handbook PRIN 2A.2, cross-cutting obligations (good faith, avoid foreseeable harm, support customer objectives)",
+            "FCA Handbook PRIN 2A.3 to PRIN 2A.6, the four retail customer outcomes",
+            "FCA FS25/5, AI Live Testing feedback statement",
+            "FCA Senior Managers and Certification Regime (SM&CR)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/bfs/v1/uk_ss1_23_model_risk.rego",
+          "package": "industry_specific.bfs.v1.uk_ss1_23_model_risk",
+          "decision_rules": [
+            {
+              "name": "principle_1_identification",
+              "default": false
+            },
+            {
+              "name": "principle_2_governance",
+              "default": false
+            },
+            {
+              "name": "principle_3_development",
+              "default": false
+            },
+            {
+              "name": "principle_4_validation",
+              "default": false
+            },
+            {
+              "name": "validation_current",
+              "default": false
+            },
+            {
+              "name": "high_risk_tier",
+              "default": false
+            },
+            {
+              "name": "principle_5_mitigants",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "model.in_inventory",
+            "model.risk_tier",
+            "governance.smf_owner_assigned",
+            "development.rationale_documented",
+            "validation.independent_validation_completed",
+            "mitigants.limitations_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/bfs/v1/uk_ss1_23_model_risk_test.rego",
+          "title": "PRA SS1/23 Model Risk Management (UK Banks)",
+          "description": "Evaluates an AI or machine-learning model against the five principles of PRA supervisory statement SS1/23, effective 17 May 2024. SS1/23 expressly extends to modelling techniques using AI, so a firm that has not brought its AI models inside its model risk management framework has a supervisory gap rather than a separate AI problem. Validation expectations are proportionate to the assigned risk tier, and vendor-supplied models are in scope.",
+          "references": [
+            "PRA SS1/23, Model risk management principles for banks (May 2023, effective 17 May 2024)",
+            "SS1/23 Principle 1, model identification and model risk classification",
+            "SS1/23 Principle 2, governance",
+            "SS1/23 Principle 3, model development, implementation and use",
+            "SS1/23 Principle 4, independent model validation",
+            "SS1/23 Principle 5, model risk mitigants"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "industry_specific/education",
+      "name": "Education",
+      "kind": "vertical",
+      "policy_count": 12,
+      "policies_with_tests": 12,
+      "policies": [
+        {
+          "path": "industry_specific/education/v1/academic_integrity/acceptable_ai_use.rego",
+          "package": "industry_specific.education.v1.academic_integrity",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/academic_integrity/acceptable_ai_use_test.rego",
+          "title": "Detailed Acceptable AI Use",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/academic_integrity/ai_plagiarism_detection.rego",
+          "package": "industry_specific.education.v1.academic_integrity",
+          "decision_rules": [
+            {
+              "name": "flag_for_review",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/academic_integrity/ai_plagiarism_detection_test.rego",
+          "title": "Detailed AI Plagiarism Detection",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/assessment_and_evaluation/human_in_the_loop_grading.rego",
+          "package": "industry_specific.education.v1.assessment_and_evaluation",
+          "decision_rules": [
+            {
+              "name": "human_in_the_loop_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/assessment_and_evaluation/human_in_the_loop_grading_test.rego",
+          "title": "Detailed Human-in-the-Loop Grading",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/assessment_and_evaluation/responsible_ai_proctoring.rego",
+          "package": "industry_specific.education.v1.assessment_and_evaluation",
+          "decision_rules": [
+            {
+              "name": "responsible_ai_proctoring_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/assessment_and_evaluation/responsible_ai_proctoring_test.rego",
+          "title": "Detailed Responsible AI Proctoring",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/fairness_and_equity/digital_divide_mitigation.rego",
+          "package": "industry_specific.education.v1.fairness_and_equity",
+          "decision_rules": [
+            {
+              "name": "equitable",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/fairness_and_equity/digital_divide_mitigation_test.rego",
+          "title": "Detailed Digital Divide Mitigation",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/fairness_and_equity/equitable_admissions_systems.rego",
+          "package": "industry_specific.education.v1.fairness_and_equity",
+          "decision_rules": [
+            {
+              "name": "equitable_admissions_systems_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/fairness_and_equity/equitable_admissions_systems_test.rego",
+          "title": "Detailed Equitable Admissions Systems",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/fairness_and_equity/unbiased_automated_grading.rego",
+          "package": "industry_specific.education.v1.fairness_and_equity",
+          "decision_rules": [
+            {
+              "name": "unbiased_automated_grading_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/fairness_and_equity/unbiased_automated_grading_test.rego",
+          "title": "Detailed Unbiased Automated Grading",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/safe_learning_environment/age_appropriate_content.rego",
+          "package": "industry_specific.education.v1.safe_learning_environment",
+          "decision_rules": [
+            {
+              "name": "appropriate",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/safe_learning_environment/age_appropriate_content_test.rego",
+          "title": "Detailed Age-Appropriate Content",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/safe_learning_environment/instructional_tool_vetting.rego",
+          "package": "industry_specific.education.v1.safe_learning_environment",
+          "decision_rules": [
+            {
+              "name": "approved",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/safe_learning_environment/instructional_tool_vetting_test.rego",
+          "title": "Detailed Instructional Tool Vetting",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/student_data_privacy/coppa_compliance.rego",
+          "package": "industry_specific.education.v1.student_data_privacy",
+          "decision_rules": [
+            {
+              "name": "coppa_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/student_data_privacy/coppa_compliance_test.rego",
+          "title": "Detailed COPPA Compliance",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/student_data_privacy/data_minimization.rego",
+          "package": "industry_specific.education.v1.student_data_privacy",
+          "decision_rules": [
+            {
+              "name": "data_minimization_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/student_data_privacy/data_minimization_test.rego",
+          "title": "Detailed Data Minimization",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/education/v1/student_data_privacy/ferpa_compliance.rego",
+          "package": "industry_specific.education.v1.student_data_privacy",
+          "decision_rules": [
+            {
+              "name": "ferpa_compliant",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/education/v1/student_data_privacy/ferpa_compliance_test.rego",
+          "title": "Detailed FERPA Compliance",
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "industry_specific/healthcare",
+      "name": "Healthcare",
+      "kind": "vertical",
+      "policy_count": 2,
+      "policies_with_tests": 2,
+      "policies": [
+        {
+          "path": "industry_specific/healthcare/v1/diagnostic_safety/diagnostic_safety.rego",
+          "package": "industry_specific.healthcare.v1.diagnostic_safety",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "evaluation.fairness_score",
+            "evaluation.content_safety_score",
+            "evaluation.risk_management_score"
+          ],
+          "required_params": [
+            "fairness_threshold (default 0.85)",
+            "content_safety_threshold (default 0.90)",
+            "risk_management_threshold (default 0.90)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/healthcare/v1/diagnostic_safety/diagnostic_safety_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/healthcare/v1/patient_safety/patient_safety.rego",
+          "package": "industry_specific.healthcare.v1.patient_safety",
+          "decision_rules": [
+            {
+              "name": "patient_safety_met",
+              "default": false
+            },
+            {
+              "name": "clinical_validation_met",
+              "default": false
+            },
+            {
+              "name": "risk_assessment_met",
+              "default": false
+            },
+            {
+              "name": "oversight_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "evaluation.patient_safety.score",
+            "evaluation.clinical_validation.score",
+            "evaluation.risk_assessment.score"
+          ],
+          "required_params": [
+            "patient_safety_threshold (default 0.95)",
+            "clinical_validation_threshold (default 0.90)",
+            "risk_assessment_threshold (default 0.90)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/healthcare/v1/patient_safety/patient_safety_test.rego",
+          "title": "Healthcare Patient Safety Requirements",
+          "description": "Evaluates a clinical AI system against patient-safety thresholds together with the human-oversight and adverse-event controls that FDA Good Machine Learning Practice expects. Thresholds are deliberately higher than the diagnostic_safety sibling, because these controls sit closest to patient harm. Every score is looked up with a failing default, so an absent score fails its threshold rather than dropping out of the assessment.",
+          "references": [
+            "FDA, Artificial Intelligence and Machine Learning in Software as a Medical Device",
+            "FDA, Good Machine Learning Practice for Medical Device Development: Guiding Principles",
+            "HIPAA, 45 CFR Parts 160 and 164"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "industry_specific/legal",
+      "name": "Legal Services AI",
+      "kind": "vertical",
+      "policy_count": 3,
+      "policies_with_tests": 3,
+      "policies": [
+        {
+          "path": "industry_specific/legal/v1/citation_verification.rego",
+          "package": "industry_specific.legal.v1.citation_verification",
+          "decision_rules": [
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "all_citations_verified",
+              "default": false
+            },
+            {
+              "name": "verification_attributable",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "submission.ai_assisted",
+            "submission.filed_with_court",
+            "submission.citations_total",
+            "submission.citations_verified",
+            "submission.verification_recorded",
+            "submission.verifier_named"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/legal/v1/citation_verification_test.rego",
+          "title": "Verification of AI-Assisted Citations Before Filing",
+          "description": "Evaluates whether authorities in an AI-assisted document have been independently verified before the document is put before a court. This is the failure mode regulators have actually sanctioned: fabricated citations reaching court filings, as in R (Ayinde) v Haringey LBC. The professional obligation is unchanged by the use of AI, so an unverified citation is a breach whether a person or a model produced it, and verification has to be recorded and attributable to a named individual.",
+          "references": [
+            "SRA warning notice, misuse of AI (August 2026)",
+            "SRA Code of Conduct for Solicitors, paragraph 1.4 (not misleading the court) and 2.4 (properly arguable statements)",
+            "Bar Standards Board, guidance on the use of AI and other technologies (18 May 2026)",
+            "R (on the application of Ayinde) v Haringey LBC",
+            "Guidance on the use of artificial intelligence for judicial office holders (31 October 2025)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/legal/v1/client_confidentiality.rego",
+          "package": "industry_specific.legal.v1.client_confidentiality",
+          "decision_rules": [
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "confidential_material_involved",
+              "default": false
+            },
+            {
+              "name": "public_consumer_tool",
+              "default": false
+            },
+            {
+              "name": "tool_assessed",
+              "default": false
+            },
+            {
+              "name": "safeguards_in_place",
+              "default": false
+            },
+            {
+              "name": "tool_is_not_public",
+              "default": false
+            },
+            {
+              "name": "data_contained",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "data.client_confidential_information_entered",
+            "tool.public_consumer_tool",
+            "tool.vendor_assessed",
+            "tool.trains_on_input",
+            "tool.data_remains_in_secure_environment",
+            "tool.contractual_safeguards"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/legal/v1/client_confidentiality_test.rego",
+          "title": "Client Confidentiality and Privilege in Legal AI Tools",
+          "description": "Evaluates whether client confidential or privileged material may be entered into a given AI tool. The regulators' concern is concrete: entering client information into a public consumer assistant places it in the public domain and can waive legal professional privilege irretrievably. Where confidential material is involved, the tool must be assessed and backed by contractual, technical and organisational safeguards, must not train on the input, and client data must stay inside a secure environment.",
+          "references": [
+            "SRA warning notice, misuse of AI (August 2026)",
+            "SRA Code of Conduct for Solicitors, paragraph 6.3 (confidentiality)",
+            "SRA Code of Conduct for Firms, paragraph 6.3 (confidentiality)",
+            "BSB Handbook Core Duty 6 and rC86, confidentiality",
+            "Bar Standards Board, guidance on the use of AI and other technologies (18 May 2026)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "industry_specific/legal/v1/competence_supervision.rego",
+          "package": "industry_specific.legal.v1.competence_supervision",
+          "decision_rules": [
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "competence_maintained",
+              "default": false
+            },
+            {
+              "name": "assessed_before_adoption",
+              "default": false
+            },
+            {
+              "name": "supervision_effective",
+              "default": false
+            },
+            {
+              "name": "client_informed",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "practitioner.technology_competence_maintained",
+            "practitioner.training_completed",
+            "firm.ai_risk_assessment_before_adoption",
+            "firm.supervision_system_in_place",
+            "firm.supervisor_named",
+            "client.ai_use_disclosed_where_material"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "industry_specific/legal/v1/competence_supervision_test.rego",
+          "title": "Competence, Supervision and Client Disclosure for Legal AI Use",
+          "description": "Evaluates the governance around a legal practitioner's use of AI. The regulators do not require expertise in the technology, but they do require enough competence to understand what the tools in a workflow actually do, a risk assessment before adoption, an effective supervision system with a named supervisor, and disclosure to the client where the use of AI is material. Managers remain accountable for the output of those they supervise however it was produced.",
+          "references": [
+            "BSB Handbook Core Duty 7, competence; Bar Standards Board guidance on AI (18 May 2026)",
+            "SRA Code of Conduct for Solicitors, paragraphs 3.2 (competent service) and 3.5 (effective supervision)",
+            "SRA Code of Conduct for Firms, paragraphs 2.1, 4.3 and 4.4 (governance and supervision)",
+            "SRA warning notice, misuse of AI (August 2026)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/brazil",
+      "name": "Brazil AI Governance",
+      "kind": "regulation",
+      "policy_count": 1,
+      "policies_with_tests": 1,
+      "policies": [
+        {
+          "path": "international/brazil/v1/ai_governance/ai_governance.rego",
+          "package": "international.brazil.v1.ai_governance",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "excessive_risk_prohibited",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/brazil/v1/ai_governance/ai_governance_test.rego",
+          "title": "Brazil AI Governance Policy (Bill 2338/2023)",
+          "description": "Policies based on Brazil's Bill of Law No. 2,338/2023 for AI governance, adopting a risk-based approach.",
+          "references": [
+            "Brazil Bill of Law No. 2,338/2023 (PL 2338/23)",
+            "Brazilian Artificial Intelligence Strategy (EBIA) 2021"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/easa",
+      "name": "EASA (European Union Aviation Safety Agency)",
+      "kind": "regulation",
+      "policy_count": 2,
+      "policies_with_tests": 2,
+      "policies": [
+        {
+          "path": "international/easa/v1/regulation_2019_947.rego",
+          "package": "international.easa.v1.regulation_2019_947",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "operation.category",
+            "operator.registered",
+            "aircraft.class_marking",
+            "authorization.granted"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/easa/v1/regulation_2019_947_test.rego",
+          "title": "EASA Regulation 2019/947 - Rules for UAS Operation",
+          "description": "Evaluates UAS operations against the Open, Specific, and Certified category requirements of Commission Implementing Regulation (EU) 2019/947.",
+          "references": [
+            "Commission Implementing Regulation (EU) 2019/947, Annex Part A (Open category), Part B (Specific category)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/easa/v1/sora.rego",
+          "package": "international.easa.v1.sora",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "assessment.ground_risk_class",
+            "assessment.air_risk_class",
+            "assessment.sail_determined",
+            "mitigations.adequate"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/easa/v1/sora_test.rego",
+          "title": "EASA SORA - Specific Operations Risk Assessment",
+          "description": "Evaluates whether a Specific-category UAS operation has completed a SORA risk assessment (ground risk class, air risk class, resulting SAIL) with adequate mitigations in place.",
+          "references": [
+            "EASA Easy Access Rules for Unmanned Aircraft Systems, SORA methodology (Annex to AMC1 Article 11 of Regulation (EU) 2019/947)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/eu_ai_act",
+      "name": "EU AI Act",
+      "kind": "regulation",
+      "policy_count": 29,
+      "policies_with_tests": 29,
+      "policies": [
+        {
+          "path": "international/eu_ai_act/v1/compliance/ce_marking.rego",
+          "package": "international.eu_ai_act.v1.compliance.ce_marking",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "marking_affixed",
+              "default": false
+            },
+            {
+              "name": "digital_only",
+              "default": false
+            },
+            {
+              "name": "marking_presented_correctly",
+              "default": false
+            },
+            {
+              "name": "notified_body_involved",
+              "default": false
+            },
+            {
+              "name": "notified_body_number_ok",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "system.digital_only",
+            "ce_marking.affixed",
+            "ce_marking.visible_legible_indelible",
+            "ce_marking.digital_marking_accessible",
+            "ce_marking.notified_body_involved",
+            "ce_marking.notified_body_number_displayed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/compliance/ce_marking_test.rego",
+          "title": "EU AI Act CE Marking (Article 48)",
+          "description": "Evaluates the CE marking on a high-risk AI system. Two conditional requirements sit inside Article 48 and are treated as such here: where the system is provided digitally the marking must be accessible digitally rather than physically, and where a notified body was involved in the conformity assessment its identification number must appear alongside the marking. A marking affixed without that number, where a notified body was used, is incomplete.",
+          "references": [
+            "Article 48 of the EU AI Act, CE marking",
+            "Article 48(2), digital CE marking",
+            "Article 48(4), identification number of the notified body"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/compliance/conformity_assessment.rego",
+          "package": "international.eu_ai_act.v1.compliance.conformity_assessment",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "biometric_category",
+              "default": false
+            },
+            {
+              "name": "internal_control_route",
+              "default": false
+            },
+            {
+              "name": "notified_body_route",
+              "default": false
+            },
+            {
+              "name": "route_permitted",
+              "default": false
+            },
+            {
+              "name": "assessment_completed",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "system.annex_iii_category",
+            "assessment.procedure",
+            "assessment.harmonised_standards_applied",
+            "assessment.notified_body_involved",
+            "assessment.completed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/compliance/conformity_assessment_test.rego",
+          "title": "EU AI Act Conformity Assessment (Article 43)",
+          "description": "Evaluates which conformity assessment route a high-risk AI system must follow. The distinction Article 43 draws is easy to get wrong: for the biometric systems in Annex III point 1 a provider may use internal control under Annex VI only where it has applied the harmonised standards, and otherwise must involve a notified body under Annex VII. For Annex III points 2 to 8, internal control is the route.",
+          "references": [
+            "Article 43(1) of the EU AI Act, conformity assessment for Annex III point 1 systems",
+            "Article 43(2) of the EU AI Act, conformity assessment for Annex III points 2 to 8",
+            "Annex VI, conformity assessment based on internal control",
+            "Annex VII, conformity based on assessment of the quality management system and technical documentation"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/compliance/declaration_conformity.rego",
+          "package": "international.eu_ai_act.v1.compliance.declaration_conformity",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "all_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "declaration.drawn_up",
+            "declaration.machine_readable",
+            "declaration.annex_v_content_complete",
+            "declaration.retained_ten_years",
+            "declaration.translated_for_market"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/compliance/declaration_conformity_test.rego",
+          "title": "EU AI Act EU Declaration of Conformity (Article 47)",
+          "description": "Evaluates the EU declaration of conformity for a high-risk AI system. Article 47 requires more than the document existing: it must be machine readable, physically or electronically signed, contain the information set out in Annex V, be kept at the disposal of the national authorities for ten years, and be translated into a language required by the Member State where the system is placed on the market.",
+          "references": [
+            "Article 47 of the EU AI Act, EU declaration of conformity",
+            "Article 47(1), ten-year retention at the disposal of national authorities",
+            "Annex V, EU declaration of conformity content"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/compliance/registration.rego",
+          "package": "international.eu_ai_act.v1.compliance.registration",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "claims_exemption",
+              "default": false
+            },
+            {
+              "name": "exemption_registered",
+              "default": false
+            },
+            {
+              "name": "fully_registered",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "system.annex_iii_exempt_under_article_6_3",
+            "registration.provider_registered",
+            "registration.system_registered",
+            "registration.registered_before_placing_on_market",
+            "registration.annex_viii_information_complete",
+            "registration.exemption_assessment_registered"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/compliance/registration_test.rego",
+          "title": "EU AI Act EU Database Registration (Article 49)",
+          "description": "Evaluates registration of a high-risk AI system in the EU database. Article 49(1) requires the provider and the system to be registered before the system is placed on the market or put into service, with the Annex VIII information. Article 49(2) covers the case a provider is most likely to overlook: where a provider concludes its Annex III system is not high-risk under Article 6(3), that assessment must itself be registered.",
+          "references": [
+            "Article 49(1) of the EU AI Act, registration before placing on the market",
+            "Article 49(2) of the EU AI Act, registration of an Article 6(3) non-high-risk assessment",
+            "Annex VIII, information to be submitted upon registration"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/data_governance/data_quality.rego",
+          "package": "international.eu_ai_act.v1.data_governance.data_quality",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "quality_criteria_met",
+              "default": false
+            },
+            {
+              "name": "setting_considered",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "datasets.relevant",
+            "datasets.sufficiently_representative",
+            "datasets.errors_addressed",
+            "datasets.complete_to_the_extent_possible",
+            "datasets.contextual_characteristics_considered"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/data_governance/data_quality_test.rego",
+          "title": "EU AI Act Data Quality Criteria (Article 10(3) to 10(4))",
+          "description": "Evaluates the training, validation and testing datasets of a high-risk AI system against the Article 10(3) quality criteria: relevant, sufficiently representative, and to the best extent possible free of errors and complete. Article 10(4) adds that the characteristics of the specific geographical, contextual, behavioural or functional setting must be considered, which is the criterion most often skipped when a dataset is reused across markets.",
+          "references": [
+            "Article 10(3) of the EU AI Act, dataset quality criteria",
+            "Article 10(4) of the EU AI Act, geographical, contextual, behavioural and functional setting",
+            "Recital 67 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/data_governance/training_data.rego",
+          "package": "international.eu_ai_act.v1.data_governance.training_data",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "governance_practices_met",
+              "default": false
+            },
+            {
+              "name": "special_category_processed",
+              "default": false
+            },
+            {
+              "name": "special_category_lawful",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "governance.design_choices_documented",
+            "governance.collection_process_documented",
+            "governance.preparation_documented",
+            "governance.assumptions_documented",
+            "governance.suitability_assessed",
+            "governance.bias_examined",
+            "governance.gaps_identified_and_addressed",
+            "special_category.processed_for_bias_correction",
+            "special_category.safeguards_in_place"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/data_governance/training_data_test.rego",
+          "title": "EU AI Act Data Governance Practices (Article 10(2) and 10(5))",
+          "description": "Evaluates the data governance and management practices behind a high-risk AI system's datasets, as required by Article 10(2): documented design choices, collection processes, preparation such as annotation and labelling, the assumptions made, a suitability assessment, examination for bias, and identification of gaps with measures to address them. Where special category personal data is processed to detect and correct bias, Article 10(5) permits it only with safeguards, so that is an explicit condition.",
+          "references": [
+            "Article 10(2) of the EU AI Act, data governance and management practices",
+            "Article 10(5) of the EU AI Act, processing special categories of personal data for bias detection",
+            "Recital 67 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/documentation/automated_logs.rego",
+          "package": "international.eu_ai_act.v1.documentation.automated_logs",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "baseline_logging",
+              "default": false
+            },
+            {
+              "name": "annex_iii_1_a",
+              "default": false
+            },
+            {
+              "name": "biometric_logging_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "logging.automatic_recording_enabled",
+            "logging.covers_system_lifetime",
+            "logging.identifies_risk_situations",
+            "logging.supports_post_market_monitoring",
+            "system.annex_iii_1_a_biometric",
+            "logging.records_usage_period",
+            "logging.records_reference_database",
+            "logging.records_input_data",
+            "logging.records_verifying_persons"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/documentation/automated_logs_test.rego",
+          "title": "EU AI Act Automatic Logging Capability (Article 12)",
+          "description": "Evaluates whether a high-risk AI system technically allows the automatic recording of events over its lifetime, as Article 12 requires, with logging capable of identifying situations that may present a risk or lead to a substantial modification. Article 12(3) adds four specific fields for the remote biometric identification systems in Annex III point 1(a), so those are required only for that class and required absolutely within it.",
+          "references": [
+            "Article 12(1) and 12(2) of the EU AI Act, automatic recording of events",
+            "Article 12(3) of the EU AI Act, additional logging for Annex III point 1(a) systems",
+            "Annex III point 1(a), remote biometric identification systems"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/documentation/record_keeping.rego",
+          "package": "international.eu_ai_act.v1.documentation.record_keeping",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "logs_retained",
+              "default": false
+            },
+            {
+              "name": "retention_sufficient",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "logs.retained",
+            "logs.retention_months",
+            "logs.role"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/documentation/record_keeping_test.rego",
+          "title": "EU AI Act Log Retention (Articles 19 and 26(6))",
+          "description": "Evaluates whether logs generated under Article 12 are retained for the period the Act requires. Both providers under Article 19 and deployers under Article 26(6) must keep the logs for at least six months, unless a longer period applies under Union or national law. A system that generates logs but discards them fails this even though its logging capability is present.",
+          "references": [
+            "Article 19 of the EU AI Act, automatically generated logs kept by providers",
+            "Article 26(6) of the EU AI Act, logs kept by deployers",
+            "Article 12 of the EU AI Act, record-keeping"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/documentation/technical_documentation.rego",
+          "package": "international.eu_ai_act.v1.documentation.technical_documentation",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "completeness_sufficient",
+              "default": false
+            },
+            {
+              "name": "quality_sufficient",
+              "default": false
+            },
+            {
+              "name": "compliance_level_acceptable",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "metrics.model_card.completeness",
+            "metrics.model_card.quality",
+            "metrics.model_card.compliance_level",
+            "metrics.model_card.section_scores"
+          ],
+          "required_params": [
+            "completeness_threshold (default 0.8)",
+            "quality_threshold (default 0.8)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/documentation/technical_documentation_test.rego",
+          "title": "EU AI Act Technical Documentation Requirements",
+          "description": "Policy to evaluate compliance with EU AI Act Articles 11, 12, and 53 documentation requirements",
+          "references": [
+            "Article 11 of the EU AI Act - Technical documentation",
+            "Article 12 of the EU AI Act - Record-keeping",
+            "Article 53 of the EU AI Act - Transparency obligations"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/eu_fairness/eu_fairness.rego",
+          "package": "international.eu_ai_act.v1.eu_fairness",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "has_gender_bias",
+              "default": true
+            },
+            {
+              "name": "has_racial_bias",
+              "default": true
+            },
+            {
+              "name": "toxicity_below_threshold",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "metrics.fairness.gender_bias",
+            "metrics.fairness.racial_bias",
+            "metrics.content_safety.score"
+          ],
+          "required_params": [
+            "fairness_threshold (default 0.8)",
+            "toxicity_threshold (default 0.7)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/eu_fairness/eu_fairness_test.rego",
+          "title": "EU AI Act Fairness Requirements",
+          "description": "Policy to evaluate compliance with EU AI Act fairness requirements",
+          "references": [
+            "Article 10 of the EU AI Act - Data and data governance",
+            "Article 15 of the EU AI Act - Accuracy, robustness and cybersecurity"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/gpai/downstream_transparency.rego",
+          "package": "international.eu_ai_act.v1.gpai.downstream_transparency",
+          "decision_rules": [
+            {
+              "name": "is_gpai",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "systemic_risk",
+              "default": false
+            },
+            {
+              "name": "downstream_exemption_applies",
+              "default": false
+            },
+            {
+              "name": "downstream_information_met",
+              "default": false
+            },
+            {
+              "name": "copyright_policy_met",
+              "default": false
+            },
+            {
+              "name": "training_summary_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "model.general_purpose",
+            "model.free_and_open_source",
+            "model.parameters_publicly_available",
+            "model.systemic_risk",
+            "downstream.annex_xii_information_provided",
+            "downstream.enables_downstream_compliance",
+            "copyright.policy_in_place",
+            "copyright.respects_article_4_3_reservations",
+            "training_content.public_summary_available",
+            "training_content.summary_sufficiently_detailed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/gpai/downstream_transparency_test.rego",
+          "title": "EU AI Act GPAI Downstream, Copyright and Training Content Obligations (Article 53(1)(b) to (d))",
+          "description": "Evaluates the three Article 53 obligations that face outward from a general-purpose AI model provider: information and documentation to downstream providers so they can meet their own obligations, a policy to comply with Union copyright law including the Article 4(3) DSM text and data mining reservations, and a sufficiently detailed publicly available summary of the training content. The free and open-source exemption in Article 53(2) reaches only the downstream information duty; the copyright policy and training content summary apply regardless.",
+          "references": [
+            "Article 53(1)(b) of the EU AI Act, information to downstream providers",
+            "Article 53(1)(c) of the EU AI Act, Union copyright policy and Article 4(3) DSM reservations",
+            "Article 53(1)(d) of the EU AI Act, public summary of training content",
+            "Article 53(2) of the EU AI Act, scope of the free and open-source exemption",
+            "Annex XII, information for downstream providers"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/gpai/systemic_risk_classification.rego",
+          "package": "international.eu_ai_act.v1.gpai.systemic_risk_classification",
+          "decision_rules": [
+            {
+              "name": "is_gpai",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "exceeds_compute_threshold",
+              "default": false
+            },
+            {
+              "name": "commission_designated",
+              "default": false
+            },
+            {
+              "name": "systemic_risk",
+              "default": false
+            },
+            {
+              "name": "commission_notified",
+              "default": false
+            },
+            {
+              "name": "article_55_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "model.general_purpose",
+            "model.cumulative_training_compute_flops",
+            "model.commission_designated_systemic_risk",
+            "notification.commission_notified",
+            "systemic_risk.model_evaluation_with_adversarial_testing",
+            "systemic_risk.risks_assessed_and_mitigated",
+            "systemic_risk.serious_incidents_reported_to_ai_office",
+            "systemic_risk.cybersecurity_protection_adequate"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/gpai/systemic_risk_classification_test.rego",
+          "title": "EU AI Act GPAI Systemic Risk Classification and Obligations (Articles 51, 52 and 55)",
+          "description": "Classifies a general-purpose AI model against the Article 51 systemic risk criteria and, where it qualifies, tests the Article 55 obligations that follow. Article 51(2) sets a rebuttable presumption of high impact capabilities at cumulative training compute above 10^25 floating point operations, and Article 52(1) requires notification of the Commission without delay and within two weeks of meeting it. A model can also be designated by Commission decision regardless of compute.",
+          "references": [
+            "Article 51 of the EU AI Act, classification of general-purpose AI models with systemic risk",
+            "Article 51(2), the 10^25 FLOP presumption",
+            "Article 52(1), notification of the Commission within two weeks",
+            "Article 55 of the EU AI Act, obligations of providers of GPAI models with systemic risk"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/gpai/technical_documentation.rego",
+          "package": "international.eu_ai_act.v1.gpai.technical_documentation",
+          "decision_rules": [
+            {
+              "name": "is_gpai",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "systemic_risk",
+              "default": false
+            },
+            {
+              "name": "exemption_applies",
+              "default": false
+            },
+            {
+              "name": "documentation_complete",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "model.general_purpose",
+            "model.free_and_open_source",
+            "model.parameters_publicly_available",
+            "model.systemic_risk",
+            "documentation.annex_xi_complete",
+            "documentation.training_process_documented",
+            "documentation.testing_process_documented",
+            "documentation.evaluation_results_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/gpai/technical_documentation_test.rego",
+          "title": "EU AI Act GPAI Technical Documentation (Article 53(1)(a))",
+          "description": "Evaluates the technical documentation a provider of a general-purpose AI model must draw up and keep up to date, including the training and testing process and the results of its evaluation, per Annex XI. Article 53(2) exempts models released under a free and open-source licence with publicly available parameters, but that exemption falls away entirely for a model with systemic risk, which is the interaction most likely to be misread.",
+          "references": [
+            "Article 53(1)(a) of the EU AI Act, technical documentation for GPAI models",
+            "Article 53(2) of the EU AI Act, free and open-source exemption",
+            "Annex XI, technical documentation for general-purpose AI models"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/human_oversight/human_oversight.rego",
+          "package": "international.eu_ai_act.v1.human_oversight",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "designed_for_oversight",
+              "default": false
+            },
+            {
+              "name": "oversight_informed",
+              "default": false
+            },
+            {
+              "name": "oversight_effective",
+              "default": false
+            },
+            {
+              "name": "assigned_persons_competent",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "oversight.measures_built_into_system",
+            "oversight.capabilities_and_limitations_communicated",
+            "oversight.automation_bias_addressed",
+            "oversight.can_disregard_output",
+            "oversight.can_intervene_or_halt",
+            "oversight.assigned_persons_competent"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/human_oversight/human_oversight_test.rego",
+          "title": "EU AI Act Human Oversight (Article 14)",
+          "description": "Evaluates a high-risk AI system against the Article 14 human oversight requirements. Article 14 is not satisfied by nominating a person: the system must be designed so oversight is possible, the people assigned must be able to understand its capacities and limitations, remain aware of automation bias, be able to disregard or override an output, and be able to intervene or halt operation. This policy treats each of those as a separate control.",
+          "references": [
+            "Article 14 of the EU AI Act, human oversight",
+            "Article 14(4)(a) to (e), the specific oversight capabilities",
+            "Recital 73 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/obligations/deployer_obligations.rego",
+          "package": "international.eu_ai_act.v1.obligations.deployer_obligations",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "uses_per_instructions",
+              "default": false
+            },
+            {
+              "name": "oversight_assigned",
+              "default": false
+            },
+            {
+              "name": "input_data_adequate",
+              "default": false
+            },
+            {
+              "name": "monitoring_in_place",
+              "default": false
+            },
+            {
+              "name": "logs_kept",
+              "default": false
+            },
+            {
+              "name": "workers_informed",
+              "default": false
+            },
+            {
+              "name": "affected_persons_informed",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "deployer.uses_per_instructions",
+            "deployer.human_oversight_assigned",
+            "deployer.oversight_persons_trained_and_authorised",
+            "deployer.input_data_relevant",
+            "deployer.controls_input_data",
+            "deployer.monitors_operation",
+            "deployer.reports_serious_incidents",
+            "deployer.logs_kept_six_months",
+            "deployer.workplace_deployment",
+            "deployer.workers_informed",
+            "deployer.affects_natural_persons",
+            "deployer.affected_persons_informed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/obligations/deployer_obligations_test.rego",
+          "title": "EU AI Act Deployer Obligations (Article 26)",
+          "description": "Evaluates a deployer of a high-risk AI system against Article 26. Two obligations are conditional rather than universal and are treated as such here: workers and their representatives must be informed before a system is put into service in the workplace, and natural persons subject to a high-risk decision must be told. The input data obligation applies only to the extent the deployer exercises control over that data.",
+          "references": [
+            "Article 26 of the EU AI Act, obligations of deployers of high-risk AI systems",
+            "Article 26(7), informing workers' representatives",
+            "Article 26(11), informing natural persons subject to a decision"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/obligations/distributor_obligations.rego",
+          "package": "international.eu_ai_act.v1.obligations.distributor_obligations",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "verifications_met",
+              "default": false
+            },
+            {
+              "name": "conformity_issue_found",
+              "default": false
+            },
+            {
+              "name": "corrective_duty_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "distributor.verified_ce_marking",
+            "distributor.verified_declaration_and_instructions",
+            "distributor.verified_provider_and_importer_compliance",
+            "distributor.storage_and_transport_conditions_adequate",
+            "distributor.non_conformity_discovered",
+            "distributor.corrective_action_taken"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/obligations/distributor_obligations_test.rego",
+          "title": "EU AI Act Distributor Obligations (Article 24)",
+          "description": "Evaluates a distributor of a high-risk AI system against Article 24. The distributor verifies CE marking, the declaration of conformity and instructions, and that the provider and importer met their own obligations, before making the system available. Article 24(4) adds a continuing duty: where a distributor discovers a system it has already made available is non-conforming, corrective action is required rather than optional.",
+          "references": [
+            "Article 24 of the EU AI Act, obligations of distributors",
+            "Article 24(4), corrective action after a system has been made available"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/obligations/importer_obligations.rego",
+          "package": "international.eu_ai_act.v1.obligations.importer_obligations",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "all_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "importer.verified_conformity_assessment",
+            "importer.verified_technical_documentation",
+            "importer.verified_ce_marking_and_declaration",
+            "importer.verified_authorised_representative",
+            "importer.identification_provided",
+            "importer.storage_and_transport_conditions_adequate",
+            "importer.documentation_retained_ten_years"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/obligations/importer_obligations_test.rego",
+          "title": "EU AI Act Importer Obligations (Article 23)",
+          "description": "Evaluates an importer of a high-risk AI system against Article 23. The importer's role is verification before placing on the market: that the provider carried out the conformity assessment, drew up the technical documentation, affixed CE marking with a declaration of conformity and instructions, and appointed an authorised representative. Article 23(5) then requires the certificate, declaration and instructions to be kept for ten years.",
+          "references": [
+            "Article 23 of the EU AI Act, obligations of importers",
+            "Article 23(5), ten-year retention of the certificate, declaration and instructions"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/obligations/provider_obligations.rego",
+          "package": "international.eu_ai_act.v1.obligations.provider_obligations",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "all_obligations_met",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "provider.quality_management_system",
+            "provider.technical_documentation_kept",
+            "provider.logs_kept",
+            "provider.conformity_assessment_completed",
+            "provider.declaration_of_conformity_drawn_up",
+            "provider.ce_marking_affixed",
+            "provider.registered_in_eu_database",
+            "provider.identification_on_system_or_packaging",
+            "provider.corrective_action_process",
+            "provider.accessibility_requirements_met"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/obligations/provider_obligations_test.rego",
+          "title": "EU AI Act Provider Obligations (Article 16)",
+          "description": "Evaluates a provider of a high-risk AI system against the Article 16 obligations. Article 16 is a checklist that pulls in the rest of Chapter III by reference, so this policy tests each limb separately and names the ones that fail. Placing a system on the market with any of them outstanding is a breach regardless of how well the underlying model performs.",
+          "references": [
+            "Article 16 of the EU AI Act, obligations of providers of high-risk AI systems",
+            "Articles 17 to 20, 43, 47, 48 and 49 of the EU AI Act, referenced by Article 16"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/biometric_categorization.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.biometric_categorization",
+          "decision_rules": [
+            {
+              "name": "categorises_biometrically",
+              "default": false
+            },
+            {
+              "name": "infers_sensitive_attribute",
+              "default": false
+            },
+            {
+              "name": "exemption_applies",
+              "default": false
+            },
+            {
+              "name": "prohibited",
+              "default": false
+            },
+            {
+              "name": "not_prohibited",
+              "default": false
+            },
+            {
+              "name": "assessment_complete",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.performs_biometric_categorisation",
+            "system.inferred_attributes",
+            "system.dataset_labelling_only",
+            "system.law_enforcement_use"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/biometric_categorization_test.rego",
+          "title": "EU AI Act Prohibition of Sensitive Biometric Categorisation",
+          "description": "Evaluates an AI system against the Article 5(1)(g) prohibition on biometric categorisation that deduces or infers race, political opinions, trade union membership, religious or philosophical beliefs, sex life or sexual orientation. Article 5(1)(g) exempts the labelling or filtering of lawfully acquired biometric datasets and categorisation of biometric data in the area of law enforcement, so both exemptions are explicit conditions here.",
+          "references": [
+            "Article 5(1)(g) of the EU AI Act, biometric categorisation deducing sensitive attributes",
+            "Recital 30 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/biometric_identification.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.biometric_identification",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "permitted_objective_claimed",
+              "default": false
+            },
+            {
+              "name": "prior_authorisation_obtained",
+              "default": false
+            },
+            {
+              "name": "prohibited",
+              "default": false
+            },
+            {
+              "name": "not_prohibited",
+              "default": false
+            },
+            {
+              "name": "assessment_complete",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.real_time_remote_biometric_identification",
+            "system.publicly_accessible_space",
+            "system.law_enforcement_purpose",
+            "system.permitted_objective",
+            "authorisation.prior_authorisation_obtained"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/biometric_identification_test.rego",
+          "title": "EU AI Act Prohibition of Real-Time Remote Biometric Identification",
+          "description": "Evaluates an AI system against the Article 5(1)(h) prohibition on real-time remote biometric identification in publicly accessible spaces for law enforcement. The prohibition admits a closed list of strictly necessary objectives, and where one of those is relied on Article 5(3) still requires prior judicial or independent administrative authorisation. This policy therefore treats a permitted objective without that authorisation as prohibited, which is the case most likely to be got wrong.",
+          "references": [
+            "Article 5(1)(h) of the EU AI Act, real-time remote biometric identification",
+            "Article 5(3) of the EU AI Act, prior authorisation requirement",
+            "Recitals 32 to 34 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/criminal_profiling.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.criminal_profiling",
+          "decision_rules": [
+            {
+              "name": "predicts_offence_risk",
+              "default": false
+            },
+            {
+              "name": "based_solely_on_profiling",
+              "default": false
+            },
+            {
+              "name": "carve_out_applies",
+              "default": false
+            },
+            {
+              "name": "prohibited",
+              "default": false
+            },
+            {
+              "name": "not_prohibited",
+              "default": false
+            },
+            {
+              "name": "assessment_complete",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.predicts_criminal_offence_risk",
+            "system.based_solely_on_profiling",
+            "system.supports_human_assessment",
+            "system.grounded_in_objective_verifiable_facts"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/criminal_profiling_test.rego",
+          "title": "EU AI Act Prohibition of Predictive Criminal Profiling",
+          "description": "Evaluates an AI system against the Article 5(1)(d) prohibition on assessing or predicting the risk of a natural person committing a criminal offence based solely on profiling or on assessing personality traits and characteristics. The Article carves out systems that support a human assessment already grounded in objective and verifiable facts directly linked to criminal activity, so this policy treats that carve-out as an explicit condition rather than assuming it.",
+          "references": [
+            "Article 5(1)(d) of the EU AI Act, predictive policing based on profiling",
+            "Recital 42 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/emotion_recognition.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.emotion_recognition",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "workplace_context_detected",
+              "default": true
+            },
+            {
+              "name": "educational_context_detected",
+              "default": true
+            },
+            {
+              "name": "combined_score_acceptable",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "metrics.emotion_recognition.workplace_context",
+            "metrics.emotion_recognition.educational_context",
+            "metrics.emotion_recognition.combined_score"
+          ],
+          "required_params": [
+            "workplace_context_threshold (default 0.3)",
+            "educational_context_threshold (default 0.3)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/emotion_recognition_test.rego",
+          "title": "EU AI Act Emotion Recognition Prohibition",
+          "description": "Policy to evaluate compliance with EU AI Act Article 5(1)(a) prohibition on emotion recognition",
+          "references": [
+            "Article 5(1)(a) of the EU AI Act - Prohibition of emotion recognition in workplace/educational contexts"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/facial_recognition_scraping.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.facial_recognition_scraping",
+          "decision_rules": [
+            {
+              "name": "builds_database",
+              "default": false
+            },
+            {
+              "name": "scrapes_untargeted",
+              "default": false
+            },
+            {
+              "name": "prohibited",
+              "default": false
+            },
+            {
+              "name": "not_prohibited",
+              "default": false
+            },
+            {
+              "name": "assessment_complete",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.builds_facial_recognition_database",
+            "system.scrapes_facial_images",
+            "system.scraping_is_targeted",
+            "system.sources"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/facial_recognition_scraping_test.rego",
+          "title": "EU AI Act Prohibition of Untargeted Facial Image Scraping",
+          "description": "Evaluates an AI system against the Article 5(1)(e) prohibition on creating or expanding facial recognition databases through the untargeted scraping of facial images from the internet or CCTV footage. The operative word is untargeted: the prohibition turns on indiscriminate collection rather than on facial recognition itself, so a database built from images collected for a specific, targeted purpose is assessed differently.",
+          "references": [
+            "Article 5(1)(e) of the EU AI Act, untargeted scraping of facial images",
+            "Recital 43 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/manipulation.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.manipulation",
+          "decision_rules": [
+            {
+              "name": "uses_prohibited_technique",
+              "default": false
+            },
+            {
+              "name": "distorts_behaviour",
+              "default": false
+            },
+            {
+              "name": "causes_significant_harm",
+              "default": false
+            },
+            {
+              "name": "prohibited",
+              "default": false
+            },
+            {
+              "name": "assessment_complete",
+              "default": false
+            },
+            {
+              "name": "no_prohibited_technique",
+              "default": false
+            },
+            {
+              "name": "no_behavioural_distortion",
+              "default": false
+            },
+            {
+              "name": "no_significant_harm",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.uses_subliminal_techniques",
+            "system.uses_purposefully_manipulative_techniques",
+            "system.uses_deceptive_techniques",
+            "system.distorts_behaviour",
+            "system.causes_or_likely_causes_significant_harm"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/manipulation_test.rego",
+          "title": "EU AI Act Prohibition of Manipulative Techniques",
+          "description": "Evaluates an AI system against the Article 5(1)(a) prohibition on subliminal, purposefully manipulative or deceptive techniques. The prohibition is cumulative: a technique is banned where it materially distorts behaviour in a way that impairs informed decision-making AND causes or is reasonably likely to cause significant harm. Recital 29 excludes lawful persuasion that does not deploy such techniques, so ordinary advertising is not caught by this rule.",
+          "references": [
+            "Article 5(1)(a) of the EU AI Act, prohibited AI practices",
+            "Recital 29 of the EU AI Act",
+            "Regulation (EU) 2024/1689"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/social_scoring.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.social_scoring",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "social_scoring_detected",
+              "default": true
+            },
+            {
+              "name": "detrimental_treatment_detected",
+              "default": true
+            },
+            {
+              "name": "combined_score_acceptable",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "metrics.social_scoring.score",
+            "metrics.social_scoring.detrimental_treatment",
+            "metrics.social_scoring.combined_score"
+          ],
+          "required_params": [
+            "social_scoring_threshold (default 0.3)",
+            "detrimental_treatment_threshold (default 0.3)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/social_scoring_test.rego",
+          "title": "EU AI Act Social Scoring Prohibition",
+          "description": "Policy to evaluate compliance with EU AI Act Article 5(1)(c) prohibition on social scoring",
+          "references": [
+            "Article 5(1)(c) of the EU AI Act - Prohibition of social scoring leading to detrimental treatment"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/prohibited_practices/vulnerability_exploitation.rego",
+          "package": "international.eu_ai_act.v1.prohibited_practices.vulnerability_exploitation",
+          "decision_rules": [
+            {
+              "name": "exploits_recognised_vulnerability",
+              "default": false
+            },
+            {
+              "name": "distorts_behaviour",
+              "default": false
+            },
+            {
+              "name": "causes_significant_harm",
+              "default": false
+            },
+            {
+              "name": "prohibited",
+              "default": false
+            },
+            {
+              "name": "not_prohibited",
+              "default": false
+            },
+            {
+              "name": "assessment_complete",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.exploits_vulnerability",
+            "system.vulnerability_basis",
+            "system.distorts_behaviour",
+            "system.causes_or_likely_causes_significant_harm"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/prohibited_practices/vulnerability_exploitation_test.rego",
+          "title": "EU AI Act Prohibition of Exploiting Vulnerabilities",
+          "description": "Evaluates an AI system against the Article 5(1)(b) prohibition on exploiting the vulnerabilities of a person or group. Like Article 5(1)(a) the test is cumulative: the system must exploit a vulnerability arising from age, disability, or a specific social or economic situation, materially distort behaviour, and cause or be reasonably likely to cause significant harm. A system serving a vulnerable group is not caught; exploiting that vulnerability is.",
+          "references": [
+            "Article 5(1)(b) of the EU AI Act, exploitation of vulnerabilities",
+            "Recital 29 of the EU AI Act"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/risk_management/risk_management.rego",
+          "package": "international.eu_ai_act.v1.risk_management",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/risk_management/risk_management_test.rego",
+          "title": "EU AI Act Risk Management Requirements",
+          "description": "Policy to evaluate compliance with EU AI Act risk management requirements",
+          "references": [
+            "Article 9 of the EU AI Act - Risk management system",
+            "Article 15 of the EU AI Act - Accuracy, robustness and cybersecurity"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/technical_robustness/robustness.rego",
+          "package": "international.eu_ai_act.v1.technical_robustness",
+          "decision_rules": [
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "accuracy_declared",
+              "default": false
+            },
+            {
+              "name": "resilient",
+              "default": false
+            },
+            {
+              "name": "continues_to_learn",
+              "default": false
+            },
+            {
+              "name": "feedback_loops_addressed",
+              "default": false
+            },
+            {
+              "name": "secured",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.high_risk",
+            "accuracy.metrics_declared",
+            "accuracy.declared_in_instructions",
+            "robustness.resilience_tested",
+            "robustness.fallback_or_fail_safe_documented",
+            "robustness.feedback_loop_risk_addressed",
+            "cybersecurity.controls_in_place",
+            "cybersecurity.adversarial_attacks_addressed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/technical_robustness/robustness_test.rego",
+          "title": "EU AI Act Accuracy, Robustness and Cybersecurity (Article 15)",
+          "description": "Evaluates a high-risk AI system against Article 15. Three requirements sit inside it that are easy to lose: accuracy metrics must be declared in the instructions for use rather than merely measured, systems that continue to learn after deployment must address feedback loops, and cybersecurity must cover AI-specific attacks such as data poisoning, model poisoning and adversarial examples rather than only conventional controls.",
+          "references": [
+            "Article 15 of the EU AI Act, accuracy, robustness and cybersecurity",
+            "Article 15(2), declaration of accuracy metrics in the instructions for use",
+            "Article 15(4), feedback loops in systems that continue to learn",
+            "Article 15(5), AI-specific cybersecurity attacks"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/eu_ai_act/v1/transparency/transparency.rego",
+          "package": "international.eu_ai_act.v1.transparency",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/eu_ai_act/v1/transparency/transparency_test.rego",
+          "title": "EU AI Act Transparency Requirements",
+          "description": "Policy to evaluate compliance with EU AI Act transparency requirements",
+          "references": [
+            "Article 13 of the EU AI Act - Transparency and provision of information to users",
+            "Article 52 of the EU AI Act - Transparency obligations for certain AI systems"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/faa",
+      "name": "FAA (Federal Aviation Administration)",
+      "kind": "regulation",
+      "policy_count": 2,
+      "policies_with_tests": 2,
+      "policies": [
+        {
+          "path": "international/faa/v1/part_107.rego",
+          "package": "international.faa.v1.part_107",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "remote_pilot.certificate_held",
+            "aircraft.registered",
+            "operation.altitude_ft",
+            "operation.visual_line_of_sight",
+            "operation.daylight_or_lit"
+          ],
+          "required_params": [
+            "max_altitude_ft (default 400)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/faa/v1/part_107_test.rego",
+          "title": "FAA Part 107 - Small Unmanned Aircraft Systems",
+          "description": "Evaluates small UAS operations against 14 CFR Part 107 operating rules: pilot certification, registration, altitude limit, visual line of sight, and daylight/lighting requirements.",
+          "references": [
+            "14 CFR Part 107 Subpart B - Operating Rules (Sec. 107.31, 107.51)",
+            "14 CFR Part 107 Subpart C - Remote Pilot Certification (Sec. 107.12)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/faa/v1/remote_id.rego",
+          "package": "international.faa.v1.remote_id",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "aircraft.standard_remote_id_equipped",
+            "aircraft.broadcast_module_attached",
+            "operation.within_fria"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/faa/v1/remote_id_test.rego",
+          "title": "FAA Remote ID (14 CFR Part 89)",
+          "description": "Evaluates whether a small unmanned aircraft satisfies Remote ID requirements: Standard Remote ID broadcast, a broadcast module, or operation confined to an FAA-Recognized Identification Area.",
+          "references": [
+            "14 CFR Part 89 - Remote Identification of Unmanned Aircraft"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/icao",
+      "name": "ICAO (International Civil Aviation Organization)",
+      "kind": "regulation",
+      "policy_count": 1,
+      "policies_with_tests": 1,
+      "policies": [
+        {
+          "path": "international/icao/v1/doc_10019.rego",
+          "package": "international.icao.v1.doc_10019",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.c2_link.lost_link_procedure_defined",
+            "system.detect_and_avoid.equipped",
+            "system.remote_pilot.qualified"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/icao/v1/doc_10019_test.rego",
+          "title": "ICAO Doc 10019 - Manual on RPAS",
+          "description": "Evaluates command and control link resilience, detect-and-avoid capability, and remote pilot qualification for remotely piloted aircraft systems.",
+          "references": [
+            "ICAO Doc 10019 - Manual on Remotely Piloted Aircraft Systems, Chapter 3 (C2 Link) and Chapter 9 (Detect and Avoid)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/india",
+      "name": "India AI",
+      "kind": "regulation",
+      "policy_count": 1,
+      "policies_with_tests": 1,
+      "policies": [
+        {
+          "path": "international/india/v1/digital_india_policy/digital_india_policy.rego",
+          "package": "international.india.v1.digital_india_policy",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/india/v1/digital_india_policy/digital_india_policy_test.rego",
+          "title": "Digital India Policy",
+          "description": "Policies based on the principles of India's AI governance framework.",
+          "references": [
+            "NITI Aayog, National Strategy for Artificial Intelligence, 2018",
+            "MeitY, Advisory on AI, March 2024",
+            "Report of the Subcommittee on AI Governance and Guidelines Development"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/nist",
+      "name": "NIST AI Risk Management Framework",
+      "kind": "regulation",
+      "policy_count": 5,
+      "policies_with_tests": 5,
+      "policies": [
+        {
+          "path": "international/nist/v1/ai_600_1/ai_600_1.rego",
+          "package": "international.nist.v1.ai_600_1",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/nist/v1/ai_600_1/ai_600_1_test.rego",
+          "title": "NIST AI RMF Orchestrator",
+          "description": "Orchestrates the NIST AI Risk Management Framework policies.",
+          "references": [
+            "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/nist/v1/govern/governance.rego",
+          "package": "international.nist.v1.govern",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/nist/v1/govern/governance_test.rego",
+          "title": "NIST AI RMF - Govern",
+          "description": "Policies for the Govern function of the NIST AI Risk Management Framework.",
+          "references": [
+            "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/nist/v1/manage/manage.rego",
+          "package": "international.nist.v1.manage",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/nist/v1/manage/manage_test.rego",
+          "title": "NIST AI RMF - Manage",
+          "description": "Policies for the Manage function of the NIST AI Risk Management Framework.",
+          "references": [
+            "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/nist/v1/map/map.rego",
+          "package": "international.nist.v1.map",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/nist/v1/map/map_test.rego",
+          "title": "NIST AI RMF - Map",
+          "description": "Policies for the Map function of the NIST AI Risk Management Framework.",
+          "references": [
+            "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/nist/v1/measure/measure.rego",
+          "package": "international.nist.v1.measure",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/nist/v1/measure/measure_test.rego",
+          "title": "NIST AI RMF - Measure",
+          "description": "Policies for the Measure function of the NIST AI Risk Management Framework.",
+          "references": [
+            "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/standards",
+      "name": "Aviation Industry Standards",
+      "kind": "regulation",
+      "policy_count": 2,
+      "policies_with_tests": 2,
+      "policies": [
+        {
+          "path": "international/standards/v1/iso_21384.rego",
+          "package": "international.standards.v1.iso_21384",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "safety_management.system_established",
+            "safety_management.risk_assessment_completed",
+            "operations.procedures_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/standards/v1/iso_21384_test.rego",
+          "title": "ISO 21384 - UAS General Requirements",
+          "description": "Evaluates UAS operator compliance with ISO 21384 general requirements: an established safety management system, completed risk assessment, and documented operational procedures.",
+          "references": [
+            "ISO 21384-1:2019 - Unmanned aircraft systems, Part 1: General requirements",
+            "ISO 21384-3:2023 - Unmanned aircraft systems, Part 3: Operational procedures"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/standards/v1/rtca_do_365.rego",
+          "package": "international.standards.v1.rtca_do_365",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "daa_system.surveillance_volume_nm",
+            "daa_system.alert_timeliness_compliant",
+            "daa_system.equipped"
+          ],
+          "required_params": [
+            "min_surveillance_volume_nm (default 1.0)"
+          ],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/standards/v1/rtca_do_365_test.rego",
+          "title": "RTCA DO-365 - Detect and Avoid MOPS",
+          "description": "Evaluates whether a UAS detect-and-avoid system meets the surveillance volume and alert-timeliness requirements of RTCA DO-365 Minimum Operational Performance Standards.",
+          "references": [
+            "RTCA DO-365 - Minimum Operational Performance Standards (MOPS) for Detect and Avoid Systems"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "international/uk",
+      "name": "UK AI Governance",
+      "kind": "regulation",
+      "policy_count": 6,
+      "policies_with_tests": 6,
+      "policies": [
+        {
+          "path": "international/uk/v1/accountability_governance.rego",
+          "package": "international.uk.v1.accountability_governance",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "named_accountability",
+              "default": false
+            },
+            {
+              "name": "oversight_in_place",
+              "default": false
+            },
+            {
+              "name": "third_party_supply",
+              "default": false
+            },
+            {
+              "name": "supply_chain_documented",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "governance.accountable_person_named",
+            "governance.oversight_body_in_place",
+            "governance.lifecycle_roles_defined",
+            "governance.supply_chain_accountability_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/uk/v1/accountability_governance_test.rego",
+          "title": "UK AI Principle 4 - Accountability and Governance",
+          "description": "Evaluates whether governance measures provide effective oversight of the supply and use of an AI system, with clear lines of accountability across the lifecycle. Where a third-party or vendor model is in use, accountability for that supply must be documented rather than assumed to sit with the vendor. Non-statutory guidance.",
+          "references": [
+            "A pro-innovation approach to AI regulation, CP 815 (March 2023), principle: accountability and governance",
+            "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/uk/v1/automated_decision_making.rego",
+          "package": "international.uk.v1.automated_decision_making",
+          "decision_rules": [
+            {
+              "name": "solely_automated",
+              "default": false
+            },
+            {
+              "name": "significant",
+              "default": false
+            },
+            {
+              "name": "in_scope",
+              "default": false
+            },
+            {
+              "name": "special_category_involved",
+              "default": false
+            },
+            {
+              "name": "safeguards_in_place",
+              "default": false
+            },
+            {
+              "name": "article_9_condition_met",
+              "default": false
+            },
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "decision.significant",
+            "decision.meaningful_human_involvement",
+            "decision.special_category_data_involved",
+            "decision.article_9_condition",
+            "safeguards.information_provided",
+            "safeguards.representations_enabled",
+            "safeguards.human_intervention_available",
+            "safeguards.decision_contestable"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/uk/v1/automated_decision_making_test.rego",
+          "title": "UK GDPR Automated Decision-Making (Articles 22A-22D)",
+          "description": "Evaluates a significant decision taken about a data subject against the automated decision-making regime substituted into the UK GDPR by section 80 of the Data (Use and Access) Act 2025, in force 5 February 2026. This regime replaced the former Article 22 prohibition with a permission-plus-safeguards model: solely automated significant decisions are permitted for ordinary personal data provided the Article 22C safeguards are in place, while decisions relying on special category data remain restricted and additionally require an Article 9(2) condition.",
+          "references": [
+            "UK GDPR Article 22A (meaning of significant decision; based solely on automated processing)",
+            "UK GDPR Article 22B (significant decisions involving special category data)",
+            "UK GDPR Article 22C (safeguards for significant decisions)",
+            "UK GDPR Article 22D (Secretary of State power on meaningful human involvement)",
+            "Data (Use and Access) Act 2025, section 80; commencement SI 2026/82"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/uk/v1/contestability_redress.rego",
+          "package": "international.uk.v1.contestability_redress",
+          "decision_rules": [
+            {
+              "name": "scope_determined",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "contestability_required",
+              "default": false
+            },
+            {
+              "name": "route_available",
+              "default": false
+            },
+            {
+              "name": "route_communicated",
+              "default": false
+            },
+            {
+              "name": "human_review_available",
+              "default": false
+            },
+            {
+              "name": "timeframe_defined",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "system.affects_individuals",
+            "redress.route_to_contest_available",
+            "redress.route_communicated",
+            "redress.human_review_available",
+            "redress.response_timeframe_days"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/uk/v1/contestability_redress_test.rego",
+          "title": "UK AI Principle 5 - Contestability and Redress",
+          "description": "Evaluates whether users, impacted third parties and other actors can contest an AI decision or outcome that is harmful or creates a material risk of harm. The principle is qualified by 'where appropriate', so this policy engages the requirement only where the system affects individuals or carries material harm potential. A route that exists but is never communicated does not satisfy it. Non-statutory guidance.",
+          "references": [
+            "A pro-innovation approach to AI regulation, CP 815 (March 2023), principle: contestability and redress",
+            "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/uk/v1/fairness.rego",
+          "package": "international.uk.v1.fairness",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "all_characteristics_tested",
+              "default": false
+            },
+            {
+              "name": "disparity_within_threshold",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "fairness.bias_assessment_completed",
+            "fairness.protected_characteristics_tested",
+            "fairness.max_disparity",
+            "fairness.legal_rights_review_completed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/uk/v1/fairness_test.rego",
+          "title": "UK AI Principle 3 - Fairness",
+          "description": "Evaluates whether an AI system undermines legal rights, discriminates unfairly against individuals, or creates unfair market outcomes. Unlike the US protected-class model, this policy tests coverage against the nine protected characteristics in the Equality Act 2010. Non-statutory guidance; the underlying Equality Act duties are binding in their own right.",
+          "references": [
+            "A pro-innovation approach to AI regulation, CP 815 (March 2023), principle: fairness",
+            "Equality Act 2010, Part 2 Chapter 1, section 4 (protected characteristics)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/uk/v1/safety_security_robustness.rego",
+          "package": "international.uk.v1.safety_security_robustness",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "risk_managed",
+              "default": false
+            },
+            {
+              "name": "secured",
+              "default": false
+            },
+            {
+              "name": "robust",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "risk_management.risk_assessment_completed",
+            "risk_management.lifecycle_monitoring_in_place",
+            "security.security_testing_completed",
+            "robustness.performance_thresholds_defined",
+            "robustness.failure_handling_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/uk/v1/safety_security_robustness_test.rego",
+          "title": "UK AI Principle 1 - Safety, Security and Robustness",
+          "description": "Evaluates whether an AI system functions in a robust, secure and safe way throughout its lifecycle, with risks continually identified, assessed and managed. The UK's five cross-sectoral principles are non-statutory and are addressed to regulators rather than imposed directly on firms, so this policy encodes them as an assurance baseline, not as a statutory test.",
+          "references": [
+            "A pro-innovation approach to AI regulation, CP 815 (March 2023), principle: safety, security and robustness",
+            "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "international/uk/v1/transparency_explainability.rego",
+          "package": "international.uk.v1.transparency_explainability",
+          "decision_rules": [
+            {
+              "name": "allow",
+              "default": false
+            },
+            {
+              "name": "baseline_transparency",
+              "default": false
+            },
+            {
+              "name": "high_impact",
+              "default": false
+            },
+            {
+              "name": "explainability_method_documented",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "transparency.ai_use_disclosed",
+            "transparency.system_purpose_documented",
+            "explainability.decision_rationale_available",
+            "explainability.method_documented",
+            "system.impact_level"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "international/uk/v1/transparency_explainability_test.rego",
+          "title": "UK AI Principle 2 - Appropriate Transparency and Explainability",
+          "description": "Evaluates whether an AI system is appropriately transparent and explainable. The UK principle is explicitly proportionate: what counts as appropriate scales with the impact of the system, so a high-impact system must additionally document the explainability method it relies on. Non-statutory guidance, not a statutory test.",
+          "references": [
+            "A pro-innovation approach to AI regulation, CP 815 (March 2023), principle: appropriate transparency and explainability",
+            "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "operational/aiops",
+      "name": "Aiops",
+      "kind": "operational",
+      "policy_count": 1,
+      "policies_with_tests": 1,
+      "policies": [
+        {
+          "path": "operational/aiops/v1/scalability/scalability.rego",
+          "package": "operational.aiops.v1.scalability",
+          "decision_rules": [
+            {
+              "name": "capacity_planned",
+              "default": false
+            },
+            {
+              "name": "headroom_sufficient",
+              "default": false
+            },
+            {
+              "name": "latency_governed",
+              "default": false
+            },
+            {
+              "name": "autoscaling_configured",
+              "default": false
+            },
+            {
+              "name": "degradation_documented",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "capacity.plan_documented",
+            "capacity.peak_load_tested",
+            "capacity.headroom_ratio",
+            "latency.slo_defined",
+            "latency.p99_within_slo",
+            "resilience.autoscaling_configured",
+            "resilience.graceful_degradation_documented"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "operational/aiops/v1/scalability/scalability_test.rego",
+          "title": "AIOps Scalability Requirements",
+          "description": "Evaluates whether an AI system can carry its expected load. Inference workloads fail differently from ordinary services: capacity is often bounded by a rate-limited or GPU-bound dependency rather than by the service's own replicas, so this policy tests headroom against measured peak load and requires a documented degradation path for when the model tier is unavailable rather than treating autoscaling as sufficient on its own.",
+          "references": [
+            "NIST AI RMF 1.0, Manage 2.3 (system performance under expected and unexpected conditions)",
+            "Google SRE Workbook, Managing Load"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "operational/corporate",
+      "name": "Corporate",
+      "kind": "operational",
+      "policy_count": 2,
+      "policies_with_tests": 2,
+      "policies": [
+        {
+          "path": "operational/corporate/v1/governance/governance.rego",
+          "package": "operational.corporate.v1.governance",
+          "decision_rules": [
+            {
+              "name": "policy_approved",
+              "default": false
+            },
+            {
+              "name": "inventoried",
+              "default": false
+            },
+            {
+              "name": "owner_named",
+              "default": false
+            },
+            {
+              "name": "review_cadence_defined",
+              "default": false
+            },
+            {
+              "name": "staff_trained",
+              "default": false
+            },
+            {
+              "name": "vendor_in_use",
+              "default": false
+            },
+            {
+              "name": "third_party_cleared",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "governance.ai_policy_approved",
+            "governance.system_in_inventory",
+            "governance.accountable_owner_named",
+            "governance.review_cadence_days",
+            "governance.staff_training_completed",
+            "third_party.vendor_in_use",
+            "third_party.due_diligence_completed"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "operational/corporate/v1/governance/governance_test.rego",
+          "title": "Corporate AI Governance Requirements",
+          "description": "Evaluates the organisational scaffolding around an AI system: an approved AI policy, the system recorded in an inventory, a named accountable owner, a defined review cadence, staff training, and due diligence where a third-party vendor supplies the system. These are the controls an ISO/IEC 42001 management system and the NIST AI RMF Govern function both expect, expressed as checks rather than prose.",
+          "references": [
+            "ISO/IEC 42001:2023, AI management systems",
+            "NIST AI RMF 1.0, Govern function",
+            "OECD AI Principles, accountability"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        },
+        {
+          "path": "operational/corporate/v1/infosec/infosec.rego",
+          "package": "operational.corporate.v1.infosec",
+          "decision_rules": [
+            {
+              "name": "access_controlled",
+              "default": false
+            },
+            {
+              "name": "data_encrypted",
+              "default": false
+            },
+            {
+              "name": "secrets_managed",
+              "default": false
+            },
+            {
+              "name": "untrusted_input_reaches_model",
+              "default": false
+            },
+            {
+              "name": "injection_controls_adequate",
+              "default": false
+            },
+            {
+              "name": "events_logged",
+              "default": false
+            },
+            {
+              "name": "vulnerability_review_current",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "access.least_privilege_enforced",
+            "access.authentication_required",
+            "data.encrypted_in_transit",
+            "data.encrypted_at_rest",
+            "secrets.managed_outside_prompts",
+            "resilience.prompt_injection_controls_in_place",
+            "logging.security_events_logged",
+            "vulnerability.review_days_ago"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "operational/corporate/v1/infosec/infosec_test.rego",
+          "title": "Corporate Information Security Requirements for AI",
+          "description": "Evaluates the information security controls around an AI system. Alongside the conventional controls of authentication, least privilege, encryption in transit and at rest, and security event logging, this policy tests two that are specific to AI systems: secrets must be managed outside prompts and context windows, and controls against prompt injection must exist where untrusted input reaches a model.",
+          "references": [
+            "ISO/IEC 27001:2022, information security management",
+            "NIST AI RMF 1.0, Manage function",
+            "OWASP Top 10 for Large Language Model Applications"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    },
+    {
+      "id": "operational/cost",
+      "name": "Cost",
+      "kind": "operational",
+      "policy_count": 1,
+      "policies_with_tests": 1,
+      "policies": [
+        {
+          "path": "operational/cost/v1/resource_efficiency/resource_efficiency.rego",
+          "package": "operational.cost.v1.resource_efficiency",
+          "decision_rules": [
+            {
+              "name": "budget_defined",
+              "default": false
+            },
+            {
+              "name": "within_budget",
+              "default": false
+            },
+            {
+              "name": "spend_observable",
+              "default": false
+            },
+            {
+              "name": "unit_cost_attributable",
+              "default": false
+            },
+            {
+              "name": "right_sizing_current",
+              "default": false
+            },
+            {
+              "name": "allow",
+              "default": false
+            }
+          ],
+          "required_metrics": [
+            "budget.defined",
+            "budget.utilisation_ratio",
+            "monitoring.spend_tracked",
+            "monitoring.alerting_configured",
+            "monitoring.unit_cost_attributable",
+            "efficiency.right_sizing_reviewed_days_ago"
+          ],
+          "required_params": [],
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "operational/cost/v1/resource_efficiency/resource_efficiency_test.rego",
+          "title": "AI Resource Efficiency Requirements",
+          "description": "Evaluates cost control around an AI system. The distinguishing risk for inference workloads is that spend scales with usage rather than with provisioned capacity, so an unbounded budget fails silently and only shows up on an invoice. This policy requires a defined budget with utilisation inside it, spend tracked and alerted on, cost attributable to a unit of work, and a recent right-sizing review.",
+          "references": [
+            "FinOps Foundation, FinOps for AI",
+            "NIST AI RMF 1.0, Manage 2.2 (resourcing)"
+          ],
+          "version": "1.0.0",
+          "is_library": false
+        }
+      ]
+    }
+  ]
+}

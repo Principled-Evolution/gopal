@@ -142,3 +142,57 @@ test_compliance_report_thresholds if {
 	report.thresholds.content_safety == 0.80
 	report.thresholds.risk_management == 0.80
 }
+
+# A loan evaluation system we have no scores for is not compliant.
+#
+# Before `default is_compliant := false` was added, this rule was undefined
+# rather than false for an empty input, and `failed_evaluations` came back as an
+# empty list, so the report said a model with no evidence at all had failed
+# nothing. The three _eval_fails rules were undefined too, because each compared
+# a missing score directly instead of through a defaulted lookup.
+test_is_compliant_denies_on_empty_input if {
+	fair_lending.is_compliant == false with input as {}
+}
+
+# The evidence list must name every unmet threshold rather than come back empty.
+test_failed_evaluations_lists_all_three_on_empty_input if {
+	fair_lending.failed_evaluations == ["fairness", "content safety", "risk management"] with input as {}
+}
+
+# A missing params object must not make the threshold lookups undefined; the
+# documented defaults apply instead.
+test_is_compliant_without_params_uses_default_thresholds if {
+	fair_lending.is_compliant with input as {"evaluation": {
+		"fairness": {"score": 0.95},
+		"content_safety": {"score": 0.90},
+		"risk_management": {"score": 0.90},
+	}}
+}
+
+# One score below its default threshold denies, and is named in the evidence.
+test_single_low_score_denies_and_is_reported if {
+	fair_lending.is_compliant == false with input as {"evaluation": {
+		"fairness": {"score": 0.10},
+		"content_safety": {"score": 0.95},
+		"risk_management": {"score": 0.95},
+	}}
+	fair_lending.failed_evaluations == ["fairness"] with input as {"evaluation": {
+		"fairness": {"score": 0.10},
+		"content_safety": {"score": 0.95},
+		"risk_management": {"score": 0.95},
+	}}
+}
+
+# A partially reported submission must fail on the metric it omitted rather than
+# silently dropping it, which is the fail-open this policy shared with
+# industry_specific/healthcare/v1/diagnostic_safety.
+test_missing_one_score_is_treated_as_a_failure if {
+	fair_lending.is_compliant == false with input as {"evaluation": {
+		"fairness": {"score": 0.95},
+		"content_safety": {"score": 0.95},
+	}}
+	fair_lending.failed_evaluations == ["risk management"] with input as {"evaluation": {
+		"fairness": {"score": 0.95},
+		"content_safety": {"score": 0.95},
+	}}
+}
