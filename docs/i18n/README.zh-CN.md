@@ -133,7 +133,7 @@ GOPAL 在三个维度上与众不同:
 
 1. **专为 AI 打造。** 每条策略都针对 AI 系统的关切点,包括偏见、透明度、人工监督、模型风险、内容安全、安全关键型认证,而非通用基础设施。
 2. **可阅读。** 规则就是 Rego 代码。您可以用 `cat` 查看、在 PR 中对比差异,并对其进行推理。没有黑盒评分卡。
-3. **版本化。** 每个框架都置于 `v1/` 之下(此后是 `v2/` 等),并提供明确的 semver 保证,参见 [COMPATIBILITY.md](../COMPATIBILITY.md)。当 EU AI Act 修订时,旧版本保持不变。
+3. **版本化。** 每个框架都置于 `v1/` 之下(此后是 `v2/` 等),并提供明确的 semver(语义化版本控制)保证,参见 [COMPATIBILITY.md](../COMPATIBILITY.md)。当 EU AI Act 修订时,旧版本保持不变。
 
 ---
 
@@ -210,8 +210,8 @@ gopal/
 | 专门面向 AI 系统 | ✅ | ❌ | ✅ |
 | 开源(Apache 2.0) | ✅ | ✅ | ❌ |
 | 每条规则均可阅读 | ✅ Rego | ✅ Rego | ❌ 隐藏 |
-| 跟踪具名法规(EU AI Act、NIST RMF、FAA) | ✅ 10+ | ❌ | 部分 |
-| 开箱即用的行业垂直领域 | ✅ 5 个 | ❌ | 有限 |
+| 跟踪具体法规(EU AI Act、NIST RMF、FAA) | ✅ 10+ | ❌ | 部分 |
+| 开箱即用的行业垂直方案 | ✅ 5 个 | ❌ | 有限 |
 | 航空 / 安全关键领域覆盖 | ✅ ICAO、RTCA、FAA、EASA、ISO | ❌ | ❌ |
 | 教育行业(FERPA / COPPA) | ✅ | ❌ | 罕见 |
 | 版本化策略(`v1/`、`v2/` …) | ✅ Semver | 视情况 | 不适用 |
@@ -275,7 +275,7 @@ report := reporting.compose_report(
 1. **`opa check`**:跨所有包的语法与引用正确性
 2. **`regal lint`**:Rego 风格与最佳实践
 
-[helper_functions/](../../helper_functions) 库提供了 `compose_report()`、`validate_required_fields()` 与 `field_exists()`,无论谁编写规则,输出的报告都将拥有统一形态。
+[helper_functions/](../../helper_functions) 库提供了 `compose_report()`、`validate_required_fields()` 与 `field_exists()`,无论谁编写规则,最终报告的格式都保持统一。
 
 详细步骤请参见 [`docs/tutorials/add-your-first-policy.md`](../tutorials/add-your-first-policy.md),各框架的覆盖矩阵请参见 [`docs/coverage/`](../coverage)。
 
