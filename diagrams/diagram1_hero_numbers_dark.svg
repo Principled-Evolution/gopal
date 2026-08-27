@@ -3,7 +3,7 @@
 <title>GOPAL coverage</title>
 <desc>96 production Rego policies across 9 frameworks and 6 industries.</desc>
 
-<text x="170" y="60" font-size="36" font-weight="500" fill="#fbbf24" text-anchor="middle">96</text>
+<text x="170" y="60" font-size="36" font-weight="500" fill="#fbbf24" text-anchor="middle">91</text>
 <text x="170" y="80" font-size="12" fill="#8b949e" text-anchor="middle">Rego policies</text>
 <text x="340" y="60" font-size="36" font-weight="500" fill="#fbbf24" text-anchor="middle">9</text>
 <text x="340" y="80" font-size="12" fill="#8b949e" text-anchor="middle">frameworks</text>

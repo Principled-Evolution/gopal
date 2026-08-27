@@ -14,27 +14,27 @@ import rego.v1
 
 # Define helper rules to check which evaluations failed/passed
 fairness_eval_fails if {
-	input.evaluation.fairness.score < object.get(input.params, "fairness_threshold", 0.90)
+	object.get(input, ["evaluation", "fairness", "score"], -1) < object.get(input, ["params", "fairness_threshold"], 0.90)
 }
 
 content_safety_eval_fails if {
-	input.evaluation.content_safety.score < object.get(input.params, "content_safety_threshold", 0.85)
+	object.get(input, ["evaluation", "content_safety", "score"], -1) < object.get(input, ["params", "content_safety_threshold"], 0.85)
 }
 
 risk_management_eval_fails if {
-	input.evaluation.risk_management.score < object.get(input.params, "risk_management_threshold", 0.85)
+	object.get(input, ["evaluation", "risk_management", "score"], -1) < object.get(input, ["params", "risk_management_threshold"], 0.85)
 }
 
 fairness_passes if {
-	input.evaluation.fairness.score >= object.get(input.params, "fairness_threshold", 0.90)
+	object.get(input, ["evaluation", "fairness", "score"], -1) >= object.get(input, ["params", "fairness_threshold"], 0.90)
 }
 
 content_safety_passes if {
-	input.evaluation.content_safety.score >= object.get(input.params, "content_safety_threshold", 0.85)
+	object.get(input, ["evaluation", "content_safety", "score"], -1) >= object.get(input, ["params", "content_safety_threshold"], 0.85)
 }
 
 risk_management_passes if {
-	input.evaluation.risk_management.score >= object.get(input.params, "risk_management_threshold", 0.85)
+	object.get(input, ["evaluation", "risk_management", "score"], -1) >= object.get(input, ["params", "risk_management_threshold"], 0.85)
 }
 
 # Create individual arrays based on evaluation results
@@ -66,16 +66,21 @@ risk_management_eval_fails_array := [] if {
 # Combine failed evaluations
 failed_evaluations := array.concat(fairness_eval_fails_array, array.concat(content_safety_eval_fails_array, risk_management_eval_fails_array))
 
-# Determine if the evaluation is compliant based on domain-specific thresholds
+# Determine if the evaluation is compliant based on domain-specific thresholds.
+# The explicit default matters: without it this rule is undefined rather than
+# false for a submission with no evaluation scores, and a caller that treats an
+# undefined verdict as "no finding" fails open.
+default is_compliant := false
+
 is_compliant if {
 	# Check fairness score against financial threshold
-	input.evaluation.fairness.score >= object.get(input.params, "fairness_threshold", 0.90)
+	object.get(input, ["evaluation", "fairness", "score"], -1) >= object.get(input, ["params", "fairness_threshold"], 0.90)
 
 	# Check content safety score against financial threshold
-	input.evaluation.content_safety.score >= object.get(input.params, "content_safety_threshold", 0.85)
+	object.get(input, ["evaluation", "content_safety", "score"], -1) >= object.get(input, ["params", "content_safety_threshold"], 0.85)
 
 	# Check risk management score against financial threshold
-	input.evaluation.risk_management.score >= object.get(input.params, "risk_management_threshold", 0.85)
+	object.get(input, ["evaluation", "risk_management", "score"], -1) >= object.get(input, ["params", "risk_management_threshold"], 0.85)
 }
 
 # Generate reason strings

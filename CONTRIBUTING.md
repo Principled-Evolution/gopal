@@ -32,7 +32,7 @@ curl -L -o regal https://github.com/StyraInc/regal/releases/latest/download/rega
 pre-commit install
 
 # Run the checks CI runs
-opa check --ignore custom/ .
+opa check --ignore custom/ --ignore dist .
 regal lint --ignore-files custom/ .
 
 # Run tests for a specific package

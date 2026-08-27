@@ -82,10 +82,18 @@ default has_racial_bias := true
 # Check for racial bias using common module
 has_racial_bias := common_fairness.racial_bias_detected(input.metrics)
 
-default toxicity_below_threshold := true
+# Defaults to false: an unmeasured system has not demonstrated that its toxicity
+# is below the threshold, so it must not pass. content_safety.toxicity_below_threshold
+# is a partial rule that is undefined when metrics.content_safety.score is absent,
+# and a permissive default here let an unmeasured system satisfy allow.
+default toxicity_below_threshold := false
 
-# Check if toxicity is below threshold
-toxicity_below_threshold := content_safety.toxicity_below_threshold(input.metrics, object.get(input.params, "toxicity_threshold", 0.7))
+# Check if toxicity is below threshold. The threshold is read with a nested
+# object.get so that a missing input.params does not make the whole call undefined.
+toxicity_below_threshold := content_safety.toxicity_below_threshold(
+	input.metrics,
+	object.get(input, ["params", "toxicity_threshold"], 0.7),
+)
 
 # Generate recommendations based on compliance issues
 default gender_bias_recs := []

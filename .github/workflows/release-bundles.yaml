@@ -1,0 +1,72 @@
+name: Release Bundles
+
+# Builds one OPA bundle per framework and attaches them to the release.
+#
+# Most consumers want a subset: somebody enforcing the EU AI Act has no use for
+# the aviation or FERPA policies. Each bundle is self-contained, carrying the
+# framework's policies plus the shared libraries they import, so it evaluates on
+# its own with no other GOPAL files present.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Build the bundles but do not upload them'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  bundles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install OPA
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod 755 opa
+          sudo mv opa /usr/local/bin/
+          opa version
+
+      # The bundle script reads the framework list out of coverage.json, so a
+      # stale file would silently ship the wrong set. Fail early instead.
+      - name: Check coverage data is current
+        run: scripts/generate-coverage.sh --check
+
+      - name: Build bundles
+        run: scripts/build-bundles.sh --out dist
+
+      # Each bundle is already smoke-tested inside the script, which loads it
+      # back and asserts a real decision denies on empty input. This step proves
+      # the same thing from outside the repo, with nothing else on disk.
+      - name: Verify a bundle evaluates in isolation
+        run: |
+          set -euo pipefail
+          version="$(tr -d ' \n' < VERSION)"
+          workdir="$(mktemp -d)"
+          cp "dist/gopal-international-eu_ai_act-${version}.tar.gz" "${workdir}/bundle.tar.gz"
+          cd "${workdir}"
+          echo '{}' > input.json
+          result="$(opa eval -b bundle.tar.gz --input input.json \
+            'data.international.eu_ai_act.v1.transparency.allow' --format raw)"
+          echo "transparency.allow on empty input = ${result}"
+          test "${result}" = "false"
+
+      - name: Upload bundles as workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gopal-bundles
+          path: dist/
+          if-no-files-found: error
+
+      - name: Attach bundles to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/* --clobber

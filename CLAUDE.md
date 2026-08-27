@@ -20,7 +20,7 @@ When the user asks about the codebase, in order:
 - **Use TodoWrite** for multi-step tasks (the user's preferred tracking).
 - **Run both gates** before claiming a change is done:
   ```bash
-  opa check --ignore custom/ .
+  opa check --ignore custom/ --ignore dist .
   regal lint --ignore-files custom/ .
   ```
 - **Don't bypass Regal warnings** by adding ignores to `.regal/config.yaml`: fix the underlying issue, or document the exception in the PR.

@@ -27,3 +27,10 @@ test_deny_without_ground_risk_mitigations if {
 	input_data := object.union(compliant_input, {"operation": {"daa_system_equipped": true, "authorization_held": true, "ground_risk_mitigations_in_place": false}})
 	not bvlos_operations.allow with input as input_data
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not bvlos_operations.allow with input as {}
+}

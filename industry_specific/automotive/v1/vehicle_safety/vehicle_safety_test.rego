@@ -57,3 +57,17 @@ test_missing_hara if {
 		},
 	}}
 }
+
+# An unevaluated system must never satisfy compliant. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_compliant_denies_on_empty_input if {
+	not vehicle_safety.compliant with input as {}
+}
+
+# An unevaluated system must never satisfy hara_analysis_is_compliant. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_hara_analysis_is_compliant_denies_on_empty_input if {
+	not vehicle_safety.hara_analysis_is_compliant with input as {}
+}

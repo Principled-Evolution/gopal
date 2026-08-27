@@ -18,3 +18,10 @@ test_deny_with_insufficient_retention if {
 test_allow_with_custom_retention_param if {
 	flight_data.allow with input as {"flight_data": {"recording_enabled": true, "retention_days": 30}, "params": {"min_retention_days": 30}}
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not flight_data.allow with input as {}
+}

@@ -27,3 +27,10 @@ test_deny_without_performance_monitoring if {
 	input_data := object.union(compliant_input, {"ai_system": {"safety_validation_completed": true, "fail_safe_mechanism_present": true, "performance_monitoring_enabled": false}})
 	not ai_safety.allow with input as input_data
 }
+
+# An unevaluated system must never satisfy allow. In Rego an undefined value is
+# not false, so a permissive default or an undefined intermediate rule can let a
+# system with no evidence pass.
+test_allow_denies_on_empty_input if {
+	not ai_safety.allow with input as {}
+}

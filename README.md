@@ -42,7 +42,7 @@ Run them against your AI system's metadata, model cards, or evaluation results. 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 96 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 91 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
 
@@ -143,11 +143,27 @@ If you already run OPA for Kubernetes admission, cloud authorization, CI/CD, or 
 
 The packages, conventions, and test patterns are idiomatic Rego. There is no DSL on top, and you don't need Python to evaluate. You can:
 
-- pull individual frameworks (`international/eu_ai_act/v1/`, `industry_specific/aviation/v1/`) into a bundle
+- download a prebuilt bundle for one framework, rather than vendoring the whole tree
 - evaluate with `opa eval`, [Conftest](https://www.conftest.dev/), or your existing OPA server
 - pin to a major version (`v1/`) and review upgrades as PRs
 - compose GOPAL rules with your private `custom/` rules in the same evaluation
 - lint with [Regal](https://github.com/StyraInc/regal), the same linter GOPAL runs in CI
+
+### Per-framework bundles
+
+Every release ships one OPA bundle per framework, so you can take the 29 EU AI Act policies without the aviation or FERPA ones. Each bundle is self-contained: it carries the shared libraries its policies import, so it evaluates with no other GOPAL files present.
+
+```bash
+gh release download v1.2.0 --pattern 'gopal-international-eu_ai_act-*.tar.gz'
+
+opa eval -b gopal-international-eu_ai_act-1.2.0.tar.gz \
+  --input model_card.json \
+  'data.international.eu_ai_act.v1.transparency.allow'
+```
+
+The EU AI Act bundle is 24K against 56K for the whole library, and there is a `gopal-all-<version>.tar.gz` if you do want everything. Because the per-framework bundles each include the shared libraries, their roots overlap and OPA will not load two of them side by side; use the full bundle when you need more than one framework. Every release also carries a `checksums.txt`.
+
+Build them yourself with [`scripts/build-bundles.sh`](scripts/build-bundles.sh), which loads each bundle back and asserts a real decision denies on empty input before declaring success.
 
 If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify).
 
@@ -183,9 +199,10 @@ gopal/
 │   ├── legal/v1/              3 policies — citation verification, privilege, supervision
 │   └── automotive/v1/         1 policy   — vehicle safety integration
 │
-├── global/v1/             9  policies — accountability, fairness, transparency,
-│                                       explainability, content safety,
-│                                       risk management, security, common rules
+├── global/v1/             4  policies — accountability, fairness, transparency, toxicity
+│   └── common/            5  libraries — shared fairness, content-safety, risk
+│                                       and compliance helpers, imported by the
+│                                       framework policies rather than run directly
 │
 ├── operational/          DevOps & corporate
 │   ├── aiops/v1/              1 policy   — scalability
@@ -199,7 +216,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**96 production policies. 146 Rego files including tests.**
+**91 policies that reach a verdict, plus 7 shared libraries they import. 196 Rego files including tests.** These figures are generated from the tree by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI, so they cannot drift from the code. Run `jq .totals docs/coverage/coverage.json` for the current numbers.
 
 ---
 
@@ -330,9 +347,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
 
 - **More NIST coverage**: filling out the Measure and Manage controls
 - **ICO statutory code of practice on AI and automated decision-making**, expected 2026
-- **California SB-1047 successor**, once it is finalized
+- **EU GDPR, scoped to the AI-relevant articles**: Article 22 and Recital 71, Article 35 DPIA triggers, Article 9, Articles 5(1)(c) and 5(1)(e), Articles 13 and 14, and Article 25. Deliberately not the whole regulation, because most of GDPR describes organisational practice that an input document cannot evidence. The UK counterpart to the Article 22 regime is already implemented and the two have now diverged, so the pair is worth having side by side
 - **MAS / HKMA banking AI guidance** for APAC financial supervision
-- **Retiring the seven remaining placeholder policies** in favour of real implementations
+- **Per-metric test coverage**: every policy is now tested against empty input, but the stronger check is removing one required metric at a time. That is what surfaced the most recent fail-open
 
 Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml). You don't have to write any Rego to make the request.
 
