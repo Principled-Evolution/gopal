@@ -58,4 +58,12 @@ jobs:
       - name: Check version references agree with VERSION
         run: scripts/check-version-refs.sh
         working-directory: ${{ github.workspace }}
+
+      # The playground ships curated sample inputs and claims they produce a
+      # specific verdict for every policy. --verify evaluates each one and fails
+      # if a policy changed meaning, which is the only thing that stops the
+      # samples drifting the way the coverage figures once did.
+      - name: Build playground artefacts and verify sample verdicts
+        run: scripts/build-playground.sh --verify
+        working-directory: ${{ github.workspace }}
 # CI trigger

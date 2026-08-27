@@ -1,0 +1,257 @@
+{
+  "accuracy": {
+    "declared_in_instructions": true,
+    "metrics_declared": true
+  },
+  "assessment": {
+    "completed": true,
+    "harmonised_standards_applied": true,
+    "notified_body_involved": true,
+    "procedure": "annex_vi_internal_control"
+  },
+  "authorisation": {
+    "prior_authorisation_obtained": true
+  },
+  "ce_marking": {
+    "affixed": true,
+    "digital_marking_accessible": true,
+    "notified_body_involved": true,
+    "notified_body_number_displayed": true,
+    "visible_legible_indelible": true
+  },
+  "copyright": {
+    "policy_in_place": true,
+    "respects_article_4_3_reservations": true
+  },
+  "cybersecurity": {
+    "adversarial_attacks_addressed": true,
+    "controls_in_place": true
+  },
+  "datasets": {
+    "complete_to_the_extent_possible": true,
+    "contextual_characteristics_considered": true,
+    "errors_addressed": true,
+    "relevant": true,
+    "sufficiently_representative": true
+  },
+  "declaration": {
+    "annex_v_content_complete": true,
+    "drawn_up": true,
+    "machine_readable": true,
+    "retained_ten_years": true,
+    "translated_for_market": true
+  },
+  "deployer": {
+    "affected_persons_informed": true,
+    "affects_natural_persons": true,
+    "controls_input_data": true,
+    "human_oversight_assigned": true,
+    "input_data_relevant": true,
+    "logs_kept_six_months": true,
+    "monitors_operation": true,
+    "oversight_persons_trained_and_authorised": true,
+    "reports_serious_incidents": true,
+    "uses_per_instructions": true,
+    "workers_informed": true,
+    "workplace_deployment": true
+  },
+  "distributor": {
+    "corrective_action_taken": true,
+    "non_conformity_discovered": true,
+    "storage_and_transport_conditions_adequate": true,
+    "verified_ce_marking": true,
+    "verified_declaration_and_instructions": true,
+    "verified_provider_and_importer_compliance": true
+  },
+  "documentation": {
+    "annex_xi_complete": true,
+    "evaluation_results_documented": true,
+    "explainability": {
+      "completeness": 0.9
+    },
+    "model_card": {
+      "completeness": 0.9
+    },
+    "technical_documentation": {
+      "completeness": 0.9
+    },
+    "testing_process_documented": true,
+    "training_process_documented": true
+  },
+  "downstream": {
+    "annex_xii_information_provided": true,
+    "enables_downstream_compliance": true
+  },
+  "governance": {
+    "assumptions_documented": true,
+    "bias_examined": true,
+    "collection_process_documented": true,
+    "design_choices_documented": true,
+    "gaps_identified_and_addressed": true,
+    "preparation_documented": true,
+    "suitability_assessed": true
+  },
+  "importer": {
+    "documentation_retained_ten_years": true,
+    "identification_provided": true,
+    "storage_and_transport_conditions_adequate": true,
+    "verified_authorised_representative": true,
+    "verified_ce_marking_and_declaration": true,
+    "verified_conformity_assessment": true,
+    "verified_technical_documentation": true
+  },
+  "logging": {
+    "automatic_recording_enabled": true,
+    "covers_system_lifetime": true,
+    "identifies_risk_situations": true,
+    "records_input_data": true,
+    "records_reference_database": true,
+    "records_usage_period": true,
+    "records_verifying_persons": true,
+    "supports_post_market_monitoring": true
+  },
+  "logs": {
+    "retained": true,
+    "retention_months": 12,
+    "role": "provider"
+  },
+  "metrics": {
+    "content_safety": {
+      "score": 0.96
+    },
+    "emotion_recognition": {
+      "combined_score": 0.02,
+      "educational_context": 0.01,
+      "workplace_context": 0.02
+    },
+    "fairness": {
+      "details": {
+        "gender_bias_detected": false,
+        "racial_bias_detected": false
+      },
+      "gender_bias": false,
+      "racial_bias": false,
+      "score": 0.94
+    },
+    "model_card": {
+      "completeness": 0.92,
+      "compliance_level": "high",
+      "quality": 0.9,
+      "section_scores": {
+        "intended_use": 0.95,
+        "limitations": 0.9,
+        "training_data": 0.88
+      }
+    },
+    "social_scoring": {
+      "combined_score": 0.02,
+      "detrimental_treatment": 0.01,
+      "score": 0.03
+    },
+    "toxicity": {
+      "max_toxicity": 0.08,
+      "mean_toxicity": 0.02,
+      "sample_size": 5000
+    }
+  },
+  "model": {
+    "commission_designated_systemic_risk": true,
+    "cumulative_training_compute_flops": true,
+    "free_and_open_source": true,
+    "general_purpose": true,
+    "parameters_publicly_available": true,
+    "systemic_risk": true
+  },
+  "notification": {
+    "commission_notified": true
+  },
+  "oversight": {
+    "assigned_persons_competent": true,
+    "automation_bias_addressed": true,
+    "can_disregard_output": true,
+    "can_intervene_or_halt": true,
+    "capabilities_and_limitations_communicated": true,
+    "measures_built_into_system": true
+  },
+  "params": {},
+  "provider": {
+    "accessibility_requirements_met": true,
+    "ce_marking_affixed": true,
+    "conformity_assessment_completed": true,
+    "corrective_action_process": true,
+    "declaration_of_conformity_drawn_up": true,
+    "identification_on_system_or_packaging": true,
+    "logs_kept": true,
+    "quality_management_system": true,
+    "registered_in_eu_database": true,
+    "technical_documentation_kept": true
+  },
+  "registration": {
+    "annex_viii_information_complete": true,
+    "exemption_assessment_registered": true,
+    "provider_registered": true,
+    "registered_before_placing_on_market": true,
+    "system_registered": true
+  },
+  "risk_management": {
+    "mitigation_measures": {
+      "completeness": 0.88
+    },
+    "monitoring_system": {
+      "completeness": 0.85
+    },
+    "risk_assessment": {
+      "completeness": 0.9,
+      "overall_risk": 0.25
+    }
+  },
+  "robustness": {
+    "fallback_or_fail_safe_documented": true,
+    "feedback_loop_risk_addressed": true,
+    "resilience_tested": true
+  },
+  "special_category": {
+    "processed_for_bias_correction": true,
+    "safeguards_in_place": true
+  },
+  "system": {
+    "annex_iii_1_a_biometric": true,
+    "annex_iii_category": 1,
+    "annex_iii_exempt_under_article_6_3": true,
+    "based_solely_on_profiling": true,
+    "builds_facial_recognition_database": true,
+    "causes_or_likely_causes_significant_harm": false,
+    "dataset_labelling_only": true,
+    "digital_only": true,
+    "distorts_behaviour": false,
+    "exploits_vulnerability": false,
+    "grounded_in_objective_verifiable_facts": true,
+    "high_risk": true,
+    "inferred_attributes": true,
+    "law_enforcement_purpose": false,
+    "law_enforcement_use": true,
+    "performs_biometric_categorisation": true,
+    "permitted_objective": true,
+    "predicts_criminal_offence_risk": true,
+    "publicly_accessible_space": false,
+    "real_time_remote_biometric_identification": false,
+    "scrapes_facial_images": true,
+    "scraping_is_targeted": true,
+    "sources": true,
+    "supports_human_assessment": true,
+    "uses_deceptive_techniques": false,
+    "uses_purposefully_manipulative_techniques": false,
+    "uses_subliminal_techniques": false,
+    "vulnerability_basis": true
+  },
+  "systemic_risk": {
+    "cybersecurity_protection_adequate": true,
+    "model_evaluation_with_adversarial_testing": true,
+    "risks_assessed_and_mitigated": true,
+    "serious_incidents_reported_to_ai_office": true
+  },
+  "training_content": {
+    "public_summary_available": true,
+    "summary_sufficiently_detailed": true
+  }
+}

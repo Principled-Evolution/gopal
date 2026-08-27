@@ -1,0 +1,65 @@
+{
+ "decision": {
+  "article_9_condition": "explicit_consent",
+  "meaningful_human_involvement": false,
+  "significant": true,
+  "special_category_data_involved": false
+ },
+ "explainability": {
+  "decision_rationale_available": true,
+  "method_documented": true
+ },
+ "fairness": {
+  "bias_assessment_completed": true,
+  "legal_rights_review_completed": true,
+  "max_disparity": 0.03,
+  "protected_characteristics_tested": [
+   "age",
+   "disability",
+   "gender_reassignment",
+   "marriage_and_civil_partnership",
+   "pregnancy_and_maternity",
+   "race",
+   "religion_or_belief",
+   "sex",
+   "sexual_orientation"
+  ]
+ },
+ "governance": {
+  "accountable_person_named": true,
+  "lifecycle_roles_defined": true,
+  "oversight_body_in_place": true,
+  "supply_chain_accountability_documented": true
+ },
+ "redress": {
+  "human_review_available": true,
+  "response_timeframe_days": 14,
+  "route_communicated": true,
+  "route_to_contest_available": true
+ },
+ "risk_management": {
+  "lifecycle_monitoring_in_place": true,
+  "risk_assessment_completed": true
+ },
+ "robustness": {
+  "failure_handling_documented": true,
+  "performance_thresholds_defined": true
+ },
+ "safeguards": {
+  "decision_contestable": true,
+  "human_intervention_available": true,
+  "information_provided": true,
+  "representations_enabled": true
+ },
+ "security": {
+  "security_testing_completed": true
+ },
+ "system": {
+  "affects_individuals": true,
+  "impact_level": "high"
+ },
+ "transparency": {
+  "ai_use_disclosed": true,
+  "system_purpose_documented": true
+ }
+}
