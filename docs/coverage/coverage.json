@@ -11,7 +11,7 @@
     "policies_with_tests": 91,
     "policies_with_empty_input_test": 91,
     "decision_rules": 325,
-    "tests": 769
+    "tests": 782
   },
   "frameworks": [
     {
@@ -49,7 +49,9 @@
             "AICertify Accountability Standards"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "global/v1/common/common_rules.rego",
@@ -74,7 +76,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         },
         {
           "path": "global/v1/common/compliance.rego",
@@ -93,7 +97,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         },
         {
           "path": "global/v1/common/content_safety.rego",
@@ -112,7 +118,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         },
         {
           "path": "global/v1/common/fairness.rego",
@@ -131,7 +139,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         },
         {
           "path": "global/v1/common/risk_management.rego",
@@ -150,7 +160,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         },
         {
           "path": "global/v1/fairness/fairness.rego",
@@ -179,7 +191,9 @@
             "AICertify Fairness Standards: https://example.com/aicertify/fairness"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "global/v1/toxicity/toxicity.rego",
@@ -205,7 +219,9 @@
             "AICertify Toxicity Standards: https://example.com/aicertify/toxicity"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "global/v1/transparency/transparency.rego",
@@ -235,7 +251,9 @@
             "AICertify Transparency Standards"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -259,7 +277,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         },
         {
           "path": "helper_functions/validation.rego",
@@ -274,7 +294,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": true
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
         }
       ]
     },
@@ -307,7 +329,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "compliant",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -341,7 +365,9 @@
             "ICAO Annex 8 - Airworthiness of Aircraft"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/airworthiness/design_standards.rego",
@@ -367,7 +393,9 @@
             "RTCA DO-254 - Design Assurance Guidance for Airborne Electronic Hardware"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/airworthiness/maintenance.rego",
@@ -393,7 +421,9 @@
             "ICAO Annex 6 - Operation of Aircraft, Part I, Chapter 8 (Aeroplane Maintenance)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/autonomous_systems/ai_safety.rego",
@@ -420,7 +450,9 @@
             "ICAO Doc 10019 - Manual on RPAS, Chapter 3"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/autonomous_systems/decision_making.rego",
@@ -446,7 +478,9 @@
             "EASA Concept Paper: First usable guidance for Level 1 & 2 machine learning applications, Issue 2"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/autonomous_systems/human_oversight.rego",
@@ -472,7 +506,9 @@
             "ICAO Doc 10019 - Manual on RPAS, Chapter 3 (C2 Link and Human Factors)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/data_management/data_sharing.rego",
@@ -497,7 +533,9 @@
             "ICAO Doc 10019 - Manual on RPAS, Chapter 3 (C2 Link data)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/data_management/flight_data.rego",
@@ -524,7 +562,9 @@
             "ICAO Annex 6 - Operation of Aircraft, Chapter 4 (Flight Recorders)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/data_management/privacy_protection.rego",
@@ -549,7 +589,9 @@
             "EASA Easy Access Rules for Unmanned Aircraft Systems, Article 5 (Rules for UAS operations conducted... with regard to privacy)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/flight_operations/bvlos_operations.rego",
@@ -576,7 +618,9 @@
             "EASA SORA methodology, ground risk mitigations"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/flight_operations/emergency_procedures.rego",
@@ -602,7 +646,9 @@
             "ICAO Doc 10019 - Manual on RPAS, Chapter 3 (C2 Link failure contingencies)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/aviation/v1/flight_operations/urban_air_mobility.rego",
@@ -631,7 +677,9 @@
             "EASA Special Condition VTOL (SC-VTOL-01)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -668,7 +716,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "is_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/bfs/v1/model_risk/model_risk.rego",
@@ -730,7 +780,9 @@
             "BCBS 239, Principles for effective risk data aggregation and risk reporting"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/bfs/v1/uk_fca_consumer_duty.rego",
@@ -792,7 +844,9 @@
             "FCA Senior Managers and Certification Regime (SM&CR)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/bfs/v1/uk_ss1_23_model_risk.rego",
@@ -854,7 +908,9 @@
             "SS1/23 Principle 5, model risk mitigants"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -883,7 +939,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/academic_integrity/ai_plagiarism_detection.rego",
@@ -903,7 +961,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "flag_for_review",
+          "decision_true_means": "concern"
         },
         {
           "path": "industry_specific/education/v1/assessment_and_evaluation/human_in_the_loop_grading.rego",
@@ -923,7 +983,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "human_in_the_loop_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/assessment_and_evaluation/responsible_ai_proctoring.rego",
@@ -943,7 +1005,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "responsible_ai_proctoring_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/fairness_and_equity/digital_divide_mitigation.rego",
@@ -963,7 +1027,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "equitable",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/fairness_and_equity/equitable_admissions_systems.rego",
@@ -983,7 +1049,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "equitable_admissions_systems_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/fairness_and_equity/unbiased_automated_grading.rego",
@@ -1003,7 +1071,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "unbiased_automated_grading_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/safe_learning_environment/age_appropriate_content.rego",
@@ -1023,7 +1093,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "appropriate",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/safe_learning_environment/instructional_tool_vetting.rego",
@@ -1043,7 +1115,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "approved",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/student_data_privacy/coppa_compliance.rego",
@@ -1063,7 +1137,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "coppa_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/student_data_privacy/data_minimization.rego",
@@ -1083,7 +1159,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "data_minimization_compliant",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/education/v1/student_data_privacy/ferpa_compliance.rego",
@@ -1103,7 +1181,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "ferpa_compliant",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -1140,7 +1220,9 @@
           "description": null,
           "references": [],
           "version": null,
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/healthcare/v1/patient_safety/patient_safety.rego",
@@ -1188,7 +1270,9 @@
             "HIPAA, 45 CFR Parts 160 and 164"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -1246,7 +1330,9 @@
             "Guidance on the use of artificial intelligence for judicial office holders (31 October 2025)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/legal/v1/client_confidentiality.rego",
@@ -1307,7 +1393,9 @@
             "Bar Standards Board, guidance on the use of AI and other technologies (18 May 2026)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "industry_specific/legal/v1/competence_supervision.rego",
@@ -1363,7 +1451,9 @@
             "SRA warning notice, misuse of AI (August 2026)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -1399,7 +1489,9 @@
             "Brazilian Artificial Intelligence Strategy (EBIA) 2021"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -1435,7 +1527,9 @@
             "Commission Implementing Regulation (EU) 2019/947, Annex Part A (Open category), Part B (Specific category)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/easa/v1/sora.rego",
@@ -1462,7 +1556,9 @@
             "EASA Easy Access Rules for Unmanned Aircraft Systems, SORA methodology (Annex to AMC1 Article 11 of Regulation (EU) 2019/947)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -1531,7 +1627,9 @@
             "Article 48(4), identification number of the notified body"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/compliance/conformity_assessment.rego",
@@ -1591,7 +1689,9 @@
             "Annex VII, conformity based on assessment of the quality management system and technical documentation"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/compliance/declaration_conformity.rego",
@@ -1634,7 +1734,9 @@
             "Annex V, EU declaration of conformity content"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/compliance/registration.rego",
@@ -1686,7 +1788,9 @@
             "Annex VIII, information to be submitted upon registration"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/data_governance/data_quality.rego",
@@ -1733,7 +1837,9 @@
             "Recital 67 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/data_governance/training_data.rego",
@@ -1788,7 +1894,9 @@
             "Recital 67 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/documentation/automated_logs.rego",
@@ -1843,7 +1951,9 @@
             "Annex III point 1(a), remote biometric identification systems"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/documentation/record_keeping.rego",
@@ -1888,7 +1998,9 @@
             "Article 12 of the EU AI Act, record-keeping"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/documentation/technical_documentation.rego",
@@ -1932,7 +2044,9 @@
             "Article 53 of the EU AI Act - Transparency obligations"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/eu_fairness/eu_fairness.rego",
@@ -1974,7 +2088,9 @@
             "Article 15 of the EU AI Act - Accuracy, robustness and cybersecurity"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/gpai/downstream_transparency.rego",
@@ -2039,7 +2155,9 @@
             "Annex XII, information for downstream providers"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/gpai/systemic_risk_classification.rego",
@@ -2101,7 +2219,9 @@
             "Article 55 of the EU AI Act, obligations of providers of GPAI models with systemic risk"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/gpai/technical_documentation.rego",
@@ -2154,7 +2274,9 @@
             "Annex XI, technical documentation for general-purpose AI models"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/human_oversight/human_oversight.rego",
@@ -2210,7 +2332,9 @@
             "Recital 73 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/obligations/deployer_obligations.rego",
@@ -2284,7 +2408,9 @@
             "Article 26(11), informing natural persons subject to a decision"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/obligations/distributor_obligations.rego",
@@ -2335,7 +2461,9 @@
             "Article 24(4), corrective action after a system has been made available"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/obligations/importer_obligations.rego",
@@ -2379,7 +2507,9 @@
             "Article 23(5), ten-year retention of the certificate, declaration and instructions"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/obligations/provider_obligations.rego",
@@ -2426,7 +2556,9 @@
             "Articles 17 to 20, 43, 47, 48 and 49 of the EU AI Act, referenced by Article 16"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/biometric_categorization.rego",
@@ -2478,7 +2610,9 @@
             "Recital 30 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/biometric_identification.rego",
@@ -2532,7 +2666,9 @@
             "Recitals 32 to 34 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/criminal_profiling.rego",
@@ -2584,7 +2720,9 @@
             "Recital 42 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/emotion_recognition.rego",
@@ -2625,7 +2763,9 @@
             "Article 5(1)(a) of the EU AI Act - Prohibition of emotion recognition in workplace/educational contexts"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/facial_recognition_scraping.rego",
@@ -2673,7 +2813,9 @@
             "Recital 43 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/manipulation.rego",
@@ -2735,7 +2877,9 @@
             "Regulation (EU) 2024/1689"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/social_scoring.rego",
@@ -2776,7 +2920,9 @@
             "Article 5(1)(c) of the EU AI Act - Prohibition of social scoring leading to detrimental treatment"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/prohibited_practices/vulnerability_exploitation.rego",
@@ -2828,7 +2974,9 @@
             "Recital 29 of the EU AI Act"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/risk_management/risk_management.rego",
@@ -2851,7 +2999,9 @@
             "Article 15 of the EU AI Act - Accuracy, robustness and cybersecurity"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/technical_robustness/robustness.rego",
@@ -2913,7 +3063,9 @@
             "Article 15(5), AI-specific cybersecurity attacks"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/eu_ai_act/v1/transparency/transparency.rego",
@@ -2936,7 +3088,9 @@
             "Article 52 of the EU AI Act - Transparency obligations for certain AI systems"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -2976,7 +3130,9 @@
             "14 CFR Part 107 Subpart C - Remote Pilot Certification (Sec. 107.12)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/faa/v1/remote_id.rego",
@@ -3002,7 +3158,9 @@
             "14 CFR Part 89 - Remote Identification of Unmanned Aircraft"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3037,7 +3195,9 @@
             "ICAO Doc 10019 - Manual on Remotely Piloted Aircraft Systems, Chapter 3 (C2 Link) and Chapter 9 (Detect and Avoid)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3070,7 +3230,9 @@
             "Report of the Subcommittee on AI Governance and Guidelines Development"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3101,7 +3263,9 @@
             "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/nist/v1/govern/governance.rego",
@@ -3123,7 +3287,9 @@
             "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/nist/v1/manage/manage.rego",
@@ -3145,7 +3311,9 @@
             "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/nist/v1/map/map.rego",
@@ -3167,7 +3335,9 @@
             "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/nist/v1/measure/measure.rego",
@@ -3189,7 +3359,9 @@
             "NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3225,7 +3397,9 @@
             "ISO 21384-3:2023 - Unmanned aircraft systems, Part 3: Operational procedures"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/standards/v1/rtca_do_365.rego",
@@ -3253,7 +3427,9 @@
             "RTCA DO-365 - Minimum Operational Performance Standards (MOPS) for Detect and Avoid Systems"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3306,7 +3482,9 @@
             "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/uk/v1/automated_decision_making.rego",
@@ -3369,7 +3547,9 @@
             "Data (Use and Access) Act 2025, section 80; commencement SI 2026/82"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/uk/v1/contestability_redress.rego",
@@ -3422,7 +3602,9 @@
             "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/uk/v1/fairness.rego",
@@ -3458,7 +3640,9 @@
             "Equality Act 2010, Part 2 Chapter 1, section 4 (protected characteristics)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/uk/v1/safety_security_robustness.rego",
@@ -3499,7 +3683,9 @@
             "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "international/uk/v1/transparency_explainability.rego",
@@ -3540,7 +3726,9 @@
             "Implementing the UK's AI regulatory principles: initial guidance for regulators (DSIT, February 2024)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3600,7 +3788,9 @@
             "Google SRE Workbook, Managing Load"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3669,7 +3859,9 @@
             "OECD AI Principles, accountability"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         },
         {
           "path": "operational/corporate/v1/infosec/infosec.rego",
@@ -3730,7 +3922,9 @@
             "OWASP Top 10 for Large Language Model Applications"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     },
@@ -3789,7 +3983,9 @@
             "NIST AI RMF 1.0, Manage 2.2 (resourcing)"
           ],
           "version": "1.0.0",
-          "is_library": false
+          "is_library": false,
+          "primary_decision": "allow",
+          "decision_true_means": "compliant"
         }
       ]
     }
