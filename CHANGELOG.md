@@ -9,6 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Nothing yet.
 
+## [1.3.0]: 2026-08-27
+
+### Fixed
+- **`global/v1/common/fairness`: a biased system produced no verdict at all.** `gender_bias_detected(_) := false` and `racial_bias_detected(_) := false` were written as plain rules, so each was a third complete definition of the function rather than a fallback. Any input that satisfied one of the real rules produced both `true` and `false`, OPA raised `eval_conflict_error`, and evaluation aborted. `international/eu_ai_act/v1/eu_fairness` therefore returned nothing, not a denial, for exactly the systems it exists to catch. Both are now `default` functions. This survived because the `eu_fairness` tests mock the two helpers they depend on, so the real functions were never exercised.
+- **`international/eu_ai_act/v1/eu_fairness`: closed a fail-open on unmeasured toxicity.** `default toxicity_below_threshold := true` asserted that toxicity was acceptable whenever the check did not affirmatively pass. `content_safety.toxicity_below_threshold` is a partial rule and is undefined both when `metrics.content_safety.score` is absent and when the score fails the threshold, so both cases resolved to `true`. An input of `{"metrics": {}}` was reported compliant with Articles 10 and 15, and so was a system measured at 0.9 toxicity. The default is now `false`, and the threshold is read through the nested `object.get` form so a missing `input.params` cannot make the whole call undefined.
+
+  An empty-input test does not catch this. With no input at all the bias defaults deny first and the toxicity path is never reached; it takes a partially populated input, which is now a named test.
+- **`industry_specific/bfs/v1/loan_evaluation/fair_lending`: closed the third instance of the same fail-open.** No `default is_compliant := false`, and each score compared directly rather than through a defaulted lookup. On an empty input `is_compliant` was undefined rather than false and `failed_evaluations` came back empty, so a loan model with no evidence at all reported that nothing had failed. This is the defect already fixed in `healthcare/v1/diagnostic_safety` in 1.1.0, and it is fixed the same way.
+- Corrected a typo in user-facing report output: `transparency` reported "requirements withsufficient documentation".
+
+### Added
+- **Per-framework OPA bundles, attached to every release.** Consuming just the EU AI Act meant vendoring the whole tree, because `opa build -b international/eu_ai_act` does not compile: every framework imports `helper_functions` and `global/v1/common`. [`scripts/build-bundles.sh`](scripts/build-bundles.sh) stages each framework with the libraries it needs and produces a self-contained bundle that evaluates with no other GOPAL files present. 19 framework bundles plus `gopal-all`, with a sha256 checksums file. The EU AI Act bundle is 24K against 56K for the whole library.
+
+  An import scan confirms the shared libraries are the only cross-directory dependency, so the staging is complete rather than merely sufficient for the cases tried. Each bundle is loaded back during the build and asked for a real decision, so one that has lost a file it needed fails at build time rather than in a user's CI.
+- **A GitHub Actions example that fails the build on non-compliance** ([`examples/github-actions/`](examples/github-actions/)). Downloads a framework bundle, verifies its checksum, evaluates a model card, and annotates the pull request with the reason and remediation. It distinguishes compliant, non-compliant, and failed-to-evaluate, because a policy that reached no verdict has told you nothing and folding that into "not a failure" is how a compliance pipeline reports green while checking nothing.
+- **Generated coverage data** at [`docs/coverage/coverage.json`](docs/coverage/coverage.json), produced from the `.rego` files by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI. For every policy it records the package, title, references, decision rules, the `RequiredMetrics` and `RequiredParams` it declares, and whether it has a test and an empty-input test. The hand-maintained matrices had drifted in every direction at once, and this makes that impossible.
+- **A version-reference check** ([`scripts/check-version-refs.sh`](scripts/check-version-refs.sh)), also in CI. 1.2.0 shipped a README telling people to `gh release download v1.2.0 --pattern 'gopal-*.tar.gz'` against a release that had no assets, because the bundle workflow did not exist when that tag was cut. The instruction was dead on arrival and nothing caught it.
+
+### Changed
+- **Every policy now has a sibling test, and every policy that reaches a verdict is tested against empty input.** It was 75 of 98 files. All 86 top-level decision rules were probed against `{}` first and every one already denied, so that property is now held by test rather than by luck. The suite goes from 604 to 769.
+
+  The four shared libraries in `global/v1/common` and `helper_functions` have tests for the first time. They document the fallback *direction* of each helper, which is what makes the toxicity defect above legible: `toxicity_score` returns `0.0` for input it cannot read, which is the permissive answer, while `fairness_score` and `risk_score` also return `0.0`, which is the denying one.
+- **The policy count is 91, not 96.** Seven files define no boolean rule with an explicit default, so they reach no verdict; they are libraries the real policies import. Counting them as policies overstated coverage. Corrected in the README tree, the hero diagram, `pyproject.toml`, and all four translated READMEs, which had also fallen behind at 96 policies and 146 Rego files against the English 91 and 196.
+- Roadmap: dropped "California SB-1047 successor", which was vetoed with no successor pending, and added EU GDPR scoped to the articles an input document can actually evidence rather than the whole regulation. Most of GDPR describes organisational practice no input can evidence, so encoding it wholesale would produce declared booleans. The evaluable intersection is Article 22 and Recital 71, Article 35 DPIA triggers, Article 9, Articles 5(1)(c) and 5(1)(e), Articles 13 and 14, and Article 25. The UK counterpart to the Article 22 regime is already implemented, and the two have diverged.
+- `opa check` and `opa test` now pass `--ignore dist`, since building bundles locally left tarballs that `opa test` tried to load as data documents.
+
 ## [1.2.0]: 2026-08-25
 
 ### Changed

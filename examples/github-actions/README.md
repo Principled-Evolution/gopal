@@ -19,7 +19,7 @@ Build the bundles first, or download one from a release:
 
 ```bash
 ../../scripts/build-bundles.sh
-BUNDLE=../../dist/gopal-international-eu_ai_act-1.2.0.tar.gz
+BUNDLE=../../dist/gopal-international-eu_ai_act-1.3.0.tar.gz
 
 ./check-compliance.sh --bundle "$BUNDLE" \
   --package international.eu_ai_act.v1.transparency \
@@ -72,7 +72,7 @@ Exit code `1`. In Actions the `::error::` line becomes an annotation on the pull
 
    ```yaml
    env:
-     GOPAL_VERSION: '1.2.0'
+     GOPAL_VERSION: '1.3.0'
      GOPAL_FRAMEWORK: 'international-eu_ai_act'
      POLICY_PACKAGE: 'international.eu_ai_act.v1.transparency'
      INPUT_FILE: 'model-card.json'
