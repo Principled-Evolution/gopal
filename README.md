@@ -143,11 +143,27 @@ If you already run OPA for Kubernetes admission, cloud authorization, CI/CD, or 
 
 The packages, conventions, and test patterns are idiomatic Rego. There is no DSL on top, and you don't need Python to evaluate. You can:
 
-- pull individual frameworks (`international/eu_ai_act/v1/`, `industry_specific/aviation/v1/`) into a bundle
+- download a prebuilt bundle for one framework, rather than vendoring the whole tree
 - evaluate with `opa eval`, [Conftest](https://www.conftest.dev/), or your existing OPA server
 - pin to a major version (`v1/`) and review upgrades as PRs
 - compose GOPAL rules with your private `custom/` rules in the same evaluation
 - lint with [Regal](https://github.com/StyraInc/regal), the same linter GOPAL runs in CI
+
+### Per-framework bundles
+
+Every release ships one OPA bundle per framework, so you can take the 29 EU AI Act policies without the aviation or FERPA ones. Each bundle is self-contained: it carries the shared libraries its policies import, so it evaluates with no other GOPAL files present.
+
+```bash
+gh release download v1.2.0 --pattern 'gopal-international-eu_ai_act-*.tar.gz'
+
+opa eval -b gopal-international-eu_ai_act-1.2.0.tar.gz \
+  --input model_card.json \
+  'data.international.eu_ai_act.v1.transparency.allow'
+```
+
+The EU AI Act bundle is 24K against 56K for the whole library, and there is a `gopal-all-<version>.tar.gz` if you do want everything. Because the per-framework bundles each include the shared libraries, their roots overlap and OPA will not load two of them side by side; use the full bundle when you need more than one framework. Every release also carries a `checksums.txt`.
+
+Build them yourself with [`scripts/build-bundles.sh`](scripts/build-bundles.sh), which loads each bundle back and asserts a real decision denies on empty input before declaring success.
 
 If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify).
 
