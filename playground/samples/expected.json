@@ -1,0 +1,47 @@
+[
+  {
+    "framework": "international/eu_ai_act",
+    "expect": {
+      "international/eu_ai_act/v1/compliance/ce_marking/allow": true,
+      "international/eu_ai_act/v1/compliance/conformity_assessment/allow": true,
+      "international/eu_ai_act/v1/compliance/declaration_conformity/allow": true,
+      "international/eu_ai_act/v1/compliance/registration/allow": true,
+      "international/eu_ai_act/v1/data_governance/data_quality/allow": true,
+      "international/eu_ai_act/v1/data_governance/training_data/allow": true,
+      "international/eu_ai_act/v1/documentation/automated_logs/allow": true,
+      "international/eu_ai_act/v1/documentation/record_keeping/allow": true,
+      "international/eu_ai_act/v1/documentation/technical_documentation/allow": true,
+      "international/eu_ai_act/v1/eu_fairness/allow": true,
+      "international/eu_ai_act/v1/gpai/downstream_transparency/allow": true,
+      "international/eu_ai_act/v1/gpai/systemic_risk_classification/allow": true,
+      "international/eu_ai_act/v1/gpai/technical_documentation/allow": true,
+      "international/eu_ai_act/v1/human_oversight/allow": true,
+      "international/eu_ai_act/v1/obligations/deployer_obligations/allow": true,
+      "international/eu_ai_act/v1/obligations/distributor_obligations/allow": true,
+      "international/eu_ai_act/v1/obligations/importer_obligations/allow": true,
+      "international/eu_ai_act/v1/obligations/provider_obligations/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/biometric_categorization/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/biometric_identification/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/criminal_profiling/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/emotion_recognition/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/facial_recognition_scraping/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/manipulation/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/social_scoring/allow": true,
+      "international/eu_ai_act/v1/prohibited_practices/vulnerability_exploitation/allow": true,
+      "international/eu_ai_act/v1/risk_management/allow": true,
+      "international/eu_ai_act/v1/technical_robustness/allow": true,
+      "international/eu_ai_act/v1/transparency/allow": true
+    }
+  },
+  {
+    "framework": "international/uk",
+    "expect": {
+      "international/uk/v1/accountability_governance/allow": true,
+      "international/uk/v1/automated_decision_making/allow": true,
+      "international/uk/v1/contestability_redress/allow": true,
+      "international/uk/v1/fairness/allow": true,
+      "international/uk/v1/safety_security_robustness/allow": true,
+      "international/uk/v1/transparency_explainability/allow": true
+    }
+  }
+]
