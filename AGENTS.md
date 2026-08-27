@@ -43,7 +43,7 @@ gopal/
 
 ```bash
 # Run the same checks CI runs
-opa check --ignore custom/ .
+opa check --ignore custom/ --ignore dist .
 regal lint --ignore-files custom/ .
 
 # Pre-commit (auto-runs on commit if installed)
@@ -119,7 +119,7 @@ Use `helper_functions/reporting.rego` for output composition and `helper_functio
 Both must pass:
 
 ```bash
-opa check --ignore custom/ .
+opa check --ignore custom/ --ignore dist .
 regal lint --ignore-files custom/ .
 ```
 

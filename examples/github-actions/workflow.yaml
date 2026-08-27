@@ -1,0 +1,89 @@
+# Copy this file into your own repository as .github/workflows/ai-compliance.yaml
+#
+# It evaluates a model card (or any JSON document describing your AI system)
+# against a GOPAL policy on every pull request, and fails the check when the
+# system is non-compliant.
+#
+# Two things to change for your repo:
+#   GOPAL_VERSION / GOPAL_FRAMEWORK  pick the release and the framework bundle
+#   POLICY_PACKAGE / INPUT_FILE      pick the policy and the document to check
+
+name: AI Compliance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  GOPAL_VERSION: '1.2.0'
+  GOPAL_FRAMEWORK: 'international-eu_ai_act'
+  POLICY_PACKAGE: 'international.eu_ai_act.v1.transparency'
+  INPUT_FILE: 'model-card.json'
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA
+        run: |
+          curl -sSL -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod 755 opa
+          sudo mv opa /usr/local/bin/
+          opa version
+
+      # Downloading one framework bundle rather than cloning GOPAL keeps the job
+      # fast and pins you to a released version. Each bundle is self-contained.
+      - name: Download the GOPAL policy bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "v${GOPAL_VERSION}" \
+            --repo Principled-Evolution/gopal \
+            --pattern "gopal-${GOPAL_FRAMEWORK}-${GOPAL_VERSION}.tar.gz" \
+            --output policy-bundle.tar.gz
+
+      # Verifying the checksum matters more than usual here: this bundle decides
+      # whether your release is allowed to ship.
+      - name: Verify the bundle checksum
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "v${GOPAL_VERSION}" \
+            --repo Principled-Evolution/gopal \
+            --pattern "gopal-${GOPAL_VERSION}-checksums.txt" \
+            --output checksums.txt
+          expected="$(grep "gopal-${GOPAL_FRAMEWORK}-${GOPAL_VERSION}.tar.gz" checksums.txt | cut -d' ' -f1)"
+          actual="$(sha256sum policy-bundle.tar.gz | cut -d' ' -f1)"
+          if [ "${expected}" != "${actual}" ]; then
+            echo "::error::Bundle checksum mismatch. Expected ${expected}, got ${actual}."
+            exit 1
+          fi
+          echo "Checksum verified."
+
+      - name: Evaluate the AI system against the policy
+        run: |
+          ./check-compliance.sh \
+            --bundle policy-bundle.tar.gz \
+            --package "${POLICY_PACKAGE}" \
+            --input "${INPUT_FILE}"
+
+      # Keep the verdict as an artifact so an auditor can see what the build
+      # decided, not just that it was green.
+      - name: Save the compliance report
+        if: always()
+        run: |
+          opa eval -b policy-bundle.tar.gz --input "${INPUT_FILE}" \
+            "data.${POLICY_PACKAGE}.compliance_report" --format json \
+            | jq '.result[0].expressions[0].value' > compliance-report.json || true
+
+      - name: Upload the compliance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-report
+          path: compliance-report.json
+          if-no-files-found: warn

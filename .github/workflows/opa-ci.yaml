@@ -32,7 +32,7 @@ jobs:
           regal version
 
       - name: Run OPA Check
-        run: opa check --ignore custom/ .
+        run: opa check --ignore custom/ --ignore dist .
         working-directory: ${{ github.workspace }}
 
       - name: Run Regal Lint
@@ -42,7 +42,7 @@ jobs:
       # The YAML and JSON ignores keep `opa test` from trying to load issue
       # templates and example inputs as data documents.
       - name: Run OPA Tests
-        run: opa test --ignore custom/ --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' .
+        run: opa test --ignore custom/ --ignore dist --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' .
         working-directory: ${{ github.workspace }}
 
       # docs/coverage/coverage.json is generated from the .rego files. This step

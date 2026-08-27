@@ -42,7 +42,7 @@ done
 TMP="$(mktemp -d)"
 trap 'rm -rf "${TMP}"' EXIT
 
-OPA_IGNORES=(--ignore custom/ --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' --ignore '.venv-diagrams')
+OPA_IGNORES=(--ignore custom/ --ignore dist --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' --ignore '.venv-diagrams')
 
 # ---------------------------------------------------------------------------
 # 1. Enumerate policy files and read what the file itself declares.

@@ -1,0 +1,28 @@
+{
+  "system": {
+    "name": "customer-support-llm-v3",
+    "provider": "Acme Corp",
+    "deployment": "production"
+  },
+  "documentation": {
+    "technical_documentation": {
+      "completeness": 0.85,
+      "last_updated": "2026-04-12"
+    },
+    "model_card": {
+      "completeness": 0.20,
+      "url": "https://example.com/model-cards/customer-support-llm-v3"
+    },
+    "explainability": {
+      "completeness": 0.15,
+      "method": "SHAP + chain-of-thought logging"
+    }
+  },
+  "metrics": {
+    "toxicity": {
+      "max_toxicity": 0.12,
+      "mean_toxicity": 0.03,
+      "sample_size": 5000
+    }
+  }
+}

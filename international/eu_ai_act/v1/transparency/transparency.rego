@@ -63,7 +63,7 @@ default compliance_reason := "The system does not meet EU AI Act transparency re
 
 compliance_reason := reason if {
 	allow
-	reason := "The system meets EU AI Act transparency requirements withsufficient documentation and low toxicity levels"
+	reason := "The system meets EU AI Act transparency requirements with sufficient documentation and low toxicity levels"
 } else := reason if {
 	not has_documentation
 	reason := "The system does not meet EU AI Act transparency requirements due to missing documentation"
