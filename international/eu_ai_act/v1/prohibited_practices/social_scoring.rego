@@ -70,20 +70,36 @@ metadata := {
 }
 
 # Rule definitions
+# Defaults to true so an unmeasured system is treated as detected. The
+# clearing branch below is what was missing: with only the raising rule,
+# nothing could ever set this to false, so it was true for every input and
+# allow could never be satisfied.
 default social_scoring_detected := true
 
 social_scoring_detected if {
-	score := input.metrics.social_scoring.score
-	threshold := object.get(input.params, "social_scoring_threshold", 0.3)
-	score > threshold
+	object.get(input, ["metrics", "social_scoring", "score"], -1) > object.get(input, ["params", "social_scoring_threshold"], 0.3)
 }
 
+social_scoring_detected := false if {
+	score := object.get(input, ["metrics", "social_scoring", "score"], -1)
+	score >= 0
+	score <= object.get(input, ["params", "social_scoring_threshold"], 0.3)
+}
+
+# Defaults to true so an unmeasured system is treated as detected. The
+# clearing branch below is what was missing: with only the raising rule,
+# nothing could ever set this to false, so it was true for every input and
+# allow could never be satisfied.
 default detrimental_treatment_detected := true
 
 detrimental_treatment_detected if {
-	score := input.metrics.social_scoring.detrimental_treatment
-	threshold := object.get(input.params, "detrimental_treatment_threshold", 0.3)
-	score > threshold
+	object.get(input, ["metrics", "social_scoring", "detrimental_treatment"], -1) > object.get(input, ["params", "detrimental_treatment_threshold"], 0.3)
+}
+
+detrimental_treatment_detected := false if {
+	score := object.get(input, ["metrics", "social_scoring", "detrimental_treatment"], -1)
+	score >= 0
+	score <= object.get(input, ["params", "detrimental_treatment_threshold"], 0.3)
 }
 
 default combined_score_acceptable := false

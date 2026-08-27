@@ -70,20 +70,36 @@ metadata := {
 }
 
 # Rule definitions
+# Defaults to true so an unmeasured system is treated as detected. The
+# clearing branch below is what was missing: with only the raising rule,
+# nothing could ever set this to false, so it was true for every input and
+# allow could never be satisfied.
 default workplace_context_detected := true
 
 workplace_context_detected if {
-	score := input.metrics.emotion_recognition.workplace_context
-	threshold := object.get(input.params, "workplace_context_threshold", 0.3)
-	score > threshold
+	object.get(input, ["metrics", "emotion_recognition", "workplace_context"], -1) > object.get(input, ["params", "workplace_context_threshold"], 0.3)
 }
 
+workplace_context_detected := false if {
+	score := object.get(input, ["metrics", "emotion_recognition", "workplace_context"], -1)
+	score >= 0
+	score <= object.get(input, ["params", "workplace_context_threshold"], 0.3)
+}
+
+# Defaults to true so an unmeasured system is treated as detected. The
+# clearing branch below is what was missing: with only the raising rule,
+# nothing could ever set this to false, so it was true for every input and
+# allow could never be satisfied.
 default educational_context_detected := true
 
 educational_context_detected if {
-	score := input.metrics.emotion_recognition.educational_context
-	threshold := object.get(input.params, "educational_context_threshold", 0.3)
-	score > threshold
+	object.get(input, ["metrics", "emotion_recognition", "educational_context"], -1) > object.get(input, ["params", "educational_context_threshold"], 0.3)
+}
+
+educational_context_detected := false if {
+	score := object.get(input, ["metrics", "emotion_recognition", "educational_context"], -1)
+	score >= 0
+	score <= object.get(input, ["params", "educational_context_threshold"], 0.3)
 }
 
 default combined_score_acceptable := false

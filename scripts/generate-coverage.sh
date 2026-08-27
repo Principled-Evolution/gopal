@@ -250,7 +250,47 @@ jq -n >"${TMP}/coverage.json" \
 			version: ($meta[.package].version // null),
 			# A file with no defaulted boolean rule reaches no verdict of its own;
 			# it exists to be imported by the policies that do.
-			is_library: ((.decision_rules | length) == 0)
+			is_library: ((.decision_rules | length) == 0),
+
+			# The rule a caller should ask for to get this policy verdict.
+			#
+			# decision_rules lists every defaulted boolean in the file, in
+			# declaration order, so its first element is usually an intermediate.
+			# `allow` is present in 78 of the 91 policies but is first in only 42,
+			# so picking [0] resolves the wrong rule for more than half of them.
+			# The remaining 13 use compliant / is_compliant / *_compliant, or a
+			# domain verb such as `equitable` or `approved`.
+			primary_decision: (
+				(.decision_rules | map(.name)) as $names
+				| if ($names | index("allow")) then "allow"
+				elif ($names | index("is_compliant")) then "is_compliant"
+				elif ($names | index("compliant")) then "compliant"
+				elif ($names | map(select(endswith("_compliant"))) | length) == 1
+					then ($names | map(select(endswith("_compliant"))) | first)
+				elif ($names | length) == 1 then ($names | first)
+				elif ($names | length) == 0 then null
+				else ($names | first) end
+			),
+
+			# What a true verdict means. Almost every policy grants: true is
+			# compliant. A detector inverts that, so true is a concern raised.
+			# Consumers must not render the two the same way; showing
+			# flag_for_review == true as a pass would invert the finding.
+			decision_true_means: (
+				(.decision_rules | map(.name)) as $names
+				| if ($names | length) == 0 then null
+				elif ($names | index("allow")) then "compliant"
+				elif (
+					($names | map(select(
+						startswith("flag_") or startswith("detect_")
+						or endswith("_detected") or endswith("_flagged")
+					)) | length) > 0
+					and ($names | map(select(
+						. == "compliant" or . == "is_compliant" or endswith("_compliant")
+					)) | length) == 0
+				) then "concern"
+				else "compliant" end
+			)
 		} | del(.comment_title))) as $enriched
 	| {
 		schema_version: 1,
