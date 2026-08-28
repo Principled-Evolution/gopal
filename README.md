@@ -24,7 +24,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml"><img src="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml/badge.svg" alt="OPA CI"></a>
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="Latest release"></a>
-  <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-1.19.1-blue.svg?style=flat-square" alt="OPA 1.19.1"></a>
+  <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-1.20.1-blue.svg?style=flat-square" alt="OPA 1.20.1"></a>
   <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://doi.org/10.5281/zenodo.22142302"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22142302-blue.svg?style=flat-square" alt="DOI"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
@@ -365,6 +365,8 @@ Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evo
 ---
 
 ## Community and support
+
+We work upstream as well as here. OPA [v1.20.1](https://github.com/open-policy-agent/opa/releases/tag/v1.20.1) exists to fix a number-comparison regression we found while running this library, [reported and patched](https://github.com/open-policy-agent/opa/pull/9099) by us.
 
 You don't need to know Rego, OPA, or GitHub conventions to get an answer here.
 
