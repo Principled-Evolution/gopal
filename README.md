@@ -394,6 +394,30 @@ Contributions of any size are welcome; see [CONTRIBUTING.md](.github/CONTRIBUTIN
 
 ---
 
+## How it fits together
+
+Two diagrams, because the commonest misunderstanding is that a policy library
+evaluates your model. It does not. It evaluates two kinds of statement that
+come from two different places and carry two different levels of proof.
+
+<p align="center">
+  <img src="docs/diagrams/usage1_two_inputs.svg" alt="How a GOPAL policy gets its inputs: declared facts asserted by a person, and measured metrics produced by evaluators such as AICertify running DeepEval or LangFair, both feeding a Rego policy that returns satisfied, not satisfied, or no conclusion" width="70%">
+</p>
+
+Facts you **declare** are the ones no tool can measure: whether the CE marking
+was affixed, whether logs are retained for six months. Metrics an evaluator
+**measures** are the ones typing a number would not prove: toxicity, fairness
+disparity, content safety. A policy reads both.
+
+<p align="center">
+  <img src="docs/diagrams/usage2_ci_loop.svg" alt="GOPAL as a required status check: a pull request carries committed compliance facts, AICertify runs evaluators to add measured metrics, opa eval runs a pinned GOPAL bundle, and the status check passes with a retained report or fails naming the article and control" width="70%">
+</p>
+
+Policy as code only means something once a policy can fail a pull request the
+way a unit test does. Sources for both diagrams are in
+[`docs/diagrams/src/`](docs/diagrams/src), rendered with
+[`render-all.sh`](docs/diagrams/src/render-all.sh).
+
 ## Cite this
 
 If GOPAL informs a paper, a policy submission or a regulator response, please

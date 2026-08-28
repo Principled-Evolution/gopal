@@ -1,0 +1,25 @@
+' Shared visual vocabulary for GOPAL usage diagrams.
+'
+' The palette matches the hand-drawn SVGs already in docs/diagrams/, so a
+' generated diagram does not look like it arrived from somewhere else: indigo
+' for GOPAL itself, teal for facts a person declares, violet for metrics a tool
+' measures, slate for everything around them.
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam ArrowFontSize 11
+skinparam ArrowColor #475569
+skinparam ArrowThickness 1.1
+skinparam wrapWidth 200
+skinparam note {
+  BackgroundColor #FEF3C7
+  BorderColor #B7791F
+  FontColor #0F172A
+}
+skinparam rectangle {
+  BorderThickness 1.2
+  FontColor #0F172A
+}

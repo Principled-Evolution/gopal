@@ -1,0 +1,44 @@
+@startuml usage1_two_inputs
+' Where a GOPAL policy's inputs come from.
+'
+' The commonest misunderstanding about a policy library is that it evaluates
+' "your model". It does not. It evaluates two kinds of statement that come from
+' two different places and carry two different levels of proof, and nearly
+' every question about adopting GOPAL turns out to be about one of them.
+!include gopal-style.puml
+
+title How a GOPAL policy gets its inputs
+
+rectangle "**Your AI system**\nmodel, prompts, retrieval,\napplication code" as SYS #line:94A3B8;back:FFFFFF
+
+rectangle "**Declared facts**\n//asserted by a person//\n\nCE marking affixed\nLogs retained six months\nDeployer informed workers" as DECL #line:0F766E;back:E6F4F1
+
+rectangle "**Evaluators**\nAICertify running DeepEval,\nLangFair, or one you write" as EVAL #line:6D4AA2;back:FFFFFF
+
+rectangle "**Measured metrics**\n//computed by a tool//\n\nToxicity score\nFairness disparity\nContent-safety score" as MEAS #line:6D4AA2;back:F1EBFA
+
+rectangle "**GOPAL policy**\nRego, cited to the article\nit enforces" as POL #line:4F46E5;back:EEF2FF
+
+rectangle "**Verdict**\nsatisfied · not satisfied\n· no conclusion" as VERD #line:4338CA;back:FFFFFF
+
+SYS -[#0F766E]-> DECL : a person asserts
+SYS -[#6D4AA2]-> EVAL : is evaluated by
+EVAL -[#6D4AA2]-> MEAS : produces
+DECL -[#0F766E]-> POL
+MEAS -[#6D4AA2]-> POL
+POL -[#4338CA]-> VERD
+
+note bottom of DECL
+  No tool can measure these. They are facts
+  about the organisation, not the model, which
+  is why a complete model card answers only
+  5 of the 184 inputs the policies read.
+end note
+
+note bottom of VERD
+  **No conclusion is not a pass.** A policy
+  given nothing says so, rather than
+  defaulting to compliant.
+end note
+
+@enduml
