@@ -1,14 +1,11 @@
 {
-  "_comment": "Classification of every declared fact the playground evaluates against what a Hugging Face model card structurally contains. A judgement, written out field by field so it can be argued with. Anything absent from both lists is classified as untouched by a model card.",
+  "_comment": "Classification of every declared input GOPAL's shipped policies read, against what a standard Hugging Face model card structurally contains. A judgement, written out field by field so it can be argued with. 'Answerable' means the card itself establishes the fact, without inference or inspecting the repository around it. Anything absent from both lists is untouched by a card.",
   "_card_structure": [
     "YAML: license, language, datasets, metrics, model-index, base_model, pipeline_tag, library_name, tags",
     "Sections: Model Details, Uses (Direct / Downstream / Out-of-Scope), Bias Risks and Limitations, How to Get Started, Training Details, Evaluation, Environmental Impact, Technical Specifications, Citation"
   ],
   "answerable": {
-    "model.free_and_open_source": "`license` in the card's YAML metadata",
-    "model.parameters_publicly_available": "the weights are either in the repo or they are not",
     "accuracy.metrics_declared": "`model-index` / the Evaluation section is exactly a declaration of metrics",
-    "documentation.model_card.completeness": "the card is the artefact being scored",
     "documentation.evaluation_results_documented": "the Evaluation section",
     "documentation.training_process_documented": "the Training Details section",
     "transparency.system_purpose_documented": "the Uses / Direct Use section",
@@ -35,6 +32,9 @@
     "fairness.protected_characteristics_tested": "named occasionally, and rarely as a tested set",
     "fairness.max_disparity": "only if fairness metrics happen to be reported",
     "system.performs_biometric_categorisation": "`pipeline_tag` can indicate the task",
-    "system.sources": "the `datasets` field can indicate provenance of training images"
+    "system.sources": "the `datasets` field can indicate provenance of training images",
+    "model.free_and_open_source": "`license` names a licence, but the Article 53(2) open-source treatment also turns on access, use, modification and distribution rights and on parameters being public. A licence string is evidence toward the test, not the test",
+    "model.parameters_publicly_available": "established by inspecting the repository, not by the card. A card may link weights without asserting their availability",
+    "documentation.model_card.completeness": "circular: the card scoring itself. Counting it as answerable inflates the numerator"
   }
 }

@@ -5,7 +5,7 @@ Evaluates an AI system's documentation and toxicity metrics against the EU AI Ac
 The policy implements obligations from:
 
 - **Article 13**: Transparency and provision of information to users
-- **Article 52**: Transparency obligations for certain AI systems
+
 
 ## Run
 
