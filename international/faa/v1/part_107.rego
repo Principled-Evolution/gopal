@@ -28,7 +28,7 @@ default allow := false
 allow if {
 	input.remote_pilot.certificate_held == true
 	input.aircraft.registered == true
-	input.operation.altitude_ft <= object.get(input.params, "max_altitude_ft", 400)
+	input.operation.altitude_ft <= object.get(input, ["params", "max_altitude_ft"], 400)
 	visual_conditions_met
 	lighting_conditions_met
 }
@@ -60,7 +60,7 @@ policy_metrics := {
 	"altitude_within_limit": {
 		"name": "Altitude Within 400ft Limit",
 		"value": input.operation.altitude_ft,
-		"control_passed": input.operation.altitude_ft <= object.get(input.params, "max_altitude_ft", 400),
+		"control_passed": input.operation.altitude_ft <= object.get(input, ["params", "max_altitude_ft"], 400),
 	},
 	"visual_conditions": {
 		"name": "VLOS or Waivered BVLOS",

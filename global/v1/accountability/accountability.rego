@@ -31,7 +31,7 @@ allow if {
 
 	# Check if system has audit logging
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input.params, "audit_logging_completeness_threshold", 0.8)
+	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 
 	# Check if system has explicit responsibility assignment
 	input.governance.responsibility.clearly_assigned == true
@@ -51,7 +51,7 @@ non_compliant if {
 
 non_compliant if {
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score < object.get(input.params, "audit_logging_completeness_threshold", 0.8)
+	input.governance.audit_logging.completeness_score < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
 non_compliant if {
@@ -71,7 +71,7 @@ compliance_report := {
 		"human_oversight_enabled": object.get(input.governance, ["human_oversight", "enabled"], false),
 		"audit_logging_enabled": object.get(input.governance, ["audit_logging", "enabled"], false),
 		"audit_logging_completeness": object.get(input.governance, ["audit_logging", "completeness_score"], 0),
-		"audit_logging_completeness_threshold": object.get(input.params, "audit_logging_completeness_threshold", 0.8),
+		"audit_logging_completeness_threshold": object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8),
 		"responsibility_assigned": object.get(input.governance, ["responsibility", "clearly_assigned"], false),
 		"incident_response_defined": object.get(input.governance, ["incident_response", "process_defined"], false),
 	},
@@ -91,20 +91,20 @@ recommendations := audit_logging_recs if {
 recommendations := audit_logging_completeness_recs if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score < object.get(input.params, "audit_logging_completeness_threshold", 0.8)
+	input.governance.audit_logging.completeness_score < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
 recommendations := responsibility_recs if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input.params, "audit_logging_completeness_threshold", 0.8)
+	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	input.governance.responsibility.clearly_assigned == false
 }
 
 recommendations := incident_response_recs if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input.params, "audit_logging_completeness_threshold", 0.8)
+	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	input.governance.responsibility.clearly_assigned == true
 	input.governance.incident_response.process_defined == false
 }
@@ -112,7 +112,7 @@ recommendations := incident_response_recs if {
 recommendations := [] if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input.params, "audit_logging_completeness_threshold", 0.8)
+	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	input.governance.responsibility.clearly_assigned == true
 	input.governance.incident_response.process_defined == true
 }

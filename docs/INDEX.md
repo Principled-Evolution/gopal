@@ -8,6 +8,7 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 
 - [Quick Start in the README](../README.md#quick-start): standalone `opa eval`, or via AICertify.
 - [Add your first GOPAL policy](tutorials/add-your-first-policy.md): write a working policy + test + CI check in 20 minutes.
+- [Plug your evaluator into GOPAL](tutorials/supplying-metrics.md): supply measured metrics from any tool, in any language, with no framework.
 - [Runnable examples](../examples/README.md): `examples/` with input/output pairs for EU AI Act, NIST AI RMF, and customer-support LLM.
 - [Add a brand-new regulatory framework](skills/add-framework/SKILL.md) (Claude Code skill): bootstraps the directory tree, framework README, and first policy.
 - [FAQ](FAQ.md): comprehensive Q&A on what GOPAL is, when to use it, and how to extend it.

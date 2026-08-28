@@ -166,7 +166,11 @@ The EU AI Act bundle is 24K against 56K for the whole library, and there is a `g
 
 Build them yourself with [`scripts/build-bundles.sh`](scripts/build-bundles.sh), which loads each bundle back and asserts a real decision denies on empty input before declaring success.
 
-If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify).
+### Supplying measured metrics
+
+Policies read two kinds of input: facts a person declares, and metrics a tool measures. The measured half is where an integration has to do real work, and [Plug your evaluator into GOPAL](docs/tutorials/supplying-metrics.md) walks it end to end in plain `opa`: find what a policy reads, use the canonical name from [`helper_functions/metrics.rego`](helper_functions/metrics.rego), write the JSON, gate a build on the result. No Python, no framework.
+
+If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify). It takes the scaffolding off you; it is not required to use any of this.
 
 ---
 

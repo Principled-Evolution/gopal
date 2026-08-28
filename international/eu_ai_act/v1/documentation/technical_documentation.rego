@@ -80,7 +80,7 @@ default completeness_sufficient := false
 
 completeness_sufficient if {
 	score := input.metrics.model_card.completeness
-	threshold := object.get(input.params, "completeness_threshold", 0.8)
+	threshold := object.get(input, ["params", "completeness_threshold"], 0.8)
 	score >= threshold
 }
 
@@ -88,7 +88,7 @@ default quality_sufficient := false
 
 quality_sufficient if {
 	score := input.metrics.model_card.quality
-	threshold := object.get(input.params, "quality_threshold", 0.8)
+	threshold := object.get(input, ["params", "quality_threshold"], 0.8)
 	score >= threshold
 }
 

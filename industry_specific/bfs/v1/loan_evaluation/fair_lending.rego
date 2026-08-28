@@ -144,9 +144,9 @@ compliance_report := {
 	"reason": reason,
 	"recommendations": recommendations,
 	"thresholds": {
-		"fairness": object.get(input.params, "fairness_threshold", 0.90),
-		"content_safety": object.get(input.params, "content_safety_threshold", 0.85),
-		"risk_management": object.get(input.params, "risk_management_threshold", 0.85),
+		"fairness": object.get(input, ["params", "fairness_threshold"], 0.90),
+		"content_safety": object.get(input, ["params", "content_safety_threshold"], 0.85),
+		"risk_management": object.get(input, ["params", "risk_management_threshold"], 0.85),
 	},
 	"scores": {
 		"fairness": metrics.resolve(input, "metrics.fairness.score"),

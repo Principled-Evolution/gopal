@@ -25,7 +25,7 @@ default allow := false
 
 allow if {
 	input.uam.vertiport_certified == true
-	input.uam.noise_db <= object.get(input.params, "max_noise_db", 65)
+	input.uam.noise_db <= object.get(input, ["params", "max_noise_db"], 65)
 	input.uam.corridor_authorized == true
 }
 
@@ -38,7 +38,7 @@ policy_metrics := {
 	"noise_within_limit": {
 		"name": "Noise Within Community Limit",
 		"value": object.get(input.uam, "noise_db", null),
-		"control_passed": object.get(input.uam, "noise_db", 999) <= object.get(input.params, "max_noise_db", 65),
+		"control_passed": object.get(input.uam, "noise_db", 999) <= object.get(input, ["params", "max_noise_db"], 65),
 	},
 	"corridor_authorized": {
 		"name": "Flight Corridor Authorized",

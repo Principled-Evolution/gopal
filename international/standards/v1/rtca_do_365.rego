@@ -24,7 +24,7 @@ default allow := false
 
 allow if {
 	input.daa_system.equipped == true
-	input.daa_system.surveillance_volume_nm >= object.get(input.params, "min_surveillance_volume_nm", 1.0)
+	input.daa_system.surveillance_volume_nm >= object.get(input, ["params", "min_surveillance_volume_nm"], 1.0)
 	input.daa_system.alert_timeliness_compliant == true
 }
 
@@ -37,7 +37,7 @@ policy_metrics := {
 	"surveillance_volume_sufficient": {
 		"name": "Surveillance Volume Meets Minimum",
 		"value": object.get(input.daa_system, "surveillance_volume_nm", 0),
-		"control_passed": object.get(input.daa_system, "surveillance_volume_nm", 0) >= object.get(input.params, "min_surveillance_volume_nm", 1.0),
+		"control_passed": object.get(input.daa_system, "surveillance_volume_nm", 0) >= object.get(input, ["params", "min_surveillance_volume_nm"], 1.0),
 	},
 	"alert_timeliness_compliant": {
 		"name": "Alert Timeliness Compliant",

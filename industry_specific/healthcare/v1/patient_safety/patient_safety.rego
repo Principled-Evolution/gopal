@@ -1,7 +1,10 @@
 # RequiredMetrics:
-#   - evaluation.patient_safety.score
-#   - evaluation.clinical_validation.score
-#   - evaluation.risk_assessment.score
+#   - metrics.patient_safety.score
+#   - metrics.clinical_validation.score
+#   - metrics.risk_assessment.score
+#
+# The legacy evaluation.<name>.score spellings still resolve; see
+# helper_functions/metrics.rego.
 #
 # RequiredParams:
 #   - patient_safety_threshold (default 0.95)
@@ -10,6 +13,7 @@
 #
 package industry_specific.healthcare.v1.patient_safety
 
+import data.helper_functions.metrics
 import data.helper_functions.reporting
 import rego.v1
 
@@ -25,7 +29,13 @@ metadata := {
 	],
 }
 
-score(name, fallback) := object.get(input, ["evaluation", name, "score"], fallback)
+# Read through the canonical table rather than one hard-coded path, so a score
+# supplied as metrics.patient_safety.score is seen as readily as the legacy
+# evaluation.patient_safety.score. resolve_or, not resolve, because the -1
+# sentinel below is deliberate: an absent score must compare below every
+# threshold and be counted as a failure, not drop out of the assessment as an
+# undefined comparison.
+score(name, fallback) := metrics.resolve_or(input, sprintf("metrics.%v.score", [name]), fallback)
 
 threshold(name, fallback) := object.get(input, ["params", name], fallback)
 
