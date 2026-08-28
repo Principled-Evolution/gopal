@@ -36,9 +36,9 @@
 
 **GOPAL: Governance Open Policy Agent Library.** Think of it as an open policy pack for AI regulation.
 
-A curated collection of [OPA](https://www.openpolicyagent.org/) policies, written in Rego, that encode real AI-governance requirements: the EU AI Act, NIST AI RMF, aviation safety standards, FERPA/COPPA in education, fair-lending rules in banking, and more.
+91 policies that translate published regulation into industry-standard policy-as-code, written in Rego for [OPA](https://www.openpolicyagent.org/). Each one takes a named instrument, encodes its obligations as executable rules, cites the article or control it enforces, ships with tests, and appears in a coverage matrix that states what is implemented and what is not. The EU AI Act, NIST AI RMF, aviation safety standards, FERPA and COPPA in education, fair-lending rules in banking, and more.
 
-Run them against your AI system's metadata, model cards, or evaluation results. You get back a structured, machine-readable compliance verdict you can drop into CI, an audit log, or a regulator submission.
+Run them against two kinds of input: facts you declare about the system and the organisation around it, and metrics an evaluator measures. You get back a structured, machine-readable verdict you can drop into CI, an audit log, or a regulator submission.
 
 <p align="center">
   <picture>
