@@ -1,0 +1,34 @@
+{
+  "title": "GOPAL: the Rego policy library for AI compliance",
+  "description": "<p>GOPAL encodes AI-governance requirements as executable <a href=\"https://www.openpolicyagent.org/\">Open Policy Agent</a> policies written in Rego, covering the EU AI Act, the UK AI framework, NIST AI RMF, aviation safety standards, financial services, education, healthcare and legal practice.</p><p>Each policy cites the provision it enforces and ships with tests, and per-article coverage matrices state what is implemented and what is not, so the library can be audited rather than trusted. 91 policies reach a verdict, backed by 806 tests; every policy is required by CI to have a test and to deny an empty input. Evaluation runs in any OPA installation with no service dependency and nothing of the caller's data leaving their environment.</p>",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "creators": [
+    { "name": "Madan, Kapil", "affiliation": "Principled Evolution" },
+    { "name": "Principled Evolution" }
+  ],
+  "keywords": [
+    "AI governance",
+    "AI compliance",
+    "EU AI Act",
+    "NIST AI RMF",
+    "policy as code",
+    "Open Policy Agent",
+    "Rego",
+    "regulatory compliance",
+    "responsible AI"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Principled-Evolution/gopal",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/Principled-Evolution/aicertify",
+      "relation": "isSourceOf",
+      "scheme": "url"
+    }
+  ]
+}

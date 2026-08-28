@@ -76,6 +76,28 @@ We aim to respond within 5 business days. Larger framework additions may take lo
 
 The `custom/` directory is `.gitignore`d and skipped by CI. That is where your organization's proprietary rules go. They evaluate alongside the public set without ever being pushed to this repo. See the [README's Custom Policies section](README.md#custom-policies).
 
+## Releasing
+
+Version strings live in several hand-maintained places and are checked by
+`scripts/check-version-refs.sh`, so bump `VERSION` first and let the script tell
+you what else to change. `CITATION.cff` is one of them.
+
+`.zenodo.json` and `CITATION.cff` exist so that a GitHub Release becomes a
+citable, archived artifact with a DOI. That requires a one-off setup step that
+cannot be done from this repository:
+
+1. Sign in to [zenodo.org](https://zenodo.org) with the GitHub account that
+   owns the organisation, and authorise the GitHub integration.
+2. Under **GitHub**, switch `Principled-Evolution/gopal` on.
+3. Publish a GitHub Release. Zenodo archives that tag and mints two DOIs: one
+   for the specific version, and a *concept DOI* that always resolves to the
+   latest. Cite the concept DOI in the README.
+4. Add the DOI to `CITATION.cff` under `identifiers:` and to the README badge
+   row, then bump both on later releases.
+
+Only releases published *after* the switch is enabled are archived, so enabling
+it does not backfill v1.3.0 or earlier.
+
 ## Community
 
 - **Questions and integration help.** Use the [integration help form](https://github.com/Principled-Evolution/gopal/issues/new?template=integration_help.yml), open a [Q&A discussion](https://github.com/Principled-Evolution/gopal/discussions/new?category=q-a), or email **gopal@principledevolution.ai**. We don't assume any Rego or OPA experience.
