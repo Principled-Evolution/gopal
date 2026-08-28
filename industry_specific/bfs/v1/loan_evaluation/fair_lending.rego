@@ -1,7 +1,7 @@
 # RequiredMetrics:
-#   - evaluation.fairness.score
-#   - evaluation.content_safety.score
-#   - evaluation.risk_management.score
+#   - metrics.fairness.score
+#   - metrics.content_safety.score
+#   - metrics.risk_management.score
 #
 # RequiredParams:
 #   - fairness_threshold (default 0.90)
@@ -10,6 +10,7 @@
 #
 package industry_specific.bfs.v1.loan_evaluation.fair_lending
 
+import data.helper_functions.metrics
 import rego.v1
 
 # Define helper rules to check which evaluations failed/passed
@@ -148,8 +149,8 @@ compliance_report := {
 		"risk_management": object.get(input.params, "risk_management_threshold", 0.85),
 	},
 	"scores": {
-		"fairness": input.evaluation.fairness.score,
-		"content_safety": input.evaluation.content_safety.score,
-		"risk_management": input.evaluation.risk_management.score,
+		"fairness": metrics.resolve(input, "metrics.fairness.score"),
+		"content_safety": metrics.resolve(input, "metrics.content_safety.score"),
+		"risk_management": metrics.resolve(input, "metrics.risk_management.score"),
 	},
 }

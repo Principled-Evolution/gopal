@@ -6,12 +6,12 @@
     "frameworks": 15,
     "groups": 20,
     "policies": 91,
-    "library_files": 7,
-    "rego_files": 98,
+    "library_files": 8,
+    "rego_files": 99,
     "policies_with_tests": 91,
     "policies_with_empty_input_test": 91,
     "decision_rules": 325,
-    "tests": 806
+    "tests": 826
   },
   "frameworks": [
     {
@@ -332,9 +332,28 @@
       "id": "helper_functions",
       "name": "Helper Functions",
       "kind": "library",
-      "policy_count": 2,
-      "policies_with_tests": 2,
+      "policy_count": 3,
+      "policies_with_tests": 3,
       "policies": [
+        {
+          "path": "helper_functions/metrics.rego",
+          "package": "helper_functions.metrics",
+          "decision_rules": [],
+          "required_metrics": [],
+          "required_params": [],
+          "input_fields": [],
+          "input_field_types": {},
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "helper_functions/metrics_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
+        },
         {
           "path": "helper_functions/reporting.rego",
           "package": "helper_functions.reporting",
@@ -929,9 +948,9 @@
             }
           ],
           "required_metrics": [
-            "evaluation.fairness.score",
-            "evaluation.content_safety.score",
-            "evaluation.risk_management.score"
+            "metrics.fairness.score",
+            "metrics.content_safety.score",
+            "metrics.risk_management.score"
           ],
           "required_params": [
             "fairness_threshold (default 0.90)",
@@ -1626,9 +1645,9 @@
             }
           ],
           "required_metrics": [
-            "evaluation.fairness_score",
-            "evaluation.content_safety_score",
-            "evaluation.risk_management_score"
+            "metrics.fairness.score",
+            "metrics.content_safety.score",
+            "metrics.risk_management.score"
           ],
           "required_params": [
             "fairness_threshold (default 0.85)",

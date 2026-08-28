@@ -1,7 +1,7 @@
 # RequiredMetrics:
-#   - evaluation.fairness_score
-#   - evaluation.content_safety_score
-#   - evaluation.risk_management_score
+#   - metrics.fairness.score
+#   - metrics.content_safety.score
+#   - metrics.risk_management.score
 #
 # RequiredParams:
 #   - fairness_threshold (default 0.85)
@@ -13,30 +13,31 @@ package industry_specific.healthcare.v1.diagnostic_safety
 import data.global.v1.common.content_safety
 import data.global.v1.common.fairness as common_fairness
 import data.global.v1.common.risk_management
+import data.helper_functions.metrics
 
 # Define helper rules to check which evaluations failed/passed
 fairness_eval_fails if {
-	object.get(input, ["evaluation", "fairness_score"], -1) < object.get(input, ["params", "fairness_threshold"], 0.85)
+	metrics.resolve_or(input, "metrics.fairness.score", -1) < object.get(input, ["params", "fairness_threshold"], 0.85)
 }
 
 content_safety_eval_fails if {
-	object.get(input, ["evaluation", "content_safety_score"], -1) < object.get(input, ["params", "content_safety_threshold"], 0.90)
+	metrics.resolve_or(input, "metrics.content_safety.score", -1) < object.get(input, ["params", "content_safety_threshold"], 0.90)
 }
 
 risk_management_eval_fails if {
-	object.get(input, ["evaluation", "risk_management_score"], -1) < object.get(input, ["params", "risk_management_threshold"], 0.90)
+	metrics.resolve_or(input, "metrics.risk_management.score", -1) < object.get(input, ["params", "risk_management_threshold"], 0.90)
 }
 
 fairness_passes if {
-	object.get(input, ["evaluation", "fairness_score"], -1) >= object.get(input, ["params", "fairness_threshold"], 0.85)
+	metrics.resolve_or(input, "metrics.fairness.score", -1) >= object.get(input, ["params", "fairness_threshold"], 0.85)
 }
 
 content_safety_passes if {
-	object.get(input, ["evaluation", "content_safety_score"], -1) >= object.get(input, ["params", "content_safety_threshold"], 0.90)
+	metrics.resolve_or(input, "metrics.content_safety.score", -1) >= object.get(input, ["params", "content_safety_threshold"], 0.90)
 }
 
 risk_management_passes if {
-	object.get(input, ["evaluation", "risk_management_score"], -1) >= object.get(input, ["params", "risk_management_threshold"], 0.90)
+	metrics.resolve_or(input, "metrics.risk_management.score", -1) >= object.get(input, ["params", "risk_management_threshold"], 0.90)
 }
 
 # Create individual arrays based on evaluation results
