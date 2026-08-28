@@ -1,0 +1,37 @@
+@startuml usage2_ci_loop
+' What running GOPAL in CI actually looks like.
+'
+' Diagram 1 explains where the inputs come from. This one shows the loop they
+' sit in, because "policy as code" only means something once a policy can fail
+' a pull request the way a unit test does.
+!include gopal-style.puml
+
+title GOPAL as a required status check
+
+|#F8FAFC|Repository|
+start
+:Pull request opened;
+:Compliance facts committed\nalongside the code\n//contract.json//;
+
+|#F1EBFA|Evaluation|
+:AICertify runs the evaluators\nDeepEval, LangFair, or your own;
+:Metrics written into the contract\n//metrics.content_safety.score//\n//metrics.fairness.gender_bias//;
+
+|#EEF2FF|Policy|
+:Pin a GOPAL bundle\n//gopal-international-eu_ai_act-1.3.1.tar.gz//;
+:opa eval against the contract;
+
+if (Every policy satisfied?) then (yes)
+  |#F8FAFC|Repository|
+  #E6F4F1:Status check passes\nMerge allowed;
+  |#FEF3C7|Evidence|
+  :Report retained as a build artefact\nPDF, Markdown or JSON;
+  stop
+else (no, or no conclusion)
+  |#F8FAFC|Repository|
+  #FEE4E2:Status check fails\nnaming the article and the control;
+  :Fix the system, or record the fact,\nor challenge the policy;
+  stop
+endif
+
+@enduml
