@@ -68,6 +68,13 @@ jobs:
         run: scripts/generate-coverage.sh --check
         working-directory: ${{ github.workspace }}
 
+      # The README's "Jump to" nav points at its own headings. A nav whose
+      # targets have been renamed is worse than no nav: it looks maintained and
+      # lands the reader nowhere.
+      - name: Check in-document anchors resolve
+        run: scripts/check-anchors.sh
+        working-directory: ${{ github.workspace }}
+
       # CONTRIBUTING.md has always required a sibling test and an empty-input
       # test per policy, and nothing enforced it: the gap reached 22 of 96
       # policies, including both Article 5 prohibited-practice policies. An
