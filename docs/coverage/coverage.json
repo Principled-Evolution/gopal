@@ -11,7 +11,7 @@
     "policies_with_tests": 91,
     "policies_with_empty_input_test": 91,
     "decision_rules": 325,
-    "tests": 831
+    "tests": 837
   },
   "frameworks": [
     {
@@ -47,7 +47,6 @@
             "governance.human_oversight.enabled",
             "governance.incident_response.process_defined",
             "governance.responsibility.clearly_assigned",
-            "params",
             "params.audit_logging_completeness_threshold"
           ],
           "input_field_types": {
@@ -213,7 +212,6 @@
           "input_fields": [
             "metrics.stereotype.metrics",
             "metrics.toxicity.score",
-            "params",
             "params.stereotype_association_threshold",
             "params.toxicity_threshold",
             "summary.stereotype_values",
@@ -257,7 +255,6 @@
           ],
           "input_fields": [
             "evaluation.toxicity_score",
-            "params",
             "params.toxicity_threshold"
           ],
           "input_field_types": {
@@ -302,7 +299,6 @@
             "documentation.model_card.completeness_score",
             "documentation.model_card.exists",
             "documentation.use_cases.defined",
-            "params",
             "params.model_card_completeness_threshold"
           ],
           "input_field_types": {
@@ -748,7 +744,6 @@
             "flight_data",
             "flight_data.recording_enabled",
             "flight_data.retention_days",
-            "params",
             "params.min_retention_days"
           ],
           "input_field_types": {
@@ -902,7 +897,6 @@
             "max_noise_db (default 65)"
           ],
           "input_fields": [
-            "params",
             "params.max_noise_db",
             "uam",
             "uam.corridor_authorized",
@@ -961,7 +955,6 @@
             "evaluation.content_safety.score",
             "evaluation.fairness.score",
             "evaluation.risk_management.score",
-            "params",
             "params.content_safety_threshold",
             "params.fairness_threshold",
             "params.risk_management_threshold"
@@ -1707,9 +1700,9 @@
             }
           ],
           "required_metrics": [
-            "evaluation.patient_safety.score",
-            "evaluation.clinical_validation.score",
-            "evaluation.risk_assessment.score"
+            "metrics.patient_safety.score",
+            "metrics.clinical_validation.score",
+            "metrics.risk_assessment.score"
           ],
           "required_params": [
             "patient_safety_threshold (default 0.95)",
@@ -1717,7 +1710,6 @@
             "risk_assessment_threshold (default 0.90)"
           ],
           "input_fields": [
-            "evaluation",
             "oversight.adverse_event_reporting_in_place",
             "oversight.clinician_in_the_loop",
             "params"
@@ -2721,7 +2713,6 @@
             "metrics.model_card.compliance_level",
             "metrics.model_card.quality",
             "metrics.model_card.section_scores",
-            "params",
             "params.completeness_threshold",
             "params.quality_threshold"
           ],
@@ -4105,7 +4096,6 @@
             "operation.bvlos_waiver_held",
             "operation.daylight_or_lit",
             "operation.visual_line_of_sight",
-            "params",
             "params.max_altitude_ft",
             "remote_pilot.certificate_held"
           ],
@@ -4504,7 +4494,6 @@
             "daa_system.alert_timeliness_compliant",
             "daa_system.equipped",
             "daa_system.surveillance_volume_nm",
-            "params",
             "params.min_surveillance_volume_nm"
           ],
           "input_field_types": {
