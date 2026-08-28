@@ -47,6 +47,17 @@ Run them against two kinds of input: facts you declare about the system and the 
   </picture>
 </p>
 
+<p align="center">
+  <b>Jump to:</b>
+  <a href="#quick-start">Run it now</a> &middot;
+  <a href="#whats-inside">What's covered</a> &middot;
+  <a href="#for-opa--rego-users">Already using OPA</a> &middot;
+  <a href="#supplying-measured-metrics">Supply your own metrics</a> &middot;
+  <a href="#authoring-policies">Write a policy</a> &middot;
+  <a href="#comparison">How it compares</a> &middot;
+  <a href="#community-and-support">Contribute</a>
+</p>
+
 ---
 
 ## AI compliance rules you can read, run, diff, and prove
