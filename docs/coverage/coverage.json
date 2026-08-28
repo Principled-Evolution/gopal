@@ -11,7 +11,7 @@
     "policies_with_tests": 91,
     "policies_with_empty_input_test": 91,
     "decision_rules": 325,
-    "tests": 837
+    "tests": 845
   },
   "frameworks": [
     {
@@ -33,7 +33,7 @@
           "required_metrics": [
             "governance.human_oversight.enabled",
             "governance.audit_logging.enabled",
-            "governance.audit_logging.completeness_score",
+            "metrics.audit_logging.completeness",
             "governance.responsibility.clearly_assigned",
             "governance.incident_response.process_defined"
           ],
@@ -248,13 +248,12 @@
             }
           ],
           "required_metrics": [
-            "evaluation.toxicity_score"
+            "metrics.toxicity.score"
           ],
           "required_params": [
             "toxicity_threshold (default 0.1)"
           ],
           "input_fields": [
-            "evaluation.toxicity_score",
             "params.toxicity_threshold"
           ],
           "input_field_types": {
@@ -284,7 +283,7 @@
           ],
           "required_metrics": [
             "documentation.model_card.exists",
-            "documentation.model_card.completeness_score",
+            "metrics.model_card.completeness",
             "documentation.explainability.provided",
             "documentation.limitations.documented",
             "documentation.use_cases.defined"

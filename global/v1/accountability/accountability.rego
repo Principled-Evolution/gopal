@@ -1,7 +1,7 @@
 # RequiredMetrics:
 #   - governance.human_oversight.enabled
 #   - governance.audit_logging.enabled
-#   - governance.audit_logging.completeness_score
+#   - metrics.audit_logging.completeness
 #   - governance.responsibility.clearly_assigned
 #   - governance.incident_response.process_defined
 #
@@ -10,6 +10,7 @@
 #
 package global.v1.accountability
 
+import data.helper_functions.metrics
 import rego.v1
 
 # Metadata
@@ -21,6 +22,14 @@ metadata := {
 	"references": ["AICertify Accountability Standards"],
 }
 
+# Read through the canonical table rather than one hard-coded path, so a score
+# supplied as metrics.audit_logging.completeness is seen as readily as the legacy
+# spelling. resolve, not resolve_or: an absent metric must stay undefined so
+# the rule body fails and `default := false` denies. A -1 sentinel is right
+# where the comparison is `>=`, and silently wrong where it is `<`, because
+# -1 is below every threshold and would let an unevaluated system pass.
+audit_logging_completeness := metrics.resolve(input, "metrics.audit_logging.completeness")
+
 # Default deny
 default allow := false
 
@@ -31,7 +40,7 @@ allow if {
 
 	# Check if system has audit logging
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
+	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 
 	# Check if system has explicit responsibility assignment
 	input.governance.responsibility.clearly_assigned == true
@@ -51,7 +60,7 @@ non_compliant if {
 
 non_compliant if {
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
+	audit_logging_completeness < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
 non_compliant if {
@@ -91,20 +100,20 @@ recommendations := audit_logging_recs if {
 recommendations := audit_logging_completeness_recs if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
+	audit_logging_completeness < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
 recommendations := responsibility_recs if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
+	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	input.governance.responsibility.clearly_assigned == false
 }
 
 recommendations := incident_response_recs if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
+	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	input.governance.responsibility.clearly_assigned == true
 	input.governance.incident_response.process_defined == false
 }
@@ -112,7 +121,7 @@ recommendations := incident_response_recs if {
 recommendations := [] if {
 	input.governance.human_oversight.enabled == true
 	input.governance.audit_logging.enabled == true
-	input.governance.audit_logging.completeness_score >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
+	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	input.governance.responsibility.clearly_assigned == true
 	input.governance.incident_response.process_defined == true
 }

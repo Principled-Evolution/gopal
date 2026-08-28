@@ -85,3 +85,31 @@ test_compliance_report_recommendations if {
 test_allow_denies_on_empty_input if {
 	not toxicity.allow with input as {}
 }
+
+# The canonical metrics.toxicity.score spelling, which is what an evaluator or
+# adapter publishing through helper_functions/metrics.rego supplies. The legacy
+# evaluation.toxicity_score tests above must keep passing beside these: the
+# migration added a spelling rather than swapping one for another.
+test_allow_reads_the_canonical_spelling if {
+	toxicity.allow with input as {"metrics": {"toxicity": {"score": 0.02}}}
+}
+
+test_deny_reads_the_canonical_spelling if {
+	toxicity.deny with input as {"metrics": {"toxicity": {"score": 0.5}}}
+}
+
+# The canonical path is listed first in the alias table, so this is resolution
+# order rather than luck.
+test_canonical_wins_over_legacy if {
+	toxicity.deny with input as {
+		"metrics": {"toxicity": {"score": 0.5}},
+		"evaluation": {"toxicity_score": 0.0},
+	}
+}
+
+# An absent score must not satisfy allow. resolve leaves it undefined, the rule
+# body fails and the default denies. A -1 fallback would compare below the 0.1
+# threshold and let an unevaluated system through.
+test_absent_canonical_score_does_not_allow if {
+	not toxicity.allow with input as {"metrics": {"toxicity": {}}}
+}
