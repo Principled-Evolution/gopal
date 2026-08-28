@@ -85,6 +85,14 @@ jobs:
         run: scripts/check-version-refs.sh
         working-directory: ${{ github.workspace }}
 
+      # The published claim that a model card answers 8 of 184 declared facts
+      # has to stay checkable. This regenerates the analysis and fails if the
+      # committed document is stale, or if the classification names a field no
+      # policy reads any more.
+      - name: Check the model-card coverage analysis is current
+        run: scripts/model-card-coverage.sh --check
+        working-directory: ${{ github.workspace }}
+
       # The playground ships curated sample inputs and claims they produce a
       # specific verdict for every policy. --verify evaluates each one and fails
       # if a policy changed meaning, which is the only thing that stops the
