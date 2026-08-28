@@ -27,9 +27,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Pinned to match opa-ci.yaml. A release should be built with the version
+      # the policies are tested against, and `latest` means an upstream release
+      # can change what ships here with no change on our side. OPA 1.20.0 does
+      # not break this build, but it does panic on ordering comparisons against
+      # a decimal zero (open-policy-agent/opa#9099), which several shared
+      # helpers use.
       - name: Install OPA
+        env:
+          OPA_VERSION: v1.19.1
         run: |
-          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          curl -L -o opa "https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64"
           chmod 755 opa
           sudo mv opa /usr/local/bin/
           opa version

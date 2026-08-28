@@ -4,7 +4,7 @@
 
 ## What this measures, and what it does not
 
-GOPAL v1.3.0 reads **184 distinct declared input fields** across the 35 EU and UK policy checks shipped to the [validation preview](https://principledevolution.ai/playground). A declared input is one no tool can measure for you: whether a CE marking was affixed, whether required documentation has been retained for ten years.
+GOPAL v1.3.1 reads **184 distinct declared input fields** across the 35 EU and UK policy checks shipped to the [validation preview](https://principledevolution.ai/playground). A declared input is one no tool can measure for you: whether a CE marking was affixed, whether required documentation has been retained for ten years.
 
 This document maps how many of those inputs a fully populated **standard Hugging Face model card** can supply. It is a measurement of **model-card-to-policy-schema overlap**. It is explicitly not a percentage of legal compliance, nor of all applicable regulatory obligations, and no figure here should be quoted as one.
 

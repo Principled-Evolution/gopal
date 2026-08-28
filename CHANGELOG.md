@@ -9,6 +9,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Nothing yet.
 
+## [1.3.1]: 2026-08-28
+
+### Fixed
+
+- **`international/eu_ai_act/v1/transparency` cited the wrong Article.** The policy referenced "Article 52 of the EU AI Act, Transparency obligations for certain AI systems". In the adopted Regulation, Article 52 is "Procedure", the GPAI systemic-risk notification, and transparency obligations for certain systems are Article 50. The same repository cites Article 52(1) correctly for GPAI notification in `gpai/systemic_risk_classification`, so both citations sat side by side.
+
+  The correction is not a rename. The policy scores documentation completeness and a toxicity threshold, which is not a test of Article 50 either: Article 50 governs disclosure to natural persons and deepfake marking. It now cites Article 13 alone. The coverage matrix had also claimed Article 50 as implemented on one row while listing it as not implemented on another; the false row is removed, and the Article 13 row is downgraded from a tick to a warning noting that Article 13 requires instructions for use containing specified content, and a completeness score is a proxy for that rather than a test of it. Claimed coverage goes down.
+
+- **`industry_specific/education/v1/student_data_privacy/ferpa_compliance`: consent was a placeholder.** The rule checked a status flag and a scope list. 34 CFR §99.30 requires written consent to be signed and dated by the parent or eligible student and to specify the records, the purpose, and the party receiving them. In practice a consent permitting a transcript to go to a named university for admissions also cleared sending that transcript to a data broker for marketing, because neither purpose nor recipient was ever read. All four elements are now checked, each in its own named helper, and the function is total.
+
+- **Two vacuous-truth fail-opens in the same file.** Both allow branches iterated `input.data_requested` with `every`, and `every` over an empty collection is true, so a request for no records at all was approved by both the consent branch and the directory-information branch. Both now require a non-empty request.
+
+- **The README hero banner said 96 policies above a panel saying 91.** The count is 91: seven of the 98 Rego files define no decision rule and are libraries the real policies import. A previous correction pass updated the README tree and the translations but missed text baked into `diagrams/hero_banner_{light,dark}.svg` and the `<desc>` in `diagrams/diagram1_hero_numbers_{light,dark}.svg`, which is what a screen reader announces.
+
+### Added
+
+- **`scripts/extract-input-fields.sh`** derives the `input` fields each policy reads from its AST rather than from a hand-written comment. The comment block had drifted to the point where 22 of 98 policies read `input` and declared nothing at all, so anything asking "what does this policy need?" got an empty answer. It recognises the `object.get(input, ["a","b"], default)` form, used 284 times here, and infers each field's kind from the literal the policy measures it against. The comment block stays and the two are unioned: a field name computed in a loop cannot be recovered from the AST.
+
+- **`scripts/check-test-coverage.sh`**, run in CI, fails the build when a policy has no sibling test or no empty-input test. Every policy has had both since v1.3.0; this makes it a gate rather than a snapshot. The gap it prevents had reached 22 of 96 policies, including both Article 5 prohibited-practice policies, and an external reviewer demonstrated it by flipping `default allow := false` to `true` in the social-scoring gate without the suite going red.
+
+- **`scripts/model-card-coverage.sh` and `docs/model-cards-vs-compliance.md`** measure how far a standard Hugging Face model card gets you against the 184 declared inputs the shipped checks read: 5 directly, 24 partially, 155 not prompted for. The classification is data with a written reason per field, the counts are computed, and CI fails if it goes stale.
+
+- **`CITATION.cff` and `.zenodo.json`.** GitHub now offers a "Cite this repository" button, and a published release is archived with a DOI.
+
+### Changed
+
+- **OPA and Regal are pinned in CI**, and now in the release workflow too. Both installed `latest`, so an upstream release could change the build with no change here, and on 2026-08-28 one did: OPA 1.20.0 panics with `illegal value` on any ordering comparison against a decimal zero, which four shared helpers in `global/v1/common` use as a score fallback. `opa test` aborted with exit code 2 across the whole suite rather than failing a test. Reported upstream as [open-policy-agent/opa#9099](https://github.com/open-policy-agent/opa/pull/9099) with a fix; raise the pin when that ships.
+
+- **`scripts/check-version-refs.sh` also checks published counts** against the generated coverage data, covering both hero banners, both diagram descriptions, the README policy sentence, `CITATION.cff` and the README BibTeX block.
+
 ## [1.3.0]: 2026-08-27
 
 ### Fixed
