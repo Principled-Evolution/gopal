@@ -136,15 +136,15 @@ check_count() {
 	fi
 }
 
-check_count diagrams/hero_banner_light.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, light"
-check_count diagrams/hero_banner_dark.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, dark"
+check_count docs/diagrams/hero_banner_light.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, light"
+check_count docs/diagrams/hero_banner_dark.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, dark"
 check_count README.md '**%P% policies that reach a verdict' "README policy count"
 
 # The accessible description is what a screen reader announces, and it said 96
 # while the visible text beside it said 91. Numbers in alt text drift more
 # easily than numbers on screen, because nobody looking at the page sees them.
-check_count diagrams/diagram1_hero_numbers_light.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, light"
-check_count diagrams/diagram1_hero_numbers_dark.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, dark"
+check_count docs/diagrams/diagram1_hero_numbers_light.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, light"
+check_count docs/diagrams/diagram1_hero_numbers_dark.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, dark"
 
 if [ "${failures}" -gt 0 ]; then
 	echo "${failures} version reference(s) disagree with VERSION (${VERSION})." >&2

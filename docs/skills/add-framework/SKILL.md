@@ -88,7 +88,7 @@ Bootstrap a new regulatory framework directory in GOPAL.
    }
    ```
 
-6. **Update the top-level [README.md](../../README.md)**: add the new framework to the coverage table in the "What's Inside" section with its policy count (`1` initially).
+6. **Update the top-level [README.md](../../../README.md)**: add the new framework to the coverage table in the "What's Inside" section with its policy count (`1` initially).
 
 7. **Run the gates**:
    ```bash

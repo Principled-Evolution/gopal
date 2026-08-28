@@ -209,7 +209,7 @@ CI will run `opa check`, `opa test`, and `regal lint`. The CHANGELOG should get 
 
 | Want to … | See |
 |---|---|
-| Add a brand-new regulatory framework | [`skills/add-framework/SKILL.md`](../../skills/add-framework/SKILL.md): Claude Code skill that scaffolds the directory tree, framework README, and first policy |
+| Add a brand-new regulatory framework | [`skills/add-framework/SKILL.md`](../skills/add-framework/SKILL.md): Claude Code skill that scaffolds the directory tree, framework README, and first policy |
 | Use the standard reporting helpers | [`helper_functions/reporting.rego`](../../helper_functions/reporting.rego): `compose_report()`, `validate_required_fields()` |
 | Understand authoring conventions in depth | [`AGENTS.md`](../../AGENTS.md) |
 | Check which obligations are still open | [`docs/coverage/`](../coverage) |

@@ -29,10 +29,10 @@ When the user asks about the codebase, in order:
 
 ## Useful skills
 
-This project ships Claude Code skills in [`skills/`](skills). To register them:
+This project ships Claude Code skills in [`docs/skills/`](docs/skills). To register them:
 
 ```bash
-mkdir -p ~/.claude/skills && cp -r skills/* ~/.claude/skills/
+mkdir -p ~/.claude/skills && cp -r docs/skills/* ~/.claude/skills/
 ```
 
 Available slash commands once registered:
@@ -41,7 +41,7 @@ Available slash commands once registered:
 - `/explain-framework`: Walk every policy in a framework directory (e.g. `international/eu_ai_act/v1`) and produce an audit-grade plain-English summary
 - `/add-framework`: Bootstrap a brand-new regulatory framework directory (README + seed policy + test)
 
-See [`skills/README.md`](skills/README.md) for details.
+See [`docs/skills/README.md`](docs/skills/README.md) for details.
 
 ## What NOT to do in this repo
 

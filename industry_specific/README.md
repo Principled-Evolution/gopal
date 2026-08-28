@@ -36,7 +36,7 @@ When adding new industry-specific policies:
 3. Use the package name `industry_specific.<industry>.v1.<policy_area>`
 4. Include a `# METADATA` block referencing the specific standard or regulation it encodes
 
-Adding a brand-new vertical (not one of the six above)? See [`skills/add-framework/SKILL.md`](../skills/add-framework/SKILL.md) for the scaffold, and update the count in this file and the top-level README once it lands.
+Adding a brand-new vertical (not one of the six above)? See [`skills/add-framework/SKILL.md`](../docs/skills/add-framework/SKILL.md) for the scaffold, and update the count in this file and the top-level README once it lands.
 
 ## Composition
 

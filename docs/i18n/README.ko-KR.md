@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL: AI 컴플라이언스를 위한 Rego 정책 라이브러리" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/hero_banner_dark.svg">
+    <img src="../diagrams/hero_banner_light.svg" alt="GOPAL: AI 컴플라이언스를 위한 Rego 정책 라이브러리" width="100%">
   </picture>
 </div>
 
@@ -41,8 +41,8 @@ Rego로 작성된 [OPA](https://www.openpolicyagent.org/) 정책을 엄선한 �
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 91개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 91개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
   </picture>
 </p>
 
@@ -76,8 +76,8 @@ GOPAL은 이러한 각 규제 체계에 대응하는 실행 가능한 Rego 정�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 평가 동작 방식: 입력 JSON, Rego 정책, OPA 평가, 판정 결과" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 평가 동작 방식: 입력 JSON, Rego 정책, OPA 평가, 판정 결과" width="85%" />
   </picture>
 </p>
 
@@ -157,8 +157,8 @@ GOPAL은 세 가지 측면에서 다릅니다.
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 디렉터리 레이아웃: 4개의 최상위 분기, 관할권 및 수직 영역별로 구성된 정책" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram2_directory_tree_dark.svg">
+    <img src="../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 디렉터리 레이아웃: 4개의 최상위 분기, 관할권 및 수직 영역별로 구성된 정책" width="85%" />
   </picture>
 </p>
 
@@ -239,8 +239,8 @@ AICertify는 내부적으로 GOPAL을 사용합니다. 이미 OPA 워크플로�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 정책의 구조: 패키지 경로, 임포트, 메타데이터, 기본 거부, 허용 규칙, 리포트" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 정책의 구조: 패키지 경로, 임포트, 메타데이터, 기본 거부, 허용 규칙, 리포트" width="85%" />
   </picture>
 </p>
 

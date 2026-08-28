@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL：面向 AI 合规的 Rego 策略库" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/hero_banner_dark.svg">
+    <img src="../diagrams/hero_banner_light.svg" alt="GOPAL：面向 AI 合规的 Rego 策略库" width="100%">
   </picture>
 </div>
 
@@ -41,8 +41,8 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:91 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:91 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
   </picture>
 </p>
 
@@ -76,8 +76,8 @@ GOPAL 为上述每一种监管体系都提供了可执行的 Rego 策略。它�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 评估流程：输入 JSON、Rego 策略、OPA 评估、判定" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 评估流程：输入 JSON、Rego 策略、OPA 评估、判定" width="85%" />
   </picture>
 </p>
 
@@ -157,8 +157,8 @@ GOPAL 在三个维度上与众不同:
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 目录结构：4 个顶级分支,按司法管辖区与行业组织的策略" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram2_directory_tree_dark.svg">
+    <img src="../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 目录结构：4 个顶级分支,按司法管辖区与行业组织的策略" width="85%" />
   </picture>
 </p>
 
@@ -239,8 +239,8 @@ AICertify 底层使用的正是 GOPAL。如果您已经有一套 OPA 工作流,�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 策略的结构：包路径、imports、元数据、默认拒绝、allow 规则、报告" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 策略的结构：包路径、imports、元数据、默认拒绝、allow 规则、报告" width="85%" />
   </picture>
 </p>
 

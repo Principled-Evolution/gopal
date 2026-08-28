@@ -50,8 +50,8 @@ Diagrams ship as **paired files** with matching `_light.svg` and `_dark.svg`. RE
 
 ```html
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="diagrams/<name>_dark.svg">
-  <img src="diagrams/<name>_light.svg" alt="<descriptive alt text>" width="85%">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/<name>_dark.svg">
+  <img src="docs/diagrams/<name>_light.svg" alt="<descriptive alt text>" width="85%">
 </picture>
 ```
 
@@ -83,7 +83,7 @@ A previous `diagram4_framework_grid` was retired because the markdown comparison
 1. Sketch the content first in markdown (what does the reader need to understand?). Cut anything that is also said in nearby text.
 2. Pick a layout that mirrors an existing diagram if you can: most additions are variations of "flow", "accordion", "stats + cards", or "mockup + callouts".
 3. Hand-author the SVG. Use the existing files as templates; copy a card definition, swap the content.
-4. Validate XML: `python3 -c "import xml.etree.ElementTree as ET; ET.parse('diagrams/<name>_light.svg')"`. Repeat for the dark variant.
+4. Validate XML: `python3 -c "import xml.etree.ElementTree as ET; ET.parse('docs/diagrams/<name>_light.svg')"`. Repeat for the dark variant.
 5. Embed with the `<picture>` snippet above in every README that should reference it (en + 4 translated).
 6. **No automation, no matplotlib, no Python generator.** The old `generate_diagrams.py` was retired because hand-authored SVGs are easier to read, edit, and review than rendered raster output. Keep them hand-authored.
 

@@ -107,9 +107,9 @@ Nothing yet.
 - **`international/nist/v1/ai_600_1`: closed a fail-open in the NIST AI RMF orchestrator.** `govern_compliant` used `object.get(input, "governance", {})` and then tested the result for existence. Because a defaulted `{}` is a defined value, the check succeeded even when the input carried no governance data at all, so an AI system with nothing recorded under `governance`, `transparency` or `fairness` was reported compliant. The orchestrator now delegates to the `govern`, `map`, `measure` and `manage` policies it already imported but never called, each of which carries its own `default allow := false`. This makes the four previously dead imports live and deletes the four shallow presence-only helper rules.
 
 ### Added
-- **Hand-authored, theme-aware SVG diagrams** under [`diagrams/`](diagrams): paired `_light.svg` + `_dark.svg` for hero banner, hero numbers, directory tree, policy anatomy, and evaluation flow. Embedded via `<picture>` so GitHub light- and dark-theme readers each see the matching variant.
+- **Hand-authored, theme-aware SVG diagrams** under [`diagrams/`](docs/diagrams): paired `_light.svg` + `_dark.svg` for hero banner, hero numbers, directory tree, policy anatomy, and evaluation flow. Embedded via `<picture>` so GitHub light- and dark-theme readers each see the matching variant.
 - **Brand assets**: standalone `logo_{light,dark}.svg` (hexagon + `{}` curly braces, signalling policy-as-code), `og_card_{light,dark}.svg` + a 1200×630 `og_card.png` for GitHub Settings → Social preview.
-- **[`diagrams/STYLE.md`](diagrams/STYLE.md)**: design-system reference (palette, typography, shape language, light/dark pattern, contribution flow) shared with sister project AICertify.
+- **[`diagrams/STYLE.md`](docs/diagrams/STYLE.md)**: design-system reference (palette, typography, shape language, light/dark pattern, contribution flow) shared with sister project AICertify.
 - **[`CONTRIBUTING.md`](.github/CONTRIBUTING.md)**: policy-authoring conventions, local-checks recipe, PR review criteria, and a "adding a new framework" guide. Resolves the broken link the README had been carrying.
 - **[`SECURITY.md`](.github/SECURITY.md)**: private vulnerability-disclosure flow at `security@principledevolution.ai`, 5-business-day acknowledgement, coordinated disclosure. Explicitly distinguishes security issues from policy-correctness disputes.
 - **`AGENTS.md`**: new "Diagrams and visual assets" section pointing future agents at the SVG system and explicitly retiring the matplotlib generator.
@@ -121,7 +121,7 @@ Nothing yet.
 - README rewritten for product-page clarity: hero numbers, then quick start, then differentiation, then directory map.
 
 ### Removed
-- **`diagrams/generate_diagrams.py`**: matplotlib generator retired. Hand-authored SVGs are now the source of truth; see [`diagrams/STYLE.md`](diagrams/STYLE.md) for how to add new ones.
+- **`diagrams/generate_diagrams.py`**: matplotlib generator retired. Hand-authored SVGs are now the source of truth; see [`diagrams/STYLE.md`](docs/diagrams/STYLE.md) for how to add new ones.
 - **`diagram4_framework_grid.png`**: the markdown comparison table directly below it does the same job; the embedded image was redundant.
 
 ## [1.0.0]: 2025-07

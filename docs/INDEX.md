@@ -9,13 +9,13 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 - [Quick Start in the README](../README.md#quick-start): standalone `opa eval`, or via AICertify.
 - [Add your first GOPAL policy](tutorials/add-your-first-policy.md): write a working policy + test + CI check in 20 minutes.
 - [Runnable examples](../examples/README.md): `examples/` with input/output pairs for EU AI Act, NIST AI RMF, and customer-support LLM.
-- [Add a brand-new regulatory framework](../skills/add-framework/SKILL.md) (Claude Code skill): bootstraps the directory tree, framework README, and first policy.
+- [Add a brand-new regulatory framework](skills/add-framework/SKILL.md) (Claude Code skill): bootstraps the directory tree, framework README, and first policy.
 - [FAQ](FAQ.md): comprehensive Q&A on what GOPAL is, when to use it, and how to extend it.
 
 ## 🛠️ How-To Guides: solve a specific problem
 
-- [Author a new Rego policy](../skills/draft-rego-policy/SKILL.md) (Claude Code skill): scaffolds policy + test + metadata.
-- [Summarize what a framework's policies enforce](../skills/explain-framework/SKILL.md) (Claude Code skill): audit-grade plain-English walkthrough.
+- [Author a new Rego policy](skills/draft-rego-policy/SKILL.md) (Claude Code skill): scaffolds policy + test + metadata.
+- [Summarize what a framework's policies enforce](skills/explain-framework/SKILL.md) (Claude Code skill): audit-grade plain-English walkthrough.
 - [Develop org-private policies in `custom/`](../README.md#custom-policies): git-ignored, CI-skipped local extensions.
 
 ## 📚 Reference: look up specific names
