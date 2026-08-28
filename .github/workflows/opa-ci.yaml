@@ -81,7 +81,7 @@ jobs:
       # The version appears in seven hand-maintained places, including a README
       # command people are told to run. v1.2.0 shipped that command pointing at
       # a release with no assets, and nothing caught it.
-      - name: Check version references agree with VERSION
+      - name: Check version references and published counts
         run: scripts/check-version-refs.sh
         working-directory: ${{ github.workspace }}
 
