@@ -11,7 +11,7 @@ body:
         raising here, just say so and we'll treat it as one.
 
         If this is a **security vulnerability**, please don't file it here. See
-        [SECURITY.md](https://github.com/Principled-Evolution/gopal/blob/main/SECURITY.md).
+        [SECURITY.md](https://github.com/Principled-Evolution/gopal/blob/main/.github/SECURITY.md).
 
   - type: dropdown
     id: kind

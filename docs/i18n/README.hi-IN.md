@@ -1,12 +1,12 @@
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="diagrams/hero_banner_light.svg" alt="GOPAL: AI कंप्लायंस के लिए Rego पॉलिसी लाइब्रेरी" width="100%">
+    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL: AI कंप्लायंस के लिए Rego पॉलिसी लाइब्रेरी" width="100%">
   </picture>
 </div>
 
 <p align="center">
-  <a href="README.md">English</a> |
+  <a href="../../README.md">English</a> |
   <a href="README.zh-CN.md">简体中文</a> |
   <a href="README.ja-JP.md">日本語</a> |
   <a href="README.ko-KR.md">한국어</a> |
@@ -42,7 +42,7 @@ Rego में लिखी गई [OPA](https://www.openpolicyagent.org/) प�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 91 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
+    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 91 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
   </picture>
 </p>
 
@@ -79,7 +79,7 @@ GOPAL इन सभी रेगुलेटरी रिजीम्स के 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है: इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
+    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है: इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
   </picture>
 </p>
 
@@ -91,7 +91,7 @@ cd gopal/examples/eu-ai-act-transparency
 ./run.sh
 ```
 
-आपको एक सैंपल AI सिस्टम के विरुद्ध एक संरचित EU AI Act ट्रांसपेरेंसी वर्डिक्ट दिखेगा। NIST AI RMF, customer-support LLM, और अन्य उदाहरणों के लिए [`examples/`](examples/) देखें।
+आपको एक सैंपल AI सिस्टम के विरुद्ध एक संरचित EU AI Act ट्रांसपेरेंसी वर्डिक्ट दिखेगा। NIST AI RMF, customer-support LLM, और अन्य उदाहरणों के लिए [`examples/`](../../examples) देखें।
 
 ### OPA CLI के साथ स्टैंडअलोन
 
@@ -135,7 +135,7 @@ GOPAL तीन आयामों में अलग है:
 
 1. **शुरुआत से ही AI-विशिष्ट।** हर पॉलिसी किसी AI-सिस्टम चिंता को लक्ष्य करती है, जैसे बायस, पारदर्शिता, मानवीय निगरानी, मॉडल रिस्क, कंटेंट सेफ्टी, सेफ्टी-क्रिटिकल सर्टिफ़िकेशन, न कि जेनेरिक इन्फ्रास्ट्रक्चर को।
 2. **पठनीय।** नियम बस Rego हैं। आप उन्हें `cat` कर सकते हैं, PR में diff कर सकते हैं, और उनके बारे में तर्क कर सकते हैं। कोई ब्लैक-बॉक्स स्कोरकार्ड नहीं।
-3. **वर्ज़न्ड।** हर फ्रेमवर्क स्पष्ट semver गारंटी के साथ `v1/` (फिर `v2/`, आदि) के अंतर्गत रहता है, देखें [COMPATIBILITY.md](COMPATIBILITY.md)। जब EU AI Act में संशोधन होता है, पुराना संस्करण यथावत रहता है।
+3. **वर्ज़न्ड।** हर फ्रेमवर्क स्पष्ट semver गारंटी के साथ `v1/` (फिर `v2/`, आदि) के अंतर्गत रहता है, देखें [COMPATIBILITY.md](../COMPATIBILITY.md)। जब EU AI Act में संशोधन होता है, पुराना संस्करण यथावत रहता है।
 
 ---
 
@@ -160,7 +160,7 @@ GOPAL तीन आयामों में अलग है:
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट: 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
+    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट: 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
   </picture>
 </p>
 
@@ -201,7 +201,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**91 पॉलिसीज़ जो निर्णय देती हैं, साथ ही वे 7 साझा लाइब्रेरीज़ जिन्हें वे इम्पोर्ट करती हैं। टेस्ट्स सहित कुल 196 Rego फ़ाइलें।** ये आंकड़े [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) द्वारा ट्री से जनरेट होते हैं और CI में जाँचे जाते हैं, इसलिए ये कोड से अलग नहीं हो सकते। वर्तमान संख्याओं के लिए `jq .totals docs/coverage/coverage.json` चलाएँ।
+**91 पॉलिसीज़ जो निर्णय देती हैं, साथ ही वे 7 साझा लाइब्रेरीज़ जिन्हें वे इम्पोर्ट करती हैं। टेस्ट्स सहित कुल 196 Rego फ़ाइलें।** ये आंकड़े [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) द्वारा ट्री से जनरेट होते हैं और CI में जाँचे जाते हैं, इसलिए ये कोड से अलग नहीं हो सकते। वर्तमान संख्याओं के लिए `jq .totals docs/coverage/coverage.json` चलाएँ।
 
 ---
 
@@ -242,7 +242,7 @@ AICertify अंदर से GOPAL का ही इस्तेमाल क�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना: package path, imports, metadata, default deny, allow rule, report" width="85%" />
+    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना: package path, imports, metadata, default deny, allow rule, report" width="85%" />
   </picture>
 </p>
 
@@ -277,9 +277,9 @@ report := reporting.compose_report(
 1. **`opa check`**: सभी पैकेजों में syntax और reference शुद्धता
 2. **`regal lint`**: Rego स्टाइल और सर्वोत्तम प्रथाएँ
 
-[helper_functions/](helper_functions/) लाइब्रेरी आपको `compose_report()`, `validate_required_fields()`, और `field_exists()` देती है, ताकि रिपोर्ट्स एक समान आकार में निकलें, चाहे नियम किसी ने भी लिखा हो।
+[helper_functions/](../../helper_functions) लाइब्रेरी आपको `compose_report()`, `validate_required_fields()`, और `field_exists()` देती है, ताकि रिपोर्ट्स एक समान आकार में निकलें, चाहे नियम किसी ने भी लिखा हो।
 
-चरण-दर-चरण मार्गदर्शन के लिए [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md) देखें, और प्रति-फ्रेमवर्क कवरेज मैट्रिक्स के लिए [`docs/coverage/`](docs/coverage/) देखें।
+चरण-दर-चरण मार्गदर्शन के लिए [`docs/tutorials/add-your-first-policy.md`](../tutorials/add-your-first-policy.md) देखें, और प्रति-फ्रेमवर्क कवरेज मैट्रिक्स के लिए [`docs/coverage/`](../coverage) देखें।
 
 ---
 
@@ -294,7 +294,7 @@ GOPAL कानूनी सलाह नहीं है। यहाँ की
 - वह input/output व्यवहार जिसकी आप उम्मीद करते हैं
 - कोई भी आधिकारिक गाइडेंस, रेगुलेटर टेक्स्ट, या पूर्व उदाहरण
 
-पॉलिसी की सटीकता को लेकर असहमति सुरक्षा भेद्यता नहीं है, सुरक्षा भेद्यता के लिए [SECURITY.md](SECURITY.md) देखें। बल्कि यह ठीक वैसी ही चीज़ है जिसे हम सार्वजनिक रखना चाहते हैं, ताकि कम्युनिटी मिलकर नियमों की समीक्षा और सुधार कर सके।
+पॉलिसी की सटीकता को लेकर असहमति सुरक्षा भेद्यता नहीं है, सुरक्षा भेद्यता के लिए [SECURITY.md](../../.github/SECURITY.md) देखें। बल्कि यह ठीक वैसी ही चीज़ है जिसे हम सार्वजनिक रखना चाहते हैं, ताकि कम्युनिटी मिलकर नियमों की समीक्षा और सुधार कर सके।
 
 ---
 
@@ -324,7 +324,7 @@ opa check --ignore custom/ .
 regal lint --ignore-files custom/ .
 ```
 
-PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.md) देखें।
+PR वर्कफ़्लो के लिए [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) देखें।
 
 ---
 
@@ -358,11 +358,11 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 | पहले से समर्थित फ़्रेमवर्क में किसी विशिष्ट पॉलिसी की मांग करना | [नई पॉलिसी का अनुरोध](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
 | किसी पॉलिसी के गलत नतीजे की रिपोर्ट करना | [बग रिपोर्ट](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
 | GitHub की जगह सीधे ईमेल करना | **gopal@principledevolution.ai** |
-| सुरक्षा भेद्यता की रिपोर्ट करना | [SECURITY.md](SECURITY.md) देखें। कृपया सार्वजनिक issue न खोलें |
+| सुरक्षा भेद्यता की रिपोर्ट करना | [SECURITY.md](../../.github/SECURITY.md) देखें। कृपया सार्वजनिक issue न खोलें |
 
-अनुरोध दर्ज करने से पहले दो जगहें ज़्यादातर सवालों का जवाब दे देती हैं। [कवरेज मैट्रिक्स](docs/coverage) अनुच्छेद-दर-अनुच्छेद बताता है कि क्या लागू हो चुका है, और [FAQ](docs/FAQ.md) दायरे, इनपुट फ़ॉर्मैट तथा AICertify से संबंध को समझाता है।
+अनुरोध दर्ज करने से पहले दो जगहें ज़्यादातर सवालों का जवाब दे देती हैं। [कवरेज मैट्रिक्स](../coverage) अनुच्छेद-दर-अनुच्छेद बताता है कि क्या लागू हो चुका है, और [FAQ](../FAQ.md) दायरे, इनपुट फ़ॉर्मैट तथा AICertify से संबंध को समझाता है।
 
-हर आकार का योगदान स्वागत योग्य है, [CONTRIBUTING.md](CONTRIBUTING.md) देखें। भागीदारी हमारी [आचार संहिता](CODE_OF_CONDUCT.md) के अंतर्गत आती है।
+हर आकार का योगदान स्वागत योग्य है, [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) देखें। भागीदारी हमारी [आचार संहिता](../../.github/CODE_OF_CONDUCT.md) के अंतर्गत आती है।
 
 ### इन सूचियों में शामिल
 
@@ -377,6 +377,6 @@ PR वर्कफ़्लो के लिए [CONTRIBUTING.md](CONTRIBUTING.m
 
 ## लाइसेंस
 
-Apache License 2.0, देखें [LICENSE](LICENSE)।
+Apache License 2.0, देखें [LICENSE](../../LICENSE)।
 
 <p align="center"><sub><a href="https://github.com/Principled-Evolution">Principled Evolution</a> द्वारा अनुरक्षित · कंप्लायंस जिसे आप पढ़ सकते हैं, चला सकते हैं, और सिद्ध कर सकते हैं।</sub></p>

@@ -87,5 +87,5 @@ body:
       options:
         - label: I looked at the [coverage matrices](https://github.com/Principled-Evolution/gopal/tree/main/docs/coverage) and the [FAQ](https://github.com/Principled-Evolution/gopal/blob/main/docs/FAQ.md)
           required: false
-        - label: This is not a security vulnerability (those go to security@principledevolution.ai, see [SECURITY.md](https://github.com/Principled-Evolution/gopal/blob/main/SECURITY.md))
+        - label: This is not a security vulnerability (those go to security@principledevolution.ai, see [SECURITY.md](https://github.com/Principled-Evolution/gopal/blob/main/.github/SECURITY.md))
           required: true

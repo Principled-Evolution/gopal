@@ -26,7 +26,7 @@ We aim to acknowledge within **5 business days**. We follow a coordinated-disclo
 
 ## Supported versions
 
-GOPAL ships under semver (see [COMPATIBILITY.md](COMPATIBILITY.md)). Security fixes are applied to:
+GOPAL ships under semver (see [COMPATIBILITY.md](../docs/COMPATIBILITY.md)). Security fixes are applied to:
 
 - The current `main` branch
 - The current `vN/` directory under each framework

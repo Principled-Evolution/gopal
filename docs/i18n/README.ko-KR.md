@@ -1,12 +1,12 @@
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="diagrams/hero_banner_light.svg" alt="GOPAL: AI 컴플라이언스를 위한 Rego 정책 라이브러리" width="100%">
+    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL: AI 컴플라이언스를 위한 Rego 정책 라이브러리" width="100%">
   </picture>
 </div>
 
 <p align="center">
-  <a href="README.md">English</a> |
+  <a href="../../README.md">English</a> |
   <a href="README.zh-CN.md">简体中文</a> |
   <a href="README.ja-JP.md">日本語</a> |
   <strong>한국어</strong> |
@@ -42,7 +42,7 @@ Rego로 작성된 [OPA](https://www.openpolicyagent.org/) 정책을 엄선한 �
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 91개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
+    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 91개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
   </picture>
 </p>
 
@@ -77,7 +77,7 @@ GOPAL은 이러한 각 규제 체계에 대응하는 실행 가능한 Rego 정�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 평가 동작 방식: 입력 JSON, Rego 정책, OPA 평가, 판정 결과" width="85%" />
+    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 평가 동작 방식: 입력 JSON, Rego 정책, OPA 평가, 판정 결과" width="85%" />
   </picture>
 </p>
 
@@ -89,7 +89,7 @@ cd gopal/examples/eu-ai-act-transparency
 ./run.sh
 ```
 
-샘플 AI 시스템에 대한 구조화된 EU AI Act 투명성 판정 결과를 확인할 수 있습니다. NIST AI RMF, 고객 지원 LLM 등 더 많은 예제는 [`examples/`](examples/)를 참고하세요.
+샘플 AI 시스템에 대한 구조화된 EU AI Act 투명성 판정 결과를 확인할 수 있습니다. NIST AI RMF, 고객 지원 LLM 등 더 많은 예제는 [`examples/`](../../examples)를 참고하세요.
 
 ### OPA CLI를 사용한 단독 실행
 
@@ -133,7 +133,7 @@ GOPAL은 세 가지 측면에서 다릅니다.
 
 1. **처음부터 AI에 특화된 설계.** 모든 정책은 편향, 투명성, 인간의 감독, 모델 리스크, 콘텐츠 안전, 안전 필수 인증 등 AI 시스템 고유의 관심사를 대상으로 하며, 범용 인프라를 대상으로 하지 않습니다.
 2. **읽기 쉬움.** 규칙은 그저 Rego입니다. `cat`으로 열어 보고, PR에서 차이를 비교하고, 그 내용을 추론할 수 있습니다. 블랙박스 점수표는 없습니다.
-3. **버전 관리.** 모든 프레임워크는 `v1/`(이후 `v2/` 등) 아래에 있으며 명시적인 시맨틱 버저닝을 보장합니다. 자세한 내용은 [COMPATIBILITY.md](COMPATIBILITY.md)를 참고하세요. EU AI Act가 개정되어도 이전 버전은 그대로 유지됩니다.
+3. **버전 관리.** 모든 프레임워크는 `v1/`(이후 `v2/` 등) 아래에 있으며 명시적인 시맨틱 버저닝을 보장합니다. 자세한 내용은 [COMPATIBILITY.md](../COMPATIBILITY.md)를 참고하세요. EU AI Act가 개정되어도 이전 버전은 그대로 유지됩니다.
 
 ---
 
@@ -158,7 +158,7 @@ GOPAL은 세 가지 측면에서 다릅니다.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 디렉터리 레이아웃: 4개의 최상위 분기, 관할권 및 수직 영역별로 구성된 정책" width="85%" />
+    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 디렉터리 레이아웃: 4개의 최상위 분기, 관할권 및 수직 영역별로 구성된 정책" width="85%" />
   </picture>
 </p>
 
@@ -199,7 +199,7 @@ gopal/
 └── custom/               비공개 정책 (git-ignored, CI 제외)
 ```
 
-**판정을 내리는 정책 91개와 이들이 가져다 쓰는 공유 라이브러리 7개. 테스트를 포함해 총 196개의 Rego 파일.** 이 수치는 [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh)가 트리에서 생성하고 CI에서 검증하므로 코드와 어긋날 수 없습니다. 현재 값은 `jq .totals docs/coverage/coverage.json`으로 확인하세요.
+**판정을 내리는 정책 91개와 이들이 가져다 쓰는 공유 라이브러리 7개. 테스트를 포함해 총 196개의 Rego 파일.** 이 수치는 [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh)가 트리에서 생성하고 CI에서 검증하므로 코드와 어긋날 수 없습니다. 현재 값은 `jq .totals docs/coverage/coverage.json`으로 확인하세요.
 
 ---
 
@@ -240,7 +240,7 @@ AICertify는 내부적으로 GOPAL을 사용합니다. 이미 OPA 워크플로�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 정책의 구조: 패키지 경로, 임포트, 메타데이터, 기본 거부, 허용 규칙, 리포트" width="85%" />
+    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 정책의 구조: 패키지 경로, 임포트, 메타데이터, 기본 거부, 허용 규칙, 리포트" width="85%" />
   </picture>
 </p>
 
@@ -275,9 +275,9 @@ report := reporting.compose_report(
 1. **`opa check`**: 모든 패키지에 걸친 구문과 참조 정확성
 2. **`regal lint`**: Rego 스타일과 모범 사례
 
-[helper_functions/](helper_functions/) 라이브러리는 `compose_report()`, `validate_required_fields()`, `field_exists()`를 제공해, 누가 규칙을 작성하든 리포트가 일관된 형식으로 출력되도록 해 줍니다.
+[helper_functions/](../../helper_functions) 라이브러리는 `compose_report()`, `validate_required_fields()`, `field_exists()`를 제공해, 누가 규칙을 작성하든 리포트가 일관된 형식으로 출력되도록 해 줍니다.
 
-단계별 안내는 [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md), 프레임워크별 커버리지 표는 [`docs/coverage/`](docs/coverage/)를 참고하세요.
+단계별 안내는 [`docs/tutorials/add-your-first-policy.md`](../tutorials/add-your-first-policy.md), 프레임워크별 커버리지 표는 [`docs/coverage/`](../coverage)를 참고하세요.
 
 ---
 
@@ -292,7 +292,7 @@ GOPAL은 법률 자문이 아닙니다. 여기 있는 정책들은 공개된 규
 - 기대하는 입출력 동작
 - 공식 가이던스, 규제 당국 문서, 선례 등
 
-정책 정확성에 대한 의견 차이는 보안 취약점이 아닙니다. 보안 취약점은 [SECURITY.md](SECURITY.md)를 참고하세요. 오히려 이런 의견 차이야말로 공개적으로 다루고 싶은 문제이며, 그래야 커뮤니티가 함께 규칙을 검토하고 개선할 수 있습니다.
+정책 정확성에 대한 의견 차이는 보안 취약점이 아닙니다. 보안 취약점은 [SECURITY.md](../../.github/SECURITY.md)를 참고하세요. 오히려 이런 의견 차이야말로 공개적으로 다루고 싶은 문제이며, 그래야 커뮤니티가 함께 규칙을 검토하고 개선할 수 있습니다.
 
 ---
 
@@ -322,7 +322,7 @@ opa check --ignore custom/ .
 regal lint --ignore-files custom/ .
 ```
 
-PR 워크플로는 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.
+PR 워크플로는 [CONTRIBUTING.md](../../.github/CONTRIBUTING.md)를 참고하세요.
 
 ---
 
@@ -356,11 +356,11 @@ Rego, OPA, GitHub 관례를 몰라도 답변을 받을 수 있습니다.
 | 이미 지원하는 프레임워크 내 특정 정책 요청 | [신규 정책 요청](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
 | 정책이 잘못된 판정을 반환하는 문제 신고 | [버그 신고](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
 | GitHub 대신 이메일로 연락 | **gopal@principledevolution.ai** |
-| 보안 취약점 신고 | [SECURITY.md](SECURITY.md) 참조. 공개 이슈로 등록하지 마세요 |
+| 보안 취약점 신고 | [SECURITY.md](../../.github/SECURITY.md) 참조. 공개 이슈로 등록하지 마세요 |
 
-등록하기 전에 다음 두 곳을 보면 대부분의 질문이 해결됩니다. [커버리지 매트릭스](docs/coverage)는 조항별 구현 현황을 보여 주고, [FAQ](docs/FAQ.md)는 적용 범위와 입력 형식, AICertify와의 관계를 다룹니다.
+등록하기 전에 다음 두 곳을 보면 대부분의 질문이 해결됩니다. [커버리지 매트릭스](../coverage)는 조항별 구현 현황을 보여 주고, [FAQ](../FAQ.md)는 적용 범위와 입력 형식, AICertify와의 관계를 다룹니다.
 
-규모와 무관하게 모든 기여를 환영합니다. [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요. 참여에는 [행동 규범](CODE_OF_CONDUCT.md)이 적용됩니다.
+규모와 무관하게 모든 기여를 환영합니다. [CONTRIBUTING.md](../../.github/CONTRIBUTING.md)를 참조하세요. 참여에는 [행동 규범](../../.github/CODE_OF_CONDUCT.md)이 적용됩니다.
 
 ### 수록된 목록
 
@@ -375,6 +375,6 @@ Rego, OPA, GitHub 관례를 몰라도 답변을 받을 수 있습니다.
 
 ## 라이선스
 
-Apache License 2.0. 자세한 내용은 [LICENSE](LICENSE)를 참고하세요.
+Apache License 2.0. 자세한 내용은 [LICENSE](../../LICENSE)를 참고하세요.
 
 <p align="center"><sub><a href="https://github.com/Principled-Evolution">Principled Evolution</a>이 유지 관리 · 읽고, 실행하고, 증명할 수 있는 컴플라이언스.</sub></p>

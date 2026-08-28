@@ -53,4 +53,4 @@ The NIST AI RMF is the de-facto AI risk baseline for US federal procurement and 
 
 This example shows the minimum signal a governance team needs to encode: documented roles, documented oversight, documented transparency commitments, and documented bias-mitigation activities.
 
-For Map / Measure / Manage functions, see [`international/nist/v1/`](../../international/nist/v1/).
+For Map / Measure / Manage functions, see [`international/nist/v1/`](../../international/nist/v1).
