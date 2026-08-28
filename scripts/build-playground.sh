@@ -67,11 +67,17 @@ SHARED=(helper_functions global/v1/common global/v1/documentation)
 # can show the number a policy compared against is far more use than one that
 # can only report pass or fail, and exposing it here means the browser runs the
 # same Rego as `opa eval` instead of a second implementation of the rubric.
+# opa build rejects an entrypoint that does not resolve, so this list is
+# self-checking: a renamed or deleted rule fails the build rather than shipping
+# a manifest that advertises a path returning nothing. What it cannot check is
+# a consumer calling a path that was never listed here, which is the website's
+# refresh --check to make.
 SHARED_ENTRYPOINTS=(
 	global/v1/documentation/model_card_score/completeness
 	global/v1/documentation/model_card_score/quality
 	global/v1/documentation/model_card_score/section_scores
 	global/v1/documentation/model_card_score/weakest_sections
+	global/v1/documentation/model_card_score/heading_sources
 )
 
 # Frameworks worth putting in front of a first-time visitor. Deliberately not
