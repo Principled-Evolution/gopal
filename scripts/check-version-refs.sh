@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
-# Assert that every place naming the GOPAL version agrees with VERSION.
+# Assert that every hand-maintained number agrees with the generated data:
+# the GOPAL version against VERSION, and the published counts against
+# docs/coverage/coverage.json.
 #
 # v1.2.0 shipped a README telling people to run
 #
@@ -10,6 +12,11 @@
 # exist when that tag was cut. The instruction was dead on arrival and nothing
 # caught it. Version strings live in seven places and are bumped by hand, so
 # this runs in CI and fails when one is left behind.
+#
+# The counts drifted the same way. The README hero banner read "96 policies"
+# while the stat panel directly beneath it read 91, on the front page of the
+# repository — the first thing a visitor sees, contradicting itself. Counts are
+# baked into SVG text, so nothing regenerates them and nothing noticed.
 #
 # Usage: scripts/check-version-refs.sh
 
@@ -91,9 +98,55 @@ if [ "${stale}" -gt 0 ]; then
 fi
 
 echo ""
+# --- published counts -------------------------------------------------------
+#
+# The authority is coverage.json, which is generated from the tree and already
+# checked in CI, so these can only disagree if a hand-edited file is stale.
+
+COVERAGE="docs/coverage/coverage.json"
+if [ ! -f "${COVERAGE}" ]; then
+	echo "error: ${COVERAGE} not found. Run scripts/generate-coverage.sh." >&2
+	exit 1
+fi
+
+POLICIES="$(jq -r '.totals.policies' "${COVERAGE}")"
+FRAMEWORKS="$(jq -r '[.frameworks[] | select(.id | startswith("international"))] | length' "${COVERAGE}")"
+INDUSTRIES="$(jq -r '[.frameworks[] | select(.id | startswith("industry_specific"))] | length' "${COVERAGE}")"
+
+echo ""
+echo "Coverage data says ${POLICIES} policies, ${FRAMEWORKS} frameworks, ${INDUSTRIES} industries. Checking every reference agrees."
+
+check_count() {
+	local file="$1" template="$2" what="$3"
+	local expected="${template//%P%/${POLICIES}}"
+	expected="${expected//%F%/${FRAMEWORKS}}"
+	expected="${expected//%I%/${INDUSTRIES}}"
+	if [ ! -f "${file}" ]; then
+		echo "  MISSING FILE  ${file}" >&2
+		failures=$((failures + 1))
+		return
+	fi
+	if grep -qF -- "${expected}" "${file}"; then
+		printf '  ok   %-42s %s\n' "${what}" "${expected}"
+	else
+		printf '  FAIL %-42s expected: %s\n' "${what}" "${expected}" >&2
+		failures=$((failures + 1))
+	fi
+}
+
+check_count diagrams/hero_banner_light.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, light"
+check_count diagrams/hero_banner_dark.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, dark"
+check_count README.md '**%P% policies that reach a verdict' "README policy count"
+
+# The accessible description is what a screen reader announces, and it said 96
+# while the visible text beside it said 91. Numbers in alt text drift more
+# easily than numbers on screen, because nobody looking at the page sees them.
+check_count diagrams/diagram1_hero_numbers_light.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, light"
+check_count diagrams/diagram1_hero_numbers_dark.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, dark"
+
 if [ "${failures}" -gt 0 ]; then
 	echo "${failures} version reference(s) disagree with VERSION (${VERSION})." >&2
 	echo "Bump them, or update scripts/check-version-refs.sh if a reference moved." >&2
 	exit 1
 fi
-echo "All enforced version references agree with ${VERSION}."
+echo "All enforced version references agree with ${VERSION}, and all published counts agree with the coverage data."
