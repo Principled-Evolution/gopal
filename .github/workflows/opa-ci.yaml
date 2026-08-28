@@ -17,16 +17,33 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Both tools are pinned. They used to install `latest`, which meant an
+      # upstream release could turn this build red with no change on our side —
+      # and on 2026-08-28 one did. OPA 1.20.0 panics with `panic: illegal value`
+      # on any ordering comparison against a float produced by a terminal
+      # `else :=` branch:
+      #
+      #     f(x) := 1.0 if { x.a } else := 0.0
+      #     g(x) if f(x) >= 0.7        # panics when the else branch is taken
+      #
+      # Four helpers in global/v1/common use that shape, so `opa test` aborted
+      # with exit 2 across the whole suite. 1.19.1 is unaffected. Reported
+      # upstream; raise this pin once a fixed OPA is out, deliberately rather
+      # than by drifting to whatever released last.
       - name: Install OPA
+        env:
+          OPA_VERSION: v1.19.1
         run: |
-          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          curl -L -o opa "https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64"
           chmod 755 opa
           sudo mv opa /usr/local/bin/
           opa version
 
       - name: Install Regal
+        env:
+          REGAL_VERSION: v0.42.0
         run: |
-          curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64
+          curl -L -o regal "https://github.com/open-policy-agent/regal/releases/download/${REGAL_VERSION}/regal_Linux_x86_64"
           chmod +x regal
           sudo mv regal /usr/local/bin/
           regal version
