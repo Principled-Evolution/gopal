@@ -139,6 +139,7 @@ check_count() {
 check_count docs/diagrams/hero_banner_light.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, light"
 check_count docs/diagrams/hero_banner_dark.svg '%P% policies · %F% frameworks · Apache 2.0' "hero banner, dark"
 check_count README.md '**%P% policies that reach a verdict' "README policy count"
+check_count README.md '%P% policies that translate published regulation' "README opening count"
 
 # The accessible description is what a screen reader announces, and it said 96
 # while the visible text beside it said 91. Numbers in alt text drift more
