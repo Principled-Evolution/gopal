@@ -147,6 +147,14 @@ check_count README.md '%P% policies that translate published regulation' "README
 check_count docs/diagrams/diagram1_hero_numbers_light.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, light"
 check_count docs/diagrams/diagram1_hero_numbers_dark.svg '<desc>%P% production Rego policies across %F% frameworks and %I% industries.</desc>' "numbers diagram desc, dark"
 
+# The number a reader actually sees, not only the one in <desc>. The desc and
+# the visible text are separate strings in the same file and drifted apart the
+# first time the policy count moved: the description said 92 while the figure
+# on the page still read 91. Checking only the accessible text would have
+# passed that.
+check_count docs/diagrams/diagram1_hero_numbers_light.svg 'text-anchor="middle">%P%</text>' "numbers diagram figure, light"
+check_count docs/diagrams/diagram1_hero_numbers_dark.svg 'text-anchor="middle">%P%</text>' "numbers diagram figure, dark"
+
 if [ "${failures}" -gt 0 ]; then
 	echo "${failures} version reference(s) disagree with VERSION (${VERSION})." >&2
 	echo "Bump them, or update scripts/check-version-refs.sh if a reference moved." >&2

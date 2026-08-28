@@ -56,7 +56,11 @@ VERSION="$(tr -d ' \n' <VERSION)"
 
 # Shared libraries every framework imports. Same set the release bundles stage;
 # an import scan confirms nothing else crosses directories.
-SHARED=(helper_functions global/v1/common)
+# global/v1/documentation holds the model-card rubric, which the EU AI Act
+# technical-documentation policy imports so that scoring a card is the same
+# rules here, in `opa eval`, and in a browser, rather than one
+# implementation per runtime kept in step by hand.
+SHARED=(helper_functions global/v1/common global/v1/documentation)
 
 # Frameworks worth putting in front of a first-time visitor. Deliberately not
 # every framework: a playground with a curated, verified sample for two
@@ -278,6 +282,7 @@ if [ "${MODE}" = "verify" ]; then
 		[ -f "${sample}" ] || { echo "  MISSING sample ${sample}" >&2; failures=$((failures+1)); continue; }
 		query="data.$(printf '%s' "${entrypoint}" | tr '/' '.')"
 		got=$(opa eval --data "${fw}" --data helper_functions --data global/v1/common \
+			--data global/v1/documentation \
 			--ignore '.github' --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' \
 			--input "${sample}" "${query}" --format json 2>/dev/null |
 			jq -r 'if (.result | length) == 0 then "undefined" else (.result[0].expressions[0].value | tostring) end')

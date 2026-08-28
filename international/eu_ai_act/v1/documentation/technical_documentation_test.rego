@@ -34,3 +34,38 @@ test_an_explicit_param_still_overrides_the_default if {
 	stricter := object.union(no_params, {"params": {"completeness_threshold": 0.95}})
 	not policy.completeness_sufficient with input as stricter
 }
+
+# Supplying the card itself is now enough: the score is computed by
+# global/v1/documentation/model_card_score rather than having to be produced by
+# an evaluator first. One rubric, in Rego, so the same rules run here and in the
+# browser through WASM.
+raw_card := {"documentation": {"model_card": {
+	"model_details": {"model_name": "demo", "model_type": "text-classification"},
+	"intended_use": {"primary_uses": concat("", [s | some _ in numbers.range(1, 60); s := "0123456789"])},
+	"training_data": {"datasets": concat("", [s | some _ in numbers.range(1, 60); s := "0123456789"])},
+}}}
+
+test_a_card_with_no_supplied_metrics_is_still_scored if {
+	policy.model_card_completeness > 0.0 with input as raw_card
+	not policy.completeness_sufficient with input as raw_card
+}
+
+# Zero regression. An input carrying the metric behaves exactly as before, and
+# where both are present the supplied number wins, so nothing that used to pass
+# starts failing because a card happens to be attached.
+test_a_supplied_metric_still_works if {
+	policy.completeness_sufficient with input as {"metrics": {"model_card": {"completeness": 0.95}}}
+}
+
+test_a_supplied_metric_wins_over_the_computed_one if {
+	both := object.union(raw_card, {"metrics": {"model_card": {"completeness": 0.95}}})
+	policy.model_card_completeness == 0.95 with input as both
+	policy.completeness_sufficient with input as both
+}
+
+# Neither route supplied is not a zero score. The rule stays undefined and the
+# default denies, rather than reporting an undocumented system as measured.
+test_neither_route_denies_rather_than_scoring_zero if {
+	not policy.completeness_sufficient with input as {}
+	not policy.model_card_completeness with input as {}
+}
