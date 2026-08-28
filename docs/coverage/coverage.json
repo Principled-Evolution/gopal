@@ -11,7 +11,7 @@
     "policies_with_tests": 91,
     "policies_with_empty_input_test": 91,
     "decision_rules": 325,
-    "tests": 826
+    "tests": 831
   },
   "frameworks": [
     {

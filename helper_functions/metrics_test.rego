@@ -35,8 +35,18 @@ test_legacy_risk_management_spellings_resolve if {
 }
 
 test_legacy_toxicity_spellings_resolve if {
-	metrics.resolve({"metrics": {"toxicity": {"max_toxicity": 0.8}}}, "metrics.toxicity.score") == 0.8
+	# Aggregate spellings only. max_toxicity is a different statistic and is
+	# covered by its own test below.
 	metrics.resolve({"evaluation": {"toxicity_score": 0.9}}, "metrics.toxicity.score") == 0.9
+	metrics.resolve({"content_safety": {"toxicity_score": 0.3}}, "metrics.toxicity.score") == 0.3
+}
+
+test_legacy_max_toxicity_spellings_resolve if {
+	metrics.resolve({"metrics": {"toxicity": {"max_toxicity": 0.8}}}, "metrics.toxicity.max_toxicity") == 0.8
+	metrics.resolve(
+		{"summary": {"toxicity_values": {"max_toxicity": 0.7}}},
+		"metrics.toxicity.max_toxicity",
+	) == 0.7
 }
 
 test_legacy_model_card_spelling_resolves if {
@@ -116,4 +126,37 @@ test_resolve_or_does_not_swallow_a_legitimate_zero if {
 
 test_resolve_or_does_not_swallow_a_legitimate_false if {
 	metrics.resolve_or({"metrics": {"fairness": {"score": false}}}, "metrics.fairness.score", -1) == false
+}
+
+# An aggregate and a worst-case maximum are different statistics, compared
+# against different thresholds: 0.1 for the aggregate throughout global/, 0.7
+# for the maximum in the EU transparency policy. Merging them would feed a
+# worst case into a threshold meant for an average, failing almost any real
+# system. An earlier version of the table did merge them.
+test_toxicity_score_and_max_toxicity_are_separate_metrics if {
+	doc := {"metrics": {"toxicity": {"max_toxicity": 0.8}}}
+	not metrics.resolve(doc, "metrics.toxicity.score")
+	metrics.resolve(doc, "metrics.toxicity.max_toxicity") == 0.8
+}
+
+test_an_aggregate_does_not_answer_a_worst_case_question if {
+	doc := {"metrics": {"toxicity": {"score": 0.05}}}
+	metrics.resolve(doc, "metrics.toxicity.score") == 0.05
+	not metrics.resolve(doc, "metrics.toxicity.max_toxicity")
+}
+
+# A safety score must never resolve as toxicity. They point in opposite
+# directions, and conflating them inverted a verdict in
+# global/v1/common/content_safety once already.
+test_a_safety_score_never_resolves_as_toxicity if {
+	doc := {"content_safety": {"score": 0.95}}
+	not metrics.resolve(doc, "metrics.toxicity.score")
+	not metrics.resolve(doc, "metrics.toxicity.max_toxicity")
+	metrics.resolve(doc, "metrics.content_safety.score") == 0.95
+}
+
+# The evaluator's own worst-case spelling now resolves, which is what lets an
+# off-the-shelf ContentSafetyEvaluator satisfy the EU transparency policy.
+test_the_evaluator_worst_case_spelling_resolves if {
+	metrics.resolve({"content_safety": {"max_toxicity": 0.42}}, "metrics.toxicity.max_toxicity") == 0.42
 }

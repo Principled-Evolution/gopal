@@ -49,11 +49,26 @@ aliases := {
 		["evaluation", "risk_management_score"],
 		["risk_management_score"],
 	],
+	# Two different statistics, deliberately not merged.
+	#
+	# `score` is an aggregate over many outputs and is compared against a 0.1
+	# default threshold throughout global/. `max_toxicity` is the single worst
+	# output observed and is compared against 0.7 in the EU transparency
+	# policy. A 0.1 threshold only makes sense for an aggregate: feed a
+	# worst-case maximum into it and almost any real system fails, which does
+	# not make the check safely stricter, it makes it useless and ignored.
+	#
+	# An earlier version of this table listed max_toxicity as a spelling of
+	# score. It is not. They answer different questions.
 	"metrics.toxicity.score": [
 		["metrics", "toxicity", "score"],
-		["metrics", "toxicity", "max_toxicity"],
 		["evaluation", "toxicity_score"],
 		["content_safety", "toxicity_score"],
+	],
+	"metrics.toxicity.max_toxicity": [
+		["metrics", "toxicity", "max_toxicity"],
+		["summary", "toxicity_values", "max_toxicity"],
+		["content_safety", "max_toxicity"],
 	],
 	"metrics.model_card.completeness": [
 		["metrics", "model_card", "completeness"],
