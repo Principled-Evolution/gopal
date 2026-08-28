@@ -1,5 +1,6 @@
 package international.eu_ai_act.v1.documentation.technical_documentation
 
+import data.global.v1.documentation.model_card_score as card
 import data.helper_functions.reporting
 import data.helper_functions.validation
 import rego.v1
@@ -9,6 +10,10 @@ import rego.v1
 #   - metrics.model_card.quality
 #   - metrics.model_card.compliance_level
 #   - metrics.model_card.section_scores
+#
+# Each of these may instead be computed from documentation.model_card.* by
+# global/v1/documentation/model_card_score, so supplying the card itself is
+# enough. A supplied metric still wins where both are present.
 #
 # RequiredParams:
 #   - completeness_threshold (default 0.8)
@@ -76,20 +81,41 @@ metadata := {
 }
 
 # Rule definitions
+# Prefer a score somebody supplied, and otherwise compute one from the card
+# itself. Strictly additive: an input carrying metrics.model_card.completeness
+# behaves exactly as it did, and an input carrying only the card sections now
+# works instead of denying for want of a number nobody produced.
+#
+# The rubric lives in global/v1/documentation/model_card_score, so there is one
+# implementation of it. It runs here through opa eval and in a browser through
+# the same policy compiled to WASM, rather than being written once per runtime.
+model_card_completeness := v if {
+	v := object.get(input, ["metrics", "model_card", "completeness"], null)
+	v != null
+} else := card.completeness
+
+model_card_quality := v if {
+	v := object.get(input, ["metrics", "model_card", "quality"], null)
+	v != null
+} else := card.quality
+
+model_card_section_scores := v if {
+	v := object.get(input, ["metrics", "model_card", "section_scores"], null)
+	v != null
+} else := card.section_scores
+
 default completeness_sufficient := false
 
 completeness_sufficient if {
-	score := input.metrics.model_card.completeness
 	threshold := object.get(input, ["params", "completeness_threshold"], 0.8)
-	score >= threshold
+	model_card_completeness >= threshold
 }
 
 default quality_sufficient := false
 
 quality_sufficient if {
-	score := input.metrics.model_card.quality
 	threshold := object.get(input, ["params", "quality_threshold"], 0.8)
-	score >= threshold
+	model_card_quality >= threshold
 }
 
 default compliance_level_acceptable := false
@@ -100,7 +126,7 @@ compliance_level_acceptable if {
 
 # Recommendations based on section scores
 missing_sections := [section |
-	some section, score in input.metrics.model_card.section_scores
+	some section, score in model_card_section_scores
 	score < 0.8
 ]
 

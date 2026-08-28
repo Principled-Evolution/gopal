@@ -56,7 +56,23 @@ VERSION="$(tr -d ' \n' <VERSION)"
 
 # Shared libraries every framework imports. Same set the release bundles stage;
 # an import scan confirms nothing else crosses directories.
-SHARED=(helper_functions global/v1/common)
+# global/v1/documentation holds the model-card rubric, which the EU AI Act
+# technical-documentation policy imports so that scoring a card is the same
+# rules here, in `opa eval`, and in a browser, rather than one
+# implementation per runtime kept in step by hand.
+SHARED=(helper_functions global/v1/common global/v1/documentation)
+
+# Shared rules a caller may want to query directly, rather than only through a
+# framework's verdict. The model-card scorer is the case in point: a UI that
+# can show the number a policy compared against is far more use than one that
+# can only report pass or fail, and exposing it here means the browser runs the
+# same Rego as `opa eval` instead of a second implementation of the rubric.
+SHARED_ENTRYPOINTS=(
+	global/v1/documentation/model_card_score/completeness
+	global/v1/documentation/model_card_score/quality
+	global/v1/documentation/model_card_score/section_scores
+	global/v1/documentation/model_card_score/weakest_sections
+)
 
 # Frameworks worth putting in front of a first-time visitor. Deliberately not
 # every framework: a playground with a curated, verified sample for two
@@ -113,6 +129,7 @@ for fw in "${FRAMEWORKS[@]}"; do
 
 	args=()
 	for e in "${eps[@]}"; do args+=(-e "${e}"); done
+	for e in "${SHARED_ENTRYPOINTS[@]}"; do args+=(-e "${e}"); done
 
 	# WASM compilation needs explicit entrypoints. Without them OPA tries to
 	# compile every rule in the tree and fails on helper functions it cannot
@@ -168,12 +185,14 @@ jq -n \
 	--arg version "${VERSION}" \
 	--argjson frameworks "$(printf '%s\n' "${FRAMEWORKS[@]}" | jq -R -s 'split("\n") | map(select(length > 0))')" \
 	--slurpfile coverage "${COVERAGE}" \
+	--argjson shared "$(printf '%s\n' "${SHARED_ENTRYPOINTS[@]}" | jq -R -s 'split("\n") | map(select(length > 0))')" \
 	'
 	($coverage[0]) as $cov
 	| {
 		gopal_version: $version,
 		generated_by: "scripts/build-playground.sh",
 		note: "Derived from docs/coverage/coverage.json. Do not edit by hand.",
+		shared_entrypoints: $shared,
 		frameworks: [
 			$frameworks[] as $id
 			| ($cov.frameworks[] | select(.id == $id)) as $f
@@ -278,6 +297,7 @@ if [ "${MODE}" = "verify" ]; then
 		[ -f "${sample}" ] || { echo "  MISSING sample ${sample}" >&2; failures=$((failures+1)); continue; }
 		query="data.$(printf '%s' "${entrypoint}" | tr '/' '.')"
 		got=$(opa eval --data "${fw}" --data helper_functions --data global/v1/common \
+			--data global/v1/documentation \
 			--ignore '.github' --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' \
 			--input "${sample}" "${query}" --format json 2>/dev/null |
 			jq -r 'if (.result | length) == 0 then "undefined" else (.result[0].expressions[0].value | tostring) end')

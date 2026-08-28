@@ -5,21 +5,21 @@
   "totals": {
     "frameworks": 15,
     "groups": 20,
-    "policies": 91,
+    "policies": 92,
     "library_files": 8,
-    "rego_files": 99,
-    "policies_with_tests": 91,
-    "policies_with_empty_input_test": 91,
-    "decision_rules": 325,
-    "tests": 845
+    "rego_files": 100,
+    "policies_with_tests": 92,
+    "policies_with_empty_input_test": 92,
+    "decision_rules": 327,
+    "tests": 862
   },
   "frameworks": [
     {
       "id": "global",
       "name": "Global",
       "kind": "cross-cutting",
-      "policy_count": 9,
-      "policies_with_tests": 9,
+      "policy_count": 10,
+      "policies_with_tests": 10,
       "policies": [
         {
           "path": "global/v1/accountability/accountability.rego",
@@ -190,6 +190,45 @@
           "is_library": true,
           "primary_decision": null,
           "decision_true_means": null
+        },
+        {
+          "path": "global/v1/documentation/model_card_score.rego",
+          "package": "global.v1.documentation.model_card_score",
+          "decision_rules": [
+            {
+              "name": "supplied",
+              "default": false
+            },
+            {
+              "name": "sufficient",
+              "default": false
+            }
+          ],
+          "required_metrics": [],
+          "required_params": [
+            "model_card_completeness_threshold (default 0.8)"
+          ],
+          "input_fields": [
+            "documentation.model_card",
+            "params.model_card_completeness_threshold"
+          ],
+          "input_field_types": {
+            "params.model_card_completeness_threshold": "number"
+          },
+          "has_test": true,
+          "has_empty_input_test": true,
+          "test_file": "global/v1/documentation/model_card_score_test.rego",
+          "title": "Model Card Documentation Completeness",
+          "description": "Scores a structured model card against the nine sections of Mitchell et al., Model Cards for Model Reporting, weighted towards the sections EU AI Act Annex IV technical documentation depends on. This is a documentation-completeness measure and not a compliance verdict: a model card answers part of what Annex IV asks and then stops. The rubric lives here rather than in an evaluator because which sections a card must carry, what each is worth, and how much text counts as content are normative judgements, which is what this library is for. Keeping them here also means one implementation: the same rules run through opa eval on a command line and through WASM in a browser, instead of being written once per runtime and kept in step by hand.",
+          "references": [
+            "Mitchell et al., Model Cards for Model Reporting, FAT* 2019",
+            "EU AI Act, Annex IV Technical Documentation",
+            "Hugging Face model card specification: https://huggingface.co/docs/hub/model-cards"
+          ],
+          "version": "1.0.0",
+          "is_library": false,
+          "primary_decision": "supplied",
+          "decision_true_means": "compliant"
         },
         {
           "path": "global/v1/fairness/fairness.rego",
