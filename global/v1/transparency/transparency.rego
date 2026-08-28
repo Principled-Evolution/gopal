@@ -1,6 +1,6 @@
 # RequiredMetrics:
 #   - documentation.model_card.exists
-#   - documentation.model_card.completeness_score
+#   - metrics.model_card.completeness
 #   - documentation.explainability.provided
 #   - documentation.limitations.documented
 #   - documentation.use_cases.defined
@@ -10,6 +10,7 @@
 #
 package global.v1.transparency
 
+import data.helper_functions.metrics
 import rego.v1
 
 # Replace comment-based metadata with proper metadata object
@@ -21,6 +22,14 @@ metadata := {
 	"references": ["AICertify Transparency Standards"],
 }
 
+# Read through the canonical table rather than one hard-coded path, so a score
+# supplied as metrics.model_card.completeness is seen as readily as the legacy
+# spelling. resolve, not resolve_or: an absent metric must stay undefined so
+# the rule body fails and `default := false` denies. A -1 sentinel is right
+# where the comparison is `>=`, and silently wrong where it is `<`, because
+# -1 is below every threshold and would let an unevaluated system pass.
+model_card_completeness := metrics.resolve(input, "metrics.model_card.completeness")
+
 # Default deny
 default allow := false
 
@@ -28,7 +37,7 @@ default allow := false
 allow if {
 	# Check if model cards exist and are complete
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 
 	# Check if explainability is provided
 	input.documentation.explainability.provided == true
@@ -47,7 +56,7 @@ non_compliant if {
 
 non_compliant if {
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score < object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness < object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 }
 
 non_compliant if {
@@ -85,25 +94,25 @@ recommendations := model_card_recs if {
 
 recommendations := model_card_completeness_recs if {
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score < object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness < object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 }
 
 recommendations := explainability_recs if {
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 	input.documentation.explainability.provided == false
 }
 
 recommendations := limitations_recs if {
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 	input.documentation.explainability.provided == true
 	input.documentation.limitations.documented == false
 }
 
 recommendations := use_cases_recs if {
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 	input.documentation.explainability.provided == true
 	input.documentation.limitations.documented == true
 	input.documentation.use_cases.defined == false
@@ -111,7 +120,7 @@ recommendations := use_cases_recs if {
 
 recommendations := [] if {
 	input.documentation.model_card.exists == true
-	input.documentation.model_card.completeness_score >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
+	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 	input.documentation.explainability.provided == true
 	input.documentation.limitations.documented == true
 	input.documentation.use_cases.defined == true

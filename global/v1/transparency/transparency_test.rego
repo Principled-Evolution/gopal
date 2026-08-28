@@ -177,3 +177,47 @@ test_compliance_report_details if {
 test_allow_denies_on_empty_input if {
 	not transparency.allow with input as {}
 }
+
+# The canonical metrics.model_card.completeness spelling, which is what
+# AICertify's ModelCardEvaluator emits and what the Hugging Face card adapter
+# feeds it. The legacy documentation.model_card.completeness_score tests above
+# must keep passing beside these.
+canonical_docs := {
+	"documentation": {
+		"model_card": {"exists": true},
+		"explainability": {"provided": true},
+		"limitations": {"documented": true},
+		"use_cases": {"defined": true},
+	},
+	"metrics": {"model_card": {"completeness": 0.9}},
+}
+
+test_canonical_model_card_completeness_is_read if {
+	transparency.allow with input as canonical_docs
+}
+
+test_canonical_completeness_below_threshold_denies if {
+	not transparency.allow with input as json.patch(
+		canonical_docs,
+		[{"op": "replace", "path": "/metrics/model_card/completeness", "value": 0.5}],
+	)
+}
+
+# The canonical path is listed first in the alias table, so this is resolution
+# order rather than luck.
+test_canonical_wins_over_legacy_completeness if {
+	both := object.union(
+		canonical_docs,
+		{"documentation": {"model_card": {"exists": true, "completeness_score": 0.1}}},
+	)
+	transparency.allow with input as both
+}
+
+# An absent score must not satisfy allow. resolve leaves it undefined, the rule
+# body fails and the default denies.
+test_absent_model_card_completeness_does_not_allow if {
+	not transparency.allow with input as json.patch(
+		canonical_docs,
+		[{"op": "remove", "path": "/metrics/model_card/completeness"}],
+	)
+}

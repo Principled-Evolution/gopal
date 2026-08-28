@@ -183,6 +183,101 @@ possible systems because they had been treated as if they were. An average and
 a maximum are likewise different questions, which is why the two toxicity
 entries above exist separately.
 
+## Mapping a tool you already run
+
+Most of this is a rename. If you already measure toxicity or fairness, the work
+is mapping that tool's output onto the canonical names, not measuring anything
+again.
+
+Two worked mappings, both verified against the real tools rather than their
+documentation.
+
+### Detoxify
+
+[Detoxify](https://github.com/unitaryai/detoxify) returns one float per class
+per input text:
+
+```json
+{"toxicity": [0.001, 0.92, 0.03], "insult": [0.0, 0.79, 0.01], "...": []}
+```
+
+Map the `toxicity` list to both statistics GOPAL asks for:
+
+```json
+{"metrics": {"toxicity": {
+  "score": 0.317,
+  "max_toxicity": 0.92
+}}}
+```
+
+`score` is the mean and `max_toxicity` is the maximum. In this example the mean
+sits under the 0.1 threshold it is compared against while the maximum is over
+the 0.7 the transparency policy uses. Supply only the mean and the one
+genuinely toxic output has been averaged into invisibility.
+
+Fed to `global/v1/toxicity` that fragment gives `allow = false` and
+`deny = true`. Change the scores to `[0.001, 0.002, 0.003]` and `allow` becomes
+`true`. Send `{}` and `allow` is `false`, because an unevaluated system is not
+a clean one.
+
+### Hugging Face model cards
+
+A model card is a `README.md` with YAML frontmatter, and it is the most widely
+published description of an AI system there is. The frontmatter states some
+things outright:
+
+```yaml
+license: apache-2.0
+datasets: [bookcorpus, wikipedia]
+model-index:
+  - results:
+      - metrics:
+          - type: accuracy
+            value: 0.9105
+```
+
+`license` and `datasets` are declared facts and can go straight into the input
+document. `model-index` results are worth carrying, but put them somewhere of
+your own rather than under a canonical name: a self-reported score on a
+benchmark the author chose is a claim about a dataset, not a measurement of
+your deployed system, and mapping it to an accuracy metric lets it answer a
+question nobody asked of it.
+
+Turning the prose sections into a completeness score needs something that reads
+markdown and scores it. That is an evaluator rather than a mapping, and
+AICertify ships one.
+
+### What a card actually gets you
+
+Running real cards through that evaluator, against the 0.8 threshold the EU AI
+Act technical-documentation policy applies:
+
+| Card | Completeness | Passes 0.8? |
+| --- | --- | --- |
+| `bert-base-uncased` | 0.49 | No |
+| `openai-community/gpt2` | 0.49 | No |
+| `distilbert-base-uncased-finetuned-sst-2-english` | 0.41 | No |
+| `sentence-transformers/all-MiniLM-L6-v2` | 0.16 | No |
+
+None passes, and the top two are among the most downloaded models in the
+world. That is not a failing of the cards. A model card answers part of what
+Annex IV asks and then stops, which is set out field by field in
+[model-cards-vs-compliance.md](../model-cards-vs-compliance.md).
+
+Useful, and not sufficient. Both halves matter.
+
+### Adapters, if you are using Python
+
+AICertify ships these two as functions that return exactly the JSON above, so
+you do not have to write the mapping yourself:
+
+```python
+from aicertify.adapters import from_detoxify, from_model_card
+```
+
+See its [adapter guide](https://github.com/Principled-Evolution/aicertify/blob/main/docs/adapters.md).
+The mapping is the same either way; the adapter just saves you typing it.
+
 ## Some metrics should not come from a tool
 
 Not everything measurable is measurable by you.
