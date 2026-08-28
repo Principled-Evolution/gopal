@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="diagrams/hero_banner_light.svg" alt="GOPAL: the Rego policy library for AI compliance" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/hero_banner_dark.svg">
+    <img src="docs/diagrams/hero_banner_light.svg" alt="GOPAL: the Rego policy library for AI compliance" width="100%">
   </picture>
 </div>
 
@@ -42,8 +42,8 @@ Run them against your AI system's metadata, model cards, or evaluation results. 
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 91 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="docs/diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 91 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
 
@@ -77,8 +77,8 @@ GOPAL ships executable Rego policies for each of those regimes. They are version
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="How GOPAL evaluation works: input JSON, Rego policy, OPA evaluation, verdict" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="docs/diagrams/diagram5_evaluation_flow_light.svg" alt="How GOPAL evaluation works: input JSON, Rego policy, OPA evaluation, verdict" width="85%" />
   </picture>
 </p>
 
@@ -174,8 +174,8 @@ If you want a Python framework that handles input capture and PDF/Markdown repor
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL directory layout: 4 top-level branches, policies organized by jurisdiction and vertical" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/diagram2_directory_tree_dark.svg">
+    <img src="docs/diagrams/diagram2_directory_tree_light.svg" alt="GOPAL directory layout: 4 top-level branches, policies organized by jurisdiction and vertical" width="85%" />
   </picture>
 </p>
 
@@ -257,8 +257,8 @@ AICertify uses GOPAL underneath. Pick GOPAL if you already have an OPA workflow 
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="Anatomy of a GOPAL policy: package path, imports, metadata, default deny, allow rule, report" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="docs/diagrams/diagram3_policy_anatomy_light.svg" alt="Anatomy of a GOPAL policy: package path, imports, metadata, default deny, allow rule, report" width="85%" />
   </picture>
 </p>
 

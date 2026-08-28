@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL: AI コンプライアンスのための Rego ポリシーライブラリ" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/hero_banner_dark.svg">
+    <img src="../diagrams/hero_banner_light.svg" alt="GOPAL: AI コンプライアンスのための Rego ポリシーライブラリ" width="100%">
   </picture>
 </div>
 
@@ -41,8 +41,8 @@ AI システムのメタデータ、モデルカード、評価結果に対し�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 91 ポリシー、国際規格、航空、業種別、共通原則の各カテゴリ" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 91 ポリシー、国際規格、航空、業種別、共通原則の各カテゴリ" width="85%" />
   </picture>
 </p>
 
@@ -76,8 +76,8 @@ GOPAL は、これらそれぞれの制度に対応する実行可能な Rego �
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL の評価フロー:入力 JSON、Rego ポリシー、OPA 評価、判定" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL の評価フロー:入力 JSON、Rego ポリシー、OPA 評価、判定" width="85%" />
   </picture>
 </p>
 
@@ -157,8 +157,8 @@ GOPAL は次の 3 点で異なります。
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL のディレクトリ構成:4 つのトップレベル分岐、管轄区域と業種ごとに整理されたポリシー" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram2_directory_tree_dark.svg">
+    <img src="../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL のディレクトリ構成:4 つのトップレベル分岐、管轄区域と業種ごとに整理されたポリシー" width="85%" />
   </picture>
 </p>
 
@@ -239,8 +239,8 @@ AICertify は内部で GOPAL を使っています。すでに OPA のワーク�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL ポリシーの構造:パッケージパス、import、メタデータ、default deny、allow ルール、レポート" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL ポリシーの構造:パッケージパス、import、メタデータ、default deny、allow ルール、レポート" width="85%" />
   </picture>
 </p>
 

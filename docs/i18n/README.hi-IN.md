@@ -1,7 +1,7 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL: AI कंप्लायंस के लिए Rego पॉलिसी लाइब्रेरी" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/hero_banner_dark.svg">
+    <img src="../diagrams/hero_banner_light.svg" alt="GOPAL: AI कंप्लायंस के लिए Rego पॉलिसी लाइब्रेरी" width="100%">
   </picture>
 </div>
 
@@ -41,8 +41,8 @@ Rego में लिखी गई [OPA](https://www.openpolicyagent.org/) प�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 91 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL कवरेज: 91 पॉलिसीज़, इंटरनेशनल स्टैंडर्ड्स, एविएशन, इंडस्ट्री वर्टिकल्स, और क्रॉस-कटिंग सिद्धांत" width="85%" />
   </picture>
 </p>
 
@@ -78,8 +78,8 @@ GOPAL इन सभी रेगुलेटरी रिजीम्स के 
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है: इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram5_evaluation_flow_dark.svg">
+    <img src="../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL मूल्यांकन कैसे काम करता है: इनपुट JSON, Rego पॉलिसी, OPA मूल्यांकन, वर्डिक्ट" width="85%" />
   </picture>
 </p>
 
@@ -159,8 +159,8 @@ GOPAL तीन आयामों में अलग है:
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट: 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram2_directory_tree_dark.svg">
+    <img src="../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL डायरेक्टरी लेआउट: 4 शीर्ष-स्तरीय शाखाएँ, क्षेत्राधिकार और वर्टिकल के अनुसार व्यवस्थित पॉलिसीज़" width="85%" />
   </picture>
 </p>
 
@@ -241,8 +241,8 @@ AICertify अंदर से GOPAL का ही इस्तेमाल क�
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना: package path, imports, metadata, default deny, allow rule, report" width="85%" />
+    <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram3_policy_anatomy_dark.svg">
+    <img src="../diagrams/diagram3_policy_anatomy_light.svg" alt="एक GOPAL पॉलिसी की संरचना: package path, imports, metadata, default deny, allow rule, report" width="85%" />
   </picture>
 </p>
 

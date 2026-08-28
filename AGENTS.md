@@ -138,7 +138,7 @@ Each framework lives under `v1/`. When the upstream regulation changes materiall
 
 ## Diagrams and visual assets
 
-All README diagrams live in [`diagrams/`](diagrams) as paired **light and dark SVGs**, embedded via `<picture>` for GitHub theme switching. The full design system (palette, type, shape language, naming, contribution flow) is documented in [`diagrams/STYLE.md`](diagrams/STYLE.md). Read it before adding or modifying any diagram.
+All README diagrams live in [`diagrams/`](docs/diagrams) as paired **light and dark SVGs**, embedded via `<picture>` for GitHub theme switching. The full design system (palette, type, shape language, naming, contribution flow) is documented in [`diagrams/STYLE.md`](docs/diagrams/STYLE.md). Read it before adding or modifying any diagram.
 
 - **Edit existing diagrams in place**: they are hand-authored SVGs, not generated. Open the file, change it, validate with `python3 -c "import xml.etree.ElementTree as ET; ET.parse('<path>')"`.
 - **Do not reintroduce a matplotlib generator**: the previous `generate_diagrams.py` was deliberately removed. Hand-authored SVGs are the source of truth.

@@ -28,7 +28,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${REPO_ROOT}"
 
 OUT_DIR="dist/playground"
-SAMPLE_DIR="playground/samples"
+SAMPLE_DIR="examples/playground/samples"
 COVERAGE="docs/coverage/coverage.json"
 MODE="build"
 
@@ -61,7 +61,7 @@ SHARED=(helper_functions global/v1/common)
 # Frameworks worth putting in front of a first-time visitor. Deliberately not
 # every framework: a playground with a curated, verified sample for two
 # frameworks is more use than six that deny everything with no explanation.
-# Adding one is a matter of writing playground/samples/<slug>.json and an entry
+# Adding one is a matter of writing examples/playground/samples/<slug>.json and an entry
 # in expected.json, then re-running with --verify.
 FRAMEWORKS=(
 	international/eu_ai_act
