@@ -8,8 +8,7 @@ metadata := {
 	"description": "Policy to evaluate compliance with EU AI Act transparency requirements",
 	"version": "1.0.0",
 	"references": [
-		"Article 13 of the EU AI Act - Transparency and provision of information to users",
-		"Article 52 of the EU AI Act - Transparency obligations for certain AI systems",
+		"Article 13 of the EU AI Act, transparency and provision of information to deployers",
 	],
 	"category": "international/eu_ai_act",
 	"import_path": "international.eu_ai_act.v1.transparency",

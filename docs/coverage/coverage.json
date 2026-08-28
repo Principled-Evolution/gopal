@@ -4045,8 +4045,7 @@
           "title": "EU AI Act Transparency Requirements",
           "description": "Policy to evaluate compliance with EU AI Act transparency requirements",
           "references": [
-            "Article 13 of the EU AI Act - Transparency and provision of information to users",
-            "Article 52 of the EU AI Act - Transparency obligations for certain AI systems"
+            "Article 13 of the EU AI Act, transparency and provision of information to deployers"
           ],
           "version": "1.0.0",
           "is_library": false,

@@ -31,7 +31,7 @@ Legend: ✅ **Implemented**: checks real input fields against the obligation. �
 | Article 11, Technical documentation | [`documentation/technical_documentation`](../../international/eu_ai_act/v1/documentation/technical_documentation.rego) | ✅ | Checks `documentation.technical_documentation.completeness` |
 | Article 12, Record-keeping (logging) | [`documentation/record_keeping`](../../international/eu_ai_act/v1/documentation/record_keeping.rego) | ✅ | Six-month floor from Articles 19 and 26(6); a longer sectoral period raises it, a shorter one cannot lower it |
 | Article 12, Automated logs | [`documentation/automated_logs`](../../international/eu_ai_act/v1/documentation/automated_logs.rego) | ✅ | Article 12(1)-(2) baseline, plus the four Article 12(3) fields for Annex III 1(a) biometric systems |
-| Article 13, Transparency to deployers | [`transparency/transparency`](../../international/eu_ai_act/v1/transparency/transparency.rego) | ✅ | Checks documentation completeness + toxicity threshold |
+| Article 13, Transparency to deployers | [`transparency/transparency`](../../international/eu_ai_act/v1/transparency/transparency.rego) | ⚠️ | Scores documentation completeness and a toxicity threshold. Article 13 requires instructions for use containing specified content; a completeness score is a proxy for that, not a test of it |
 | Article 14, Human oversight | [`human_oversight/human_oversight`](../../international/eu_ai_act/v1/human_oversight/human_oversight.rego) | ✅ | Article 14(4)(a)-(e) as four separate controls: oversight designed in, limits understood, automation bias, ability to disregard and to halt |
 | Article 15, Accuracy, robustness, cybersecurity | [`technical_robustness/robustness`](../../international/eu_ai_act/v1/technical_robustness/robustness.rego) | ✅ | Accuracy declared in the instructions for use, feedback loops where the system keeps learning, and AI-specific cybersecurity attacks |
 | Article 15, Fairness obligations | [`eu_fairness/eu_fairness`](../../international/eu_ai_act/v1/eu_fairness/eu_fairness.rego) | ✅ | Checks bias-metric thresholds and protected-class coverage |
@@ -61,7 +61,6 @@ Legend: ✅ **Implemented**: checks real input fields against the obligation. �
 | Article 53, GPAI technical documentation | [`gpai/technical_documentation`](../../international/eu_ai_act/v1/gpai/technical_documentation.rego) | ✅ | Article 53(1)(a) with the Article 53(2) open-source exemption, which systemic risk removes |
 | Article 53, Downstream transparency | [`gpai/downstream_transparency`](../../international/eu_ai_act/v1/gpai/downstream_transparency.rego) | ✅ | Article 53(1)(b)-(d); the open-source exemption reaches the downstream duty only |
 | Article 51, Systemic-risk classification | [`gpai/systemic_risk_classification`](../../international/eu_ai_act/v1/gpai/systemic_risk_classification.rego) | ✅ | Article 51(2) 10^25 FLOP presumption, Article 52(1) notification, and the four Article 55 obligations |
-| Article 52, Transparency obligations for certain systems | [`transparency/transparency`](../../international/eu_ai_act/v1/transparency/transparency.rego) | ✅ | Shared with Article 13 |
 
 ## Not yet covered (📋 Planned)
 
