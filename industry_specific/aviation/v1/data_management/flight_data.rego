@@ -23,7 +23,7 @@ default allow := false
 
 allow if {
 	input.flight_data.recording_enabled == true
-	input.flight_data.retention_days >= object.get(input.params, "min_retention_days", 90)
+	input.flight_data.retention_days >= object.get(input, ["params", "min_retention_days"], 90)
 }
 
 policy_metrics := {
@@ -35,7 +35,7 @@ policy_metrics := {
 	"retention_sufficient": {
 		"name": "Retention Period Sufficient",
 		"value": object.get(input.flight_data, "retention_days", 0),
-		"control_passed": object.get(input.flight_data, "retention_days", 0) >= object.get(input.params, "min_retention_days", 90),
+		"control_passed": object.get(input.flight_data, "retention_days", 0) >= object.get(input, ["params", "min_retention_days"], 90),
 	},
 }
 
