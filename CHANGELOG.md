@@ -3,7 +3,7 @@
 All notable changes to **GOPAL** are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [COMPATIBILITY.md](COMPATIBILITY.md) for the versioning model applied to individual policy directories.
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [COMPATIBILITY.md](docs/COMPATIBILITY.md) for the versioning model applied to individual policy directories.
 
 ## [Unreleased]
 
@@ -53,7 +53,7 @@ Nothing yet.
 - **Per-framework OPA bundles, attached to every release.** Consuming just the EU AI Act meant vendoring the whole tree, because `opa build -b international/eu_ai_act` does not compile: every framework imports `helper_functions` and `global/v1/common`. [`scripts/build-bundles.sh`](scripts/build-bundles.sh) stages each framework with the libraries it needs and produces a self-contained bundle that evaluates with no other GOPAL files present. 19 framework bundles plus `gopal-all`, with a sha256 checksums file. The EU AI Act bundle is 24K against 56K for the whole library.
 
   An import scan confirms the shared libraries are the only cross-directory dependency, so the staging is complete rather than merely sufficient for the cases tried. Each bundle is loaded back during the build and asked for a real decision, so one that has lost a file it needed fails at build time rather than in a user's CI.
-- **A GitHub Actions example that fails the build on non-compliance** ([`examples/github-actions/`](examples/github-actions/)). Downloads a framework bundle, verifies its checksum, evaluates a model card, and annotates the pull request with the reason and remediation. It distinguishes compliant, non-compliant, and failed-to-evaluate, because a policy that reached no verdict has told you nothing and folding that into "not a failure" is how a compliance pipeline reports green while checking nothing.
+- **A GitHub Actions example that fails the build on non-compliance** ([`examples/github-actions/`](examples/github-actions)). Downloads a framework bundle, verifies its checksum, evaluates a model card, and annotates the pull request with the reason and remediation. It distinguishes compliant, non-compliant, and failed-to-evaluate, because a policy that reached no verdict has told you nothing and folding that into "not a failure" is how a compliance pipeline reports green while checking nothing.
 - **Generated coverage data** at [`docs/coverage/coverage.json`](docs/coverage/coverage.json), produced from the `.rego` files by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI. For every policy it records the package, title, references, decision rules, the `RequiredMetrics` and `RequiredParams` it declares, and whether it has a test and an empty-input test. The hand-maintained matrices had drifted in every direction at once, and this makes that impossible.
 - **A version-reference check** ([`scripts/check-version-refs.sh`](scripts/check-version-refs.sh)), also in CI. 1.2.0 shipped a README telling people to `gh release download v1.2.0 --pattern 'gopal-*.tar.gz'` against a release that had no assets, because the bundle workflow did not exist when that tag was cut. The instruction was dead on arrival and nothing caught it.
 
@@ -107,11 +107,11 @@ Nothing yet.
 - **`international/nist/v1/ai_600_1`: closed a fail-open in the NIST AI RMF orchestrator.** `govern_compliant` used `object.get(input, "governance", {})` and then tested the result for existence. Because a defaulted `{}` is a defined value, the check succeeded even when the input carried no governance data at all, so an AI system with nothing recorded under `governance`, `transparency` or `fairness` was reported compliant. The orchestrator now delegates to the `govern`, `map`, `measure` and `manage` policies it already imported but never called, each of which carries its own `default allow := false`. This makes the four previously dead imports live and deletes the four shallow presence-only helper rules.
 
 ### Added
-- **Hand-authored, theme-aware SVG diagrams** under [`diagrams/`](diagrams/): paired `_light.svg` + `_dark.svg` for hero banner, hero numbers, directory tree, policy anatomy, and evaluation flow. Embedded via `<picture>` so GitHub light- and dark-theme readers each see the matching variant.
+- **Hand-authored, theme-aware SVG diagrams** under [`diagrams/`](diagrams): paired `_light.svg` + `_dark.svg` for hero banner, hero numbers, directory tree, policy anatomy, and evaluation flow. Embedded via `<picture>` so GitHub light- and dark-theme readers each see the matching variant.
 - **Brand assets**: standalone `logo_{light,dark}.svg` (hexagon + `{}` curly braces, signalling policy-as-code), `og_card_{light,dark}.svg` + a 1200×630 `og_card.png` for GitHub Settings → Social preview.
 - **[`diagrams/STYLE.md`](diagrams/STYLE.md)**: design-system reference (palette, typography, shape language, light/dark pattern, contribution flow) shared with sister project AICertify.
-- **[`CONTRIBUTING.md`](CONTRIBUTING.md)**: policy-authoring conventions, local-checks recipe, PR review criteria, and a "adding a new framework" guide. Resolves the broken link the README had been carrying.
-- **[`SECURITY.md`](SECURITY.md)**: private vulnerability-disclosure flow at `security@principledevolution.ai`, 5-business-day acknowledgement, coordinated disclosure. Explicitly distinguishes security issues from policy-correctness disputes.
+- **[`CONTRIBUTING.md`](.github/CONTRIBUTING.md)**: policy-authoring conventions, local-checks recipe, PR review criteria, and a "adding a new framework" guide. Resolves the broken link the README had been carrying.
+- **[`SECURITY.md`](.github/SECURITY.md)**: private vulnerability-disclosure flow at `security@principledevolution.ai`, 5-business-day acknowledgement, coordinated disclosure. Explicitly distinguishes security issues from policy-correctness disputes.
 - **`AGENTS.md`**: new "Diagrams and visual assets" section pointing future agents at the SVG system and explicitly retiring the matplotlib generator.
 - Previously (still in this Unreleased line): `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` operational instructions for AI coding agents; `skills/` directory with 3 Claude Code skills (`draft-rego-policy`, `explain-framework`, `add-framework`); comparison table vs generic OPA bundles and vendor governance SaaS in the README.
 

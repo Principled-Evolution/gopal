@@ -7,10 +7,10 @@
 
 <p align="center">
   <a href="README.md">English</a> |
-  <a href="README.zh-CN.md">简体中文</a> |
-  <a href="README.ja-JP.md">日本語</a> |
-  <a href="README.ko-KR.md">한국어</a> |
-  <a href="README.hi-IN.md">हिन्दी</a>
+  <a href="docs/i18n/README.zh-CN.md">简体中文</a> |
+  <a href="docs/i18n/README.ja-JP.md">日本語</a> |
+  <a href="docs/i18n/README.ko-KR.md">한국어</a> |
+  <a href="docs/i18n/README.hi-IN.md">हिन्दी</a>
 </p>
 
 <p align="center">
@@ -90,7 +90,7 @@ cd gopal/examples/eu-ai-act-transparency
 ./run.sh
 ```
 
-You'll see a structured EU AI Act transparency verdict against a sample AI system. See [`examples/`](examples/) for NIST AI RMF, customer-support LLM, and more.
+You'll see a structured EU AI Act transparency verdict against a sample AI system. See [`examples/`](examples) for NIST AI RMF, customer-support LLM, and more.
 
 ### Standalone with the OPA CLI
 
@@ -134,7 +134,7 @@ Where GOPAL differs:
 
 1. **AI-specific by construction.** Every policy targets an AI-system concern: bias, transparency, human oversight, model risk, content safety, safety-critical certification. Not generic infrastructure.
 2. **Readable.** The rules are Rego. You can `cat` them, diff them in a PR, and reason about them. No black-box scorecards.
-3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees (see [COMPATIBILITY.md](COMPATIBILITY.md)). When the EU AI Act amends, the old version stays put.
+3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees (see [COMPATIBILITY.md](docs/COMPATIBILITY.md)). When the EU AI Act amends, the old version stays put.
 
 ---
 
@@ -293,9 +293,9 @@ Then a sibling `*_test.rego` covers the rule. CI enforces:
 1. **`opa check`** for syntax and reference correctness across all packages
 2. **`regal lint`** for Rego style and best practices
 
-The [helper_functions/](helper_functions/) library gives you `compose_report()`, `validate_required_fields()`, and `field_exists()` so reports come out in a uniform shape no matter who wrote the rule.
+The [helper_functions/](helper_functions) library gives you `compose_report()`, `validate_required_fields()`, and `field_exists()` so reports come out in a uniform shape no matter who wrote the rule.
 
-See [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md) for a walkthrough, and [`docs/coverage/`](docs/coverage/) for per-framework coverage matrices.
+See [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md) for a walkthrough, and [`docs/coverage/`](docs/coverage) for per-framework coverage matrices.
 
 ---
 
@@ -310,7 +310,7 @@ If you believe a rule misreads a regulation or misses an obligation, please open
 - the input/output behavior you'd expect
 - any official guidance, regulator text, or precedent
 
-Policy-correctness disagreements are not security vulnerabilities; see [SECURITY.md](SECURITY.md) for those. We want disagreements about interpretation in the open, where the community can review the rules and improve them.
+Policy-correctness disagreements are not security vulnerabilities; see [SECURITY.md](.github/SECURITY.md) for those. We want disagreements about interpretation in the open, where the community can review the rules and improve them.
 
 ---
 
@@ -340,7 +340,7 @@ opa check --ignore custom/ .
 regal lint --ignore-files custom/ .
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the PR workflow.
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the PR workflow.
 
 ---
 
@@ -377,11 +377,11 @@ You don't need to know Rego, OPA, or GitHub conventions to get an answer here.
 | Request a specific policy inside a framework we already cover | [New policy request](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
 | Report a policy that returns the wrong verdict | [Bug report](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
 | Email us instead of using GitHub | **gopal@principledevolution.ai** |
-| Report a security vulnerability | See [SECURITY.md](SECURITY.md). Please don't open a public issue. |
+| Report a security vulnerability | See [SECURITY.md](.github/SECURITY.md). Please don't open a public issue. |
 
 Two things answer most questions before you file anything. The [coverage matrices](docs/coverage) list what's already implemented, article by article. The [FAQ](docs/FAQ.md) covers scope, input shapes, and how GOPAL relates to AICertify.
 
-Contributions of any size are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md).
+Contributions of any size are welcome; see [CONTRIBUTING.md](.github/CONTRIBUTING.md). Participation is governed by our [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ### Listed in
 

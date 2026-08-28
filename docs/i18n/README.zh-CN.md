@@ -1,12 +1,12 @@
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/hero_banner_dark.svg">
-    <img src="diagrams/hero_banner_light.svg" alt="GOPAL：面向 AI 合规的 Rego 策略库" width="100%">
+    <img src="../../diagrams/hero_banner_light.svg" alt="GOPAL：面向 AI 合规的 Rego 策略库" width="100%">
   </picture>
 </div>
 
 <p align="center">
-  <a href="README.md">English</a> |
+  <a href="../../README.md">English</a> |
   <strong>简体中文</strong> |
   <a href="README.ja-JP.md">日本語</a> |
   <a href="README.ko-KR.md">한국어</a> |
@@ -42,7 +42,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:91 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
+    <img src="../../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:91 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
   </picture>
 </p>
 
@@ -77,7 +77,7 @@ GOPAL 为上述每一种监管体系都提供了可执行的 Rego 策略。它�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram5_evaluation_flow_dark.svg">
-    <img src="diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 评估流程：输入 JSON、Rego 策略、OPA 评估、判定" width="85%" />
+    <img src="../../diagrams/diagram5_evaluation_flow_light.svg" alt="GOPAL 评估流程：输入 JSON、Rego 策略、OPA 评估、判定" width="85%" />
   </picture>
 </p>
 
@@ -89,7 +89,7 @@ cd gopal/examples/eu-ai-act-transparency
 ./run.sh
 ```
 
-您将看到针对示例 AI 系统生成的结构化 EU AI Act 透明度判定结果。更多示例(NIST AI RMF、客服 LLM 等)请参见 [`examples/`](examples/)。
+您将看到针对示例 AI 系统生成的结构化 EU AI Act 透明度判定结果。更多示例(NIST AI RMF、客服 LLM 等)请参见 [`examples/`](../../examples)。
 
 ### 搭配 OPA CLI 独立使用
 
@@ -133,7 +133,7 @@ GOPAL 在三个维度上与众不同:
 
 1. **专为 AI 打造。** 每条策略都针对 AI 系统的关切点,包括偏见、透明度、人工监督、模型风险、内容安全、安全关键型认证,而非通用基础设施。
 2. **可阅读。** 规则就是 Rego 代码。您可以用 `cat` 查看、在 PR 中对比差异,并对其进行推理。没有黑盒评分卡。
-3. **版本化。** 每个框架都置于 `v1/` 之下(此后是 `v2/` 等),并提供明确的 semver 保证,参见 [COMPATIBILITY.md](COMPATIBILITY.md)。当 EU AI Act 修订时,旧版本保持不变。
+3. **版本化。** 每个框架都置于 `v1/` 之下(此后是 `v2/` 等),并提供明确的 semver 保证,参见 [COMPATIBILITY.md](../COMPATIBILITY.md)。当 EU AI Act 修订时,旧版本保持不变。
 
 ---
 
@@ -158,7 +158,7 @@ GOPAL 在三个维度上与众不同:
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram2_directory_tree_dark.svg">
-    <img src="diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 目录结构：4 个顶级分支,按司法管辖区与行业组织的策略" width="85%" />
+    <img src="../../diagrams/diagram2_directory_tree_light.svg" alt="GOPAL 目录结构：4 个顶级分支,按司法管辖区与行业组织的策略" width="85%" />
   </picture>
 </p>
 
@@ -199,7 +199,7 @@ gopal/
 └── custom/               您的私有策略(已 git-ignore,CI 跳过)
 ```
 
-**91 条能给出判定的策略,以及它们所引用的 7 个共享库。包括测试在内共 196 个 Rego 文件。** 这些数字由 [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) 从目录树生成,并在 CI 中校验,因此不会与代码脱节。运行 `jq .totals docs/coverage/coverage.json` 可查看当前数值。
+**91 条能给出判定的策略,以及它们所引用的 7 个共享库。包括测试在内共 196 个 Rego 文件。** 这些数字由 [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) 从目录树生成,并在 CI 中校验,因此不会与代码脱节。运行 `jq .totals docs/coverage/coverage.json` 可查看当前数值。
 
 ---
 
@@ -240,7 +240,7 @@ AICertify 底层使用的正是 GOPAL。如果您已经有一套 OPA 工作流,�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="diagrams/diagram3_policy_anatomy_dark.svg">
-    <img src="diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 策略的结构：包路径、imports、元数据、默认拒绝、allow 规则、报告" width="85%" />
+    <img src="../../diagrams/diagram3_policy_anatomy_light.svg" alt="GOPAL 策略的结构：包路径、imports、元数据、默认拒绝、allow 规则、报告" width="85%" />
   </picture>
 </p>
 
@@ -275,9 +275,9 @@ report := reporting.compose_report(
 1. **`opa check`**:跨所有包的语法与引用正确性
 2. **`regal lint`**:Rego 风格与最佳实践
 
-[helper_functions/](helper_functions/) 库提供了 `compose_report()`、`validate_required_fields()` 与 `field_exists()`,无论谁编写规则,输出的报告都将拥有统一形态。
+[helper_functions/](../../helper_functions) 库提供了 `compose_report()`、`validate_required_fields()` 与 `field_exists()`,无论谁编写规则,输出的报告都将拥有统一形态。
 
-详细步骤请参见 [`docs/tutorials/add-your-first-policy.md`](docs/tutorials/add-your-first-policy.md),各框架的覆盖矩阵请参见 [`docs/coverage/`](docs/coverage/)。
+详细步骤请参见 [`docs/tutorials/add-your-first-policy.md`](../tutorials/add-your-first-policy.md),各框架的覆盖矩阵请参见 [`docs/coverage/`](../coverage)。
 
 ---
 
@@ -292,7 +292,7 @@ GOPAL 不是法律建议。这里的每条策略都是工程师对公开监管�
 - 您期望的输入/输出行为
 - 任何官方指引、监管文本或先例
 
-策略准确性方面的分歧不属于安全漏洞,安全漏洞请参见 [SECURITY.md](SECURITY.md)。恰恰相反,这类分歧正是我们希望被公开讨论的问题,这样社区才能一起审查和改进这些规则。
+策略准确性方面的分歧不属于安全漏洞,安全漏洞请参见 [SECURITY.md](../../.github/SECURITY.md)。恰恰相反,这类分歧正是我们希望被公开讨论的问题,这样社区才能一起审查和改进这些规则。
 
 ---
 
@@ -322,7 +322,7 @@ opa check --ignore custom/ .
 regal lint --ignore-files custom/ .
 ```
 
-PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+PR 流程请参见 [CONTRIBUTING.md](../../.github/CONTRIBUTING.md)。
 
 ---
 
@@ -356,11 +356,11 @@ PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 | 申请已覆盖框架内的某条具体策略 | [新策略申请](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) |
 | 报告某条策略给出了错误结论 | [缺陷报告](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) |
 | 不用 GitHub，直接发邮件 | **gopal@principledevolution.ai** |
-| 报告安全漏洞 | 请参阅 [SECURITY.md](SECURITY.md)，请勿公开提交 issue |
+| 报告安全漏洞 | 请参阅 [SECURITY.md](../../.github/SECURITY.md)，请勿公开提交 issue |
 
-有两处能提前解答大部分疑问。[覆盖矩阵](docs/coverage)逐条款列出了已经实现的内容；[常见问题](docs/FAQ.md)说明了适用范围、输入格式，以及 GOPAL 与 AICertify 的关系。
+有两处能提前解答大部分疑问。[覆盖矩阵](../coverage)逐条款列出了已经实现的内容；[常见问题](../FAQ.md)说明了适用范围、输入格式，以及 GOPAL 与 AICertify 的关系。
 
-欢迎任何规模的贡献，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。参与本项目须遵守我们的[行为准则](CODE_OF_CONDUCT.md)。
+欢迎任何规模的贡献，详见 [CONTRIBUTING.md](../../.github/CONTRIBUTING.md)。参与本项目须遵守我们的[行为准则](../../.github/CODE_OF_CONDUCT.md)。
 
 ### 收录于
 
@@ -375,6 +375,6 @@ PR 流程请参见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 许可证
 
-Apache License 2.0,详见 [LICENSE](LICENSE)。
+Apache License 2.0,详见 [LICENSE](../../LICENSE)。
 
 <p align="center"><sub>由 <a href="https://github.com/Principled-Evolution">Principled Evolution</a> 维护 · 可读、可运行、可证明的合规。</sub></p>

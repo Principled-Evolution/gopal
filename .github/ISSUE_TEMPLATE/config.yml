@@ -13,5 +13,5 @@ contact_links:
     url: mailto:gopal@principledevolution.ai
     about: If you would rather not use GitHub, send us a regulation request, an integration question, or anything else and we will route it.
   - name: Report a security vulnerability
-    url: https://github.com/Principled-Evolution/gopal/blob/main/SECURITY.md
+    url: https://github.com/Principled-Evolution/gopal/blob/main/.github/SECURITY.md
     about: Please don't open a public issue for a vulnerability. Email security@principledevolution.ai instead.

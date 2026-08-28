@@ -30,7 +30,7 @@ The orchestrator delegates to the four function packages rather than checking to
 | GOVERN 2, Transparency | Public documentation available; decision explanations provided | `input.transparency.public_documentation_available`, `input.transparency.decision_explanations_provided` |
 | GOVERN 3, Fairness | Bias assessments conducted; mitigation strategies in place | `input.fairness.bias_assessments_conducted`, `input.fairness.bias_mitigation_strategies_in_place` |
 
-See [`examples/nist-ai-rmf-govern/`](../../examples/nist-ai-rmf-govern/) for a runnable example.
+See [`examples/nist-ai-rmf-govern/`](../../examples/nist-ai-rmf-govern) for a runnable example.
 
 ## Map: per-category coverage
 

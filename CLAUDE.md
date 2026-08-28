@@ -29,7 +29,7 @@ When the user asks about the codebase, in order:
 
 ## Useful skills
 
-This project ships Claude Code skills in [`skills/`](skills/). To register them:
+This project ships Claude Code skills in [`skills/`](skills). To register them:
 
 ```bash
 mkdir -p ~/.claude/skills && cp -r skills/* ~/.claude/skills/

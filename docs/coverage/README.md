@@ -6,7 +6,7 @@ The matrices are deliberately honest. A policy is only marked **Implemented** wh
 
 ## Test coverage
 
-Every policy has a sibling test file and asserts that its decision denies an empty input, as [CONTRIBUTING.md](../../CONTRIBUTING.md) requires. That is now a CI gate rather than a convention: [`scripts/check-test-coverage.sh`](../../scripts/check-test-coverage.sh) fails the build if a policy has no test, or has one without an empty-input assertion. The seven libraries under `global/v1/common/` and `helper_functions/` are exempt, since they define helpers rather than decisions and have no `allow` to hand an empty input to.
+Every policy has a sibling test file and asserts that its decision denies an empty input, as [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) requires. That is now a CI gate rather than a convention: [`scripts/check-test-coverage.sh`](../../scripts/check-test-coverage.sh) fails the build if a policy has no test, or has one without an empty-input assertion. The seven libraries under `global/v1/common/` and `helper_functions/` are exempt, since they define helpers rather than decisions and have no `allow` to hand an empty input to.
 
 The gate exists because the convention was not enough. The gap had reached 22 of the 96 files then counted as policies with no test at all, including both Article 5 prohibited-practice policies — the ones gating the practices the Act bans outright. An external reviewer changed `default allow := false` to `default allow := true` in the social-scoring policy, turning that gate into a default allow, and the suite still reported 604/604. A green suite and a per-file count were disagreeing, and the uncovered files were the prohibitions rather than the paperwork.
 

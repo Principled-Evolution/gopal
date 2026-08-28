@@ -24,7 +24,7 @@ Worth knowing if you already evaluate against `international/eu_ai_act/`:
 - **Automated decisions are permitted by default.** Under Articles 22A-22D a solely automated significant decision on ordinary personal data is lawful provided the Article 22C safeguards are in place. Special category data remains restricted and additionally needs an Article 9(2) condition.
 - **Fairness is anchored in the Equality Act 2010.** The nine protected characteristics are the operative list, which is not the same set a US protected-class model would test.
 
-Financial services is the sector furthest ahead in practice. Those policies live in [`industry_specific/bfs/v1/`](../../industry_specific/bfs/v1/) rather than here, because they are sector requirements rather than cross-sectoral principles.
+Financial services is the sector furthest ahead in practice. Those policies live in [`industry_specific/bfs/v1/`](../../industry_specific/bfs/v1) rather than here, because they are sector requirements rather than cross-sectoral principles.
 
 ## Disclaimer
 

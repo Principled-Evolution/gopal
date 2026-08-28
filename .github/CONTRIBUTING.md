@@ -16,9 +16,9 @@ Thanks for considering a contribution. GOPAL is an open, community-curated libra
 
 1. **Open or check an issue first.** For new frameworks or larger additions, a quick "I'm planning to add X" comment avoids duplicate work.
 2. **Run the same checks CI runs.** See [Development](#development) below.
-3. **Match the existing policy shape.** Every policy file follows the same structure (package, imports, METADATA, default deny, allow rule, report). See [diagrams/diagram3_policy_anatomy_light.svg](diagrams/diagram3_policy_anatomy_light.svg) and any existing `.rego` for the canonical pattern.
+3. **Match the existing policy shape.** Every policy file follows the same structure (package, imports, METADATA, default deny, allow rule, report). See [diagrams/diagram3_policy_anatomy_light.svg](../diagrams/diagram3_policy_anatomy_light.svg) and any existing `.rego` for the canonical pattern.
 4. **Add a test sibling.** A new `foo.rego` needs a `foo_test.rego` covering both allow and deny cases.
-5. **Update [CHANGELOG.md](CHANGELOG.md)** under `[Unreleased]` with a one-line entry describing your change.
+5. **Update [CHANGELOG.md](../CHANGELOG.md)** under `[Unreleased]` with a one-line entry describing your change.
 
 ## Development
 
@@ -47,7 +47,7 @@ If `opa check` fails it usually means a typo in a package path or an undeclared 
 - **Default deny.** Every policy starts with `default allow := false` so a missing rule produces a safe (deny) result, never an accidental allow.
 - **Metadata comments.** Use `# METADATA` followed by `# title:` and `# description:` so the rule is human-readable in audit reports.
 - **Report composition.** Use `data.helper_functions.reporting.compose_report(...)` to produce the standardized output shape rather than rolling your own report dict. The helper guarantees the field names auditors expect.
-- **Versioning.** New frameworks go under `<framework>/v1/`. When a regulation amends, the old `v1/` stays put and a new `v2/` ships alongside. See [COMPATIBILITY.md](COMPATIBILITY.md).
+- **Versioning.** New frameworks go under `<framework>/v1/`. When a regulation amends, the old `v1/` stays put and a new `v2/` ships alongside. See [COMPATIBILITY.md](../docs/COMPATIBILITY.md).
 - **Reference data needed?** Add it as a constant inside the policy or under a sibling `_data.rego`. Avoid runtime dependencies on external services.
 
 ## Adding a new framework
@@ -56,7 +56,7 @@ The fastest path:
 
 1. Decide where it goes: `international/`, `industry_specific/`, `global/`, or `operational/`.
 2. `mkdir <category>/<framework>/v1/`
-3. Drop in a first policy that follows the standard shape. The [`draft-rego-policy`](skills/draft-rego-policy/SKILL.md) skill scaffolds this for you under Claude Code.
+3. Drop in a first policy that follows the standard shape. The [`draft-rego-policy`](../skills/draft-rego-policy/SKILL.md) skill scaffolds this for you under Claude Code.
 4. Add a test sibling.
 5. Update the README count + add a row under "What's Inside".
 6. Open a PR.
@@ -74,7 +74,7 @@ We aim to respond within 5 business days. Larger framework additions may take lo
 
 ## Custom policies
 
-The `custom/` directory is `.gitignore`d and skipped by CI. That is where your organization's proprietary rules go. They evaluate alongside the public set without ever being pushed to this repo. See the [README's Custom Policies section](README.md#custom-policies).
+The `custom/` directory is `.gitignore`d and skipped by CI. That is where your organization's proprietary rules go. They evaluate alongside the public set without ever being pushed to this repo. See the [README's Custom Policies section](../README.md#custom-policies).
 
 ## Releasing
 
@@ -107,4 +107,4 @@ it does not backfill v1.3.0 or earlier.
 
 ## License
 
-By contributing, you agree your contributions will be licensed under the [Apache License 2.0](LICENSE), the same license as GOPAL itself.
+By contributing, you agree your contributions will be licensed under the [Apache License 2.0](../LICENSE), the same license as GOPAL itself.

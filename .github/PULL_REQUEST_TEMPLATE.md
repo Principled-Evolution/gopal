@@ -18,7 +18,7 @@
 - [ ] Framework-level `README.md` lists the new policy and includes the standard disclaimer
 - [ ] `opa check --ignore custom/ .` passes locally
 - [ ] `regal lint --ignore-files custom/ .` passes locally
-- [ ] If breaking: new `v2/` directory created, `v1/` left untouched, [COMPATIBILITY.md](../COMPATIBILITY.md) updated
+- [ ] If breaking: new `v2/` directory created, `v1/` left untouched, [COMPATIBILITY.md](../docs/COMPATIBILITY.md) updated
 
 ## Source(s)
 

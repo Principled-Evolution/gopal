@@ -1,6 +1,6 @@
 # Aviation Policies
 
-This directory contains AI-governance policies for aviation systems, organized by concern area rather than by regulator (see [`international/icao/`](../../international/icao/), [`international/faa/`](../../international/faa/), [`international/easa/`](../../international/easa/), and [`international/standards/`](../../international/standards/) for regulator-specific policies).
+This directory contains AI-governance policies for aviation systems, organized by concern area rather than by regulator (see [`international/icao/`](../../international/icao), [`international/faa/`](../../international/faa), [`international/easa/`](../../international/easa), and [`international/standards/`](../../international/standards) for regulator-specific policies).
 
 ## Directory Structure
 

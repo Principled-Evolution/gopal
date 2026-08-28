@@ -16,18 +16,17 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 
 - [Author a new Rego policy](../skills/draft-rego-policy/SKILL.md) (Claude Code skill): scaffolds policy + test + metadata.
 - [Summarize what a framework's policies enforce](../skills/explain-framework/SKILL.md) (Claude Code skill): audit-grade plain-English walkthrough.
-- [Resolve Regal lint violations](regal-linting-guide.md): fix common style issues that block CI.
 - [Develop org-private policies in `custom/`](../README.md#custom-policies): git-ignored, CI-skipped local extensions.
 
 ## 📚 Reference: look up specific names
 
-- [Policy coverage matrices](coverage/): per-framework view of what's Implemented / Scaffold / Planned.
+- [Policy coverage matrices](coverage): per-framework view of what's Implemented / Scaffold / Planned.
 - [Coverage table](../README.md#whats-inside): every framework with its policy count.
 - [helper_functions/reporting.rego](../helper_functions/reporting.rego): `compose_report()`, validators.
 - [helper_functions/validation.rego](../helper_functions/validation.rego): `field_exists()`, `validate_required_fields()`.
 - [.regal/config.yaml](../.regal/config.yaml): linter exclusions.
 - [pyproject.toml](../pyproject.toml): Python packaging metadata.
-- [COMPATIBILITY.md](../COMPATIBILITY.md): the versioning model (`v1/`, `v2/`, …).
+- [COMPATIBILITY.md](COMPATIBILITY.md): the versioning model (`v1/`, `v2/`, …).
 - [CHANGELOG](../CHANGELOG.md): release history.
 
 ## 💡 Explanation: understand the design
@@ -38,6 +37,6 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 
 ## 🤝 Contributing & community
 
-- [CONTRIBUTING.md](../CONTRIBUTING.md)
+- [CONTRIBUTING.md](../.github/CONTRIBUTING.md)
 - [Issues](https://github.com/Principled-Evolution/gopal/issues)
 - [Consumer: AICertify](https://github.com/Principled-Evolution/aicertify): the Python framework that runs GOPAL.
