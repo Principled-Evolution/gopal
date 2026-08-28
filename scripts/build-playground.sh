@@ -183,10 +183,38 @@ jq -n \
 				name: $f.name,
 				wasm: (($f.id | gsub("/"; "-")) + ".wasm"),
 				policy_count: ([$f.policies[] | select(.is_library | not)] | length),
+
+				# One map for the whole framework rather than per policy: field
+				# paths are global to a framework and seven of them are read by
+				# more than one policy, so repeating the kinds would only invite
+				# them to disagree.
+				field_types: ([$f.policies[] | .input_field_types // {}] | add // {}),
 				policies: [
 					$f.policies[]
 					| select(.is_library | not)
 					| select(.primary_decision != null)
+
+					# Union of the hand-written `# RequiredMetrics:` block and the
+					# fields derived from the AST of the policy, with prefixes pruned.
+					#
+					# Neither source is complete alone. The comments had drifted
+					# far enough that 22 of 98 policies read `input` and declared
+					# nothing at all, so anything asking "what does this policy
+					# need?" got an empty answer and no signal that it was wrong.
+					# The AST closes that, but cannot recover a field name that is
+					# computed, as in `object.get(input, ["datasets", field],
+					# false)` where `field` is bound by a loop — there the comment
+					# is the only record of the names.
+					#
+					# Pruning matters because such a call contributes a bare
+					# `datasets` to the AST list. That is an object, not a
+					# question, and it is satisfied by any leaf beneath it.
+					| ((.required_metrics + .input_fields)
+						| map(sub(" +\\(default .*\\)$"; ""))
+						| unique
+						| . as $all
+						| map(. as $p | select($all | map(startswith($p + ".")) | any | not))
+					) as $fields
 					| {
 						package: .package,
 						title: .title,
@@ -196,7 +224,8 @@ jq -n \
 						true_means: .decision_true_means,
 						references: .references,
 						declared_fields: [
-							.required_metrics[]
+							$fields[]
+							| select(startswith("params.") | not)
 							| select(
 								(startswith("metrics.") or startswith("evaluation.")
 								 or startswith("summary.") or startswith("results.")
@@ -204,8 +233,15 @@ jq -n \
 								 or . == "risk_management_score") | not
 							)
 						],
+
+						# Thresholds the policy reads from `input.params`, each
+						# with a default in the Rego. They tune how strict a
+						# check is; they are not facts about the system, and
+						# putting "toxicity threshold" among the obligations
+						# would invite someone to answer their way to a pass.
+						parameter_fields: [$fields[] | select(startswith("params."))],
 						evaluator_fields: [
-							.required_metrics[]
+							$fields[]
 							| select(
 								startswith("metrics.") or startswith("evaluation.")
 								or startswith("summary.") or startswith("results.")
