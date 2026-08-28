@@ -24,7 +24,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml"><img src="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml/badge.svg" alt="OPA CI"></a>
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="Latest release"></a>
-  <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-latest-blue.svg?style=flat-square" alt="OPA"></a>
+  <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-1.19.1-blue.svg?style=flat-square" alt="OPA 1.19.1"></a>
   <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
   <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
@@ -390,6 +390,27 @@ Contributions of any size are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). P
 - [**Awesome AI Agent Governance**](https://github.com/systempromptio/awesome-ai-agent-governance#policy-engines-and-authorisation), under Policy Engines and Authorisation
 
 ---
+
+## Cite this
+
+If GOPAL informs a paper, a policy submission or a regulator response, please
+cite it. [`CITATION.cff`](CITATION.cff) is machine-readable, so GitHub's
+**Cite this repository** button will generate APA or BibTeX for you.
+
+```bibtex
+@software{gopal,
+  author  = {Madan, Kapil and {Principled Evolution}},
+  title   = {{GOPAL}: the {Rego} policy library for {AI} compliance},
+  version = {1.3.0},
+  year    = {2026},
+  license = {Apache-2.0},
+  url     = {https://github.com/Principled-Evolution/gopal}
+}
+```
+
+Cite the coverage matrices rather than the library as a whole if your claim is
+about a specific framework: they state per article what is implemented and what
+is not, which is the part that can be checked.
 
 ## License
 

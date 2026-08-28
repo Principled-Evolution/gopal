@@ -65,6 +65,8 @@ check README.md 'gopal-international-eu_ai_act-%V%.tar.gz' "README bundle filena
 check examples/github-actions/workflow.yaml "GOPAL_VERSION: '%V%'" "Actions example workflow"
 check examples/github-actions/README.md "GOPAL_VERSION: '%V%'" "Actions example README, env block"
 check examples/github-actions/README.md 'gopal-international-eu_ai_act-%V%.tar.gz' "Actions example README, local build"
+check CITATION.cff 'version: "%V%"' "CITATION.cff version"
+check README.md 'version = {%V%},' "README BibTeX version"
 
 # Nothing outside the changelog and build output should still name an older
 # version. This catches a reference in a file the list above does not know about.
