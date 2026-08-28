@@ -154,9 +154,9 @@ The packages, conventions, and test patterns are idiomatic Rego. There is no DSL
 Every release ships one OPA bundle per framework, so you can take the 29 EU AI Act policies without the aviation or FERPA ones. Each bundle is self-contained: it carries the shared libraries its policies import, so it evaluates with no other GOPAL files present.
 
 ```bash
-gh release download v1.3.0 --pattern 'gopal-international-eu_ai_act-*.tar.gz'
+gh release download v1.3.1 --pattern 'gopal-international-eu_ai_act-*.tar.gz'
 
-opa eval -b gopal-international-eu_ai_act-1.3.0.tar.gz \
+opa eval -b gopal-international-eu_ai_act-1.3.1.tar.gz \
   --input model_card.json \
   'data.international.eu_ai_act.v1.transparency.allow'
 ```
@@ -401,7 +401,7 @@ cite it. [`CITATION.cff`](CITATION.cff) is machine-readable, so GitHub's
 @software{gopal,
   author  = {Madan, Kapil and {Principled Evolution}},
   title   = {{GOPAL}: the {Rego} policy library for {AI} compliance},
-  version = {1.3.0},
+  version = {1.3.1},
   year    = {2026},
   license = {Apache-2.0},
   url     = {https://github.com/Principled-Evolution/gopal}

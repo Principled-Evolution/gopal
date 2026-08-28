@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gopal"
-version = "1.3.0"
+version = "1.3.1"
 description = "GOPAL - the Rego policy library for AI compliance. AI compliance rules you can read, run, diff, and prove, covering the EU AI Act, the UK AI framework, NIST AI RMF, aviation, financial services, education, healthcare, and legal practice. Per-article coverage matrices state what is implemented and what is not."
 readme = "README.md"
 authors = [
