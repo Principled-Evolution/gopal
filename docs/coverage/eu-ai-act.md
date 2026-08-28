@@ -76,7 +76,7 @@ Legend: ✅ **Implemented**: checks real input fields against the obligation. �
 
 ## How to help
 
-1. **Write a test for a policy that has none.** Every obligation in this matrix is now implemented, but not every policy has a sibling `*_test.rego`. Adding one needs no new Rego logic and CI enforces it from then on. See [`docs/tutorials/add-your-first-policy.md`](../tutorials/add-your-first-policy.md).
+1. **Write a test for a case that has none.** Every policy now has a sibling `*_test.rego` with an empty-input assertion, and [`scripts/check-test-coverage.sh`](../../scripts/check-test-coverage.sh) fails CI if one goes missing. What is still thin is coverage of *cases*: a policy with one test proving it denies an empty input is verified against the fail-open class and nothing else. Adding a case needs no new Rego logic. See [`docs/tutorials/add-your-first-policy.md`](../tutorials/add-your-first-policy.md).
 2. **Open a 📋 Planned row.** Comment on the relevant issue (or open one) with your interpretation of the obligation and a proposed input schema before sending a PR.
 3. **Disagree with our coverage call?** Open an issue. We'd rather have the dispute in public than ship rules that misread the regulation.
 
