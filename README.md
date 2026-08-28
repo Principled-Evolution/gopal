@@ -26,6 +26,7 @@
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="Latest release"></a>
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-1.19.1-blue.svg?style=flat-square" alt="OPA 1.19.1"></a>
   <a href="https://github.com/open-policy-agent/regal"><img src="https://img.shields.io/badge/lint-regal-yellow.svg?style=flat-square" alt="Regal"></a>
+  <a href="https://doi.org/10.5281/zenodo.22142302"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22142302-blue.svg?style=flat-square" alt="DOI"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="Apache 2.0"></a>
   <a href="https://github.com/open-policy-agent/awesome-opa"><img src="https://awesome.re/mentioned-badge-flat.svg" alt="Mentioned in Awesome OPA"></a>
   <a href="https://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
@@ -404,9 +405,15 @@ cite it. [`CITATION.cff`](CITATION.cff) is machine-readable, so GitHub's
   version = {1.3.1},
   year    = {2026},
   license = {Apache-2.0},
-  url     = {https://github.com/Principled-Evolution/gopal}
+  doi     = {10.5281/zenodo.22142302},
+  url     = {https://doi.org/10.5281/zenodo.22142302}
 }
 ```
+
+That DOI is the *concept* DOI: it always resolves to the newest release, so a
+citation using it does not go stale. To pin a reader to this exact version,
+cite `10.5281/zenodo.22142303` instead. Each release is archived by Zenodo, so
+the artefact survives independently of GitHub.
 
 Cite the coverage matrices rather than the library as a whole if your claim is
 about a specific framework: they state per article what is implemented and what
