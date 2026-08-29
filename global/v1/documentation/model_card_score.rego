@@ -4,6 +4,17 @@
 # RequiredParams:
 #   - model_card_completeness_threshold (default 0.8)
 #
+# ProvidedMetrics:
+#   - metrics.model_card.completeness
+#   - metrics.model_card.quality
+#   - metrics.model_card.section_scores
+#
+# Metrics this policy computes from declared input rather than needing an
+# evaluator to measure. A metric listed here is not a gap in anybody's tooling:
+# supplying the documentation is enough, and the library derives the number.
+# Tooling that reports which metrics still need an evaluator should read this
+# alongside RequiredMetrics, or it will ask for work already done.
+#
 package global.v1.documentation.model_card_score
 
 import rego.v1

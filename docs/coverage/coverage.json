@@ -37,6 +37,7 @@
             "governance.responsibility.clearly_assigned",
             "governance.incident_response.process_defined"
           ],
+          "provided_metrics": [],
           "required_params": [
             "audit_logging_completeness_threshold (default 0.8)"
           ],
@@ -81,6 +82,7 @@
             "risk_management.score",
             "toxicity.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "content_safety_threshold (default 0.1)",
             "risk_management_threshold (default 0.7)",
@@ -106,6 +108,7 @@
           "required_metrics": [
             "compliance.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "compliance_threshold (default 0.8)"
           ],
@@ -129,6 +132,7 @@
           "required_metrics": [
             "content_safety_score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "content_safety_threshold (default 0.9)"
           ],
@@ -152,6 +156,7 @@
           "required_metrics": [
             "fairness_score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "fairness_threshold (default 0.8)"
           ],
@@ -175,6 +180,7 @@
           "required_metrics": [
             "risk_management_score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "risk_management_threshold (default 0.7)"
           ],
@@ -205,6 +211,11 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [
+            "metrics.model_card.completeness",
+            "metrics.model_card.quality",
+            "metrics.model_card.section_scores"
+          ],
           "required_params": [
             "model_card_completeness_threshold (default 0.8)"
           ],
@@ -244,6 +255,7 @@
             "content_safety.toxicity_score",
             "risk_management.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "toxicity_threshold (default 0.1)",
             "stereotype_association_threshold (default 0.1)"
@@ -289,6 +301,7 @@
           "required_metrics": [
             "metrics.toxicity.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "toxicity_threshold (default 0.1)"
           ],
@@ -327,6 +340,7 @@
             "documentation.limitations.documented",
             "documentation.use_cases.defined"
           ],
+          "provided_metrics": [],
           "required_params": [
             "model_card_completeness_threshold (default 0.8)"
           ],
@@ -374,6 +388,7 @@
           "package": "helper_functions.metrics",
           "decision_rules": [],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [],
           "input_field_types": {},
@@ -393,6 +408,7 @@
           "package": "helper_functions.reporting",
           "decision_rules": [],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [],
           "input_field_types": {},
@@ -412,6 +428,7 @@
           "package": "helper_functions.validation",
           "decision_rules": [],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [],
           "input_field_types": {},
@@ -449,6 +466,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "safety_assessment",
@@ -512,6 +530,7 @@
             "aircraft.type_certificate_held",
             "aircraft.airworthiness_directive_compliant"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "aircraft",
@@ -548,6 +567,7 @@
             "system.failure_condition_severity",
             "software.design_assurance_level"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "software",
@@ -583,6 +603,7 @@
             "maintenance.inspection_current",
             "maintenance.records_retained"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "maintenance",
@@ -622,6 +643,7 @@
             "ai_system.fail_safe_mechanism_present",
             "ai_system.performance_monitoring_enabled"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "ai_system",
@@ -662,6 +684,7 @@
             "decision_system.explainable",
             "decision_system.override_capability"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "decision_system",
@@ -701,6 +724,7 @@
             "oversight.intervention_capability",
             "oversight.handover_procedure_defined"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "oversight",
@@ -739,6 +763,7 @@
             "data_sharing.agreement_in_place",
             "data_sharing.recipient_authorized"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "data_sharing",
@@ -775,6 +800,7 @@
             "flight_data.recording_enabled",
             "flight_data.retention_days"
           ],
+          "provided_metrics": [],
           "required_params": [
             "min_retention_days (default 90)"
           ],
@@ -815,6 +841,7 @@
             "privacy.data_minimization_applied",
             "privacy.consent_or_legal_basis"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "privacy",
@@ -852,6 +879,7 @@
             "operation.authorization_held",
             "operation.ground_risk_mitigations_in_place"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "operation",
@@ -892,6 +920,7 @@
             "emergency_procedures.contingency_landing_sites_identified",
             "emergency_procedures.crew_trained"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "emergency_procedures",
@@ -931,6 +960,7 @@
             "uam.noise_compliant",
             "uam.corridor_authorized"
           ],
+          "provided_metrics": [],
           "required_params": [
             "max_noise_db (default 65)"
           ],
@@ -984,6 +1014,7 @@
             "metrics.content_safety.score",
             "metrics.risk_management.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "fairness_threshold (default 0.90)",
             "content_safety_threshold (default 0.85)",
@@ -1064,6 +1095,7 @@
             "monitoring.ongoing_monitoring_in_place",
             "data.lineage_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "data.lineage_documented",
@@ -1150,6 +1182,7 @@
             "ai.decision_explainable_in_plain_language",
             "accountability.smf_owner_assigned"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "accountability.smf_owner_assigned",
@@ -1243,6 +1276,7 @@
             "validation.independent_validation_completed",
             "mitigants.limitations_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "development.data_quality_assessed",
@@ -1315,6 +1349,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "ai_tool",
@@ -1343,6 +1378,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "submission.ai_detection_reports"
@@ -1369,6 +1405,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "assessment",
@@ -1400,6 +1437,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "proctoring_session.data_handling",
@@ -1430,6 +1468,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "assignment.has_offline_alternative",
@@ -1466,6 +1505,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "admissions_model.features",
@@ -1493,6 +1533,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "bias_report.demographic_groups"
@@ -1519,6 +1560,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "content.age_rating",
@@ -1548,6 +1590,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "tool.name",
@@ -1575,6 +1618,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "request.purpose",
@@ -1606,6 +1650,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "data_requested",
@@ -1633,6 +1678,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "data_requested",
@@ -1680,6 +1726,7 @@
             "metrics.content_safety.score",
             "metrics.risk_management.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "fairness_threshold (default 0.85)",
             "content_safety_threshold (default 0.90)",
@@ -1742,6 +1789,7 @@
             "metrics.clinical_validation.score",
             "metrics.risk_assessment.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "patient_safety_threshold (default 0.95)",
             "clinical_validation_threshold (default 0.90)",
@@ -1813,6 +1861,7 @@
             "submission.verification_recorded",
             "submission.verifier_named"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "submission.ai_assisted",
@@ -1892,6 +1941,7 @@
             "tool.data_remains_in_secure_environment",
             "tool.contractual_safeguards"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "data.client_confidential_information_entered",
@@ -1973,6 +2023,7 @@
             "firm.supervisor_named",
             "client.ai_use_disclosed_where_material"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "client.ai_use_disclosed_where_material",
@@ -2033,6 +2084,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "ai_system.basic_requirements_met",
@@ -2089,6 +2141,7 @@
             "aircraft.class_marking",
             "authorization.granted"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "aircraft.class_marking",
@@ -2132,6 +2185,7 @@
             "assessment.sail_determined",
             "mitigations.adequate"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "assessment",
@@ -2215,6 +2269,7 @@
             "ce_marking.notified_body_involved",
             "ce_marking.notified_body_number_displayed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "ce_marking.affixed",
@@ -2294,6 +2349,7 @@
             "assessment.notified_body_involved",
             "assessment.completed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "assessment.completed",
@@ -2356,6 +2412,7 @@
             "declaration.retained_ten_years",
             "declaration.translated_for_market"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "declaration",
@@ -2420,6 +2477,7 @@
             "registration.annex_viii_information_complete",
             "registration.exemption_assessment_registered"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "registration.annex_viii_information_complete",
@@ -2487,6 +2545,7 @@
             "datasets.complete_to_the_extent_possible",
             "datasets.contextual_characteristics_considered"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "datasets",
@@ -2554,6 +2613,7 @@
             "special_category.processed_for_bias_correction",
             "special_category.safeguards_in_place"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "governance",
@@ -2623,6 +2683,7 @@
             "logging.records_input_data",
             "logging.records_verifying_persons"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "logging",
@@ -2688,6 +2749,7 @@
             "logs.retention_months",
             "logs.role"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "logs.retained",
@@ -2742,6 +2804,7 @@
             "metrics.model_card.compliance_level",
             "metrics.model_card.section_scores"
           ],
+          "provided_metrics": [],
           "required_params": [
             "completeness_threshold (default 0.8)",
             "quality_threshold (default 0.8)"
@@ -2800,6 +2863,7 @@
             "metrics.fairness.racial_bias",
             "metrics.content_safety.score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "fairness_threshold (default 0.8)",
             "toxicity_threshold (default 0.7)"
@@ -2874,6 +2938,7 @@
             "training_content.public_summary_available",
             "training_content.summary_sufficiently_detailed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "copyright.policy_in_place",
@@ -2963,6 +3028,7 @@
             "systemic_risk.serious_incidents_reported_to_ai_office",
             "systemic_risk.cybersecurity_protection_adequate"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "model.commission_designated_systemic_risk",
@@ -3033,6 +3099,7 @@
             "documentation.testing_process_documented",
             "documentation.evaluation_results_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "documentation",
@@ -3105,6 +3172,7 @@
             "oversight.can_intervene_or_halt",
             "oversight.assigned_persons_competent"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "oversight.assigned_persons_competent",
@@ -3199,6 +3267,7 @@
             "deployer.affects_natural_persons",
             "deployer.affected_persons_informed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "deployer.affected_persons_informed",
@@ -3283,6 +3352,7 @@
             "distributor.non_conformity_discovered",
             "distributor.corrective_action_taken"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "distributor",
@@ -3341,6 +3411,7 @@
             "importer.storage_and_transport_conditions_adequate",
             "importer.documentation_retained_ten_years"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "importer",
@@ -3398,6 +3469,7 @@
             "provider.corrective_action_process",
             "provider.accessibility_requirements_met"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "provider",
@@ -3460,6 +3532,7 @@
             "system.dataset_labelling_only",
             "system.law_enforcement_use"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "system.dataset_labelling_only",
@@ -3527,6 +3600,7 @@
             "system.permitted_objective",
             "authorisation.prior_authorisation_obtained"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "authorisation.prior_authorisation_obtained",
@@ -3596,6 +3670,7 @@
             "system.supports_human_assessment",
             "system.grounded_in_objective_verifiable_facts"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "system.based_solely_on_profiling",
@@ -3649,6 +3724,7 @@
             "metrics.emotion_recognition.educational_context",
             "metrics.emotion_recognition.combined_score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "workplace_context_threshold (default 0.3)",
             "educational_context_threshold (default 0.3)"
@@ -3715,6 +3791,7 @@
             "system.scraping_is_targeted",
             "system.sources"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "system.builds_facial_recognition_database",
@@ -3790,6 +3867,7 @@
             "system.distorts_behaviour",
             "system.causes_or_likely_causes_significant_harm"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "system",
@@ -3842,6 +3920,7 @@
             "metrics.social_scoring.detrimental_treatment",
             "metrics.social_scoring.combined_score"
           ],
+          "provided_metrics": [],
           "required_params": [
             "social_scoring_threshold (default 0.3)",
             "detrimental_treatment_threshold (default 0.3)"
@@ -3912,6 +3991,7 @@
             "system.distorts_behaviour",
             "system.causes_or_likely_causes_significant_harm"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "system.causes_or_likely_causes_significant_harm",
@@ -3949,6 +4029,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "risk_management",
@@ -4024,6 +4105,7 @@
             "cybersecurity.controls_in_place",
             "cybersecurity.adversarial_attacks_addressed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "accuracy.declared_in_instructions",
@@ -4073,6 +4155,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "documentation",
@@ -4125,6 +4208,7 @@
             "operation.visual_line_of_sight",
             "operation.daylight_or_lit"
           ],
+          "provided_metrics": [],
           "required_params": [
             "max_altitude_ft (default 400)"
           ],
@@ -4173,6 +4257,7 @@
             "aircraft.broadcast_module_attached",
             "operation.within_fria"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "aircraft.broadcast_module_attached",
@@ -4220,6 +4305,7 @@
             "system.detect_and_avoid.equipped",
             "system.remote_pilot.qualified"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "system.c2_link",
@@ -4266,6 +4352,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "accountability.oversight_mechanisms_in_place",
@@ -4312,6 +4399,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [],
           "input_field_types": {},
@@ -4338,6 +4426,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "fairness.bias_assessments_conducted",
@@ -4371,6 +4460,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "manage.continuous_monitoring_plan_executed",
@@ -4404,6 +4494,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "map.architecture_documented",
@@ -4437,6 +4528,7 @@
             }
           ],
           "required_metrics": [],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "measure.bias_metrics_defined",
@@ -4483,6 +4575,7 @@
             "safety_management.risk_assessment_completed",
             "operations.procedures_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "operations",
@@ -4524,6 +4617,7 @@
             "daa_system.alert_timeliness_compliant",
             "daa_system.equipped"
           ],
+          "provided_metrics": [],
           "required_params": [
             "min_surveillance_volume_nm (default 1.0)"
           ],
@@ -4593,6 +4687,7 @@
             "governance.lifecycle_roles_defined",
             "governance.supply_chain_accountability_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "governance.accountable_person_named",
@@ -4669,6 +4764,7 @@
             "safeguards.human_intervention_available",
             "safeguards.decision_contestable"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "decision.article_9_condition",
@@ -4749,6 +4845,7 @@
             "redress.human_review_available",
             "redress.response_timeframe_days"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "redress.human_review_available",
@@ -4803,6 +4900,7 @@
             "fairness.max_disparity",
             "fairness.legal_rights_review_completed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "fairness.bias_assessment_completed",
@@ -4858,6 +4956,7 @@
             "robustness.performance_thresholds_defined",
             "robustness.failure_handling_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "risk_management.lifecycle_monitoring_in_place",
@@ -4915,6 +5014,7 @@
             "explainability.method_documented",
             "system.impact_level"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "explainability.decision_rationale_available",
@@ -4991,6 +5091,7 @@
             "resilience.autoscaling_configured",
             "resilience.graceful_degradation_documented"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "capacity.headroom_ratio",
@@ -5079,6 +5180,7 @@
             "third_party.vendor_in_use",
             "third_party.due_diligence_completed"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "governance.accountable_owner_named",
@@ -5160,6 +5262,7 @@
             "logging.security_events_logged",
             "vulnerability.review_days_ago"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "access.authentication_required",
@@ -5244,6 +5347,7 @@
             "monitoring.unit_cost_attributable",
             "efficiency.right_sizing_reviewed_days_ago"
           ],
+          "provided_metrics": [],
           "required_params": [],
           "input_fields": [
             "budget.defined",
