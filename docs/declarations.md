@@ -1,10 +1,10 @@
-# Declarations: the other 171 fields
+# Declarations: the other 170 fields
 
 Most writing about AI compliance tooling is about measurement. Measurement is
 the smaller half.
 
-Of the 185 input fields the 29 EU AI Act policies in this library read, **171
-are declarations and 14 are measurements**. No tool can observe whether a
+Of the 185 input fields the 29 EU AI Act policies in this library read, **170
+are declarations and 15 are measurements**. No tool can observe whether a
 conformity assessment was completed, whether a person can halt the system, or
 whether technical documentation has been retained for ten years. Somebody
 asserts those, and the library takes their word.
@@ -100,15 +100,15 @@ inputs that never mentioned time.
 
 ### 1. Ask what determines scope, before asking anything else
 
-**18 of the 29 EU policies are gated on applicability**, covering 143 of the 171
+**18 of the 29 EU policies are gated on applicability**, covering 143 of the 170
 declared fields. Declaring `system.high_risk = false` and
 `model.general_purpose = false` puts 15 policies out of scope immediately.
 
 The remaining 11 policies, 28 fields, are almost entirely the prohibited
 practice screens, which genuinely do apply to everyone.
 
-So the burden is not 171. It is roughly 28 plus whatever scope pulls in, and
-three or four answers decide the rest. Any interface that asks all 171 up front
+So the burden is not 170. It is roughly 28 plus whatever scope pulls in, and
+three or four answers decide the rest. Any interface that asks all 170 up front
 is asking most people most of the questions they do not have to answer, and it
 will feel like a compliance questionnaire because that is what it has become.
 
@@ -117,8 +117,8 @@ that consumes it.
 
 ### 2. Separate what is declared once from what is declared per release
 
-Of the 151 unique declared fields, **57 are organisation or product level** and
-94 are per system.
+Of the 150 unique declared fields, **57 are organisation or product level** and
+93 are per system.
 
 `ce_marking.affixed`, `declaration.drawn_up`, `provider.quality_management_system`
 are properties of a company or a product line, not of this week's build. They

@@ -63,7 +63,7 @@ So the obligations are written as rules. Rego, in git, each citing the article i
   <sub>&nbsp;</sub>
 </p>
 
-This does not make compliance automatic, and anything claiming to is selling something. Most of what the EU AI Act obliges is a declaration nobody can measure: whether a conformity assessment was completed, whether a person can halt the system. Of the 185 fields these 29 EU policies read, **171 are declarations and 14 are measurements**.
+This does not make compliance automatic, and anything claiming to is selling something. Most of what the EU AI Act obliges is a declaration nobody can measure: whether a conformity assessment was completed, whether a person can halt the system. Of the 185 fields these 29 EU policies read, **170 are declarations and 15 are measurements**.
 
 What changes is that the declaration becomes a versioned artefact re-checked on every commit instead of a PDF re-read once a year, and the 14 that can be measured are measured on every commit too. The [validation preview](https://principledevolution.ai/playground) shows both halves against your own system, in your browser, without sending us anything.
 
