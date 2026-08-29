@@ -6,12 +6,12 @@
     "frameworks": 15,
     "groups": 20,
     "policies": 92,
-    "library_files": 8,
-    "rego_files": 100,
+    "library_files": 9,
+    "rego_files": 101,
     "policies_with_tests": 92,
     "policies_with_empty_input_test": 92,
     "decision_rules": 327,
-    "tests": 865
+    "tests": 880
   },
   "frameworks": [
     {
@@ -380,9 +380,29 @@
       "id": "helper_functions",
       "name": "Helper Functions",
       "kind": "library",
-      "policy_count": 3,
-      "policies_with_tests": 3,
+      "policy_count": 4,
+      "policies_with_tests": 4,
       "policies": [
+        {
+          "path": "helper_functions/declarations.rego",
+          "package": "helper_functions.declarations",
+          "decision_rules": [],
+          "required_metrics": [],
+          "provided_metrics": [],
+          "required_params": [],
+          "input_fields": [],
+          "input_field_types": {},
+          "has_test": true,
+          "has_empty_input_test": false,
+          "test_file": "helper_functions/declarations_test.rego",
+          "title": null,
+          "description": null,
+          "references": [],
+          "version": null,
+          "is_library": true,
+          "primary_decision": null,
+          "decision_true_means": null
+        },
         {
           "path": "helper_functions/metrics.rego",
           "package": "helper_functions.metrics",
