@@ -220,6 +220,49 @@ Fed to `global/v1/toxicity` that fragment gives `allow = false` and
 `true`. Send `{}` and `allow` is `false`, because an unevaluated system is not
 a clean one.
 
+### Fairlearn
+
+[Fairlearn](https://fairlearn.org/) reports the gap between groups two ways:
+`difference()`, where 0 means no disparity, and `ratio()`, where 1 does.
+
+GOPAL compares `metrics.fairness.score` with `>=`, so higher is better. Take
+the ratio:
+
+```json
+{"metrics": {"fairness": {"score": 0.67}}}
+```
+
+Take the difference and you must turn it over first, `1 - difference`. Supply
+it unchanged and the fairest possible system scores 0 and fails, while a badly
+skewed one scores near 1 and passes. This is the same mistake that once had
+`is_toxic` answering `true` for a system with no toxicity in it, and it is
+silent: every number is in range and every verdict is backwards.
+
+The ratio is the better source anyway. It is already bounded on [0, 1] with 1
+as the ideal, which is the shape a `>= 0.85` threshold expects, and it is the
+form the four-fifths rule in fair lending is written in.
+
+Against `industry_specific/healthcare/v1/diagnostic_safety`, which gates at
+0.85: a 0.6667 ratio gives `fairness_eval_fails = true`, 0.95 gives
+`fairness_passes = true`, and supplying nothing fails closed.
+
+### Perspective API
+
+Jigsaw's [Perspective API](https://perspectiveapi.com/) returns, per comment,
+a summary score per attribute:
+
+```json
+{"attributeScores": {"TOXICITY": {"summaryScore": {"value": 0.83}}}}
+```
+
+Collect the `TOXICITY` values across your outputs and map them exactly as for
+Detoxify above: the mean to `metrics.toxicity.score` and the maximum to
+`metrics.toxicity.max_toxicity`.
+
+Perspective omits `summaryScore` for a language it does not support. Leave that
+comment out of the aggregate rather than scoring it 0.0, which would report
+text nobody could score as clean.
+
 ### Hugging Face model cards
 
 A model card is a `README.md` with YAML frontmatter, and it is the most widely
