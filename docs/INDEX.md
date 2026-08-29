@@ -32,7 +32,7 @@ Organized along [Diátaxis](https://diataxis.fr/) lines.
 
 ## 💡 Explanation: understand the design
 
-- [Declarations: the other 171 fields](declarations.md): why most of the EU AI Act cannot be measured, what an attested declaration is, and which layer owns which decision.
+- [Declarations: the other 170 fields](declarations.md): why most of the EU AI Act cannot be measured, what an attested declaration is, and which layer owns which decision.
 
 - [Why GOPAL?](../README.md#why-gopal): the differentiation argument.
 - [AGENTS.md](../AGENTS.md): strict authoring conventions; required reading before contributing a policy.

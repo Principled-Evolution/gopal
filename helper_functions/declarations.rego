@@ -4,7 +4,7 @@
 #
 #   A declaration is not a measurement. Nobody can observe whether a conformity
 #   assessment was completed or whether a person can halt the system, so a
-#   person asserts it and the library takes their word. 171 of the 185 fields
+#   person asserts it and the library takes their word. 170 of the 185 fields
 #   the EU AI Act policies read are of that kind.
 #
 #   Taking someone's word is reasonable. Taking it forever is not. An assertion
