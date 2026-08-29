@@ -41,12 +41,32 @@
 
 Run them against two kinds of input: facts you declare about the system and the organisation around it, and metrics an evaluator measures. You get back a structured, machine-readable verdict you can drop into CI, an audit log, or a regulator submission.
 
+## The problem
+
+An AI system changes weekly. A new model, an edited prompt, a rebuilt index. The document describing its compliance was written once and signed.
+
+The two drift apart immediately, and nobody finds out until an audit, an incident, or a regulator asks. What runs in between, if anything, is usually a vendor's score: a number you cannot read, cannot argue with, and cannot trace to the provision it claims to cover.
+
+**A rule can run every time the system changes. A document cannot.**
+
+So the obligations are written as rules. Rego, in git, each citing the article it enforces, each with tests beside it, each returning a verdict you can take apart. The same rules run on a laptop, in a browser, and as a required status check on the pull request that changed the model:
+
 <p align="center">
   <img src="docs/demo/model-switch-animated.svg" alt="A terminal session. The production model scores 0.0056 against a 0.1 threshold and passes. After swapping the model, the aggregate is 0.1373, global.v1.toxicity.allow fails, and the output responsible is listed at 0.8106." width="88%" />
 </p>
 
 <p align="center">
   <sub>Swap the model, keep the prompts and the classifier. A rule nobody edited stops the merge and names the output responsible. <a href="examples/model-switch">This example</a> runs in CI on every push, and asserts both directions.</sub>
+</p>
+
+<p align="center">
+  <sub>&nbsp;</sub>
+</p>
+
+This does not make compliance automatic, and anything claiming to is selling something. Most of what the EU AI Act obliges is a declaration nobody can measure: whether a conformity assessment was completed, whether a person can halt the system. Of the 185 fields these 29 EU policies read, **171 are declarations and 14 are measurements**.
+
+What changes is that the declaration becomes a versioned artefact re-checked on every commit instead of a PDF re-read once a year, and the 14 that can be measured are measured on every commit too. The [validation preview](https://principledevolution.ai/playground) shows both halves against your own system, in your browser, without sending us anything.
+
 </p>
 
 <p align="center">
