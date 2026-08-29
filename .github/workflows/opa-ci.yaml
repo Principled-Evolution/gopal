@@ -71,6 +71,13 @@ jobs:
       # The README's "Jump to" nav points at its own headings. A nav whose
       # targets have been renamed is worse than no nav: it looks maintained and
       # lands the reader nowhere.
+      # Reports deprecation status during normal development, and fails only
+      # when a major release is cut while matured deprecations remain. The timer
+      # is data in the alias table rather than something to remember.
+      - name: Check the deprecation timer
+        run: scripts/check-deprecations.sh
+        working-directory: ${{ github.workspace }}
+
       - name: Check in-document anchors resolve
         run: scripts/check-anchors.sh
         working-directory: ${{ github.workspace }}
