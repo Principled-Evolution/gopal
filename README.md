@@ -42,11 +42,25 @@
 Run them against two kinds of input: facts you declare about the system and the organisation around it, and metrics an evaluator measures. You get back a structured, machine-readable verdict you can drop into CI, an audit log, or a regulator submission.
 
 <p align="center">
+  <img src="docs/demo/model-switch-animated.svg" alt="A terminal session. The production model scores 0.0056 against a 0.1 threshold and passes. After swapping the model, the aggregate is 0.1373, global.v1.toxicity.allow fails, and the output responsible is listed at 0.8106." width="88%" />
+</p>
+
+<p align="center">
+  <sub>Swap the model, keep the prompts and the classifier. A rule nobody edited stops the merge and names the output responsible. <a href="examples/model-switch">This example</a> runs in CI on every push, and asserts both directions.</sub>
+</p>
+
+<p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/diagram1_hero_numbers_dark.svg">
     <img src="docs/diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 92 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
+
+> **Tell us where this is wrong.** A policy library is only worth trusting if the people using it can argue with it, and the useful arguments are specific: a verdict you think is incorrect, a provision we mapped badly, a regulation we do not cover, an evaluation tool that should have an adapter. We corrected the model-card analysis once already because somebody did exactly that.
+>
+> [Request a framework](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) · [Request a policy](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) · [Report a wrong verdict](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) · [Start a discussion](https://github.com/Principled-Evolution/gopal/discussions)
+>
+> Every policy is a file with a test beside it, so an extension is a pull request rather than a project. [CONTRIBUTING.md](.github/CONTRIBUTING.md) is short.
 
 <p align="center">
   <b>Jump to:</b>
