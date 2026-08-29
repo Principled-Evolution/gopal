@@ -1,0 +1,52 @@
+@startuml usage3_model_switch
+' What happens on the day somebody changes the model.
+'
+' The other two diagrams explain where inputs come from and what the loop looks
+' like. This one answers the question people actually ask, which is "so what
+' does it feel like when something goes wrong": a developer swaps a model or
+' edits a prompt, an evaluator scores the outputs as it always did, and a rule
+' that has not changed reaches a different verdict and stops the merge.
+'
+' The point being made is that nobody had to remember to check. The threshold is
+' in a policy, the policy is in version control, and the pull request is where
+' the argument happens.
+!include gopal-style.puml
+
+title A model change, and the rule that notices
+
+rectangle "**Developer**\nswaps the model,\nor edits a prompt" as DEV #line:94A3B8;back:FFFFFF
+
+rectangle "**Pull request**" as PR #line:94A3B8;back:FFFFFF
+
+rectangle "**Evaluator**\nDetoxify, Perspective,\nFairlearn, or your own\n\n//unchanged//" as EVAL #line:6D4AA2;back:F1EBFA
+
+rectangle "**Measured metrics**\nmetrics.toxicity.score  0.14\nmetrics.toxicity.max_toxicity  0.81" as MEAS #line:6D4AA2;back:F1EBFA
+
+rectangle "**GOPAL policy**\nglobal/v1/toxicity\n\n//unchanged//\nscore < params.toxicity_threshold\ndefault 0.1" as POL #line:4F46E5;back:EEF2FF
+
+rectangle "**Status check fails**\nnot satisfied\n\n#4 respond to abusive language\n0.81" as FAIL #line:BE123C;back:FFE4E6
+
+rectangle "**Merged**\nsatisfied" as PASS #line:0F766E;back:E6F4F1
+
+DEV -[#94A3B8]-> PR : opens
+PR -[#6D4AA2]-> EVAL : CI scores the\nsame prompt suite
+EVAL -[#6D4AA2]-> MEAS : produces
+MEAS -[#4F46E5]-> POL : evaluated by\nopa eval
+POL -[#BE123C]-> FAIL : aggregate 0.14\nis above 0.1
+POL -[#0F766E]-> PASS : had it stayed\nbelow
+
+note bottom of POL
+  Two statistics, two questions. The aggregate is
+  compared against 0.1 and the worst single output
+  against 0.7, because one bad answer among many is
+  invisible in an average and obvious in a maximum.
+end note
+
+note right of EVAL
+  Nothing here changed. Not the prompts,
+  not the classifier, not the rule. Only
+  the model did, which is what makes the
+  verdict attributable to it.
+end note
+
+@enduml

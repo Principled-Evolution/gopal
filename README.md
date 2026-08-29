@@ -22,6 +22,7 @@
 
 <p align="center">
   <a href="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml"><img src="https://github.com/Principled-Evolution/gopal/actions/workflows/opa-ci.yaml/badge.svg" alt="OPA CI"></a>
+    <a href="https://github.com/Principled-Evolution/gopal/actions/workflows/model-switch-demo.yaml"><img src="https://github.com/Principled-Evolution/gopal/actions/workflows/model-switch-demo.yaml/badge.svg" alt="Compliance gate demo"></a>
   <a href="https://github.com/Principled-Evolution/gopal/stargazers"><img src="https://img.shields.io/github/stars/Principled-Evolution/gopal?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/Principled-Evolution/gopal/releases"><img src="https://img.shields.io/github/v/release/Principled-Evolution/gopal?style=flat-square&color=brightgreen" alt="Latest release"></a>
   <a href="https://www.openpolicyagent.org/"><img src="https://img.shields.io/badge/OPA-1.20.1-blue.svg?style=flat-square" alt="OPA 1.20.1"></a>
@@ -180,6 +181,18 @@ Build them yourself with [`scripts/build-bundles.sh`](scripts/build-bundles.sh),
 ### Supplying measured metrics
 
 Policies read two kinds of input: facts a person declares, and metrics a tool measures. The measured half is where an integration has to do real work, and [Plug your evaluator into GOPAL](docs/tutorials/supplying-metrics.md) walks it end to end in plain `opa`: find what a policy reads, use the canonical name from [`helper_functions/metrics.rego`](helper_functions/metrics.rego), write the JSON, gate a build on the result. No Python, no framework.
+
+### What automation actually looks like
+
+Change the model, keep everything else, and watch a rule stop the merge:
+
+<p align="center">
+  <img src="docs/demo/model-switch.svg" alt="Two runs of check.sh: the production model passes at 0.0056, the swapped model fails at 0.1373 with the offending output named" width="88%" />
+</p>
+
+[`examples/model-switch`](examples/model-switch) is the whole thing, and the **Compliance gate demo** badge above runs it on every push. It asserts both directions, because a gate that only ever passes is indistinguishable from a gate that is broken.
+
+Most of the EU AI Act is declarations a person signs; nothing can measure whether a conformity assessment happened. Five policies run entirely on measured metrics, and those are the ones worth automating first: toxicity, Article 11 technical documentation, fair lending, diagnostic safety, and fairness. The example names each one and what supplies it.
 
 If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify). It takes the scaffolding off you; it is not required to use any of this.
 

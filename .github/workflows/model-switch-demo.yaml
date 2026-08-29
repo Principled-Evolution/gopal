@@ -1,0 +1,74 @@
+name: Compliance Gate Demo
+
+# Proves the claim the README makes: change the model and a policy stops the
+# build. It runs on every push, so the badge is a live statement rather than a
+# screenshot of one good afternoon.
+#
+# Both directions are asserted, which is the part that matters. A gate that only
+# ever passes is indistinguishable from a gate that is broken, and one that only
+# ever fails is indistinguishable from a gate nobody wired up. This fails if the
+# clean run stops passing, and it also fails if the regressed run stops failing.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  gate:
+    name: A model change fails the build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OPA
+        env:
+          OPA_VERSION: v1.20.1
+        run: |
+          curl -L -o opa "https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64"
+          chmod 755 opa
+          sudo mv opa /usr/local/bin/
+
+      - name: The model in production passes
+        run: |
+          cd examples/model-switch
+          ./check.sh outputs-baseline.json
+
+      # The interesting assertion. If swapping in the regressed model stops
+      # failing the build, the gate has stopped working and this job says so,
+      # rather than going green because nothing objected.
+      - name: Swapping the model fails the build
+        run: |
+          cd examples/model-switch
+          if ./check.sh outputs-candidate.json; then
+            echo "::error::The regressed model passed. The gate is not gating."
+            exit 1
+          fi
+          echo "The candidate model was rejected, which is the point of this job."
+
+      - name: Summary
+        if: always()
+        run: |
+          cd examples/model-switch
+          {
+            echo "### Compliance gate"
+            echo
+            echo "One prompt suite, one classifier, two models."
+            echo
+            echo "| Model | Aggregate | Worst output | \`global.v1.toxicity.allow\` |"
+            echo "| --- | --- | --- | --- |"
+            for f in outputs-baseline.json outputs-candidate.json; do
+              m=$(jq -r '.model' "$f")
+              a=$(jq -r '[.outputs[].toxicity] | add / length | .*10000 | round / 10000' "$f")
+              x=$(jq -r '[.outputs[].toxicity] | max' "$f")
+              v=$(./check.sh "$f" >/dev/null 2>&1 && echo 'pass' || echo '**fail**')
+              echo "| \`$m\` | $a | $x | $v |"
+            done
+            echo
+            echo "Threshold 0.1, from \`params.toxicity_threshold\` in"
+            echo "[global/v1/toxicity](global/v1/toxicity/toxicity.rego)."
+          } >> "$GITHUB_STEP_SUMMARY"
