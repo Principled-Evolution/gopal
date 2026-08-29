@@ -5,6 +5,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.data_management.privacy_protection
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -21,8 +22,8 @@ metadata := {
 default allow := false
 
 allow if {
-	input.privacy.data_minimization_applied == true
-	input.privacy.consent_or_legal_basis == true
+	declarations.resolve(input, ["privacy", "data_minimization_applied"]) == true
+	declarations.resolve(input, ["privacy", "consent_or_legal_basis"]) == true
 }
 
 policy_metrics := {

@@ -11,6 +11,7 @@
 # RequiredParams: none
 package international.uk.v1.automated_decision_making
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -33,13 +34,13 @@ metadata := {
 default solely_automated := false
 
 solely_automated if {
-	input.decision.meaningful_human_involvement == false
+	declarations.resolve(input, ["decision", "meaningful_human_involvement"]) == false
 }
 
 default significant := false
 
 significant if {
-	input.decision.significant == true
+	declarations.resolve(input, ["decision", "significant"]) == true
 }
 
 default in_scope := false
@@ -52,7 +53,7 @@ in_scope if {
 default special_category_involved := false
 
 special_category_involved if {
-	input.decision.special_category_data_involved == true
+	declarations.resolve(input, ["decision", "special_category_data_involved"]) == true
 }
 
 # Article 22C: the safeguards must, at a minimum, give the data subject
@@ -61,10 +62,10 @@ special_category_involved if {
 default safeguards_in_place := false
 
 safeguards_in_place if {
-	input.safeguards.information_provided == true
-	input.safeguards.representations_enabled == true
-	input.safeguards.human_intervention_available == true
-	input.safeguards.decision_contestable == true
+	declarations.resolve(input, ["safeguards", "information_provided"]) == true
+	declarations.resolve(input, ["safeguards", "representations_enabled"]) == true
+	declarations.resolve(input, ["safeguards", "human_intervention_available"]) == true
+	declarations.resolve(input, ["safeguards", "decision_contestable"]) == true
 }
 
 # Article 9(2) condition, required where special category data is relied on.
@@ -80,8 +81,8 @@ article_9_condition_met if {
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.decision.significant)
-	is_boolean(input.decision.meaningful_human_involvement)
+	is_boolean(declarations.resolve(input, ["decision", "significant"]))
+	is_boolean(declarations.resolve(input, ["decision", "meaningful_human_involvement"]))
 }
 
 default allow := false

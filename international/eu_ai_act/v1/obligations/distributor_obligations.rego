@@ -10,6 +10,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.obligations.distributor_obligations
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -27,13 +28,13 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 verifications := {
@@ -58,7 +59,7 @@ verifications_met if {
 default conformity_issue_found := false
 
 conformity_issue_found if {
-	input.distributor.non_conformity_discovered == true
+	declarations.resolve(input, ["distributor", "non_conformity_discovered"]) == true
 }
 
 default corrective_duty_met := false
@@ -69,7 +70,7 @@ corrective_duty_met if {
 
 corrective_duty_met if {
 	conformity_issue_found
-	input.distributor.corrective_action_taken == true
+	declarations.resolve(input, ["distributor", "corrective_action_taken"]) == true
 }
 
 default allow := false

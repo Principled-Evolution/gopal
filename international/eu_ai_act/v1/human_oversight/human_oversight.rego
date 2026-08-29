@@ -10,6 +10,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.human_oversight
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -29,20 +30,20 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 # Article 14(1) and 14(2): oversight has to be designed into the system.
 default designed_for_oversight := false
 
 designed_for_oversight if {
-	input.oversight.measures_built_into_system == true
+	declarations.resolve(input, ["oversight", "measures_built_into_system"]) == true
 }
 
 # Article 14(4)(a) and (b): understanding capacities and limitations, and
@@ -50,8 +51,8 @@ designed_for_oversight if {
 default oversight_informed := false
 
 oversight_informed if {
-	input.oversight.capabilities_and_limitations_communicated == true
-	input.oversight.automation_bias_addressed == true
+	declarations.resolve(input, ["oversight", "capabilities_and_limitations_communicated"]) == true
+	declarations.resolve(input, ["oversight", "automation_bias_addressed"]) == true
 }
 
 # Article 14(4)(c) to (e): the ability to disregard an output, and to intervene
@@ -59,14 +60,14 @@ oversight_informed if {
 default oversight_effective := false
 
 oversight_effective if {
-	input.oversight.can_disregard_output == true
-	input.oversight.can_intervene_or_halt == true
+	declarations.resolve(input, ["oversight", "can_disregard_output"]) == true
+	declarations.resolve(input, ["oversight", "can_intervene_or_halt"]) == true
 }
 
 default assigned_persons_competent := false
 
 assigned_persons_competent if {
-	input.oversight.assigned_persons_competent == true
+	declarations.resolve(input, ["oversight", "assigned_persons_competent"]) == true
 }
 
 default allow := false

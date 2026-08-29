@@ -5,6 +5,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.airworthiness.design_standards
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -33,9 +34,9 @@ dal_rank := {"A": 5, "B": 4, "C": 3, "D": 2, "E": 1}
 default allow := false
 
 allow if {
-	severity := input.system.failure_condition_severity
+	severity := declarations.resolve(input, ["system", "failure_condition_severity"])
 	minimum_dal := required_dal[severity]
-	dal_rank[input.software.design_assurance_level] >= dal_rank[minimum_dal]
+	dal_rank[declarations.resolve(input, ["software", "design_assurance_level"])] >= dal_rank[minimum_dal]
 }
 
 policy_metrics := {

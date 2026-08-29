@@ -10,6 +10,7 @@
 # RequiredParams: none
 package operational.corporate.v1.governance
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -28,20 +29,20 @@ metadata := {
 default policy_approved := false
 
 policy_approved if {
-	input.governance.ai_policy_approved == true
+	declarations.resolve(input, ["governance", "ai_policy_approved"]) == true
 }
 
 # An AI system nobody has recorded cannot be governed.
 default inventoried := false
 
 inventoried if {
-	input.governance.system_in_inventory == true
+	declarations.resolve(input, ["governance", "system_in_inventory"]) == true
 }
 
 default owner_named := false
 
 owner_named if {
-	input.governance.accountable_owner_named == true
+	declarations.resolve(input, ["governance", "accountable_owner_named"]) == true
 }
 
 # A review cadence of zero or an absent cadence is not a cadence.
@@ -56,13 +57,13 @@ review_cadence_defined if {
 default staff_trained := false
 
 staff_trained if {
-	input.governance.staff_training_completed == true
+	declarations.resolve(input, ["governance", "staff_training_completed"]) == true
 }
 
 default vendor_in_use := false
 
 vendor_in_use if {
-	input.third_party.vendor_in_use == true
+	declarations.resolve(input, ["third_party", "vendor_in_use"]) == true
 }
 
 default third_party_cleared := false
@@ -73,7 +74,7 @@ third_party_cleared if {
 
 third_party_cleared if {
 	vendor_in_use
-	input.third_party.due_diligence_completed == true
+	declarations.resolve(input, ["third_party", "due_diligence_completed"]) == true
 }
 
 default allow := false

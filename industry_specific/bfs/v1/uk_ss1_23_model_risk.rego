@@ -9,6 +9,7 @@
 # RequiredParams: none
 package industry_specific.bfs.v1.uk_ss1_23_model_risk
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -33,7 +34,7 @@ high_risk_tiers := {"high", "1"}
 default principle_1_identification := false
 
 principle_1_identification if {
-	input.model.in_inventory == true
+	declarations.resolve(input, ["model", "in_inventory"]) == true
 	object.get(input, ["model", "risk_tier"], "") != ""
 }
 
@@ -42,18 +43,18 @@ principle_1_identification if {
 default principle_2_governance := false
 
 principle_2_governance if {
-	input.governance.smf_owner_assigned == true
-	input.governance.mrm_policy_approved == true
-	input.governance.board_reporting_in_place == true
+	declarations.resolve(input, ["governance", "smf_owner_assigned"]) == true
+	declarations.resolve(input, ["governance", "mrm_policy_approved"]) == true
+	declarations.resolve(input, ["governance", "board_reporting_in_place"]) == true
 }
 
 # Principle 3: development, implementation and use are documented.
 default principle_3_development := false
 
 principle_3_development if {
-	input.development.rationale_documented == true
-	input.development.data_quality_assessed == true
-	input.development.testing_documented == true
+	declarations.resolve(input, ["development", "rationale_documented"]) == true
+	declarations.resolve(input, ["development", "data_quality_assessed"]) == true
+	declarations.resolve(input, ["development", "testing_documented"]) == true
 }
 
 # Principle 4: validation is independent of development. A vendor model still
@@ -61,8 +62,8 @@ principle_3_development if {
 default principle_4_validation := false
 
 principle_4_validation if {
-	input.validation.independent_validation_completed == true
-	input.validation.validator_independent_of_development == true
+	declarations.resolve(input, ["validation", "independent_validation_completed"]) == true
+	declarations.resolve(input, ["validation", "validator_independent_of_development"]) == true
 	validation_current
 }
 
@@ -90,9 +91,9 @@ high_risk_tier if {
 default principle_5_mitigants := false
 
 principle_5_mitigants if {
-	input.mitigants.limitations_documented == true
-	input.mitigants.post_model_adjustments_tracked == true
-	input.mitigants.ongoing_monitoring_in_place == true
+	declarations.resolve(input, ["mitigants", "limitations_documented"]) == true
+	declarations.resolve(input, ["mitigants", "post_model_adjustments_tracked"]) == true
+	declarations.resolve(input, ["mitigants", "ongoing_monitoring_in_place"]) == true
 }
 
 default allow := false

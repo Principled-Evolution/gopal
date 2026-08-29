@@ -1,5 +1,6 @@
 package international.nist.v1.govern
 
+import data.helper_functions.declarations
 import rego.v1
 
 metadata := {
@@ -25,10 +26,10 @@ default accountability := {"allow": false, "msg": "Accountability requirements n
 
 accountability := {"allow": true, "msg": "Accountability requirements met."} if {
 	# Check for defined roles and responsibilities
-	input.governance.roles_and_responsibilities_defined
+	declarations.resolve(input, ["governance", "roles_and_responsibilities_defined"])
 
 	# Check for established oversight mechanisms
-	input.governance.oversight_mechanisms_in_place
+	declarations.resolve(input, ["governance", "oversight_mechanisms_in_place"])
 }
 
 # Transparency: Check for clear communication about the AI system
@@ -36,10 +37,10 @@ default transparency := {"allow": false, "msg": "Transparency requirements not m
 
 transparency := {"allow": true, "msg": "Transparency requirements met."} if {
 	# Check for public documentation about the system's purpose and limitations
-	input.transparency.public_documentation_available
+	declarations.resolve(input, ["transparency", "public_documentation_available"])
 
 	# Check for clear explanations of the system's decisions
-	input.transparency.decision_explanations_provided
+	declarations.resolve(input, ["transparency", "decision_explanations_provided"])
 }
 
 # Fairness: Check for measures to mitigate bias
@@ -47,8 +48,8 @@ default fairness := {"allow": false, "msg": "Fairness requirements not met."}
 
 fairness := {"allow": true, "msg": "Fairness requirements met."} if {
 	# Check for regular bias assessments
-	input.fairness.bias_assessments_conducted
+	declarations.resolve(input, ["fairness", "bias_assessments_conducted"])
 
 	# Check for mitigation strategies for identified biases
-	input.fairness.bias_mitigation_strategies_in_place
+	declarations.resolve(input, ["fairness", "bias_mitigation_strategies_in_place"])
 }

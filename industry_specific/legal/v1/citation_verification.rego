@@ -9,6 +9,7 @@
 # RequiredParams: none
 package industry_specific.legal.v1.citation_verification
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -31,15 +32,15 @@ metadata := {
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.submission.ai_assisted)
-	is_boolean(input.submission.filed_with_court)
+	is_boolean(declarations.resolve(input, ["submission", "ai_assisted"]))
+	is_boolean(declarations.resolve(input, ["submission", "filed_with_court"]))
 }
 
 default in_scope := false
 
 in_scope if {
-	input.submission.ai_assisted == true
-	input.submission.filed_with_court == true
+	declarations.resolve(input, ["submission", "ai_assisted"]) == true
+	declarations.resolve(input, ["submission", "filed_with_court"]) == true
 }
 
 citations_total := object.get(input, ["submission", "citations_total"], 0)
@@ -59,8 +60,8 @@ all_citations_verified if {
 default verification_attributable := false
 
 verification_attributable if {
-	input.submission.verification_recorded == true
-	input.submission.verifier_named == true
+	declarations.resolve(input, ["submission", "verification_recorded"]) == true
+	declarations.resolve(input, ["submission", "verifier_named"]) == true
 }
 
 default allow := false

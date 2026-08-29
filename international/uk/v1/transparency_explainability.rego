@@ -8,6 +8,7 @@
 # RequiredParams: none
 package international.uk.v1.transparency_explainability
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -38,21 +39,21 @@ allow if {
 default baseline_transparency := false
 
 baseline_transparency if {
-	input.transparency.ai_use_disclosed == true
-	input.transparency.system_purpose_documented == true
-	input.explainability.decision_rationale_available == true
+	declarations.resolve(input, ["transparency", "ai_use_disclosed"]) == true
+	declarations.resolve(input, ["transparency", "system_purpose_documented"]) == true
+	declarations.resolve(input, ["explainability", "decision_rationale_available"]) == true
 }
 
 default high_impact := false
 
 high_impact if {
-	input.system.impact_level == "high"
+	declarations.resolve(input, ["system", "impact_level"]) == "high"
 }
 
 default explainability_method_documented := false
 
 explainability_method_documented if {
-	input.explainability.method_documented == true
+	declarations.resolve(input, ["explainability", "method_documented"]) == true
 }
 
 policy_metrics := {

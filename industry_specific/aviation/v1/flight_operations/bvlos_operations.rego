@@ -6,6 +6,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.flight_operations.bvlos_operations
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -23,9 +24,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.operation.daa_system_equipped == true
-	input.operation.authorization_held == true
-	input.operation.ground_risk_mitigations_in_place == true
+	declarations.resolve(input, ["operation", "daa_system_equipped"]) == true
+	declarations.resolve(input, ["operation", "authorization_held"]) == true
+	declarations.resolve(input, ["operation", "ground_risk_mitigations_in_place"]) == true
 }
 
 policy_metrics := {

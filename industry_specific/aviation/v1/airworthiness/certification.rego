@@ -5,6 +5,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.airworthiness.certification
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -21,8 +22,8 @@ metadata := {
 default allow := false
 
 allow if {
-	input.aircraft.type_certificate_held == true
-	input.aircraft.airworthiness_directive_compliant == true
+	declarations.resolve(input, ["aircraft", "type_certificate_held"]) == true
+	declarations.resolve(input, ["aircraft", "airworthiness_directive_compliant"]) == true
 }
 
 policy_metrics := {

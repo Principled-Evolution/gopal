@@ -8,6 +8,7 @@
 # RequiredParams: none
 package international.uk.v1.safety_security_robustness
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -33,21 +34,21 @@ allow if {
 default risk_managed := false
 
 risk_managed if {
-	input.risk_management.risk_assessment_completed == true
-	input.risk_management.lifecycle_monitoring_in_place == true
+	declarations.resolve(input, ["risk_management", "risk_assessment_completed"]) == true
+	declarations.resolve(input, ["risk_management", "lifecycle_monitoring_in_place"]) == true
 }
 
 default secured := false
 
 secured if {
-	input.security.security_testing_completed == true
+	declarations.resolve(input, ["security", "security_testing_completed"]) == true
 }
 
 default robust := false
 
 robust if {
-	input.robustness.performance_thresholds_defined == true
-	input.robustness.failure_handling_documented == true
+	declarations.resolve(input, ["robustness", "performance_thresholds_defined"]) == true
+	declarations.resolve(input, ["robustness", "failure_handling_documented"]) == true
 }
 
 policy_metrics := {

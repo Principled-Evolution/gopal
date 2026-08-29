@@ -48,6 +48,7 @@
             "governance.human_oversight.enabled",
             "governance.incident_response.process_defined",
             "governance.responsibility.clearly_assigned",
+            "metrics.audit_logging.completeness",
             "params.audit_logging_completeness_threshold"
           ],
           "input_field_types": {
@@ -56,6 +57,7 @@
             "governance.human_oversight.enabled": "boolean",
             "governance.incident_response.process_defined": "boolean",
             "governance.responsibility.clearly_assigned": "boolean",
+            "metrics.audit_logging.completeness": "number",
             "params.audit_logging_completeness_threshold": "number"
           },
           "has_test": true,
@@ -264,7 +266,8 @@
             "metrics.stereotype.metrics",
             "metrics.toxicity.score",
             "params.stereotype_association_threshold",
-            "params.toxicity_threshold"
+            "params.toxicity_threshold",
+            "summary.stereotype_values"
           ],
           "input_field_types": {
             "metrics.toxicity.score": "number",
@@ -301,9 +304,11 @@
             "toxicity_threshold (default 0.1)"
           ],
           "input_fields": [
+            "metrics.toxicity.score",
             "params.toxicity_threshold"
           ],
           "input_field_types": {
+            "metrics.toxicity.score": "number",
             "params.toxicity_threshold": "number"
           },
           "has_test": true,
@@ -346,6 +351,7 @@
             "documentation.model_card.completeness_score",
             "documentation.model_card.exists",
             "documentation.use_cases.defined",
+            "metrics.model_card.completeness",
             "params.model_card_completeness_threshold"
           ],
           "input_field_types": {
@@ -354,6 +360,7 @@
             "documentation.model_card.completeness_score": "number",
             "documentation.model_card.exists": "boolean",
             "documentation.use_cases.defined": "boolean",
+            "metrics.model_card.completeness": "number",
             "params.model_card_completeness_threshold": "number"
           },
           "has_test": true,
@@ -492,9 +499,6 @@
             "safety_assessment.hara_analysis.status",
             "safety_assessment.odd_definition",
             "safety_assessment.odd_definition.conditions",
-            "safety_assessment.odd_definition.conditions.road_types",
-            "safety_assessment.odd_definition.conditions.traffic",
-            "safety_assessment.odd_definition.conditions.weather",
             "safety_assessment.odd_definition.status",
             "safety_assessment.sotif_analysis",
             "safety_assessment.sotif_analysis.scenarios_analyzed",
@@ -502,15 +506,8 @@
           ],
           "input_field_types": {
             "safety_assessment.asil_determination": "boolean",
-            "safety_assessment.asil_determination.status": "string",
-            "safety_assessment.hara_analysis.status": "string",
             "safety_assessment.odd_definition": "boolean",
-            "safety_assessment.odd_definition.conditions.road_types": "boolean",
-            "safety_assessment.odd_definition.conditions.traffic": "boolean",
-            "safety_assessment.odd_definition.conditions.weather": "boolean",
-            "safety_assessment.odd_definition.status": "string",
-            "safety_assessment.sotif_analysis": "boolean",
-            "safety_assessment.sotif_analysis.status": "string"
+            "safety_assessment.sotif_analysis": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -1039,6 +1036,9 @@
             "evaluation.content_safety.score",
             "evaluation.fairness.score",
             "evaluation.risk_management.score",
+            "metrics.content_safety.score",
+            "metrics.fairness.score",
+            "metrics.risk_management.score",
             "params.content_safety_threshold",
             "params.fairness_threshold",
             "params.risk_management_threshold"
@@ -1047,6 +1047,9 @@
             "evaluation.content_safety.score": "number",
             "evaluation.fairness.score": "number",
             "evaluation.risk_management.score": "number",
+            "metrics.content_safety.score": "number",
+            "metrics.fairness.score": "number",
+            "metrics.risk_management.score": "number",
             "params.content_safety_threshold": "number",
             "params.fairness_threshold": "number",
             "params.risk_management_threshold": "number"
@@ -1125,14 +1128,7 @@
             "validation.outcomes_analysis_performed"
           ],
           "input_field_types": {
-            "data.lineage_documented": "boolean",
-            "development.conceptual_soundness_documented": "boolean",
-            "governance.board_approved_policy": "boolean",
-            "governance.owner_named": "boolean",
-            "model.in_inventory": "boolean",
             "model.risk_rating": "string",
-            "monitoring.ongoing_monitoring_in_place": "boolean",
-            "validation.independent_review_completed": "boolean",
             "validation.last_review_days_ago": "number",
             "validation.outcomes_analysis_performed": "boolean"
           },
@@ -1216,18 +1212,7 @@
           ],
           "input_field_types": {
             "accountability.smf_owner_assigned": "boolean",
-            "ai.customer_facing": "boolean",
-            "ai.decision_explainable_in_plain_language": "boolean",
-            "ai.outcomes_monitoring_data_collected": "boolean",
-            "ai.vulnerable_customer_handling_documented": "boolean",
-            "cross_cutting.foreseeable_harm_assessment_completed": "boolean",
-            "cross_cutting.good_faith_assessment_completed": "boolean",
-            "cross_cutting.supports_customer_objectives": "boolean",
-            "firm.retail_customers_affected": "boolean",
-            "outcomes.communications_tested_for_understanding": "boolean",
-            "outcomes.fair_value_assessment_completed": "boolean",
-            "outcomes.support_channels_free_of_unreasonable_barriers": "boolean",
-            "outcomes.target_market_defined": "boolean"
+            "ai.decision_explainable_in_plain_language": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -1311,21 +1296,9 @@
             "validation.validator_independent_of_development"
           ],
           "input_field_types": {
-            "development.data_quality_assessed": "boolean",
-            "development.rationale_documented": "boolean",
-            "development.testing_documented": "boolean",
-            "governance.board_reporting_in_place": "boolean",
-            "governance.mrm_policy_approved": "boolean",
-            "governance.smf_owner_assigned": "boolean",
-            "mitigants.limitations_documented": "boolean",
-            "mitigants.ongoing_monitoring_in_place": "boolean",
-            "mitigants.post_model_adjustments_tracked": "boolean",
-            "model.in_inventory": "boolean",
             "model.is_ai_ml": "boolean",
             "model.risk_tier": "string",
-            "validation.independent_validation_completed": "boolean",
-            "validation.last_validation_days_ago": "number",
-            "validation.validator_independent_of_development": "boolean"
+            "validation.last_validation_days_ago": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -1428,9 +1401,7 @@
             "assessment.type",
             "grading_process.human_reviewer_assigned"
           ],
-          "input_field_types": {
-            "grading_process.human_reviewer_assigned": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "industry_specific/education/v1/assessment_and_evaluation/human_in_the_loop_grading_test.rego",
@@ -1459,9 +1430,7 @@
             "proctoring_session.review_process",
             "proctoring_session.student_consent_given"
           ],
-          "input_field_types": {
-            "proctoring_session.student_consent_given": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "industry_specific/education/v1/assessment_and_evaluation/responsible_ai_proctoring_test.rego",
@@ -1492,13 +1461,7 @@
             "student.resources.has_school_provided_device",
             "student.resources.has_school_provided_internet"
           ],
-          "input_field_types": {
-            "assignment.has_offline_alternative": "boolean",
-            "assignment.requirements.bandwidth": "string",
-            "assignment.requirements.device_spec": "string",
-            "student.resources.has_school_provided_device": "boolean",
-            "student.resources.has_school_provided_internet": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "industry_specific/education/v1/fairness_and_equity/digital_divide_mitigation_test.rego",
@@ -1640,10 +1603,7 @@
             "user",
             "user.age"
           ],
-          "input_field_types": {
-            "request.purpose": "string",
-            "user.age": "number"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "industry_specific/education/v1/student_data_privacy/coppa_compliance_test.rego",
@@ -1703,10 +1663,7 @@
             "student",
             "student.directory_information_opt_out"
           ],
-          "input_field_types": {
-            "request.purpose": "string",
-            "student.directory_information_opt_out": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "industry_specific/education/v1/student_data_privacy/ferpa_compliance_test.rego",
@@ -1751,6 +1708,9 @@
             "evaluation.content_safety_score",
             "evaluation.fairness_score",
             "evaluation.risk_management_score",
+            "metrics.content_safety.score",
+            "metrics.fairness.score",
+            "metrics.risk_management.score",
             "params.content_safety_threshold",
             "params.fairness_threshold",
             "params.risk_management_threshold"
@@ -1759,6 +1719,9 @@
             "evaluation.content_safety_score": "number",
             "evaluation.fairness_score": "number",
             "evaluation.risk_management_score": "number",
+            "metrics.content_safety.score": "number",
+            "metrics.fairness.score": "number",
+            "metrics.risk_management.score": "number",
             "params.content_safety_threshold": "number",
             "params.fairness_threshold": "number",
             "params.risk_management_threshold": "number"
@@ -1816,7 +1779,6 @@
             "params"
           ],
           "input_field_types": {
-            "oversight.adverse_event_reporting_in_place": "boolean",
             "oversight.clinician_in_the_loop": "boolean"
           },
           "has_test": true,
@@ -1887,12 +1849,8 @@
             "submission.verifier_named"
           ],
           "input_field_types": {
-            "submission.ai_assisted": "boolean",
             "submission.citations_total": "number",
-            "submission.citations_verified": "number",
-            "submission.filed_with_court": "boolean",
-            "submission.verification_recorded": "boolean",
-            "submission.verifier_named": "boolean"
+            "submission.citations_verified": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -1969,17 +1927,7 @@
             "tool.trains_on_input",
             "tool.vendor_assessed"
           ],
-          "input_field_types": {
-            "data.client_confidential_information_entered": "boolean",
-            "data.privileged_material_entered": "boolean",
-            "tool.contractual_safeguards": "boolean",
-            "tool.data_remains_in_secure_environment": "boolean",
-            "tool.organisational_safeguards": "boolean",
-            "tool.public_consumer_tool": "boolean",
-            "tool.technical_safeguards": "boolean",
-            "tool.trains_on_input": "boolean",
-            "tool.vendor_assessed": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "industry_specific/legal/v1/client_confidentiality_test.rego",
@@ -2051,14 +1999,7 @@
             "practitioner.uses_ai_for_regulated_work"
           ],
           "input_field_types": {
-            "client.ai_use_disclosed_where_material": "boolean",
-            "client.ai_use_material": "boolean",
-            "firm.ai_risk_assessment_before_adoption": "boolean",
-            "firm.supervision_system_in_place": "boolean",
-            "firm.supervisor_named": "boolean",
-            "practitioner.technology_competence_maintained": "boolean",
-            "practitioner.training_completed": "boolean",
-            "practitioner.uses_ai_for_regulated_work": "boolean"
+            "firm.supervisor_named": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2102,22 +2043,10 @@
           "provided_metrics": [],
           "required_params": [],
           "input_fields": [
-            "ai_system.basic_requirements_met",
             "ai_system.risk_category",
-            "ai_system.type",
-            "compliance.accuracy_ensured",
-            "compliance.algorithmic_impact_assessment_conducted",
-            "compliance.oversight_authority_engaged",
-            "compliance.reliability_ensured",
-            "compliance.robustness_ensured",
-            "rights.contest_mechanism_available",
-            "rights.explanation_provided",
-            "rights.human_review_available"
+            "ai_system.type"
           ],
-          "input_field_types": {
-            "ai_system.risk_category": "string",
-            "ai_system.type": "string"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "international/brazil/v1/ai_governance/ai_governance_test.rego",
@@ -2167,9 +2096,6 @@
             "operator.registered"
           ],
           "input_field_types": {
-            "aircraft.type_certificate_held": "boolean",
-            "authorization.granted": "boolean",
-            "operation.category": "string",
             "operator.registered": "boolean"
           },
           "has_test": true,
@@ -2295,15 +2221,7 @@
             "system.digital_only",
             "system.high_risk"
           ],
-          "input_field_types": {
-            "ce_marking.affixed": "boolean",
-            "ce_marking.digital_marking_accessible": "boolean",
-            "ce_marking.notified_body_involved": "boolean",
-            "ce_marking.notified_body_number_displayed": "boolean",
-            "ce_marking.visible_legible_indelible": "boolean",
-            "system.digital_only": "boolean",
-            "system.high_risk": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "international/eu_ai_act/v1/compliance/ce_marking_test.rego",
@@ -2375,12 +2293,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "assessment.completed": "boolean",
-            "assessment.harmonised_standards_applied": "boolean",
-            "assessment.notified_body_involved": "boolean",
-            "assessment.procedure": "string",
-            "system.annex_iii_category": "number",
-            "system.high_risk": "boolean"
+            "assessment.procedure": "string"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2436,8 +2349,7 @@
           ],
           "input_field_types": {
             "declaration": "boolean",
-            "declaration.machine_readable": "boolean",
-            "system.high_risk": "boolean"
+            "declaration.machine_readable": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2505,12 +2417,7 @@
           ],
           "input_field_types": {
             "registration.annex_viii_information_complete": "boolean",
-            "registration.exemption_assessment_registered": "boolean",
-            "registration.provider_registered": "boolean",
-            "registration.registered_before_placing_on_market": "boolean",
-            "registration.system_registered": "boolean",
-            "system.annex_iii_exempt_under_article_6_3": "boolean",
-            "system.high_risk": "boolean"
+            "registration.registered_before_placing_on_market": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2569,8 +2476,7 @@
           ],
           "input_field_types": {
             "datasets": "boolean",
-            "datasets.contextual_characteristics_considered": "boolean",
-            "system.high_risk": "boolean"
+            "datasets.contextual_characteristics_considered": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2637,10 +2543,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "governance": "boolean",
-            "special_category.processed_for_bias_correction": "boolean",
-            "special_category.safeguards_in_place": "boolean",
-            "system.high_risk": "boolean"
+            "governance": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2710,13 +2613,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "logging": "boolean",
-            "logging.automatic_recording_enabled": "boolean",
-            "logging.covers_system_lifetime": "boolean",
-            "logging.identifies_risk_situations": "boolean",
-            "logging.supports_post_market_monitoring": "boolean",
-            "system.annex_iii_1_a_biometric": "boolean",
-            "system.high_risk": "boolean"
+            "logging": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2773,9 +2670,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "logs.retained": "boolean",
-            "logs.retention_months": "number",
-            "system.high_risk": "boolean"
+            "logs.retention_months": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -2968,16 +2863,7 @@
             "training_content.summary_sufficiently_detailed"
           ],
           "input_field_types": {
-            "copyright.policy_in_place": "boolean",
-            "copyright.respects_article_4_3_reservations": "boolean",
-            "downstream.annex_xii_information_provided": "boolean",
-            "downstream.enables_downstream_compliance": "boolean",
-            "model.free_and_open_source": "boolean",
-            "model.general_purpose": "boolean",
-            "model.parameters_publicly_available": "boolean",
-            "model.systemic_risk": "boolean",
-            "training_content.public_summary_available": "boolean",
-            "training_content.summary_sufficiently_detailed": "boolean"
+            "copyright.respects_article_4_3_reservations": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3053,10 +2939,7 @@
             "systemic_risk"
           ],
           "input_field_types": {
-            "model.commission_designated_systemic_risk": "boolean",
             "model.cumulative_training_compute_flops": "number",
-            "model.general_purpose": "boolean",
-            "notification.commission_notified": "boolean",
             "systemic_risk": "boolean"
           },
           "has_test": true,
@@ -3124,11 +3007,7 @@
             "model.systemic_risk"
           ],
           "input_field_types": {
-            "documentation": "boolean",
-            "model.free_and_open_source": "boolean",
-            "model.general_purpose": "boolean",
-            "model.parameters_publicly_available": "boolean",
-            "model.systemic_risk": "boolean"
+            "documentation": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3199,13 +3078,8 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "oversight.assigned_persons_competent": "boolean",
             "oversight.automation_bias_addressed": "boolean",
-            "oversight.can_disregard_output": "boolean",
-            "oversight.can_intervene_or_halt": "boolean",
-            "oversight.capabilities_and_limitations_communicated": "boolean",
-            "oversight.measures_built_into_system": "boolean",
-            "system.high_risk": "boolean"
+            "oversight.can_intervene_or_halt": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3300,19 +3174,8 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "deployer.affected_persons_informed": "boolean",
             "deployer.affects_natural_persons": "boolean",
-            "deployer.controls_input_data": "boolean",
-            "deployer.human_oversight_assigned": "boolean",
-            "deployer.input_data_relevant": "boolean",
-            "deployer.logs_kept_six_months": "boolean",
-            "deployer.monitors_operation": "boolean",
-            "deployer.oversight_persons_trained_and_authorised": "boolean",
-            "deployer.reports_serious_incidents": "boolean",
-            "deployer.uses_per_instructions": "boolean",
-            "deployer.workers_informed": "boolean",
-            "deployer.workplace_deployment": "boolean",
-            "system.high_risk": "boolean"
+            "deployer.workplace_deployment": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3376,10 +3239,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "distributor": "boolean",
-            "distributor.corrective_action_taken": "boolean",
-            "distributor.non_conformity_discovered": "boolean",
-            "system.high_risk": "boolean"
+            "distributor": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3433,8 +3293,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "importer": "boolean",
-            "system.high_risk": "boolean"
+            "importer": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3491,8 +3350,7 @@
             "system.high_risk"
           ],
           "input_field_types": {
-            "provider": "boolean",
-            "system.high_risk": "boolean"
+            "provider": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3556,10 +3414,7 @@
             "system.performs_biometric_categorisation"
           ],
           "input_field_types": {
-            "system.dataset_labelling_only": "boolean",
-            "system.inferred_attributes": "list",
-            "system.law_enforcement_use": "boolean",
-            "system.performs_biometric_categorisation": "boolean"
+            "system.inferred_attributes": "list"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3625,11 +3480,7 @@
             "system.real_time_remote_biometric_identification"
           ],
           "input_field_types": {
-            "authorisation.prior_authorisation_obtained": "boolean",
-            "system.law_enforcement_purpose": "boolean",
-            "system.permitted_objective": "string",
-            "system.publicly_accessible_space": "boolean",
-            "system.real_time_remote_biometric_identification": "boolean"
+            "system.permitted_objective": "string"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -3693,12 +3544,7 @@
             "system.predicts_criminal_offence_risk",
             "system.supports_human_assessment"
           ],
-          "input_field_types": {
-            "system.based_solely_on_profiling": "boolean",
-            "system.grounded_in_objective_verifiable_facts": "boolean",
-            "system.predicts_criminal_offence_risk": "boolean",
-            "system.supports_human_assessment": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "international/eu_ai_act/v1/prohibited_practices/criminal_profiling_test.rego",
@@ -3815,9 +3661,6 @@
             "system.sources"
           ],
           "input_field_types": {
-            "system.builds_facial_recognition_database": "boolean",
-            "system.scrapes_facial_images": "boolean",
-            "system.scraping_is_targeted": "boolean",
             "system.sources": "list"
           },
           "has_test": true,
@@ -3890,9 +3733,7 @@
             "system.distorts_behaviour"
           ],
           "input_field_types": {
-            "system": "boolean",
-            "system.causes_or_likely_causes_significant_harm": "boolean",
-            "system.distorts_behaviour": "boolean"
+            "system": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -4015,9 +3856,6 @@
             "system.vulnerability_basis"
           ],
           "input_field_types": {
-            "system.causes_or_likely_causes_significant_harm": "boolean",
-            "system.distorts_behaviour": "boolean",
-            "system.exploits_vulnerability": "boolean",
             "system.vulnerability_basis": "list"
           },
           "has_test": true,
@@ -4135,14 +3973,7 @@
           ],
           "input_field_types": {
             "accuracy.declared_in_instructions": "boolean",
-            "accuracy.metrics_declared": "boolean",
-            "cybersecurity.adversarial_attacks_addressed": "boolean",
-            "cybersecurity.controls_in_place": "boolean",
-            "robustness.fallback_or_fail_safe_documented": "boolean",
-            "robustness.feedback_loop_risk_addressed": "boolean",
-            "robustness.resilience_tested": "boolean",
-            "system.continues_to_learn_after_deployment": "boolean",
-            "system.high_risk": "boolean"
+            "cybersecurity.adversarial_attacks_addressed": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -4180,9 +4011,6 @@
             "metrics.toxicity.max_toxicity"
           ],
           "input_field_types": {
-            "documentation.explainability.completeness": "number",
-            "documentation.model_card.completeness": "number",
-            "documentation.technical_documentation.completeness": "number",
             "metrics.toxicity.max_toxicity": "number"
           },
           "has_test": true,
@@ -4237,12 +4065,7 @@
             "remote_pilot.certificate_held"
           ],
           "input_field_types": {
-            "aircraft.registered": "boolean",
-            "operation.bvlos_waiver_held": "boolean",
-            "operation.daylight_or_lit": "boolean",
-            "operation.visual_line_of_sight": "boolean",
-            "params.max_altitude_ft": "number",
-            "remote_pilot.certificate_held": "boolean"
+            "params.max_altitude_ft": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -4279,11 +4102,7 @@
             "aircraft.standard_remote_id_equipped",
             "operation.within_fria"
           ],
-          "input_field_types": {
-            "aircraft.broadcast_module_attached": "boolean",
-            "aircraft.standard_remote_id_equipped": "boolean",
-            "operation.within_fria": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "international/faa/v1/remote_id_test.rego",
@@ -4330,11 +4149,7 @@
             "system.remote_pilot",
             "system.remote_pilot.qualified"
           ],
-          "input_field_types": {
-            "system.c2_link.lost_link_procedure_defined": "boolean",
-            "system.detect_and_avoid.equipped": "boolean",
-            "system.remote_pilot.qualified": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "international/icao/v1/doc_10019_test.rego",
@@ -4369,16 +4184,7 @@
           "required_metrics": [],
           "provided_metrics": [],
           "required_params": [],
-          "input_fields": [
-            "accountability.oversight_mechanisms_in_place",
-            "accountability.roles_and_responsibilities_defined",
-            "fairness.bias_assessments_conducted",
-            "fairness.bias_mitigation_strategies_in_place",
-            "safety.electoral_integrity_safeguards_in_place",
-            "safety.risk_assessment_for_unreliable_models",
-            "transparency.ai_generated_content_labeled",
-            "transparency.public_documentation_available"
-          ],
+          "input_fields": [],
           "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
@@ -4443,14 +4249,7 @@
           "required_metrics": [],
           "provided_metrics": [],
           "required_params": [],
-          "input_fields": [
-            "fairness.bias_assessments_conducted",
-            "fairness.bias_mitigation_strategies_in_place",
-            "governance.oversight_mechanisms_in_place",
-            "governance.roles_and_responsibilities_defined",
-            "transparency.decision_explanations_provided",
-            "transparency.public_documentation_available"
-          ],
+          "input_fields": [],
           "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
@@ -4477,14 +4276,7 @@
           "required_metrics": [],
           "provided_metrics": [],
           "required_params": [],
-          "input_fields": [
-            "manage.continuous_monitoring_plan_executed",
-            "manage.continuous_monitoring_plan_in_place",
-            "manage.incident_response_plan_in_place",
-            "manage.incident_response_plan_tested",
-            "manage.risk_mitigation_strategies_documented",
-            "manage.risk_mitigation_strategies_implemented"
-          ],
+          "input_fields": [],
           "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
@@ -4511,14 +4303,7 @@
           "required_metrics": [],
           "provided_metrics": [],
           "required_params": [],
-          "input_fields": [
-            "map.architecture_documented",
-            "map.data_processing_documented",
-            "map.data_sources_documented",
-            "map.intended_use_documented",
-            "map.known_limitations_documented",
-            "map.out_of_scope_use_cases_documented"
-          ],
+          "input_fields": [],
           "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
@@ -4545,14 +4330,7 @@
           "required_metrics": [],
           "provided_metrics": [],
           "required_params": [],
-          "input_fields": [
-            "measure.bias_metrics_defined",
-            "measure.bias_metrics_tracked",
-            "measure.performance_metrics_defined",
-            "measure.performance_metrics_tracked",
-            "measure.robustness_metrics_defined",
-            "measure.robustness_metrics_tracked"
-          ],
+          "input_fields": [],
           "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
@@ -4712,10 +4490,6 @@
             "governance.third_party_model_in_use"
           ],
           "input_field_types": {
-            "governance.accountable_person_named": "boolean",
-            "governance.lifecycle_roles_defined": "boolean",
-            "governance.oversight_body_in_place": "boolean",
-            "governance.supply_chain_accountability_documented": "boolean",
             "governance.third_party_model_in_use": "boolean"
           },
           "has_test": true,
@@ -4794,14 +4568,7 @@
           ],
           "input_field_types": {
             "decision.article_9_condition": "string",
-            "decision.meaningful_human_involvement": "boolean",
-            "decision.significant": "boolean",
-            "decision.special_category_data_involved": "boolean",
-            "safeguards": "boolean",
-            "safeguards.decision_contestable": "boolean",
-            "safeguards.human_intervention_available": "boolean",
-            "safeguards.information_provided": "boolean",
-            "safeguards.representations_enabled": "boolean"
+            "safeguards": "boolean"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -4871,12 +4638,7 @@
             "system.material_harm_potential"
           ],
           "input_field_types": {
-            "redress.human_review_available": "boolean",
-            "redress.response_timeframe_days": "number",
-            "redress.route_communicated": "boolean",
-            "redress.route_to_contest_available": "boolean",
-            "system.affects_individuals": "boolean",
-            "system.material_harm_potential": "boolean"
+            "redress.response_timeframe_days": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -4980,13 +4742,7 @@
             "robustness.performance_thresholds_defined",
             "security.security_testing_completed"
           ],
-          "input_field_types": {
-            "risk_management.lifecycle_monitoring_in_place": "boolean",
-            "risk_management.risk_assessment_completed": "boolean",
-            "robustness.failure_handling_documented": "boolean",
-            "robustness.performance_thresholds_defined": "boolean",
-            "security.security_testing_completed": "boolean"
-          },
+          "input_field_types": {},
           "has_test": true,
           "has_empty_input_test": true,
           "test_file": "international/uk/v1/safety_security_robustness_test.rego",
@@ -5039,11 +4795,7 @@
             "transparency.system_purpose_documented"
           ],
           "input_field_types": {
-            "explainability.decision_rationale_available": "boolean",
-            "explainability.method_documented": "boolean",
-            "system.impact_level": "string",
-            "transparency.ai_use_disclosed": "boolean",
-            "transparency.system_purpose_documented": "boolean"
+            "system.impact_level": "string"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -5119,11 +4871,6 @@
           ],
           "input_field_types": {
             "capacity.headroom_ratio": "number",
-            "capacity.peak_load_tested": "boolean",
-            "capacity.plan_documented": "boolean",
-            "latency.p99_within_slo": "boolean",
-            "latency.slo_defined": "boolean",
-            "resilience.autoscaling_configured": "boolean",
             "resilience.graceful_degradation_documented": "boolean"
           },
           "has_test": true,
@@ -5207,13 +4954,7 @@
             "third_party.vendor_in_use"
           ],
           "input_field_types": {
-            "governance.accountable_owner_named": "boolean",
-            "governance.ai_policy_approved": "boolean",
-            "governance.review_cadence_days": "number",
-            "governance.staff_training_completed": "boolean",
-            "governance.system_in_inventory": "boolean",
-            "third_party.due_diligence_completed": "boolean",
-            "third_party.vendor_in_use": "boolean"
+            "governance.review_cadence_days": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,
@@ -5291,13 +5032,6 @@
             "vulnerability.review_days_ago"
           ],
           "input_field_types": {
-            "access.authentication_required": "boolean",
-            "access.least_privilege_enforced": "boolean",
-            "data.encrypted_at_rest": "boolean",
-            "data.encrypted_in_transit": "boolean",
-            "logging.security_events_logged": "boolean",
-            "resilience.prompt_injection_controls_in_place": "boolean",
-            "resilience.untrusted_input_reaches_model": "boolean",
             "secrets.managed_outside_prompts": "boolean",
             "vulnerability.review_days_ago": "number"
           },
@@ -5373,11 +5107,8 @@
             "monitoring.unit_cost_attributable"
           ],
           "input_field_types": {
-            "budget.defined": "boolean",
             "budget.utilisation_ratio": "number",
             "efficiency.right_sizing_reviewed_days_ago": "number",
-            "monitoring.alerting_configured": "boolean",
-            "monitoring.spend_tracked": "boolean",
             "monitoring.unit_cost_attributable": "boolean"
           },
           "has_test": true,

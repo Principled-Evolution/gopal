@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.prohibited_practices.criminal_profiling
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -24,13 +25,13 @@ metadata := {
 default predicts_offence_risk := false
 
 predicts_offence_risk if {
-	input.system.predicts_criminal_offence_risk == true
+	declarations.resolve(input, ["system", "predicts_criminal_offence_risk"]) == true
 }
 
 default based_solely_on_profiling := false
 
 based_solely_on_profiling if {
-	input.system.based_solely_on_profiling == true
+	declarations.resolve(input, ["system", "based_solely_on_profiling"]) == true
 }
 
 # The Article 5(1)(d) carve-out: supporting a human assessment that is itself
@@ -38,8 +39,8 @@ based_solely_on_profiling if {
 default carve_out_applies := false
 
 carve_out_applies if {
-	input.system.supports_human_assessment == true
-	input.system.grounded_in_objective_verifiable_facts == true
+	declarations.resolve(input, ["system", "supports_human_assessment"]) == true
+	declarations.resolve(input, ["system", "grounded_in_objective_verifiable_facts"]) == true
 }
 
 default prohibited := false
@@ -59,8 +60,8 @@ not_prohibited if {
 default assessment_complete := false
 
 assessment_complete if {
-	is_boolean(input.system.predicts_criminal_offence_risk)
-	is_boolean(input.system.based_solely_on_profiling)
+	is_boolean(declarations.resolve(input, ["system", "predicts_criminal_offence_risk"]))
+	is_boolean(declarations.resolve(input, ["system", "based_solely_on_profiling"]))
 }
 
 default allow := false

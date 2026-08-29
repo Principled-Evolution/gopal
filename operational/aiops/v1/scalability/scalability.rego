@@ -10,6 +10,7 @@
 # RequiredParams: none
 package operational.aiops.v1.scalability
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -27,8 +28,8 @@ metadata := {
 default capacity_planned := false
 
 capacity_planned if {
-	input.capacity.plan_documented == true
-	input.capacity.peak_load_tested == true
+	declarations.resolve(input, ["capacity", "plan_documented"]) == true
+	declarations.resolve(input, ["capacity", "peak_load_tested"]) == true
 }
 
 # Headroom is measured against tested peak, not against average.
@@ -41,14 +42,14 @@ headroom_sufficient if {
 default latency_governed := false
 
 latency_governed if {
-	input.latency.slo_defined == true
-	input.latency.p99_within_slo == true
+	declarations.resolve(input, ["latency", "slo_defined"]) == true
+	declarations.resolve(input, ["latency", "p99_within_slo"]) == true
 }
 
 default autoscaling_configured := false
 
 autoscaling_configured if {
-	input.resilience.autoscaling_configured == true
+	declarations.resolve(input, ["resilience", "autoscaling_configured"]) == true
 }
 
 # Autoscaling cannot help when the bound is a rate-limited model provider, so a
@@ -56,7 +57,7 @@ autoscaling_configured if {
 default degradation_documented := false
 
 degradation_documented if {
-	input.resilience.graceful_degradation_documented == true
+	declarations.resolve(input, ["resilience", "graceful_degradation_documented"]) == true
 }
 
 default allow := false

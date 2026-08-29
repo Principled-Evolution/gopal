@@ -9,6 +9,7 @@
 # RequiredParams: none
 package operational.cost.v1.resource_efficiency
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -26,7 +27,7 @@ metadata := {
 default budget_defined := false
 
 budget_defined if {
-	input.budget.defined == true
+	declarations.resolve(input, ["budget", "defined"]) == true
 }
 
 # Utilisation at or over 1.0 means the budget is already exceeded.
@@ -41,8 +42,8 @@ within_budget if {
 default spend_observable := false
 
 spend_observable if {
-	input.monitoring.spend_tracked == true
-	input.monitoring.alerting_configured == true
+	declarations.resolve(input, ["monitoring", "spend_tracked"]) == true
+	declarations.resolve(input, ["monitoring", "alerting_configured"]) == true
 }
 
 # Without unit cost attribution there is no way to tell an efficiency
@@ -50,7 +51,7 @@ spend_observable if {
 default unit_cost_attributable := false
 
 unit_cost_attributable if {
-	input.monitoring.unit_cost_attributable == true
+	declarations.resolve(input, ["monitoring", "unit_cost_attributable"]) == true
 }
 
 default right_sizing_current := false

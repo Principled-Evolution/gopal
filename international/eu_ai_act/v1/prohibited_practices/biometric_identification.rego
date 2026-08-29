@@ -8,6 +8,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.prohibited_practices.biometric_identification
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -35,9 +36,9 @@ permitted_objectives := {
 default in_scope := false
 
 in_scope if {
-	input.system.real_time_remote_biometric_identification == true
-	input.system.publicly_accessible_space == true
-	input.system.law_enforcement_purpose == true
+	declarations.resolve(input, ["system", "real_time_remote_biometric_identification"]) == true
+	declarations.resolve(input, ["system", "publicly_accessible_space"]) == true
+	declarations.resolve(input, ["system", "law_enforcement_purpose"]) == true
 }
 
 default permitted_objective_claimed := false
@@ -51,7 +52,7 @@ permitted_objective_claimed if {
 default prior_authorisation_obtained := false
 
 prior_authorisation_obtained if {
-	input.authorisation.prior_authorisation_obtained == true
+	declarations.resolve(input, ["authorisation", "prior_authorisation_obtained"]) == true
 }
 
 default prohibited := false
@@ -76,9 +77,9 @@ not_prohibited if {
 default assessment_complete := false
 
 assessment_complete if {
-	is_boolean(input.system.real_time_remote_biometric_identification)
-	is_boolean(input.system.publicly_accessible_space)
-	is_boolean(input.system.law_enforcement_purpose)
+	is_boolean(declarations.resolve(input, ["system", "real_time_remote_biometric_identification"]))
+	is_boolean(declarations.resolve(input, ["system", "publicly_accessible_space"]))
+	is_boolean(declarations.resolve(input, ["system", "law_enforcement_purpose"]))
 }
 
 default allow := false

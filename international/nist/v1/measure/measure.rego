@@ -1,5 +1,6 @@
 package international.nist.v1.measure
 
+import data.helper_functions.declarations
 import rego.v1
 
 metadata := {
@@ -25,10 +26,10 @@ default performance_metrics := {"allow": false, "msg": "Performance metrics requ
 
 performance_metrics := {"allow": true, "msg": "Performance metrics requirements met."} if {
 	# Check for defined performance metrics
-	input.measure.performance_metrics_defined
+	declarations.resolve(input, ["measure", "performance_metrics_defined"])
 
 	# Check for regular tracking of performance metrics
-	input.measure.performance_metrics_tracked
+	declarations.resolve(input, ["measure", "performance_metrics_tracked"])
 }
 
 # Bias Metrics: Check for regular measurement of bias
@@ -36,10 +37,10 @@ default bias_metrics := {"allow": false, "msg": "Bias metrics requirements not m
 
 bias_metrics := {"allow": true, "msg": "Bias metrics requirements met."} if {
 	# Check for defined bias metrics
-	input.measure.bias_metrics_defined
+	declarations.resolve(input, ["measure", "bias_metrics_defined"])
 
 	# Check for regular tracking of bias metrics
-	input.measure.bias_metrics_tracked
+	declarations.resolve(input, ["measure", "bias_metrics_tracked"])
 }
 
 # Robustness Metrics: Check for regular measurement of system robustness
@@ -47,8 +48,8 @@ default robustness_metrics := {"allow": false, "msg": "Robustness metrics requir
 
 robustness_metrics := {"allow": true, "msg": "Robustness metrics requirements met."} if {
 	# Check for defined robustness metrics
-	input.measure.robustness_metrics_defined
+	declarations.resolve(input, ["measure", "robustness_metrics_defined"])
 
 	# Check for regular tracking of robustness metrics
-	input.measure.robustness_metrics_tracked
+	declarations.resolve(input, ["measure", "robustness_metrics_tracked"])
 }

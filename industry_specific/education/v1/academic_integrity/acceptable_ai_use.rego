@@ -1,5 +1,7 @@
 package industry_specific.education.v1.academic_integrity
 
+import data.helper_functions.declarations
+
 # @title Detailed Acceptable AI Use
 # @description This policy defines the acceptable use of AI tools by students based on the course policy and the type of assignment.
 # @version 1.1
@@ -11,7 +13,7 @@ default allow := false
 
 # Allow if the specific AI use case is permitted in the course's AI policy.
 allow if {
-	is_permitted_use(input.ai_use_case, input.course.ai_policy, permitted_uses)
+	is_permitted_use(input.ai_use_case, declarations.resolve(input, ["course", "ai_policy"]), permitted_uses)
 }
 
 # Allow if the student is using a generally accepted tool for a common task (e.g., spell check).

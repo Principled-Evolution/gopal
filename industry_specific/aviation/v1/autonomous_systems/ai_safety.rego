@@ -6,6 +6,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.autonomous_systems.ai_safety
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -23,9 +24,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.ai_system.safety_validation_completed == true
-	input.ai_system.fail_safe_mechanism_present == true
-	input.ai_system.performance_monitoring_enabled == true
+	declarations.resolve(input, ["ai_system", "safety_validation_completed"]) == true
+	declarations.resolve(input, ["ai_system", "fail_safe_mechanism_present"]) == true
+	declarations.resolve(input, ["ai_system", "performance_monitoring_enabled"]) == true
 }
 
 policy_metrics := {

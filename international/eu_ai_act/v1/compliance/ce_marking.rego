@@ -10,6 +10,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.compliance.ce_marking
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -28,45 +29,45 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 default marking_affixed := false
 
 marking_affixed if {
-	input.ce_marking.affixed == true
+	declarations.resolve(input, ["ce_marking", "affixed"]) == true
 }
 
 # Article 48(2): physical marking for physical systems, digital for digital.
 default digital_only := false
 
 digital_only if {
-	input.system.digital_only == true
+	declarations.resolve(input, ["system", "digital_only"]) == true
 }
 
 default marking_presented_correctly := false
 
 marking_presented_correctly if {
 	not digital_only
-	input.ce_marking.visible_legible_indelible == true
+	declarations.resolve(input, ["ce_marking", "visible_legible_indelible"]) == true
 }
 
 marking_presented_correctly if {
 	digital_only
-	input.ce_marking.digital_marking_accessible == true
+	declarations.resolve(input, ["ce_marking", "digital_marking_accessible"]) == true
 }
 
 # Article 48(4): the notified body number is required where one was involved.
 default notified_body_involved := false
 
 notified_body_involved if {
-	input.ce_marking.notified_body_involved == true
+	declarations.resolve(input, ["ce_marking", "notified_body_involved"]) == true
 }
 
 default notified_body_number_ok := false
@@ -77,7 +78,7 @@ notified_body_number_ok if {
 
 notified_body_number_ok if {
 	notified_body_involved
-	input.ce_marking.notified_body_number_displayed == true
+	declarations.resolve(input, ["ce_marking", "notified_body_number_displayed"]) == true
 }
 
 default allow := false

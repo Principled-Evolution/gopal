@@ -11,6 +11,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.gpai.technical_documentation
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -29,19 +30,19 @@ metadata := {
 default is_gpai := false
 
 is_gpai if {
-	input.model.general_purpose == true
+	declarations.resolve(input, ["model", "general_purpose"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.model.general_purpose)
+	is_boolean(declarations.resolve(input, ["model", "general_purpose"]))
 }
 
 default systemic_risk := false
 
 systemic_risk if {
-	input.model.systemic_risk == true
+	declarations.resolve(input, ["model", "systemic_risk"]) == true
 }
 
 # Article 53(2): free and open-source with publicly available parameters, but
@@ -49,8 +50,8 @@ systemic_risk if {
 default exemption_applies := false
 
 exemption_applies if {
-	input.model.free_and_open_source == true
-	input.model.parameters_publicly_available == true
+	declarations.resolve(input, ["model", "free_and_open_source"]) == true
+	declarations.resolve(input, ["model", "parameters_publicly_available"]) == true
 	not systemic_risk
 }
 
