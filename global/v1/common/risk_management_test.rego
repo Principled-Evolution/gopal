@@ -5,62 +5,39 @@ import rego.v1
 
 # --- risk_score --------------------------------------------------------------
 
-test_risk_score_prefers_risk_management_score if {
-	rm.risk_score({"risk_management": {"score": 0.85}}) == 0.85
+test_risk_score_reads_the_canonical_name if {
+	rm.risk_score({"metrics": {"risk_management": {"score": 0.85}}}) == 0.85
 }
 
-test_risk_score_falls_back_to_evaluation_path if {
-	rm.risk_score({"evaluation": {"risk_management": {"score": 0.42}}}) == 0.42
+# Undefined, not 0.0. Higher is better here, so 0.0 denied and the direction was
+# safe, but it denied while reporting a measurement nobody took.
+test_risk_score_is_undefined_when_unmeasured if {
+	not rm.risk_score({})
+	not rm.risk_score({"metrics": {}})
 }
 
-test_risk_score_first_shape_wins if {
-	rm.risk_score({
-		"risk_management": {"score": 0.10},
-		"evaluation": {"risk_management": {"score": 0.90}},
-	}) == 0.10
-}
-
-# Higher is better for risk management, so the 0.0 fallback denies. Absence of
-# evidence fails, which is the direction a compliance library wants.
-test_risk_score_defaults_to_zero if {
-	rm.risk_score({}) == 0.0
+test_the_retired_evaluation_spelling_is_not_read if {
+	not rm.risk_score({"evaluation": {"risk_management": {"score": 0.42}}})
 }
 
 # --- has_adequate_risk_management -------------------------------------------
 
 test_has_adequate_risk_management_above_threshold if {
-	rm.has_adequate_risk_management({"risk_management": {"score": 0.9}}, 0.7)
+	rm.has_adequate_risk_management({"metrics": {"risk_management": {"score": 0.9}}}, 0.7)
 }
 
 test_has_adequate_risk_management_at_boundary if {
-	rm.has_adequate_risk_management({"risk_management": {"score": 0.7}}, 0.7)
+	rm.has_adequate_risk_management({"metrics": {"risk_management": {"score": 0.7}}}, 0.7)
 }
 
 test_not_adequate_risk_management_below_threshold if {
-	not rm.has_adequate_risk_management({"risk_management": {"score": 0.3}}, 0.7)
+	not rm.has_adequate_risk_management({"metrics": {"risk_management": {"score": 0.3}}}, 0.7)
 }
 
-# Follows from the 0.0 fallback: an unmeasured system is inadequate.
+# risk_score is undefined for an unmeasured system, so the comparison fails
+# and the system is inadequate. Absence does not become adequacy.
 test_not_adequate_risk_management_for_unreadable_metrics if {
 	not rm.has_adequate_risk_management({}, 0.7)
-}
-
-# --- passes_risk_threshold ---------------------------------------------------
-
-test_passes_risk_threshold_above if {
-	rm.passes_risk_threshold({"risk_management_score": 0.8}, 0.7)
-}
-
-test_passes_risk_threshold_at_boundary if {
-	rm.passes_risk_threshold({"risk_management_score": 0.7}, 0.7)
-}
-
-test_fails_risk_threshold_below if {
-	not rm.passes_risk_threshold({"risk_management_score": 0.1}, 0.7)
-}
-
-test_fails_risk_threshold_when_score_absent if {
-	not rm.passes_risk_threshold({}, 0.7)
 }
 
 # --- has_adequate_documentation ---------------------------------------------

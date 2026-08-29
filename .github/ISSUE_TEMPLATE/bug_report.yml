@@ -52,7 +52,8 @@ body:
       description: The exact commands you ran.
       render: shell
       placeholder: |
-        opa eval -d . -i input.json "data.international.eu_ai_act.v1.transparency"
+        opa eval -d international -d helper_functions -d global \
+          -i input.json "data.international.eu_ai_act.v1.transparency"
     validations:
       required: true
 

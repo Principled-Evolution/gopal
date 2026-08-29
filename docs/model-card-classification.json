@@ -34,7 +34,6 @@
     "system.performs_biometric_categorisation": "`pipeline_tag` can indicate the task",
     "system.sources": "the `datasets` field can indicate provenance of training images",
     "model.free_and_open_source": "`license` names a licence, but the Article 53(2) open-source treatment also turns on access, use, modification and distribution rights and on parameters being public. A licence string is evidence toward the test, not the test",
-    "model.parameters_publicly_available": "established by inspecting the repository, not by the card. A card may link weights without asserting their availability",
-    "documentation.model_card.completeness": "circular: the card scoring itself. Counting it as answerable inflates the numerator"
+    "model.parameters_publicly_available": "established by inspecting the repository, not by the card. A card may link weights without asserting their availability"
   }
 }

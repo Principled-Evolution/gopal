@@ -18,18 +18,18 @@ start
 :Metrics written into the contract\n//metrics.content_safety.score//\n//metrics.fairness.gender_bias//;
 
 |#EEF2FF|Policy|
-:Pin a GOPAL bundle\n//gopal-international-eu_ai_act-1.3.1.tar.gz//;
+:Pin a GOPAL bundle\n//gopal-international-eu_ai_act-2.0.0.tar.gz//;
 :opa eval against the contract;
 
 if (Every policy satisfied?) then (yes)
   |#F8FAFC|Repository|
-  #E6F4F1:Status check passes\nMerge allowed;
+  :Status check passes\nMerge allowed; <<#E6F4F1>>
   |#FEF3C7|Evidence|
   :Report retained as a build artefact\nPDF, Markdown or JSON;
   stop
 else (no, or no conclusion)
   |#F8FAFC|Repository|
-  #FEE4E2:Status check fails\nnaming the article and the control;
+  :Status check fails\nnaming the article and the control; <<#FEE4E2>>
   :Fix the system, or record the fact,\nor challenge the policy;
   stop
 endif

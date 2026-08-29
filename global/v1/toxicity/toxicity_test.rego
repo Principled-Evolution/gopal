@@ -5,7 +5,7 @@ import data.global.v1.toxicity
 # Test case for compliant input with custom parameters
 test_allow_with_custom_params if {
 	toxicity.allow with input as {
-		"evaluation": {"toxicity_score": 0.12},
+		"metrics": {"toxicity": {"score": 0.12}},
 		"params": {"toxicity_threshold": 0.15},
 	}
 }
@@ -13,7 +13,7 @@ test_allow_with_custom_params if {
 # Test case for non-compliant input with custom parameters
 test_deny_with_custom_params if {
 	not toxicity.allow with input as {
-		"evaluation": {"toxicity_score": 0.18},
+		"metrics": {"toxicity": {"score": 0.18}},
 		"params": {"toxicity_threshold": 0.15},
 	}
 }
@@ -21,7 +21,7 @@ test_deny_with_custom_params if {
 # Test case for compliant input with default parameters
 test_allow_with_default_params if {
 	toxicity.allow with input as {
-		"evaluation": {"toxicity_score": 0.05},
+		"metrics": {"toxicity": {"score": 0.05}},
 		"params": {},
 	}
 }
@@ -29,7 +29,7 @@ test_allow_with_default_params if {
 # Test case for non-compliant input with default parameters
 test_deny_with_default_params if {
 	not toxicity.allow with input as {
-		"evaluation": {"toxicity_score": 0.15},
+		"metrics": {"toxicity": {"score": 0.15}},
 		"params": {},
 	}
 }
@@ -37,7 +37,7 @@ test_deny_with_default_params if {
 # Test explicit deny rule
 test_explicit_deny_rule if {
 	toxicity.deny with input as {
-		"evaluation": {"toxicity_score": 0.15},
+		"metrics": {"toxicity": {"score": 0.15}},
 		"params": {"toxicity_threshold": 0.1},
 	}
 }
@@ -45,7 +45,7 @@ test_explicit_deny_rule if {
 # Test non-compliant rule
 test_non_compliant_rule if {
 	toxicity.non_compliant with input as {
-		"evaluation": {"toxicity_score": 0.15},
+		"metrics": {"toxicity": {"score": 0.15}},
 		"params": {"toxicity_threshold": 0.1},
 	}
 }
@@ -53,7 +53,7 @@ test_non_compliant_rule if {
 # Test compliance report details
 test_compliance_report_details if {
 	report := toxicity.compliance_report with input as {
-		"evaluation": {"toxicity_score": 0.05},
+		"metrics": {"toxicity": {"score": 0.05}},
 		"params": {"toxicity_threshold": 0.15},
 	}
 
@@ -67,7 +67,7 @@ test_compliance_report_details if {
 # Test compliance report recommendations
 test_compliance_report_recommendations if {
 	report := toxicity.compliance_report with input as {
-		"evaluation": {"toxicity_score": 0.2},
+		"metrics": {"toxicity": {"score": 0.2}},
 		"params": {"toxicity_threshold": 0.15},
 	}
 
@@ -86,25 +86,15 @@ test_allow_denies_on_empty_input if {
 	not toxicity.allow with input as {}
 }
 
-# The canonical metrics.toxicity.score spelling, which is what an evaluator or
-# adapter publishing through helper_functions/metrics.rego supplies. The legacy
-# evaluation.toxicity_score tests above must keep passing beside these: the
-# migration added a spelling rather than swapping one for another.
+# metrics.toxicity.score, which is what an evaluator or adapter publishing
+# through helper_functions/metrics.rego supplies, and since 2.0.0 the only
+# spelling this policy reads.
 test_allow_reads_the_canonical_spelling if {
 	toxicity.allow with input as {"metrics": {"toxicity": {"score": 0.02}}}
 }
 
 test_deny_reads_the_canonical_spelling if {
 	toxicity.deny with input as {"metrics": {"toxicity": {"score": 0.5}}}
-}
-
-# The canonical path is listed first in the alias table, so this is resolution
-# order rather than luck.
-test_canonical_wins_over_legacy if {
-	toxicity.deny with input as {
-		"metrics": {"toxicity": {"score": 0.5}},
-		"evaluation": {"toxicity_score": 0.0},
-	}
 }
 
 # An absent score must not satisfy allow. resolve leaves it undefined, the rule

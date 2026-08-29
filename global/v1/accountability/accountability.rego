@@ -72,46 +72,95 @@ non_compliant if {
 	declarations.resolve(input, ["governance", "incident_response", "process_defined"]) == false
 }
 
+# What the report shows for audit logging completeness.
+#
+# null when nothing was supplied, so an unmeasured system is not reported as one
+# that logs nothing. The decision path is undefined in the same case and the
+# default denies; a report rule left undefined would instead delete the whole
+# compliance_report object and lose the finding silently.
+default reported_audit_logging_completeness := null
+
+reported_audit_logging_completeness := metrics.resolve(input, "metrics.audit_logging.completeness")
+
 # Define the compliance report
 compliance_report := {
 	"policy": "Global Accountability Policy",
 	"version": "1.0.0",
 	"overall_result": allow,
 	"details": {
-		"human_oversight_enabled": object.get(input.governance, ["human_oversight", "enabled"], false),
-		"audit_logging_enabled": object.get(input.governance, ["audit_logging", "enabled"], false),
-		"audit_logging_completeness": object.get(input.governance, ["audit_logging", "completeness_score"], 0),
+		"human_oversight_enabled": object.get(input, ["governance", "human_oversight", "enabled"], false),
+		"audit_logging_enabled": object.get(input, ["governance", "audit_logging", "enabled"], false),
+		"audit_logging_completeness": reported_audit_logging_completeness,
 		"audit_logging_completeness_threshold": object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8),
-		"responsibility_assigned": object.get(input.governance, ["responsibility", "clearly_assigned"], false),
-		"incident_response_defined": object.get(input.governance, ["incident_response", "process_defined"], false),
+		"responsibility_assigned": object.get(input, ["governance", "responsibility", "clearly_assigned"], false),
+		"incident_response_defined": object.get(input, ["governance", "incident_response", "process_defined"], false),
 	},
 	"recommendations": recommendations,
 }
 
 # Generate recommendations based on compliance issues
-recommendations := human_oversight_recs if {
+# See the note in global/v1/transparency: without a default, an unmeasured
+# completeness leaves recommendations undefined and takes the whole
+# compliance_report with it.
+# What to recommend when no branch above matched. See the note in
+# global/v1/transparency: without this the report deletes itself, and a fixed
+# string naming one input is wrong whenever that input is the one present.
+_input_presence := {
+	"governance.human_oversight.enabled": declarations.supplied(input, ["governance", "human_oversight", "enabled"]),
+	"governance.audit_logging.enabled": declarations.supplied(input, ["governance", "audit_logging", "enabled"]),
+	"governance.responsibility.clearly_assigned": declarations.supplied(input, ["governance", "responsibility", "clearly_assigned"]),
+	"governance.incident_response.process_defined": declarations.supplied(input, ["governance", "incident_response", "process_defined"]),
+	"metrics.audit_logging.completeness": metrics.supplied(input, "metrics.audit_logging.completeness"),
+}
+
+# The inputs this policy reads, and whether each arrived. Object iteration in
+# Rego is ordered by key, so the list below is stable between runs.
+default _unsupplied_recs := ["Every input this policy reads was supplied, but not in a form it recognises. Check the values against the inputs declared at the top of this policy."]
+
+_unsupplied_recs := [sprintf("Supply %v, which this policy reads and did not receive", [name]) |
+	some name in _unsupplied_names
+] if {
+	count(_unsupplied_names) > 0
+}
+
+_unsupplied_names := [name |
+	some name, present in _input_presence
+	not present
+]
+
+# One of the branches below matched, or none did and the input is incomplete.
+# The two are mutually exclusive, so they cannot conflict.
+recommendations := _matched_recommendations if {
+	_matched_recommendations
+}
+
+recommendations := _unsupplied_recs if {
+	not _matched_recommendations
+}
+
+_matched_recommendations := human_oversight_recs if {
 	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == false
 }
 
-recommendations := audit_logging_recs if {
+_matched_recommendations := audit_logging_recs if {
 	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
 	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == false
 }
 
-recommendations := audit_logging_completeness_recs if {
+_matched_recommendations := audit_logging_completeness_recs if {
 	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
 	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
-recommendations := responsibility_recs if {
+_matched_recommendations := responsibility_recs if {
 	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
 	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 	declarations.resolve(input, ["governance", "responsibility", "clearly_assigned"]) == false
 }
 
-recommendations := incident_response_recs if {
+_matched_recommendations := incident_response_recs if {
 	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
 	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
@@ -119,7 +168,7 @@ recommendations := incident_response_recs if {
 	declarations.resolve(input, ["governance", "incident_response", "process_defined"]) == false
 }
 
-recommendations := [] if {
+_matched_recommendations := [] if {
 	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
 	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)

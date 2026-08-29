@@ -4,7 +4,7 @@
 
 ## What this measures, and what it does not
 
-GOPAL v1.3.1 reads **184 distinct declared input fields** across the 35 EU and UK policy checks shipped to the [validation preview](https://principledevolution.ai/playground). A declared input is one no tool can measure for you: whether a CE marking was affixed, whether required documentation has been retained for ten years.
+GOPAL v2.0.0 reads **183 distinct declared input fields** across the 35 EU and UK policy checks shipped to the [validation preview](https://principledevolution.ai/playground). A declared input is one no tool can measure for you: whether a CE marking was affixed, whether required documentation has been retained for ten years.
 
 This document maps how many of those inputs a fully populated **standard Hugging Face model card** can supply. It is a measurement of **model-card-to-policy-schema overlap**. It is explicitly not a percentage of legal compliance, nor of all applicable regulatory obligations, and no figure here should be quoted as one.
 
@@ -21,11 +21,11 @@ Every field is classified below against what a card structurally contains: its Y
 | | Facts | Share |
 | --- | --- | --- |
 | **Answerable from a model card** | 5 | 3% |
-| **Partially informed by one** | 24 | 13% |
-| **Untouched by one** | 155 | 84% |
-| Total | 184 | |
+| **Partially informed by one** | 23 | 13% |
+| **Untouched by one** | 155 | 85% |
+| Total | 183 | |
 
-A complete, well-written model card supplies **5 of 184** of these inputs outright and gives you material for 24 more. The standard template does not prompt for the remaining **155**.
+A complete, well-written model card supplies **5 of 183** of these inputs outright and gives you material for 23 more. The standard template does not prompt for the remaining **155**.
 
 Much of that remainder is organisational, process and supply-chain evidence: who signed the declaration of conformity, whether a notified body was involved, whether the deployer told the affected workers, whether logs are kept for six months. Some of it is not organisational at all and needs technical work a card simply does not carry, such as adversarial testing, cybersecurity controls, dataset quality and fairness measurement.
 
@@ -54,7 +54,6 @@ These are the ones worth arguing about. In each case the card raises the topic w
 | `datasets.relevant` | the `datasets` field names them; relevance is a claim about them |
 | `datasets.sufficiently_representative` | Bias, Risks and Limitations often discusses representativeness without asserting it |
 | `documentation.explainability.completeness` | some cards discuss interpretability |
-| `documentation.model_card.completeness` | circular: the card scoring itself. Counting it as answerable inflates the numerator |
 | `documentation.technical_documentation.completeness` | a card is a summary, not the Annex IV file |
 | `documentation.testing_process_documented` | Evaluation covers results more often than process |
 | `explainability.method_documented` | sometimes present in Technical Specifications |

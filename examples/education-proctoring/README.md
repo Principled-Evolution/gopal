@@ -63,6 +63,7 @@ This policy encodes the minimum signal a university or ed-tech vendor's complian
   run: |
     opa eval \
       -d gopal/industry_specific/education/v1/assessment_and_evaluation \
+      -d gopal/helper_functions \
       --input proctoring-session.json \
       --fail-defined \
       "data.industry_specific.education.v1.assessment_and_evaluation.responsible_ai_proctoring_compliant == false"

@@ -6,14 +6,12 @@ import data.global.v1.transparency
 test_allow_with_custom_params if {
 	transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.7,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.7}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -22,14 +20,12 @@ test_allow_with_custom_params if {
 test_allow_with_default_params if {
 	transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.85,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.85}},
 		"params": {},
 	}
 }
@@ -38,14 +34,12 @@ test_allow_with_default_params if {
 test_deny_missing_model_card if {
 	not transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": false,
-				"completeness_score": 0.85,
-			},
+			"model_card": {"exists": false},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.85}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -54,14 +48,12 @@ test_deny_missing_model_card if {
 test_deny_insufficient_model_card_completeness if {
 	not transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.5,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.5}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -70,14 +62,12 @@ test_deny_insufficient_model_card_completeness if {
 test_deny_missing_explainability if {
 	not transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.85,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": false},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.85}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -86,14 +76,12 @@ test_deny_missing_explainability if {
 test_deny_missing_limitations if {
 	not transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.85,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": false},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.85}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -102,14 +90,12 @@ test_deny_missing_limitations if {
 test_deny_missing_use_cases if {
 	not transparency.allow with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.85,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": false},
 		},
+		"metrics": {"model_card": {"completeness": 0.85}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -118,14 +104,12 @@ test_deny_missing_use_cases if {
 test_recommendations_missing_model_card if {
 	transparency.recommendations == ["Create a model card documenting the AI system's properties, capabilities, and limitations"] with input as {
 		"documentation": {
-			"model_card": {
-				"exists": false,
-				"completeness_score": 0,
-			},
+			"model_card": {"exists": false},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -134,14 +118,12 @@ test_recommendations_missing_model_card if {
 test_recommendations_insufficient_model_card_completeness if {
 	transparency.recommendations == ["Enhance the model card with more comprehensive information about the AI system"] with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.5,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.5}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 }
@@ -150,14 +132,12 @@ test_recommendations_insufficient_model_card_completeness if {
 test_compliance_report_details if {
 	report := transparency.compliance_report with input as {
 		"documentation": {
-			"model_card": {
-				"exists": true,
-				"completeness_score": 0.85,
-			},
+			"model_card": {"exists": true},
 			"explainability": {"provided": true},
 			"limitations": {"documented": true},
 			"use_cases": {"defined": true},
 		},
+		"metrics": {"model_card": {"completeness": 0.85}},
 		"params": {"model_card_completeness_threshold": 0.6},
 	}
 
@@ -178,10 +158,10 @@ test_allow_denies_on_empty_input if {
 	not transparency.allow with input as {}
 }
 
-# The canonical metrics.model_card.completeness spelling, which is what
-# AICertify's ModelCardEvaluator emits and what the Hugging Face card adapter
-# feeds it. The legacy documentation.model_card.completeness_score tests above
-# must keep passing beside these.
+# The metrics.model_card.completeness spelling, which is what the model card
+# rubric in global/v1/documentation emits and what the Hugging Face card adapter
+# feeds it. It is the only spelling: the documentation.model_card variants were
+# retired in 2.0.0.
 canonical_docs := {
 	"documentation": {
 		"model_card": {"exists": true},
@@ -201,16 +181,6 @@ test_canonical_completeness_below_threshold_denies if {
 		canonical_docs,
 		[{"op": "replace", "path": "/metrics/model_card/completeness", "value": 0.5}],
 	)
-}
-
-# The canonical path is listed first in the alias table, so this is resolution
-# order rather than luck.
-test_canonical_wins_over_legacy_completeness if {
-	both := object.union(
-		canonical_docs,
-		{"documentation": {"model_card": {"exists": true, "completeness_score": 0.1}}},
-	)
-	transparency.allow with input as both
 }
 
 # An absent score must not satisfy allow. resolve leaves it undefined, the rule
@@ -278,4 +248,34 @@ test_bare_declarations_are_unaffected if {
 		"metrics": {"model_card": {"completeness": 0.9}},
 	}
 	transparency.allow with input as bare
+}
+
+# An unmeasured completeness is reported as null, not as 0. Those are different
+# findings: 0 means the card is empty, null means nobody has looked, and they go
+# to different people. The report must also still exist, because an undefined
+# rule inside the object deletes the whole object.
+test_report_says_null_for_unmeasured_completeness if {
+	report := transparency.compliance_report with input as {"documentation": {
+		"model_card": {"exists": true},
+		"explainability": {"provided": true},
+		"limitations": {"documented": true},
+		"use_cases": {"defined": true},
+	}}
+
+	report.details.model_card_completeness == null
+	report.overall_result == false
+}
+
+# The report must survive the submission with no evidence at all, and say what
+# is missing. Two separate things used to delete it: an undefined value anywhere
+# inside the object, and object.get on a parent that was not there. The
+# recommendation has to name an input that is genuinely absent, because a fixed
+# string naming one input is wrong whenever that input is the one supplied.
+test_report_survives_empty_input_and_names_what_is_missing if {
+	report := transparency.compliance_report with input as {}
+
+	report.overall_result == false
+	report.details.model_card_completeness == null
+	some rec in report.recommendations
+	contains(rec, "documentation.model_card.exists")
 }

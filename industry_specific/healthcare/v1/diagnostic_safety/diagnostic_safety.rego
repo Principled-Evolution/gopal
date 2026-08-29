@@ -77,17 +77,32 @@ allow if {
 	count(failed_evaluations) == 0
 }
 
+# What the report shows for a score.
+#
+# The decision rules above use resolve_or with a -1 sentinel, which fails every
+# threshold and so denies an unmeasured system. -1 is right for a comparison and
+# wrong for a report: it reads as a score, and no rubric produces it. null says
+# nobody measured this, which is a different finding from a score of zero and
+# goes to a different person.
+#
+# Until 2.0.0 these three read evaluation.<name>_score with a fallback of 0
+# while the decisions above read the canonical names, so a report could contradict
+# the verdict in its own file.
+reported_score(name) := value if {
+	value := metrics.resolve(input, sprintf("metrics.%v.score", [name]))
+} else := null
+
 # Define the compliance report
 compliance_report := {
 	"policy": "Healthcare Diagnostic Safety Policy",
 	"version": "1.0.0",
 	"overall_result": allow,
 	"details": {
-		"fairness_score": object.get(input, ["evaluation", "fairness_score"], 0),
+		"fairness_score": reported_score("fairness"),
 		"fairness_threshold": object.get(input, ["params", "fairness_threshold"], 0.85),
-		"content_safety_score": object.get(input, ["evaluation", "content_safety_score"], 0),
+		"content_safety_score": reported_score("content_safety"),
 		"content_safety_threshold": object.get(input, ["params", "content_safety_threshold"], 0.90),
-		"risk_management_score": object.get(input, ["evaluation", "risk_management_score"], 0),
+		"risk_management_score": reported_score("risk_management"),
 		"risk_management_threshold": object.get(input, ["params", "risk_management_threshold"], 0.90),
 		"failed_evaluations": failed_evaluations,
 	},

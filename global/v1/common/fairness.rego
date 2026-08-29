@@ -1,10 +1,11 @@
 # RequiredMetrics:
-#   - fairness_score
+#   - metrics.fairness.score
 #
 # RequiredParams:
 #   - fairness_threshold (default 0.8)
 package global.v1.common.fairness
 
+import data.helper_functions.metrics
 import rego.v1
 
 # Common fairness rules and utilities for reuse across policies
@@ -41,14 +42,15 @@ racial_bias_detected(metrics) if {
 	metrics.summary.stereotype_values.racial_bias_detected == true
 }
 
-# Get fairness score with reasonable default
-fairness_score(metrics) := score if {
-	score = metrics.fairness.score
-} else := score if {
-	score = metrics.evaluation.fairness.score
-} else := 0.0
-
-# Check if fairness score passes threshold
-passes_fairness_threshold(eval, threshold) if {
-	eval.fairness_score >= threshold
-}
+# The fairness score, or undefined.
+#
+# Takes the whole input document and reads through helper_functions/metrics, so
+# there is one place that knows how a metric is spelled. Until 2.0.0 this
+# resolved its own else-chain over spellings that the alias table also carried,
+# and fell back to 0.0 for an unreadable input. Fairness is a higher-is-better
+# score, so 0.0 denied, but it denied while reporting a measurement that was
+# never taken.
+#
+# Removed in 2.0.0: passes_fairness_threshold, which read the retired flat
+# fairness_score and had no callers.
+fairness_score(doc) := metrics.resolve(doc, "metrics.fairness.score")

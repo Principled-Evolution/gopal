@@ -8,69 +8,8 @@ test_canonical_path_resolves if {
 	metrics.resolve({"metrics": {"content_safety": {"score": 0.77}}}, "metrics.content_safety.score") == 0.77
 }
 
-# Every legacy spelling that exists in the library still resolves, so migrating
-# a policy to the canonical name cannot break an input written for the old one.
-test_legacy_dotted_evaluation_path_resolves if {
-	metrics.resolve({"evaluation": {"content_safety": {"score": 0.42}}}, "metrics.content_safety.score") == 0.42
-}
-
-test_legacy_underscored_evaluation_path_resolves if {
-	metrics.resolve({"evaluation": {"content_safety_score": 0.31}}, "metrics.content_safety.score") == 0.31
-}
-
-test_legacy_bare_score_resolves if {
-	metrics.resolve({"content_safety_score": 0.11}, "metrics.content_safety.score") == 0.11
-}
-
-test_legacy_fairness_spellings_resolve if {
-	metrics.resolve({"evaluation": {"fairness": {"score": 0.5}}}, "metrics.fairness.score") == 0.5
-	metrics.resolve({"evaluation": {"fairness_score": 0.6}}, "metrics.fairness.score") == 0.6
-	metrics.resolve({"fairness_score": 0.7}, "metrics.fairness.score") == 0.7
-}
-
-test_legacy_risk_management_spellings_resolve if {
-	metrics.resolve({"evaluation": {"risk_management": {"score": 0.5}}}, "metrics.risk_management.score") == 0.5
-	metrics.resolve({"evaluation": {"risk_management_score": 0.6}}, "metrics.risk_management.score") == 0.6
-	metrics.resolve({"risk_management_score": 0.7}, "metrics.risk_management.score") == 0.7
-}
-
-test_legacy_toxicity_spellings_resolve if {
-	# Aggregate spellings only. max_toxicity is a different statistic and is
-	# covered by its own test below.
-	metrics.resolve({"evaluation": {"toxicity_score": 0.9}}, "metrics.toxicity.score") == 0.9
-	metrics.resolve({"content_safety": {"toxicity_score": 0.3}}, "metrics.toxicity.score") == 0.3
-}
-
-test_legacy_max_toxicity_spellings_resolve if {
+test_max_toxicity_resolves if {
 	metrics.resolve({"metrics": {"toxicity": {"max_toxicity": 0.8}}}, "metrics.toxicity.max_toxicity") == 0.8
-	metrics.resolve(
-		{"summary": {"toxicity_values": {"max_toxicity": 0.7}}},
-		"metrics.toxicity.max_toxicity",
-	) == 0.7
-}
-
-test_legacy_model_card_spelling_resolves if {
-	metrics.resolve(
-		{"documentation": {"model_card": {"completeness_score": 0.65}}},
-		"metrics.model_card.completeness",
-	) == 0.65
-}
-
-# Order matters and must be deterministic. An input carrying both the canonical
-# name and a legacy one resolves to the canonical value every time; an
-# unordered search over matching paths would let OPA return either.
-test_canonical_wins_over_legacy if {
-	doc := {
-		"metrics": {"content_safety": {"score": 0.9}},
-		"evaluation": {"content_safety_score": 0.1},
-		"content_safety_score": 0.2,
-	}
-	metrics.resolve(doc, "metrics.content_safety.score") == 0.9
-}
-
-test_earlier_legacy_wins_over_later_legacy if {
-	doc := {"evaluation": {"content_safety": {"score": 0.4}}, "content_safety_score": 0.2}
-	metrics.resolve(doc, "metrics.content_safety.score") == 0.4
 }
 
 # Absent means undefined, not zero. A policy that reads an unsupplied toxicity
@@ -113,7 +52,7 @@ test_every_canonical_name_is_its_own_first_candidate if {
 # default so that an absent metric compares below every threshold and is
 # counted as a failure; losing that would turn a fail-closed check fail-open.
 test_resolve_or_returns_the_value_when_present if {
-	metrics.resolve_or({"evaluation": {"fairness_score": 0.6}}, "metrics.fairness.score", -1) == 0.6
+	metrics.resolve_or({"metrics": {"fairness": {"score": 0.6}}}, "metrics.fairness.score", -1) == 0.6
 }
 
 test_resolve_or_returns_the_sentinel_when_absent if {
@@ -149,29 +88,29 @@ test_an_aggregate_does_not_answer_a_worst_case_question if {
 # directions, and conflating them inverted a verdict in
 # global/v1/common/content_safety once already.
 test_a_safety_score_never_resolves_as_toxicity if {
-	doc := {"content_safety": {"score": 0.95}}
+	doc := {"metrics": {"content_safety": {"score": 0.95}}}
 	not metrics.resolve(doc, "metrics.toxicity.score")
 	not metrics.resolve(doc, "metrics.toxicity.max_toxicity")
 	metrics.resolve(doc, "metrics.content_safety.score") == 0.95
 }
 
-# The evaluator's own worst-case spelling now resolves, which is what lets an
-# off-the-shelf ContentSafetyEvaluator satisfy the EU transparency policy.
-test_the_evaluator_worst_case_spelling_resolves if {
-	metrics.resolve({"content_safety": {"max_toxicity": 0.42}}, "metrics.toxicity.max_toxicity") == 0.42
-}
+# The table carries no legacy spellings after 2.0.0, so the deprecation
+# machinery is exercised against a table supplied by the test rather than
+# against the real one. It has to keep working: it is how the next spelling
+# gets retired, and COMPATIBILITY.md promises it.
+sample_aliases := {"metrics.fairness.score": [
+	["metrics", "fairness", "score"],
+	["evaluation", "fairness_score"],
+	["fairness_score"],
+]}
 
-# The alias table is debt. 18 of its 20 legacy spellings have no user anywhere
-# in this repository, and every policy reads through resolve now, so they exist
-# for hypothetical external inputs. Retiring them on taste would be guessing;
-# this reports which are actually sent so the next major version can drop the
-# ones nobody uses, with evidence rather than a hunch.
 test_deprecated_names_what_was_sent_and_what_to_send if {
 	used := metrics.deprecated({
-		"content_safety_score": 0.9,
+		"fairness_score": 0.9,
 		"evaluation": {"fairness_score": 0.8},
-	})
-	used.content_safety_score == "metrics.content_safety.score"
+	}) with metrics.aliases as sample_aliases
+
+	used.fairness_score == "metrics.fairness.score"
 	used["evaluation.fairness_score"] == "metrics.fairness.score"
 }
 
@@ -192,8 +131,49 @@ test_the_canonical_spelling_is_not_reported_as_legacy if {
 
 test_both_spellings_present_reports_only_the_legacy_one if {
 	used := metrics.deprecated({
-		"metrics": {"toxicity": {"score": 0.01}},
-		"evaluation": {"toxicity_score": 0.02},
-	})
-	used == {"evaluation.toxicity_score": "metrics.toxicity.score"}
+		"metrics": {"fairness": {"score": 0.01}},
+		"evaluation": {"fairness_score": 0.02},
+	}) with metrics.aliases as sample_aliases
+
+	used == {"evaluation.fairness_score": "metrics.fairness.score"}
+}
+
+# The 2.0.0 contract, stated as a test rather than only in the changelog. These
+# twenty spellings resolved in 1.x and must not resolve now; a well-meaning
+# re-addition to the alias table would revive an input format the library no
+# longer claims to read, and nothing else in the suite would notice.
+test_retired_spellings_no_longer_resolve if {
+	every doc, canonical in {
+		{"evaluation": {"content_safety": {"score": 0.4}}}: "metrics.content_safety.score",
+		{"evaluation": {"content_safety_score": 0.4}}: "metrics.content_safety.score",
+		{"content_safety": {"score": 0.4}}: "metrics.content_safety.score",
+		{"content_safety_score": 0.4}: "metrics.content_safety.score",
+		{"evaluation": {"fairness": {"score": 0.4}}}: "metrics.fairness.score",
+		{"evaluation": {"fairness_score": 0.4}}: "metrics.fairness.score",
+		{"fairness_score": 0.4}: "metrics.fairness.score",
+		{"evaluation": {"risk_management": {"score": 0.4}}}: "metrics.risk_management.score",
+		{"evaluation": {"risk_management_score": 0.4}}: "metrics.risk_management.score",
+		{"risk_management_score": 0.4}: "metrics.risk_management.score",
+		{"evaluation": {"toxicity_score": 0.4}}: "metrics.toxicity.score",
+		{"content_safety": {"toxicity_score": 0.4}}: "metrics.toxicity.score",
+		{"summary": {"toxicity_values": {"max_toxicity": 0.4}}}: "metrics.toxicity.max_toxicity",
+		{"content_safety": {"max_toxicity": 0.4}}: "metrics.toxicity.max_toxicity",
+		{"documentation": {"model_card": {"completeness_score": 0.4}}}: "metrics.model_card.completeness",
+		{"documentation": {"model_card": {"completeness": 0.4}}}: "metrics.model_card.completeness",
+		{"evaluation": {"patient_safety": {"score": 0.4}}}: "metrics.patient_safety.score",
+		{"evaluation": {"clinical_validation": {"score": 0.4}}}: "metrics.clinical_validation.score",
+		{"evaluation": {"risk_assessment": {"score": 0.4}}}: "metrics.risk_assessment.score",
+		{"governance": {"audit_logging": {"completeness_score": 0.4}}}: "metrics.audit_logging.completeness",
+	} {
+		not metrics.resolve(doc, canonical)
+	}
+}
+
+# And the table itself carries nothing but canonical names, so a spelling cannot
+# creep back in without this failing.
+test_the_table_has_no_legacy_spellings if {
+	every name, paths in metrics.aliases {
+		count(paths) == 1
+		concat(".", paths[0]) == name
+	}
 }

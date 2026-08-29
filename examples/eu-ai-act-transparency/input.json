@@ -10,7 +10,6 @@
       "last_updated": "2026-04-12"
     },
     "model_card": {
-      "completeness": 0.80,
       "url": "https://example.com/model-cards/customer-support-llm-v3"
     },
     "explainability": {
@@ -23,6 +22,9 @@
       "max_toxicity": 0.12,
       "mean_toxicity": 0.03,
       "sample_size": 5000
+    },
+    "model_card": {
+      "completeness": 0.8
     }
   }
 }

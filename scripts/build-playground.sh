@@ -248,15 +248,14 @@ jq -n \
 						decision: .primary_decision,
 						true_means: .decision_true_means,
 						references: .references,
+						# A measured value is spelled metrics.<name>, and after
+						# 2.0.0 that is the only spelling. The evaluation.,
+						# summary. and bare _score roots listed here until then
+						# were the retired aliases.
 						declared_fields: [
 							$fields[]
 							| select(startswith("params.") | not)
-							| select(
-								(startswith("metrics.") or startswith("evaluation.")
-								 or startswith("summary.") or startswith("results.")
-								 or . == "fairness_score" or . == "content_safety_score"
-								 or . == "risk_management_score") | not
-							)
+							| select(startswith("metrics.") | not)
 						],
 
 						# Thresholds the policy reads from `input.params`, each
@@ -267,12 +266,7 @@ jq -n \
 						parameter_fields: [$fields[] | select(startswith("params."))],
 						evaluator_fields: [
 							$fields[]
-							| select(
-								startswith("metrics.") or startswith("evaluation.")
-								or startswith("summary.") or startswith("results.")
-								or . == "fairness_score" or . == "content_safety_score"
-								or . == "risk_management_score"
-							)
+							| select(startswith("metrics."))
 						]
 					}
 				] | sort_by(.title // .package)

@@ -69,9 +69,7 @@
     "explainability": {
       "completeness": 0.9
     },
-    "model_card": {
-      "completeness": 0.9
-    },
+    "model_card": {},
     "technical_documentation": {
       "completeness": 0.9
     },

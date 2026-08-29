@@ -51,6 +51,15 @@ the policy, not back to us. The window exists so a user has a release in which t
 notice and object; it is not a measurement period, and silence at the end of it is
 the absence of evidence rather than evidence of absence.
 
+**The first cycle did not use the window.** The 20 legacy metric spellings were
+recorded as deprecated since 1.4.0 and removed in 2.0.0 without 1.4.0 or 1.5.0
+ever being released, so no consumer met the deprecation in a shipped version.
+That was a deliberate call, taken because the library had little external
+adoption and the alternative was carrying two spellings of every metric through
+two more releases. It is recorded here rather than smoothed over: the window
+above is the rule, and this was an exception to it. The migration table in
+[the changelog](../CHANGELOG.md) is what a consumer gets instead.
+
 Callers who want to know whether they are affected can ask directly:
 
 ```rego

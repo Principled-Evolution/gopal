@@ -91,7 +91,7 @@ default toxicity_below_threshold := false
 # Check if toxicity is below threshold. The threshold is read with a nested
 # object.get so that a missing input.params does not make the whole call undefined.
 toxicity_below_threshold := content_safety.toxicity_below_threshold(
-	input.metrics,
+	input,
 	object.get(input, ["params", "toxicity_threshold"], 0.7),
 )
 

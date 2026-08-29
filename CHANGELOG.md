@@ -5,21 +5,215 @@ All notable changes to **GOPAL** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [COMPATIBILITY.md](docs/COMPATIBILITY.md) for the versioning model applied to individual policy directories.
 
-## [Unreleased]
+## [2.0.0]: 2026-08-29
 
-### Deprecated
+Breaking. One input format goes away and three policies get stricter. If you
+send canonical `metrics.*` names already, nothing here affects you.
 
-- The 20 legacy metric spellings in `helper_functions/metrics.rego` are deprecated as of 1.4.0. They keep working, and every policy reads through `metrics.resolve`, so no input needs to change yet. `data.helper_functions.metrics.deprecated(input)` reports which legacy names an input used and what to send instead. Removal is a breaking change and waits for 2.0.0, no sooner than two minor releases from now. [`docs/COMPATIBILITY.md`](docs/COMPATIBILITY.md) sets out the policy and `scripts/check-deprecations.sh` holds the timer.
+### Removed
 
-### Added
+- **The 20 legacy metric spellings.** `helper_functions/metrics.rego` accepted
+  several names for the same measurement. It now accepts one. Rename these in
+  whatever writes your input:
 
-- Declarations may carry provenance: who asserted a fact, against what evidence, and until when. An expired attestation resolves to undefined rather than to its value, so a stale claim stops counting without being mistaken for a refuted one. Bare values keep working unchanged. See [`docs/declarations.md`](docs/declarations.md).
-- `evaluated_at` on the input document supplies the evaluation clock, so an expiry check is reproducible: the same bundle and input give the same verdict whenever it runs.
-- `global/v1/documentation/model_card_score` scores a model card's documentation completeness, replacing a rubric that lived in AICertify's Python and had to be reimplemented in JavaScript to run in a browser.
+  | Send this | Instead of |
+  | --- | --- |
+  | `metrics.content_safety.score` | `evaluation.content_safety.score`, `evaluation.content_safety_score`, `content_safety.score`, `content_safety_score` |
+  | `metrics.fairness.score` | `evaluation.fairness.score`, `evaluation.fairness_score`, `fairness_score` |
+  | `metrics.risk_management.score` | `evaluation.risk_management.score`, `evaluation.risk_management_score`, `risk_management_score` |
+  | `metrics.toxicity.score` | `evaluation.toxicity_score`, `content_safety.toxicity_score` |
+  | `metrics.toxicity.max_toxicity` | `summary.toxicity_values.max_toxicity`, `content_safety.max_toxicity` |
+  | `metrics.model_card.completeness` | `documentation.model_card.completeness_score`, `documentation.model_card.completeness` |
+  | `metrics.patient_safety.score` | `evaluation.patient_safety.score` |
+  | `metrics.clinical_validation.score` | `evaluation.clinical_validation.score` |
+  | `metrics.risk_assessment.score` | `evaluation.risk_assessment.score` |
+  | `metrics.audit_logging.completeness` | `governance.audit_logging.completeness_score` |
+
+  A retired name is not an error, it is silence: the metric reads as absent, and
+  a policy that requires it denies. So a missed rename shows up as a system that
+  stops passing, not as one that wrongly passes. `metrics.deprecated(input)`
+  still works and still reports what to send, and it reports nothing now because
+  there is nothing left to report.
+
+  Note the two `documentation.model_card.*` rows. Completeness is measured, by
+  `global/v1/documentation/model_card_score` or by an adapter, so it is spelled
+  as a metric rather than as something you assert about your documentation.
+
+- **`global.v1.common.common_rules` and `global.v1.common.compliance`, both
+  packages, entirely.** Sixteen functions between them and no importer anywhere
+  in this repository, in AICertify, or in the playground: only their own tests
+  used them. They had also drifted from the libraries beside them.
+  `common_rules.content_safety_is_toxic` read `metrics.content_safety.score`,
+  where higher is better, and compared it against a threshold as though higher
+  were worse, so a system scoring 0.95 for safety was reported as toxic;
+  `compliance.compliance_score` still resolved its own spellings in an
+  else-chain over an `evaluation.` root that the alias table had already
+  replaced. Carrying two dead libraries meant keeping them consistent with the
+  live ones forever, and they were not consistent already.
+
+  `common_rules` also carried the repository's only `entrypoint: true`
+  annotation, despite having no decision rule. It now sits on
+  `international/eu_ai_act/v1/transparency`, which the playground really does
+  compile and call as a WASM entrypoint.
+
+- **`global.v1.common.content_safety.passes_content_safety_threshold`**, which
+  read the retired `content_safety_score` and had no callers.
+
+- **`global.v1.common.fairness.passes_fairness_threshold`** and
+  **`global.v1.common.risk_management.passes_risk_threshold`**, which read the
+  retired flat `fairness_score` and `risk_management_score`. Neither had callers.
 
 ### Changed
 
-- Every policy reads declarations through `helper_functions/declarations`, 516 sites across 92 policies. Additive: a bare value resolves to itself, so existing inputs behave identically. Before this, supplying an attested declaration to a policy turned a passing check into a failing one, and in two policies silently stopped a `non_compliant` rule from firing.
+- Every policy reads declarations through `helper_functions/declarations`, 516
+  sites across 92 policies. Additive: a bare value resolves to itself, so
+  existing inputs behave identically. Before this, supplying an attested
+  declaration to a policy turned a passing check into a failing one, and in two
+  policies silently stopped a `non_compliant` rule from firing.
+
+- **`international/eu_ai_act/v1/transparency` denies a system whose toxicity was
+  never measured.** `allow` required `not has_high_toxicity`, and
+  `has_high_toxicity` is undefined when no reading was supplied. Undefined
+  negates to true, so a fully documented system that had never been tested
+  satisfied the toxicity condition of Article 13 and returned `allow: true`. It
+  now requires a reading below the threshold, and `compliance_reason` says which
+  of the two happened.
+
+- **`international/eu_ai_act/v1/transparency` reads
+  `metrics.model_card.completeness`.** It previously read the literal path
+  `documentation.model_card.completeness`, so a canonical input was invisible to
+  it.
+
+- **`industry_specific/bfs/v1/loan_evaluation/fair_lending` reads the canonical
+  names.** Its nine reads went straight to `evaluation.<metric>.score` and never
+  consulted the alias table, so a submission using canonical names scored `-1`
+  on every check and was denied. Sending legacy names to this policy worked
+  before and does not now; sending canonical names failed before and works now.
+
+- **Compliance reports say `null` for a metric nobody measured**, instead of
+  `0`. Affects `model_card_completeness` in `global/v1/transparency`,
+  `audit_logging_completeness` in `global/v1/accountability`, the three scores
+  in `industry_specific/healthcare/v1/diagnostic_safety`, and the three in
+  `fair_lending`. `0` made an unmeasured system indistinguishable from one that
+  scored zero, which are different findings for different people.
+
+- **`global/v1/common/fairness.fairness_score` and
+  `global/v1/common/risk_management.risk_score` take the whole input document,
+  read through `helper_functions/metrics`, and are undefined when nothing was
+  measured** rather than falling back to `0.0`. Both are higher-is-better
+  scores, so `0.0` denied and the direction was safe, but it denied while
+  reporting a measurement nobody took. Both also resolved their own spellings in
+  an else-chain that duplicated the alias table.
+
+- **`global/v1/fairness` reads toxicity through `helper_functions/metrics`** and
+  reports `null` rather than `0` for an unmeasured score. On a lower-is-better
+  scale, `0` reported an unmeasured system as the cleanest possible one while
+  the verdict, correctly, denied it. Its `RequiredMetrics` header also named
+  `content_safety.toxicity_score`, which the policy never read.
+
+- **`content_safety.toxicity_score` compares its sources instead of ranking
+  them.** A first pass preferred the worst-case reading outright, assuming a
+  maximum is always the stricter number. It is not: a `max_toxicity` of 0.20
+  beside a `content_safety.score` of 0.10, which inverts to a toxicity of 0.90,
+  is the more flattering of the two, and preferring it let a system where nine
+  checks in ten failed read as untoxic. The higher reading now wins whichever
+  source it came from.
+
+- **`global/v1/common/content_safety` functions take the whole input document.**
+  `toxicity_score`, `is_toxic` and `toxicity_below_threshold` previously
+  disagreed with each other about whether they were handed `input` or
+  `input.metrics`, and about whether `content_safety.score` meant safety or
+  toxicity. They now all take `input`, all read through
+  `helper_functions/metrics`, and all treat safety as safety. If both a
+  worst-case and an aggregate are supplied, the worst case wins.
+
+- **`fairness_gender_bias_detected`, `fairness_racial_bias_detected`,
+  `risk_management_has_high_risk` and `risk_management_has_high_risk_param` are
+  undefined for an absent metric** rather than answering `false` or `0`. Those
+  defaults read as "no problem found", so a system nobody measured answered the
+  same as one measured and found clean.
+
+### Fixed
+
+- **Three compliance reports contradicted their own verdict.** In
+  `global/v1/transparency`, `global/v1/accountability` and
+  `industry_specific/healthcare/v1/diagnostic_safety`, the decision rules read
+  the canonical metric while the report read a legacy path directly. A canonical
+  input got the right verdict and a report saying the score was `0`. The alias
+  table hid this: while both spellings resolved, the two agreed.
+
+- **`fair_lending` produced no report at all for the submission that most needed
+  one.** `compliance_report` read scores with `metrics.resolve`, which is
+  undefined when a score is absent, and an undefined value inside the object
+  made the whole object undefined rather than the one field.
+
+- **Three compliance reports disappeared when a metric was unmeasured.** In
+  `global/v1/transparency`, `global/v1/accountability` and `global/v1/fairness`,
+  every `recommendations` branch was conditional and each one that mentioned the
+  metric was undefined when no score was supplied. None fired, `recommendations`
+  went undefined, and an undefined value inside `compliance_report` deleted the
+  whole report. Each now has a `default recommendations` naming the metric to
+  supply.
+
+- **`docs/FAQ.md` taught an input format that no longer exists and two commands
+  that never worked.** Its examples used `evaluation.fairness_score` and
+  `evaluation.toxicity_score`, and both `opa eval -d gopal/` and
+  `opa run gopal/` fail with a merge error before reaching a policy, because OPA
+  loads every YAML and JSON file it finds as data, the issue templates and
+  `dist/` included. The same broken invocation was in the bug report template
+  people are asked to paste output from.
+
+- **Reports still vanished for an input missing a whole section.**
+  `global/v1/transparency` and `global/v1/accountability` read their details
+  with `object.get(input.documentation, ...)` and
+  `object.get(input.governance, ...)`, which are undefined when that key is
+  absent rather than falling back, and `global/v1/fairness` called `object.get`
+  on the result of a `resolve` that was itself undefined. An empty input
+  produced no report at all. The same shape survives at roughly fifty sites in
+  about twenty other policies and is not addressed here.
+
+- **The fallback recommendation named an input that was often present.** Its
+  first form was a fixed string telling the reader to supply a completeness
+  score, which was wrong whenever completeness was the input they had. It now
+  lists the inputs actually missing, and says so plainly when every input
+  arrived but not in a form the policy recognises.
+
+- **Four examples could not run.** `customer-support-llm`,
+  `eu-ai-act-transparency`, `nist-ai-rmf-govern` and `education-proctoring` each
+  loaded only their policy directory, so every one failed with
+  `undefined function data.helper_functions.metrics.resolve` once the policies
+  started reading through the helpers. The README snippets people copy had the
+  same gap. `eu-ai-act-transparency/expected-output.json` had also drifted from
+  what the policy produces.
+
+- **`docs/diagrams/usage2_ci_loop.svg` displayed two PlantUML deprecation
+  warnings** as yellow boxes in the rendered diagram.
+
+### Added
+
+- Declarations may carry provenance: who asserted a fact, against what evidence,
+  and until when. An expired attestation resolves to undefined rather than to its
+  value, so a stale claim stops counting without being mistaken for a refuted
+  one. Bare values keep working unchanged. See
+  [`docs/declarations.md`](docs/declarations.md).
+
+- `evaluated_at` on the input document supplies the evaluation clock, so an
+  expiry check is reproducible: the same bundle and input give the same verdict
+  whenever it runs.
+
+- `global/v1/documentation/model_card_score` scores a model card's documentation
+  completeness, replacing a rubric that lived in AICertify's Python and had to be
+  reimplemented in JavaScript to run in a browser.
+
+- **A test suite for `international/eu_ai_act/v1/transparency`**, which had one
+  test. That is why the toxicity fail-open above survived: the single test used
+  empty input, which denies for want of documentation before toxicity is
+  reached.
+
+- **`test_retired_spellings_no_longer_resolve`** asserts all twenty removed
+  names stay removed, and `test_the_table_has_no_legacy_spellings` asserts the
+  table carries nothing but canonical names. A re-addition fails the suite
+  rather than quietly reviving an input format the library no longer documents.
 
 ## [1.3.1]: 2026-08-28
 

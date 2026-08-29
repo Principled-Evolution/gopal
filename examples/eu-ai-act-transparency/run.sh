@@ -7,6 +7,7 @@ REPO_ROOT="$(cd "$HERE/../.." && pwd)"
 
 opa eval \
   -d "$REPO_ROOT/international/eu_ai_act/v1/transparency" \
+  -d "$REPO_ROOT/helper_functions" \
   --input "$HERE/input.json" \
   --format pretty \
   "data.international.eu_ai_act.v1.transparency.compliance_report"
