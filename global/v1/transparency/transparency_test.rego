@@ -221,3 +221,61 @@ test_absent_model_card_completeness_does_not_allow if {
 		[{"op": "remove", "path": "/metrics/model_card/completeness"}],
 	)
 }
+
+# Declarations may carry who asserted them and until when. Read directly, an
+# attestation is an object and `== true` is false, so a valid attestation turned
+# a passing check into a failing one and, worse, stopped `non_compliant` firing
+# at all: a real finding disappeared rather than a wrong approval appearing.
+attested_docs := {
+	"evaluated_at": "2026-08-29T00:00:00Z",
+	"documentation": {
+		"model_card": {"exists": {
+			"value": true,
+			"asserted_by": "j.smith@example.com",
+			"expires": "2027-01-01T00:00:00Z",
+		}},
+		"explainability": {"provided": true},
+		"limitations": {"documented": true},
+		"use_cases": {"defined": true},
+	},
+	"metrics": {"model_card": {"completeness": 0.9}},
+}
+
+test_an_attested_declaration_is_read if {
+	transparency.allow with input as attested_docs
+}
+
+# The whole point. An assertion made once does not hold forever, and a stale one
+# must stop counting rather than keep passing.
+test_an_expired_attestation_denies if {
+	stale := json.patch(attested_docs, [{
+		"op": "replace",
+		"path": "/documentation/model_card/exists/expires",
+		"value": "2026-01-01T00:00:00Z",
+	}])
+	not transparency.allow with input as stale
+}
+
+# The finding that used to vanish. A card that exists but falls short must still
+# be reported when the existence claim is attested.
+test_attestation_does_not_silence_a_finding if {
+	incomplete := json.patch(attested_docs, [{
+		"op": "replace", "path": "/metrics/model_card/completeness", "value": 0.4,
+	}])
+	transparency.non_compliant with input as incomplete
+}
+
+# Zero regression: a bare value behaves exactly as it did, which is what makes
+# this migration additive rather than breaking.
+test_bare_declarations_are_unaffected if {
+	bare := {
+		"documentation": {
+			"model_card": {"exists": true},
+			"explainability": {"provided": true},
+			"limitations": {"documented": true},
+			"use_cases": {"defined": true},
+		},
+		"metrics": {"model_card": {"completeness": 0.9}},
+	}
+	transparency.allow with input as bare
+}

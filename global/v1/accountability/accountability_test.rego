@@ -193,3 +193,57 @@ test_compliance_report_details if {
 test_allow_denies_on_empty_input if {
 	not accountability.allow with input as {}
 }
+
+# See transparency_test for the reasoning. This policy had the same shape of
+# fail-open: `non_compliant if input.governance.audit_logging.enabled == true`
+# stopped firing when the declaration was attested, so a system with logging
+# enabled but incomplete quietly dropped off the report.
+attested_governance := {
+	"evaluated_at": "2026-08-29T00:00:00Z",
+	"governance": {"audit_logging": {"enabled": {
+		"value": true,
+		"asserted_by": "j.smith@example.com",
+		"expires": "2027-01-01T00:00:00Z",
+	}}},
+	"metrics": {"audit_logging": {"completeness": 0.4}},
+}
+
+test_attestation_does_not_silence_a_finding if {
+	accountability.non_compliant with input as attested_governance
+}
+
+complete_governance := {
+	"evaluated_at": "2026-08-29T00:00:00Z",
+	"governance": {
+		"human_oversight": {"enabled": true},
+		"audit_logging": {"enabled": {
+			"value": true,
+			"asserted_by": "j.smith@example.com",
+			"expires": "2027-01-01T00:00:00Z",
+		}},
+		"responsibility": {"clearly_assigned": true},
+		"incident_response": {"process_defined": true},
+	},
+	"metrics": {"audit_logging": {"completeness": 0.9}},
+}
+
+test_an_attested_declaration_is_read if {
+	accountability.allow with input as complete_governance
+}
+
+test_an_expired_attestation_stops_counting if {
+	stale := json.patch(complete_governance, [{
+		"op": "replace",
+		"path": "/governance/audit_logging/enabled/expires",
+		"value": "2026-01-01T00:00:00Z",
+	}])
+	not accountability.allow with input as stale
+}
+
+# Zero regression: a bare value behaves exactly as it did.
+test_a_bare_declaration_is_unaffected if {
+	bare := json.patch(complete_governance, [{
+		"op": "replace", "path": "/governance/audit_logging/enabled", "value": true,
+	}])
+	accountability.allow with input as bare
+}
