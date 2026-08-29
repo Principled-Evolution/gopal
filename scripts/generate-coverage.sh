@@ -97,6 +97,12 @@ while IFS= read -r file; do
 	metrics="$(comment_list "${file}" 'RequiredMetrics' | jq -R -s 'split("\n") | map(select(length > 0))')"
 	params="$(comment_list "${file}" 'RequiredParams' | jq -R -s 'split("\n") | map(select(length > 0))')"
 
+	# Metrics the policy computes from declared input rather than needing an
+	# evaluator to supply. Consumers that report which metrics still need
+	# tooling read this alongside required_metrics, or they ask for work the
+	# library already does.
+	provided_metrics="$(comment_list "${file}" 'ProvidedMetrics' | jq -R -s 'split("\n") | map(select(length > 0))')"
+
 	# The `input` fields the policy actually reads, derived from its AST rather
 	# than from the comment above. Neither source alone is complete: the comment
 	# had drifted to the point where 22 of 98 policies read `input` and declared
@@ -149,6 +155,7 @@ while IFS= read -r file; do
 		--arg test_file "${test_file}" \
 		--argjson decision_rules "${decisions}" \
 		--argjson required_metrics "${metrics}" \
+		--argjson provided_metrics "${provided_metrics}" \
 		--argjson required_params "${params}" \
 		--argjson input_fields "${input_fields}" \
 		--argjson input_field_types "${input_field_types}" \
@@ -161,6 +168,7 @@ while IFS= read -r file; do
 			comment_title: (if $comment_title == "" then null else $comment_title end),
 			decision_rules: $decision_rules,
 			required_metrics: $required_metrics,
+			provided_metrics: $provided_metrics,
 			required_params: $required_params,
 			input_fields: $input_fields,
 			input_field_types: $input_field_types,
