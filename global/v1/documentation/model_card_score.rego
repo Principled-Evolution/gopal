@@ -115,6 +115,130 @@ rubric := {
 	},
 }
 
+# Which headings in a published model card establish which subsection.
+#
+# Cards do not use the nine section names from the paper. They use the current
+# Hugging Face template, or the older convention most high-download
+# repositories still carry, or whatever their author wrote. Matching only one
+# of those scores bert-base-uncased and gpt2 as almost undocumented, which is a
+# fact about the matcher rather than the cards.
+#
+# This lives here rather than in whichever parser happens to be running,
+# because a second copy of it drifts exactly the way a second copy of the
+# scoring did. A parser reads it from the policy, turns markdown into the
+# structured card below, and scores nothing itself.
+heading_sources := {
+	"caveats_recommendations": {
+		"limitations": [
+			"limitations",
+			"known limitations",
+			"limitations and bias",
+			"caveats",
+		],
+		"recommendations": [
+			"recommendations",
+			"caveats and recommendations",
+		],
+	},
+	"ethical_considerations": {
+		"data_bias": [
+			"bias, risks, and limitations",
+			"risks, limitations and biases",
+			"limitations and bias",
+			"bias",
+		],
+		"mitigations": [
+			"recommendations",
+			"mitigations",
+			"mitigation",
+		],
+		"risks": [
+			"risks",
+			"bias, risks, and limitations",
+			"risks, limitations and biases",
+			"ethical considerations",
+		],
+	},
+	"evaluation_data": {
+		"datasets": [
+			"evaluation data",
+			"testing data",
+			"test data",
+			"evaluation dataset",
+		],
+	},
+	"factors": {
+		"evaluation_factors": [
+			"evaluation factors",
+			"testing data, factors & metrics",
+		],
+		"relevant_factors": [
+			"factors",
+			"relevant factors",
+			"bias, risks, and limitations",
+			"risks, limitations and biases",
+			"limitations and bias",
+		],
+	},
+	"intended_use": {
+		"out_of_scope_uses": [
+			"out-of-scope use",
+			"out of scope use",
+			"misuse",
+			"limitations and bias",
+			"known limitations",
+		],
+		"primary_uses": [
+			"direct use",
+			"intended use",
+			"intended uses",
+			"intended uses & limitations",
+			"intended uses and limitations",
+			"uses",
+			"downstream use",
+			"usage",
+		],
+	},
+	"metrics": {
+		"performance_metrics": [
+			"metrics",
+			"evaluation",
+			"evaluation results",
+			"results",
+		],
+	},
+	"model_details": {
+		"model_type": [
+			"model details",
+			"model description",
+			"model summary",
+			"model overview",
+			"model architecture",
+		],
+	},
+	"quantitative_analyses": {
+		"unitary_results": [
+			"evaluation results",
+			"results",
+			"benchmark results",
+			"performance",
+		],
+	},
+	"training_data": {
+		"datasets": [
+			"training data",
+			"training dataset",
+			"training details",
+			"training",
+		],
+		"preprocessing": [
+			"preprocessing",
+			"data preprocessing",
+			"training procedure",
+		],
+	},
+}
+
 card := object.get(input, ["documentation", "model_card"], {})
 
 # How much content a subsection carries. Length is a crude proxy for substance

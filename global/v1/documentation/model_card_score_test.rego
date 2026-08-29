@@ -137,3 +137,22 @@ test_a_realistic_card_lands_well_short_of_the_threshold if {
 	s < 0.8
 	not score.sufficient with input as real_card_shape
 }
+
+# The heading table is data the parser reads, not something each parser keeps
+# its own copy of. A second copy drifts exactly the way a second copy of the
+# scoring did, so these assert it covers the conventions real cards use.
+test_the_heading_table_covers_every_section if {
+	count(score.heading_sources) == count(score.rubric.sections)
+}
+
+test_it_knows_the_current_template if {
+	"uses" in score.heading_sources.intended_use.primary_uses
+	"bias, risks, and limitations" in score.heading_sources.ethical_considerations.data_bias
+	"training details" in score.heading_sources.training_data.datasets
+}
+
+test_it_knows_the_older_convention_too if {
+	"intended uses & limitations" in score.heading_sources.intended_use.primary_uses
+	"limitations and bias" in score.heading_sources.ethical_considerations.data_bias
+	"training data" in score.heading_sources.training_data.datasets
+}
