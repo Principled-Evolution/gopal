@@ -31,7 +31,7 @@ The system is **compliant** when **all** of the following are true:
 | Check | Field | Required value |
 |---|---|---|
 | Technical documentation is reasonably complete | `documentation.technical_documentation.completeness` | `>= 0.7` |
-| Model card is reasonably complete | `documentation.model_card.completeness` | `>= 0.7` |
+| Model card is reasonably complete | `metrics.model_card.completeness` | `>= 0.7` |
 | Explainability information is reasonably complete | `documentation.explainability.completeness` | `>= 0.7` |
 | Outputs are not highly toxic | `metrics.toxicity.max_toxicity` | `<= 0.7` |
 
@@ -55,7 +55,7 @@ Edit [`input.json`](input.json) and lower any `completeness` below `0.7`, or rai
 # .github/workflows/ai-compliance.yaml
 - name: EU AI Act transparency check
   run: |
-    opa eval -d gopal/international/eu_ai_act/v1/transparency \
+    opa eval -d gopal/international/eu_ai_act/v1/transparency -d gopal/helper_functions \
       --input my-system.json \
       --fail-defined \
       "data.international.eu_ai_act.v1.transparency.compliance_report.compliant == false"

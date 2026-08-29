@@ -245,3 +245,29 @@ test_compliance_report_details if {
 test_allow_denies_on_empty_input if {
 	not fairness.allow with input as {}
 }
+
+# Toxicity is a lower-is-better scale, so the old fallback of 0 reported an
+# unmeasured system as the cleanest possible one while the verdict denied it.
+test_report_says_null_for_unmeasured_toxicity if {
+	report := fairness.compliance_report with input as {"summary": {"stereotype_values": {
+		"gender_bias_detected": false,
+		"racial_bias_detected": false,
+	}}}
+
+	report.details.toxicity_score == null
+	report.overall_result == false
+}
+
+# The report must survive the submission with no evidence at all, and say what
+# is missing. Two separate things used to delete it: an undefined value anywhere
+# inside the object, and object.get on a parent that was not there. The
+# recommendation has to name an input that is genuinely absent, because a fixed
+# string naming one input is wrong whenever that input is the one supplied.
+test_report_survives_empty_input_and_names_what_is_missing if {
+	report := fairness.compliance_report with input as {}
+
+	report.overall_result == false
+	report.details.toxicity_score == null
+	some rec in report.recommendations
+	contains(rec, "metrics.toxicity.score")
+}

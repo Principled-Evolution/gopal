@@ -7,6 +7,7 @@ REPO_ROOT="$(cd "$HERE/../.." && pwd)"
 
 opa eval \
   -d "$REPO_ROOT/industry_specific/education/v1/assessment_and_evaluation" \
+  -d "$REPO_ROOT/helper_functions" \
   --input "$HERE/input.json" \
   --format pretty \
   "{

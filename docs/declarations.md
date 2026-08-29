@@ -188,40 +188,42 @@ The reader, [`helper_functions/declarations.rego`](../helper_functions/declarati
 is implemented and tested: both forms, expiry as undefined, provenance lookup,
 and the clock as an input.
 
-**The policies do not use it yet, and until they do the attested form is not
-merely unsupported, it is a trap.** A policy reading
-`input.ce_marking.affixed == true` receives an object and the comparison fails,
-so a valid unexpired attestation turns a passing check into a failing one:
+**Every policy reads through it.** 516 read sites across 92 policies, done in
+batches by framework and each gated on the full suite. No direct declaration
+reads remain, so the attested form is safe to write into an input document for
+any policy in the library.
+
+Until that migration landed the attested form was worse than unsupported. A
+policy reading `input.ce_marking.affixed == true` received an object, the
+comparison failed, and a valid unexpired attestation turned a passing check into
+a failing one:
 
 ```
 bare       allow=true    marking_affixed=true
 attested   allow=false   marking_affixed=false
 ```
 
-Decisions fail closed, which is the safe direction. Reporting does not always:
-`transparency.rego` and `accountability.rego` each have a `non_compliant` rule
-of the form `input.x == true` that simply stops firing, so a real finding
-disappears rather than a wrong approval appearing. Losing a finding is quieter
+Decisions failed closed, which is the safe direction. Reporting did not always:
+`transparency.rego` and `accountability.rego` each had a `non_compliant` rule of
+the form `input.x == true` that simply stopped firing, so a real finding
+disappeared rather than a wrong approval appearing. Losing a finding is quieter
 and therefore worse to discover.
-
-So do not write the attested form into an input document until the policy you
-care about has migrated.
 
 ### The migration
 
 Additive, not breaking. `resolve` on a bare value returns the bare value, so
-every input that works today works identically afterwards. Verified rather than
-assumed: rewriting all 29 declaration reads in `transparency.rego` left its 79
-tests passing unchanged, and the attested and expired cases then behaved
-correctly.
+every input that worked beforehand works identically now. Verified rather than
+assumed: rewriting all 29 declaration reads in `transparency.rego` left its tests
+passing unchanged, and the attested and expired cases then behaved correctly. The
+same held for each subsequent batch.
 
-The surface is 595 read sites across 86 policy files. The risk is not breakage
-but mechanical error at that scale, and the mitigation is the test suite: every
-policy has a sibling test and an empty-input test, required by CI. That is the
-net that caught the `resolve_or(..., -1)` fail-open during the metrics
-migration, where a sentinel correct against `>=` was silently wrong against `<`.
+The risk was never breakage but mechanical error at that scale, and the
+mitigation was the test suite: every policy has a sibling test and an empty-input
+test, required by CI. That is the net that caught a `resolve_or(..., -1)`
+fail-open during the metrics migration, where a sentinel correct against `>=` was
+silently wrong against `<`, and a regex that excluded digits and truncated field
+names into a parse error.
 
-Done in batches by framework, each gated on the full suite. What needs human
-attention rather than a script is the handful of sites using
+What needed human attention rather than a script were the sites using
 `object.get(..., default)` or `not input.x`, where the choice between `resolve`
 and `resolve_or` changes what the rule means.

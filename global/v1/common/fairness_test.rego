@@ -67,41 +67,20 @@ test_top_level_gender_bias_key_is_not_recognised if {
 
 # --- fairness_score ----------------------------------------------------------
 
-test_fairness_score_prefers_fairness_score if {
-	f.fairness_score({"fairness": {"score": 0.88}}) == 0.88
+test_fairness_score_reads_the_canonical_name if {
+	f.fairness_score({"metrics": {"fairness": {"score": 0.85}}}) == 0.85
 }
 
-test_fairness_score_falls_back_to_evaluation_path if {
-	f.fairness_score({"evaluation": {"fairness": {"score": 0.55}}}) == 0.55
+# Undefined, not 0.0. Higher is better for fairness, so 0.0 denied and the
+# direction was safe, but it denied while reporting a measurement nobody took.
+# A caller now has to decide what absence means.
+test_fairness_score_is_undefined_when_unmeasured if {
+	not f.fairness_score({})
+	not f.fairness_score({"metrics": {}})
 }
 
-test_fairness_score_first_shape_wins if {
-	f.fairness_score({
-		"fairness": {"score": 0.10},
-		"evaluation": {"fairness": {"score": 0.90}},
-	}) == 0.10
-}
-
-# Here the 0.0 fallback is the *denying* direction, since higher is better for
-# fairness. Absence of evidence therefore fails, which is the safe outcome.
-test_fairness_score_defaults_to_zero if {
-	f.fairness_score({}) == 0.0
-}
-
-# --- passes_fairness_threshold ----------------------------------------------
-
-test_passes_fairness_threshold_above if {
-	f.passes_fairness_threshold({"fairness_score": 0.95}, 0.8)
-}
-
-test_passes_fairness_threshold_at_boundary if {
-	f.passes_fairness_threshold({"fairness_score": 0.8}, 0.8)
-}
-
-test_fails_fairness_threshold_below if {
-	not f.passes_fairness_threshold({"fairness_score": 0.5}, 0.8)
-}
-
-test_fails_fairness_threshold_when_score_absent if {
-	not f.passes_fairness_threshold({}, 0.8)
+# The spelling retired in 2.0.0 must not keep working through this helper after
+# being removed from the alias table.
+test_the_retired_evaluation_spelling_is_not_read if {
+	not f.fairness_score({"evaluation": {"fairness": {"score": 0.42}}})
 }

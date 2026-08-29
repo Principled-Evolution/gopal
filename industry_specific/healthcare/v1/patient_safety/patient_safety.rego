@@ -3,7 +3,7 @@
 #   - metrics.clinical_validation.score
 #   - metrics.risk_assessment.score
 #
-# The legacy evaluation.<name>.score spellings still resolve; see
+# Spelled metrics.<name>.score, the only spelling since 2.0.0; see
 # helper_functions/metrics.rego.
 #
 # RequiredParams:
@@ -32,7 +32,7 @@ metadata := {
 
 # Read through the canonical table rather than one hard-coded path, so a score
 # supplied as metrics.patient_safety.score is seen as readily as the legacy
-# evaluation.patient_safety.score. resolve_or, not resolve, because the -1
+# metrics.patient_safety.score. resolve_or, not resolve, because the -1
 # sentinel below is deliberate: an absent score must compare below every
 # threshold and be counted as a failure, not drop out of the assessment as an
 # undefined comparison.

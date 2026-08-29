@@ -27,12 +27,13 @@ authors:
     affiliation: "Principled Evolution"
   - name: "Principled Evolution"
     website: "https://principledevolution.ai"
-version: "1.3.1"
-date-released: "2026-08-28"
+version: "2.0.0"
+date-released: "2026-08-29"
 license: Apache-2.0
 # The concept DOI, which always resolves to the most recent release. Cite this
-# one unless you specifically need to pin a reader to v1.3.1, in which case use
-# the version DOI listed under identifiers.
+# one unless you specifically need to pin a reader to a particular release, in
+# which case use the version DOI listed under identifiers. Zenodo mints the
+# version DOI when the release is published, so it is added here afterwards.
 doi: 10.5281/zenodo.22142302
 identifiers:
   - type: doi

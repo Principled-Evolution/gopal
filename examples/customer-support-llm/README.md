@@ -30,14 +30,14 @@ Expected verdict:
 
 | Field | Required |
 |---|---|
-| `evaluation.toxicity_score` | `< params.toxicity_threshold` |
+| `metrics.toxicity.score` | `< params.toxicity_threshold` |
 | `params.toxicity_threshold` | default `0.1` if not provided |
 
 The policy is **parameterized**: your team picks the threshold based on use case. Internal-only tools may tolerate a higher threshold than customer-facing surfaces.
 
 ## See it fail
 
-Raise `evaluation.toxicity_score` to `0.15` in [`input.json`](input.json) and re-run:
+Raise `metrics.toxicity.score` to `0.15` in [`input.json`](input.json) and re-run:
 
 ```json
 {
@@ -57,7 +57,7 @@ Raise `evaluation.toxicity_score` to `0.15` in [`input.json`](input.json) and re
 
 ```bash
 # After every offline eval run, gate the deploy on the toxicity verdict:
-opa eval -d gopal/global/v1/toxicity \
+opa eval -d gopal/global/v1/toxicity -d gopal/helper_functions \
   --input eval-results.json \
   --fail-defined \
   "data.global.v1.toxicity.deny"
@@ -70,6 +70,6 @@ The build fails the moment `toxicity_score >= toxicity_threshold`.
 | Layer | Tool |
 |---|---|
 | Generate the score | Perspective API, OpenAI moderation, internal classifiers |
-| Aggregate per release | Your eval harness, write `evaluation.toxicity_score` to `input.json` |
+| Aggregate per release | Your eval harness, write `metrics.toxicity.score` to `input.json` |
 | Decide pass/fail | `global.v1.toxicity` (this policy) |
 | Report to stakeholders | [AICertify](https://github.com/Principled-Evolution/aicertify) renders a PDF report on top |

@@ -6,20 +6,20 @@
     "frameworks": 15,
     "groups": 20,
     "policies": 92,
-    "library_files": 9,
-    "rego_files": 101,
+    "library_files": 7,
+    "rego_files": 99,
     "policies_with_tests": 92,
     "policies_with_empty_input_test": 92,
     "decision_rules": 327,
-    "tests": 892
+    "tests": 842
   },
   "frameworks": [
     {
       "id": "global",
       "name": "Global",
       "kind": "cross-cutting",
-      "policy_count": 10,
-      "policies_with_tests": 10,
+      "policy_count": 8,
+      "policies_with_tests": 8,
       "policies": [
         {
           "path": "global/v1/accountability/accountability.rego",
@@ -42,8 +42,6 @@
             "audit_logging_completeness_threshold (default 0.8)"
           ],
           "input_fields": [
-            "governance",
-            "governance.audit_logging.completeness_score",
             "governance.audit_logging.enabled",
             "governance.human_oversight.enabled",
             "governance.incident_response.process_defined",
@@ -52,7 +50,6 @@
             "params.audit_logging_completeness_threshold"
           ],
           "input_field_types": {
-            "governance.audit_logging.completeness_score": "number",
             "governance.audit_logging.enabled": "boolean",
             "governance.human_oversight.enabled": "boolean",
             "governance.incident_response.process_defined": "boolean",
@@ -74,72 +71,25 @@
           "decision_true_means": "compliant"
         },
         {
-          "path": "global/v1/common/common_rules.rego",
-          "package": "global.v1.common.common_rules",
-          "decision_rules": [],
-          "required_metrics": [
-            "fairness.gender_bias",
-            "fairness.racial_bias",
-            "content_safety.score",
-            "risk_management.score",
-            "toxicity.score"
-          ],
-          "provided_metrics": [],
-          "required_params": [
-            "content_safety_threshold (default 0.1)",
-            "risk_management_threshold (default 0.7)",
-            "toxicity_threshold (default 0.1)"
-          ],
-          "input_fields": [],
-          "input_field_types": {},
-          "has_test": true,
-          "has_empty_input_test": false,
-          "test_file": "global/v1/common/common_rules_test.rego",
-          "title": null,
-          "description": null,
-          "references": [],
-          "version": null,
-          "is_library": true,
-          "primary_decision": null,
-          "decision_true_means": null
-        },
-        {
-          "path": "global/v1/common/compliance.rego",
-          "package": "global.v1.common.compliance",
-          "decision_rules": [],
-          "required_metrics": [
-            "compliance.score"
-          ],
-          "provided_metrics": [],
-          "required_params": [
-            "compliance_threshold (default 0.8)"
-          ],
-          "input_fields": [],
-          "input_field_types": {},
-          "has_test": true,
-          "has_empty_input_test": false,
-          "test_file": "global/v1/common/compliance_test.rego",
-          "title": null,
-          "description": null,
-          "references": [],
-          "version": null,
-          "is_library": true,
-          "primary_decision": null,
-          "decision_true_means": null
-        },
-        {
           "path": "global/v1/common/content_safety.rego",
           "package": "global.v1.common.content_safety",
           "decision_rules": [],
           "required_metrics": [
-            "content_safety_score"
+            "metrics.content_safety.score",
+            "metrics.toxicity.max_toxicity"
           ],
           "provided_metrics": [],
           "required_params": [
             "content_safety_threshold (default 0.9)"
           ],
-          "input_fields": [],
-          "input_field_types": {},
+          "input_fields": [
+            "metrics.content_safety.score",
+            "metrics.toxicity.max_toxicity"
+          ],
+          "input_field_types": {
+            "metrics.content_safety.score": "number",
+            "metrics.toxicity.max_toxicity": "number"
+          },
           "has_test": true,
           "has_empty_input_test": false,
           "test_file": "global/v1/common/content_safety_test.rego",
@@ -156,14 +106,18 @@
           "package": "global.v1.common.fairness",
           "decision_rules": [],
           "required_metrics": [
-            "fairness_score"
+            "metrics.fairness.score"
           ],
           "provided_metrics": [],
           "required_params": [
             "fairness_threshold (default 0.8)"
           ],
-          "input_fields": [],
-          "input_field_types": {},
+          "input_fields": [
+            "metrics.fairness.score"
+          ],
+          "input_field_types": {
+            "metrics.fairness.score": "number"
+          },
           "has_test": true,
           "has_empty_input_test": false,
           "test_file": "global/v1/common/fairness_test.rego",
@@ -180,14 +134,18 @@
           "package": "global.v1.common.risk_management",
           "decision_rules": [],
           "required_metrics": [
-            "risk_management_score"
+            "metrics.risk_management.score"
           ],
           "provided_metrics": [],
           "required_params": [
             "risk_management_threshold (default 0.7)"
           ],
-          "input_fields": [],
-          "input_field_types": {},
+          "input_fields": [
+            "metrics.risk_management.score"
+          ],
+          "input_field_types": {
+            "metrics.risk_management.score": "number"
+          },
           "has_test": true,
           "has_empty_input_test": false,
           "test_file": "global/v1/common/risk_management_test.rego",
@@ -253,9 +211,8 @@
             }
           ],
           "required_metrics": [
-            "fairness.score",
-            "content_safety.toxicity_score",
-            "risk_management.score"
+            "metrics.toxicity.score",
+            "metrics.stereotype.metrics"
           ],
           "provided_metrics": [],
           "required_params": [
@@ -345,10 +302,8 @@
             "model_card_completeness_threshold (default 0.8)"
           ],
           "input_fields": [
-            "documentation",
             "documentation.explainability.provided",
             "documentation.limitations.documented",
-            "documentation.model_card.completeness_score",
             "documentation.model_card.exists",
             "documentation.use_cases.defined",
             "metrics.model_card.completeness",
@@ -357,7 +312,6 @@
           "input_field_types": {
             "documentation.explainability.provided": "boolean",
             "documentation.limitations.documented": "boolean",
-            "documentation.model_card.completeness_score": "number",
             "documentation.model_card.exists": "boolean",
             "documentation.use_cases.defined": "boolean",
             "metrics.model_card.completeness": "number",
@@ -1033,9 +987,6 @@
             "risk_management_threshold (default 0.85)"
           ],
           "input_fields": [
-            "evaluation.content_safety.score",
-            "evaluation.fairness.score",
-            "evaluation.risk_management.score",
             "metrics.content_safety.score",
             "metrics.fairness.score",
             "metrics.risk_management.score",
@@ -1044,9 +995,6 @@
             "params.risk_management_threshold"
           ],
           "input_field_types": {
-            "evaluation.content_safety.score": "number",
-            "evaluation.fairness.score": "number",
-            "evaluation.risk_management.score": "number",
             "metrics.content_safety.score": "number",
             "metrics.fairness.score": "number",
             "metrics.risk_management.score": "number",
@@ -1705,9 +1653,6 @@
             "risk_management_threshold (default 0.90)"
           ],
           "input_fields": [
-            "evaluation.content_safety_score",
-            "evaluation.fairness_score",
-            "evaluation.risk_management_score",
             "metrics.content_safety.score",
             "metrics.fairness.score",
             "metrics.risk_management.score",
@@ -1716,9 +1661,6 @@
             "params.risk_management_threshold"
           ],
           "input_field_types": {
-            "evaluation.content_safety_score": "number",
-            "evaluation.fairness_score": "number",
-            "evaluation.risk_management_score": "number",
             "metrics.content_safety.score": "number",
             "metrics.fairness.score": "number",
             "metrics.risk_management.score": "number",
@@ -4006,11 +3948,12 @@
           "input_fields": [
             "documentation",
             "documentation.explainability.completeness",
-            "documentation.model_card.completeness",
             "documentation.technical_documentation.completeness",
+            "metrics.model_card.completeness",
             "metrics.toxicity.max_toxicity"
           ],
           "input_field_types": {
+            "metrics.model_card.completeness": "number",
             "metrics.toxicity.max_toxicity": "number"
           },
           "has_test": true,

@@ -9,12 +9,6 @@ mock_gender_bias_detected(metrics) := metrics.fairness.details.gender_bias_detec
 
 mock_racial_bias_detected(metrics) := metrics.fairness.details.racial_bias_detected
 
-default mock_toxicity_below_threshold(_, _) := false
-
-mock_toxicity_below_threshold(metrics, threshold) if {
-	metrics.content_safety.score < threshold
-}
-
 # Key change 2: Test data uses the 'details' path, matching the common/fairness package
 # Test case for compliant input with custom parameters
 test_allow_with_custom_params if {
@@ -37,7 +31,6 @@ test_allow_with_custom_params if {
 	}
 		with common_fairness.gender_bias_detected as mock_gender_bias_detected
 		with common_fairness.racial_bias_detected as mock_racial_bias_detected
-		with content_safety.toxicity_below_threshold as mock_toxicity_below_threshold
 }
 
 # Test case for compliant input with default parameters
@@ -58,7 +51,6 @@ test_allow_with_default_params if {
 	}
 		with common_fairness.gender_bias_detected as mock_gender_bias_detected
 		with common_fairness.racial_bias_detected as mock_racial_bias_detected
-		with content_safety.toxicity_below_threshold as mock_toxicity_below_threshold
 }
 
 # Test case for non-compliant input (gender bias)
@@ -82,7 +74,6 @@ test_deny_gender_bias if {
 	}
 		with common_fairness.gender_bias_detected as mock_gender_bias_detected
 		with common_fairness.racial_bias_detected as mock_racial_bias_detected
-		with content_safety.toxicity_below_threshold as mock_toxicity_below_threshold
 }
 
 # Test case for non-compliant input (racial bias)
@@ -106,7 +97,6 @@ test_deny_racial_bias if {
 	}
 		with common_fairness.gender_bias_detected as mock_gender_bias_detected
 		with common_fairness.racial_bias_detected as mock_racial_bias_detected
-		with content_safety.toxicity_below_threshold as mock_toxicity_below_threshold
 }
 
 # Test case for non-compliant input (high toxicity)
@@ -117,7 +107,7 @@ test_deny_high_toxicity if {
 				"gender_bias_detected": false,
 				"racial_bias_detected": false,
 			}},
-			"content_safety": {"score": 0.8},
+			"toxicity": {"max_toxicity": 0.8},
 		},
 		"summary": {"stereotype_values": {
 			"gender_bias_detected": false,
@@ -130,7 +120,6 @@ test_deny_high_toxicity if {
 	}
 		with common_fairness.gender_bias_detected as mock_gender_bias_detected
 		with common_fairness.racial_bias_detected as mock_racial_bias_detected
-		with content_safety.toxicity_below_threshold as mock_toxicity_below_threshold
 }
 
 # Test recommendations for gender bias
@@ -154,7 +143,6 @@ test_recommendations_gender_bias if {
 	}
 		with common_fairness.gender_bias_detected as mock_gender_bias_detected
 		with common_fairness.racial_bias_detected as mock_racial_bias_detected
-		with content_safety.toxicity_below_threshold as mock_toxicity_below_threshold
 }
 
 # An unevaluated system must never satisfy allow. In Rego an undefined value is

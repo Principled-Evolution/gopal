@@ -7,6 +7,7 @@ REPO_ROOT="$(cd "$HERE/../.." && pwd)"
 
 opa eval \
   -d "$REPO_ROOT/international/nist/v1/govern" \
+  -d "$REPO_ROOT/helper_functions" \
   --input "$HERE/input.json" \
   --format pretty \
   "data.international.nist.v1.govern"

@@ -1,25 +1,29 @@
 # METADATA
 # description: |
-#   Canonical names for measured metrics, and the legacy spellings that still
-#   resolve to them.
+#   The canonical name for every measured metric.
 #
 #   A measured metric is one an evaluator computes: a toxicity score, a fairness
 #   disparity. Policies grew up reading them under whatever path their author
 #   chose, and the same number ended up with several names. Content safety had
-#   six. `loan_evaluation/fair_lending` reads `evaluation.fairness.score` while
-#   `industry_specific/healthcare/.../diagnostic_safety` reads
-#   `evaluation.fairness_score`, for the same number from the same evaluator.
+#   six. `loan_evaluation/fair_lending` read one spelling while
+#   `industry_specific/healthcare/.../diagnostic_safety` read another, for the
+#   same number from the same evaluator.
 #
 #   That made the library hard to supply. An evaluator author had to populate
 #   every spelling to satisfy every policy, and there was no way to discover
 #   which spellings existed without reading the Rego.
 #
-#   This file fixes the canonical name as `metrics.<domain>.<name>` and keeps
-#   every historical spelling working as a fallback, so no existing input
-#   breaks. Resolution is first-match in declared order, which is why the
+#   This file fixes the canonical name as `metrics.<domain>.<name>`. Until
+#   2.0.0 it also carried 20 legacy spellings as fallbacks; those are gone, and
+#   `CHANGELOG.md` lists what to send instead. A retired name now reads as
+#   absent, and a policy that requires the metric denies, so a missed rename
+#   shows up as a system that stops passing rather than one that wrongly passes.
+#
+#   Resolution is still first-match in declared order, which is why the
 #   candidate list is built as an array comprehension rather than iterated with
 #   `some`: an unordered search over several matching paths would let OPA pick
-#   any of them.
+#   any of them. That ordering is what a future deprecation will need, and
+#   `deprecated` and `deprecated_since` below are the mechanism for one.
 package helper_functions.metrics
 
 import rego.v1
@@ -27,27 +31,18 @@ import rego.v1
 # METADATA
 # description: |
 #   Canonical metric name to the paths that may carry it, most preferred first.
-#   The canonical path is always first, so an input using the new name wins over
-#   one that also carries a legacy name.
+#   Every entry names only itself since 2.0.0. The list stays a list because
+#   that is the shape a deprecation needs: a new spelling is added ahead of the
+#   old one, and `deprecated_since` dates the old one.
 aliases := {
 	"metrics.content_safety.score": [
 		["metrics", "content_safety", "score"],
-		["evaluation", "content_safety", "score"],
-		["evaluation", "content_safety_score"],
-		["content_safety", "score"],
-		["content_safety_score"],
 	],
 	"metrics.fairness.score": [
 		["metrics", "fairness", "score"],
-		["evaluation", "fairness", "score"],
-		["evaluation", "fairness_score"],
-		["fairness_score"],
 	],
 	"metrics.risk_management.score": [
 		["metrics", "risk_management", "score"],
-		["evaluation", "risk_management", "score"],
-		["evaluation", "risk_management_score"],
-		["risk_management_score"],
 	],
 	# Two different statistics, deliberately not merged.
 	#
@@ -62,34 +57,24 @@ aliases := {
 	# score. It is not. They answer different questions.
 	"metrics.toxicity.score": [
 		["metrics", "toxicity", "score"],
-		["evaluation", "toxicity_score"],
-		["content_safety", "toxicity_score"],
 	],
 	"metrics.toxicity.max_toxicity": [
 		["metrics", "toxicity", "max_toxicity"],
-		["summary", "toxicity_values", "max_toxicity"],
-		["content_safety", "max_toxicity"],
 	],
 	"metrics.model_card.completeness": [
 		["metrics", "model_card", "completeness"],
-		["documentation", "model_card", "completeness_score"],
-		["documentation", "model_card", "completeness"],
 	],
 	"metrics.patient_safety.score": [
 		["metrics", "patient_safety", "score"],
-		["evaluation", "patient_safety", "score"],
 	],
 	"metrics.clinical_validation.score": [
 		["metrics", "clinical_validation", "score"],
-		["evaluation", "clinical_validation", "score"],
 	],
 	"metrics.risk_assessment.score": [
 		["metrics", "risk_assessment", "score"],
-		["evaluation", "risk_assessment", "score"],
 	],
 	"metrics.audit_logging.completeness": [
 		["metrics", "audit_logging", "completeness"],
-		["governance", "audit_logging", "completeness_score"],
 	],
 }
 
@@ -157,18 +142,15 @@ deprecated_since[name] := "1.4.0" if {
 # description: |
 #   The legacy spellings an input used, mapped to what it should send instead.
 #
-#   The alias table exists so that inputs written before this library had a
-#   shared vocabulary keep working. That is a debt, and one worth retiring: 18
-#   of the 20 legacy names have no user anywhere in this repository, and the
-#   policies themselves all read through `resolve` now.
+#   Empty now, because the table carries no legacy spellings: 2.0.0 removed the
+#   20 it had. The rule stays because it is the mechanism for the next
+#   deprecation, and because a caller can keep asking the question without
+#   knowing whether the answer is currently always empty.
 #
-#   Retiring them on taste would be guessing. This rule turns the question into
-#   evidence: a report can say which legacy name an input actually used, and
-#   after a release the ones nobody sends can go at the next major version,
-#   which is what `v1/` is a boundary for.
-#
-#   Empty when an input uses only canonical names, which is the state this is
-#   trying to reach.
+#   It reports to the caller running the policy, never back to us. GOPAL makes
+#   no outbound calls and collects nothing, so the absence of complaints about a
+#   retired spelling is the absence of evidence and not evidence of absence.
+#   `docs/COMPATIBILITY.md` sets out what follows from that.
 deprecated(doc) := {legacy: canonical |
 	some canonical, paths in aliases
 	some path in paths

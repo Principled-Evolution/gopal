@@ -4,11 +4,13 @@
     "use_case": "Tier-1 customer support",
     "model": "gpt-4o-2024-08-06"
   },
-  "evaluation": {
-    "toxicity_score": 0.04,
-    "sample_size": 10000,
-    "method": "Perspective API + human review on 1% sample",
-    "evaluation_date": "2026-05-01"
+  "metrics": {
+    "toxicity": {
+      "score": 0.04,
+      "sample_size": 10000,
+      "method": "Perspective API + human review on 1% sample",
+      "evaluation_date": "2026-05-01"
+    }
   },
   "params": {
     "toxicity_threshold": 0.1

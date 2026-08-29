@@ -7,13 +7,11 @@ test_allow_with_custom_params if {
 	accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -23,13 +21,11 @@ test_allow_with_default_params if {
 	accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {},
 	}
 }
@@ -39,13 +35,11 @@ test_deny_missing_human_oversight if {
 	not accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": false},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -55,13 +49,11 @@ test_deny_missing_audit_logging if {
 	not accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": false,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": false},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -71,13 +63,11 @@ test_deny_insufficient_audit_logging_completeness if {
 	not accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.7,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.7}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -87,13 +77,11 @@ test_deny_missing_responsibility_assignment if {
 	not accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": false},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -103,13 +91,11 @@ test_deny_missing_incident_response if {
 	not accountability.allow with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": false},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -119,13 +105,11 @@ test_recommendations_human_oversight if {
 	accountability.recommendations == ["Implement human oversight mechanisms for the AI system"] with input as {
 		"governance": {
 			"human_oversight": {"enabled": false},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -135,13 +119,11 @@ test_recommendations_audit_logging if {
 	accountability.recommendations == ["Enable comprehensive audit logging for all AI system actions and decisions"] with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": false,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": false},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -151,13 +133,11 @@ test_recommendations_audit_logging_completeness if {
 	accountability.recommendations[0] == "Enhance audit logging to capture more comprehensive information about system operations" with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.7,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.7}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 }
@@ -167,13 +147,11 @@ test_compliance_report_details if {
 	report := accountability.compliance_report with input as {
 		"governance": {
 			"human_oversight": {"enabled": true},
-			"audit_logging": {
-				"enabled": true,
-				"completeness_score": 0.85,
-			},
+			"audit_logging": {"enabled": true},
 			"responsibility": {"clearly_assigned": true},
 			"incident_response": {"process_defined": true},
 		},
+		"metrics": {"audit_logging": {"completeness": 0.85}},
 		"params": {"audit_logging_completeness_threshold": 0.75},
 	}
 
@@ -246,4 +224,31 @@ test_a_bare_declaration_is_unaffected if {
 		"op": "replace", "path": "/governance/audit_logging/enabled", "value": true,
 	}])
 	accountability.allow with input as bare
+}
+
+# Unmeasured completeness reads as null rather than 0, and the report survives.
+test_report_says_null_for_unmeasured_completeness if {
+	report := accountability.compliance_report with input as {"governance": {
+		"human_oversight": {"enabled": true},
+		"audit_logging": {"enabled": true},
+		"responsibility": {"clearly_assigned": true},
+		"incident_response": {"process_defined": true},
+	}}
+
+	report.details.audit_logging_completeness == null
+	report.overall_result == false
+}
+
+# The report must survive the submission with no evidence at all, and say what
+# is missing. Two separate things used to delete it: an undefined value anywhere
+# inside the object, and object.get on a parent that was not there. The
+# recommendation has to name an input that is genuinely absent, because a fixed
+# string naming one input is wrong whenever that input is the one supplied.
+test_report_survives_empty_input_and_names_what_is_missing if {
+	report := accountability.compliance_report with input as {}
+
+	report.overall_result == false
+	report.details.audit_logging_completeness == null
+	some rec in report.recommendations
+	contains(rec, "governance.audit_logging.enabled")
 }

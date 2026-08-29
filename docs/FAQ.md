@@ -52,6 +52,7 @@ mkdir -p custom/my_category/v1/policy_area
 ```rego
 package custom.my_category.v1.policy_area
 
+import data.helper_functions.metrics
 import data.helper_functions.reporting
 
 # METADATA
@@ -59,7 +60,7 @@ import data.helper_functions.reporting
 # Description: Description of what this policy evaluates
 # Version: 1.0.0
 # Category: My Category
-# Required Metrics: ["fairness.score", "content_safety.score"]
+# Required Metrics: ["metrics.fairness.score", "metrics.toxicity.score"]
 # Required Parameters:
 #   threshold: 0.8 (Default threshold value)
 
@@ -68,21 +69,21 @@ default allow := false
 
 # Rules for allowing
 allow if {
-    input.evaluation.fairness_score > input.params.threshold
-    input.evaluation.toxicity_score < 0.2
+    metrics.resolve(input, "metrics.fairness.score") > input.params.threshold
+    metrics.resolve(input, "metrics.toxicity.score") < 0.2
 }
 
 # Generate compliance report
 report_output := reporting.compose_report("My Custom Policy", allow, {
     "fairness_score": {
         "name": "Fairness Score",
-        "value": input.evaluation.fairness_score,
-        "control_passed": input.evaluation.fairness_score > input.params.threshold
+        "value": metrics.resolve(input, "metrics.fairness.score"),
+        "control_passed": metrics.resolve(input, "metrics.fairness.score") > input.params.threshold
     },
     "toxicity_score": {
-        "name": "Toxicity Score", 
-        "value": input.evaluation.toxicity_score,
-        "control_passed": input.evaluation.toxicity_score < 0.2
+        "name": "Toxicity Score",
+        "value": metrics.resolve(input, "metrics.toxicity.score"),
+        "control_passed": metrics.resolve(input, "metrics.toxicity.score") < 0.2
     }
 })
 ```
@@ -95,9 +96,9 @@ import data.custom.my_category.v1.policy_area
 
 test_allow_when_compliant {
     allow with input as {
-        "evaluation": {
-            "fairness_score": 0.9,
-            "toxicity_score": 0.1
+        "metrics": {
+            "fairness": {"score": 0.9},
+            "toxicity": {"score": 0.1}
         },
         "params": {"threshold": 0.8}
     }
@@ -106,16 +107,21 @@ test_allow_when_compliant {
 
 **Q: What input format should my policies expect?**
 
-A: There isn't one universal shape; each policy's metadata comment lists its `RequiredMetrics` and `RequiredParams`. Two shapes show up often enough to be worth knowing:
-
-Flat `_score` fields, used by policies like `industry_specific/healthcare/v1/diagnostic_safety/`:
+A: Measured values have one shape: `metrics.<domain>.<name>`. GOPAL 2.0.0 removed
+the alternative spellings, so an evaluator populates one path per metric and
+every policy that wants it reads that path through
+[`helper_functions/metrics`](../helper_functions/metrics.rego).
 
 ```json
 {
-    "evaluation": {
-        "fairness_score": 0.85,
-        "content_safety_score": 0.95,
-        "risk_management_score": 0.90
+    "metrics": {
+        "fairness": {
+            "score": 0.85,
+            "details": {"gender_bias_detected": false, "racial_bias_detected": false}
+        },
+        "content_safety": {"score": 0.95},
+        "risk_management": {"score": 0.90},
+        "toxicity": {"score": 0.02, "max_toxicity": 0.08}
     },
     "params": {
         "fairness_threshold": 0.7
@@ -123,19 +129,10 @@ Flat `_score` fields, used by policies like `industry_specific/healthcare/v1/dia
 }
 ```
 
-Nested `metrics.<category>.details.*` fields, used by policies like `international/eu_ai_act/v1/eu_fairness/`:
-
-```json
-{
-    "metrics": {
-        "fairness": {"details": {"gender_bias_detected": false, "racial_bias_detected": false}},
-        "content_safety": {"score": 0.05}
-    },
-    "params": {
-        "toxicity_threshold": 0.1
-    }
-}
-```
+Declared facts, the ones no tool can measure, are a separate matter and keep
+their own paths per policy. Each policy's metadata comment lists its
+`RequiredMetrics` and `RequiredParams`, and
+[`docs/declarations.md`](declarations.md) covers the declared side.
 
 Read the target policy's `.rego` file before writing an evaluator, its top-of-file comment and its `_test.rego` sibling show the exact shape it expects.
 
@@ -216,8 +213,14 @@ A: Yes! GOPAL is designed to work independently with any OPA-compatible system. 
 
 1. **Use OPA CLI directly:**
 ```bash
-opa eval -d gopal/ -i input.json "data.global.v1.fairness.allow"
+opa eval -d gopal/global -d gopal/helper_functions \
+  -i input.json "data.global.v1.fairness.allow"
 ```
+
+Name the policy directories and `helper_functions` rather than the repository
+root. `opa eval -d gopal/` loads every YAML and JSON file it finds as data,
+including the issue templates and anything under `dist/`, and fails with a merge
+error before it reaches a policy.
 
 2. **Use OPA as a service:**
 ```bash
@@ -254,9 +257,11 @@ result = await evaluate_by_policy(
 
 A: Your system needs to provide evaluation metrics in the expected input format. The exact metrics depend on the policies you're evaluating against, but common metrics include:
 
-- `toxicity_score`: Toxicity level (0.0-1.0, lower is better)
-- `fairness_score`: Fairness assessment (0.0-1.0, higher is better)  
-- `bias_detected`: Boolean flags for different types of bias
+- `metrics.toxicity.score`: aggregate toxicity (0.0-1.0, lower is better)
+- `metrics.toxicity.max_toxicity`: the single worst output (0.0-1.0, lower is better)
+- `metrics.fairness.score`: fairness assessment (0.0-1.0, higher is better)
+- `metrics.content_safety.score`: content safety (0.0-1.0, higher is better)
+- `metrics.fairness.details.*`: boolean flags for different types of bias
 - `performance_metrics`: System performance data
 - `resource_usage`: Computational resource consumption
 
@@ -331,11 +336,12 @@ A: Use OPA's debugging capabilities:
 
 ```bash
 # Trace policy evaluation
-opa eval -d gopal/ -i input.json --explain=full "data.global.v1.fairness.allow"
+opa eval -d gopal/global -d gopal/helper_functions \
+  -i input.json --explain=full "data.global.v1.fairness.allow"
 
 # Interactive debugging
-opa run gopal/
-> data.global.v1.fairness.allow with input as {"evaluation": {"toxicity_score": 0.15}}
+opa run gopal/global gopal/helper_functions
+> data.global.v1.fairness.allow with input as {"metrics": {"toxicity": {"score": 0.15}}}
 ```
 
 This shows the step-by-step evaluation process and helps identify where policies might be failing unexpectedly.
