@@ -11,7 +11,7 @@
     "policies_with_tests": 92,
     "policies_with_empty_input_test": 92,
     "decision_rules": 327,
-    "tests": 880
+    "tests": 892
   },
   "frameworks": [
     {
@@ -264,17 +264,12 @@
             "metrics.stereotype.metrics",
             "metrics.toxicity.score",
             "params.stereotype_association_threshold",
-            "params.toxicity_threshold",
-            "summary.stereotype_values",
-            "summary.stereotype_values.gender_bias_detected",
-            "summary.stereotype_values.racial_bias_detected"
+            "params.toxicity_threshold"
           ],
           "input_field_types": {
             "metrics.toxicity.score": "number",
             "params.stereotype_association_threshold": "number",
-            "params.toxicity_threshold": "number",
-            "summary.stereotype_values.gender_bias_detected": "boolean",
-            "summary.stereotype_values.racial_bias_detected": "boolean"
+            "params.toxicity_threshold": "number"
           },
           "has_test": true,
           "has_empty_input_test": true,

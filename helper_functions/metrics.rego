@@ -129,6 +129,30 @@ resolve_or(doc, canonical, fallback) := value if {
 
 # METADATA
 # description: |
+#   The legacy spellings an input used, mapped to what it should send instead.
+#
+#   The alias table exists so that inputs written before this library had a
+#   shared vocabulary keep working. That is a debt, and one worth retiring: 18
+#   of the 20 legacy names have no user anywhere in this repository, and the
+#   policies themselves all read through `resolve` now.
+#
+#   Retiring them on taste would be guessing. This rule turns the question into
+#   evidence: a report can say which legacy name an input actually used, and
+#   after a release the ones nobody sends can go at the next major version,
+#   which is what `v1/` is a boundary for.
+#
+#   Empty when an input uses only canonical names, which is the state this is
+#   trying to reach.
+deprecated(doc) := {legacy: canonical |
+	some canonical, paths in aliases
+	some path in paths
+	concat(".", path) != canonical
+	object.get(doc, path, null) != null
+	legacy := concat(".", path)
+}
+
+# METADATA
+# description: |
 #   True when some spelling of the metric is present. Useful where a policy
 #   needs to distinguish "not supplied" from a supplied value, without
 #   inspecting the value itself.
