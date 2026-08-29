@@ -9,6 +9,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.compliance.conformity_assessment
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -28,32 +29,32 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 default biometric_category := false
 
 biometric_category if {
-	input.system.annex_iii_category == 1
+	declarations.resolve(input, ["system", "annex_iii_category"]) == 1
 }
 
 default internal_control_route := false
 
 internal_control_route if {
-	input.assessment.procedure == "annex_vi_internal_control"
+	declarations.resolve(input, ["assessment", "procedure"]) == "annex_vi_internal_control"
 }
 
 default notified_body_route := false
 
 notified_body_route if {
-	input.assessment.procedure == "annex_vii_notified_body"
-	input.assessment.notified_body_involved == true
+	declarations.resolve(input, ["assessment", "procedure"]) == "annex_vii_notified_body"
+	declarations.resolve(input, ["assessment", "notified_body_involved"]) == true
 }
 
 # Annex III point 1: internal control is available only where the harmonised
@@ -73,7 +74,7 @@ route_permitted if {
 route_permitted if {
 	biometric_category
 	internal_control_route
-	input.assessment.harmonised_standards_applied == true
+	declarations.resolve(input, ["assessment", "harmonised_standards_applied"]) == true
 }
 
 route_permitted if {
@@ -84,7 +85,7 @@ route_permitted if {
 default assessment_completed := false
 
 assessment_completed if {
-	input.assessment.completed == true
+	declarations.resolve(input, ["assessment", "completed"]) == true
 }
 
 default allow := false

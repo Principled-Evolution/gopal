@@ -12,6 +12,7 @@
 # RequiredParams: none
 package industry_specific.bfs.v1.model_risk
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -34,7 +35,7 @@ high_risk_ratings := {"high", "1", "tier1", "tier 1"}
 default identified := false
 
 identified if {
-	input.model.in_inventory == true
+	declarations.resolve(input, ["model", "in_inventory"]) == true
 	object.get(input, ["model", "risk_rating"], "") != ""
 }
 
@@ -42,8 +43,8 @@ identified if {
 default governed := false
 
 governed if {
-	input.governance.board_approved_policy == true
-	input.governance.owner_named == true
+	declarations.resolve(input, ["governance", "board_approved_policy"]) == true
+	declarations.resolve(input, ["governance", "owner_named"]) == true
 }
 
 # Development and implementation: the conceptual soundness of the approach is
@@ -51,8 +52,8 @@ governed if {
 default developed := false
 
 developed if {
-	input.development.conceptual_soundness_documented == true
-	input.data.lineage_documented == true
+	declarations.resolve(input, ["development", "conceptual_soundness_documented"]) == true
+	declarations.resolve(input, ["data", "lineage_documented"]) == true
 }
 
 # Validation: SR 11-7 names conceptual soundness review and outcomes analysis as
@@ -60,8 +61,8 @@ developed if {
 default validated := false
 
 validated if {
-	input.validation.independent_review_completed == true
-	input.validation.outcomes_analysis_performed == true
+	declarations.resolve(input, ["validation", "independent_review_completed"]) == true
+	declarations.resolve(input, ["validation", "outcomes_analysis_performed"]) == true
 	validation_current
 }
 
@@ -88,7 +89,7 @@ high_risk_rating if {
 default monitored := false
 
 monitored if {
-	input.monitoring.ongoing_monitoring_in_place == true
+	declarations.resolve(input, ["monitoring", "ongoing_monitoring_in_place"]) == true
 }
 
 default allow := false

@@ -1,5 +1,6 @@
 package industry_specific.education.v1.academic_integrity
 
+import data.helper_functions.declarations
 import rego.v1
 
 # @title Detailed AI Plagiarism Detection
@@ -13,12 +14,12 @@ default flag_for_review := false
 
 # Flag if the average score from multiple AI detection tools exceeds a threshold.
 flag_for_review if {
-	avg(all_scores(input.submission.ai_detection_reports)) > 0.90
+	avg(all_scores(declarations.resolve(input, ["submission", "ai_detection_reports"]))) > 0.90
 }
 
 # Flag if any single high-confidence detector flags the content.
 flag_for_review if {
-	some report in input.submission.ai_detection_reports
+	some report in declarations.resolve(input, ["submission", "ai_detection_reports"])
 	report.detector_confidence == "high"
 	report.ai_score > 0.95
 }
@@ -27,7 +28,7 @@ flag_for_review if {
 
 deny contains msg if {
 	flag_for_review
-	scores := all_scores(input.submission.ai_detection_reports)
+	scores := all_scores(declarations.resolve(input, ["submission", "ai_detection_reports"]))
 	msg := sprintf("Submission flagged for potential AI plagiarism. Detection scores: %v", [scores])
 }
 

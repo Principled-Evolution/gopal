@@ -1,5 +1,7 @@
 package industry_specific.education.v1.student_data_privacy
 
+import data.helper_functions.declarations
+
 # @title Detailed FERPA Compliance
 # @description This policy evaluates data access requests against the Family Educational Rights and Privacy Act (FERPA).
 # @version 1.2
@@ -16,7 +18,7 @@ ferpa_compliant if {
 
 # Allow if ALL requested data is "directory information" AND the student has NOT opted out.
 ferpa_compliant if {
-	input.student.directory_information_opt_out == false
+	declarations.resolve(input, ["student", "directory_information_opt_out"]) == false
 
 	# A request for nothing is not a request. Without this, `every` over an
 	# empty collection is vacuously true and the branch allows an empty
@@ -31,13 +33,13 @@ ferpa_compliant if {
 
 # Allow if the request is from a school official with a legitimate educational interest.
 ferpa_compliant if {
-	is_school_official(input.request.recipient)
-	has_legitimate_interest(input.request.purpose)
+	is_school_official(declarations.resolve(input, ["request", "recipient"]))
+	has_legitimate_interest(declarations.resolve(input, ["request", "purpose"]))
 }
 
 # Allow in a health or safety emergency.
 ferpa_compliant if {
-	input.request.purpose == "health_or_safety_emergency"
+	declarations.resolve(input, ["request", "purpose"]) == "health_or_safety_emergency"
 }
 
 # --- Deny Messages ---

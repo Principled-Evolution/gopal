@@ -1,5 +1,7 @@
 package industry_specific.education.v1.fairness_and_equity
 
+import data.helper_functions.declarations
+
 # @title Detailed Digital Divide Mitigation
 # @description This policy ensures that technology-based assignments provide equitable alternatives for students facing a digital divide.
 # @version 1.1
@@ -11,19 +13,19 @@ default equitable := false
 
 # Equitable if a comparable offline alternative is available.
 equitable if {
-	input.assignment.has_offline_alternative == true
+	declarations.resolve(input, ["assignment", "has_offline_alternative"]) == true
 }
 
 # Equitable if the school provides all necessary resources (device and internet).
 equitable if {
-	input.student.resources.has_school_provided_device == true
-	input.student.resources.has_school_provided_internet == true
+	declarations.resolve(input, ["student", "resources", "has_school_provided_device"]) == true
+	declarations.resolve(input, ["student", "resources", "has_school_provided_internet"]) == true
 }
 
 # Equitable if the assignment can be completed with low-bandwidth or basic devices.
 equitable if {
-	input.assignment.requirements.bandwidth == "low"
-	input.assignment.requirements.device_spec == "basic"
+	declarations.resolve(input, ["assignment", "requirements", "bandwidth"]) == "low"
+	declarations.resolve(input, ["assignment", "requirements", "device_spec"]) == "basic"
 }
 
 # --- Deny Messages ---

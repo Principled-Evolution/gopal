@@ -5,6 +5,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.data_management.data_sharing
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -21,8 +22,8 @@ metadata := {
 default allow := false
 
 allow if {
-	input.data_sharing.agreement_in_place == true
-	input.data_sharing.recipient_authorized == true
+	declarations.resolve(input, ["data_sharing", "agreement_in_place"]) == true
+	declarations.resolve(input, ["data_sharing", "recipient_authorized"]) == true
 }
 
 policy_metrics := {

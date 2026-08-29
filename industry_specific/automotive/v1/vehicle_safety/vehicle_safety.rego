@@ -1,5 +1,6 @@
 package industry_specific.automotive.v1.vehicle_safety
 
+import data.helper_functions.declarations
 import rego.v1
 
 # @title Automotive Vehicle Safety Requirements
@@ -20,35 +21,35 @@ default hara_analysis_is_compliant := false
 
 hara_analysis_is_compliant if {
 	# Check for the presence of a comprehensive safety assessment in the input
-	input.safety_assessment.hara_analysis.status == "completed"
-	count(input.safety_assessment.hara_analysis.identified_hazards) > 0
+	declarations.resolve(input, ["safety_assessment", "hara_analysis", "status"]) == "completed"
+	count(declarations.resolve(input, ["safety_assessment", "hara_analysis", "identified_hazards"])) > 0
 }
 
 # Automotive Safety Integrity Level (ASIL) Determination
 asil_determination_is_compliant if {
 	object.get(input.safety_assessment, "asil_determination", false) != false
-	is_object(input.safety_assessment.asil_determination)
-	input.safety_assessment.asil_determination.status == "completed"
-	is_string(input.safety_assessment.asil_determination.final_asil_level)
-	input.safety_assessment.asil_determination.final_asil_level in ["ASIL A", "ASIL B", "ASIL C", "ASIL D", "QM"]
+	is_object(declarations.resolve(input, ["safety_assessment", "asil_determination"]))
+	declarations.resolve(input, ["safety_assessment", "asil_determination", "status"]) == "completed"
+	is_string(declarations.resolve(input, ["safety_assessment", "asil_determination", "final_asil_level"]))
+	declarations.resolve(input, ["safety_assessment", "asil_determination", "final_asil_level"]) in ["ASIL A", "ASIL B", "ASIL C", "ASIL D", "QM"]
 }
 
 # Safety of the Intended Functionality (SOTIF) Analysis
 sotif_analysis_is_compliant if {
 	object.get(input.safety_assessment, "sotif_analysis", false) != false
-	is_object(input.safety_assessment.sotif_analysis)
-	input.safety_assessment.sotif_analysis.status == "completed"
-	count(input.safety_assessment.sotif_analysis.scenarios_analyzed) > 0
+	is_object(declarations.resolve(input, ["safety_assessment", "sotif_analysis"]))
+	declarations.resolve(input, ["safety_assessment", "sotif_analysis", "status"]) == "completed"
+	count(declarations.resolve(input, ["safety_assessment", "sotif_analysis", "scenarios_analyzed"])) > 0
 }
 
 # Operational Design Domain (ODD) Definition
 odd_definition_is_compliant if {
 	object.get(input.safety_assessment, "odd_definition", false) != false
-	is_object(input.safety_assessment.odd_definition)
-	input.safety_assessment.odd_definition.status == "defined"
-	object.get(input.safety_assessment.odd_definition.conditions, "road_types", false) != false
-	object.get(input.safety_assessment.odd_definition.conditions, "weather", false) != false
-	object.get(input.safety_assessment.odd_definition.conditions, "traffic", false) != false
+	is_object(declarations.resolve(input, ["safety_assessment", "odd_definition"]))
+	declarations.resolve(input, ["safety_assessment", "odd_definition", "status"]) == "defined"
+	object.get(declarations.resolve(input, ["safety_assessment", "odd_definition", "conditions"]), "road_types", false) != false
+	object.get(declarations.resolve(input, ["safety_assessment", "odd_definition", "conditions"]), "weather", false) != false
+	object.get(declarations.resolve(input, ["safety_assessment", "odd_definition", "conditions"]), "traffic", false) != false
 }
 
 # Deny rule with detailed messages

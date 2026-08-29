@@ -13,6 +13,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.data_governance.training_data
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -31,13 +32,13 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 # The Article 10(2) practices.
@@ -67,7 +68,7 @@ governance_practices_met if {
 default special_category_processed := false
 
 special_category_processed if {
-	input.special_category.processed_for_bias_correction == true
+	declarations.resolve(input, ["special_category", "processed_for_bias_correction"]) == true
 }
 
 default special_category_lawful := false
@@ -78,7 +79,7 @@ special_category_lawful if {
 
 special_category_lawful if {
 	special_category_processed
-	input.special_category.safeguards_in_place == true
+	declarations.resolve(input, ["special_category", "safeguards_in_place"]) == true
 }
 
 default allow := false

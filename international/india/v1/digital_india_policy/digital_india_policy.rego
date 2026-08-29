@@ -1,5 +1,6 @@
 package international.india.v1.digital_india_policy
 
+import data.helper_functions.declarations
 import rego.v1
 
 metadata := {
@@ -30,10 +31,10 @@ default fairness := {"allow": false, "msg": "Fairness requirements not met."}
 
 fairness := {"allow": true, "msg": "Fairness requirements met."} if {
 	# Check for regular bias assessments
-	input.fairness.bias_assessments_conducted
+	declarations.resolve(input, ["fairness", "bias_assessments_conducted"])
 
 	# Check for mitigation strategies for identified biases
-	input.fairness.bias_mitigation_strategies_in_place
+	declarations.resolve(input, ["fairness", "bias_mitigation_strategies_in_place"])
 }
 
 # Transparency: Check for clear communication about the AI system
@@ -41,10 +42,10 @@ default transparency := {"allow": false, "msg": "Transparency requirements not m
 
 transparency := {"allow": true, "msg": "Transparency requirements met."} if {
 	# Check for clear labeling of AI-generated content
-	input.transparency.ai_generated_content_labeled
+	declarations.resolve(input, ["transparency", "ai_generated_content_labeled"])
 
 	# Check for public documentation about the system's purpose and limitations
-	input.transparency.public_documentation_available
+	declarations.resolve(input, ["transparency", "public_documentation_available"])
 }
 
 # Accountability: Check for clear lines of responsibility and oversight
@@ -52,10 +53,10 @@ default accountability := {"allow": false, "msg": "Accountability requirements n
 
 accountability := {"allow": true, "msg": "Accountability requirements met."} if {
 	# Check for defined roles and responsibilities
-	input.accountability.roles_and_responsibilities_defined
+	declarations.resolve(input, ["accountability", "roles_and_responsibilities_defined"])
 
 	# Check for established oversight mechanisms
-	input.accountability.oversight_mechanisms_in_place
+	declarations.resolve(input, ["accountability", "oversight_mechanisms_in_place"])
 }
 
 # Safety: Check for measures to ensure the safety and reliability of the AI system
@@ -63,8 +64,8 @@ default safety := {"allow": false, "msg": "Safety requirements not met."}
 
 safety := {"allow": true, "msg": "Safety requirements met."} if {
 	# Check for risk assessments for unreliable AI models
-	input.safety.risk_assessment_for_unreliable_models
+	declarations.resolve(input, ["safety", "risk_assessment_for_unreliable_models"])
 
 	# Check for measures to prevent threats to electoral integrity
-	input.safety.electoral_integrity_safeguards_in_place
+	declarations.resolve(input, ["safety", "electoral_integrity_safeguards_in_place"])
 }

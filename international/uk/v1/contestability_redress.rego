@@ -8,6 +8,7 @@
 # RequiredParams: none
 package international.uk.v1.contestability_redress
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -27,7 +28,7 @@ metadata := {
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.affects_individuals)
+	is_boolean(declarations.resolve(input, ["system", "affects_individuals"]))
 }
 
 default allow := false
@@ -49,29 +50,29 @@ allow if {
 default contestability_required := false
 
 contestability_required if {
-	input.system.affects_individuals == true
+	declarations.resolve(input, ["system", "affects_individuals"]) == true
 }
 
 contestability_required if {
-	input.system.material_harm_potential == true
+	declarations.resolve(input, ["system", "material_harm_potential"]) == true
 }
 
 default route_available := false
 
 route_available if {
-	input.redress.route_to_contest_available == true
+	declarations.resolve(input, ["redress", "route_to_contest_available"]) == true
 }
 
 default route_communicated := false
 
 route_communicated if {
-	input.redress.route_communicated == true
+	declarations.resolve(input, ["redress", "route_communicated"]) == true
 }
 
 default human_review_available := false
 
 human_review_available if {
-	input.redress.human_review_available == true
+	declarations.resolve(input, ["redress", "human_review_available"]) == true
 }
 
 default timeframe_defined := false

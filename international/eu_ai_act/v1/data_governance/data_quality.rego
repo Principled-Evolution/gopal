@@ -9,6 +9,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.data_governance.data_quality
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -27,13 +28,13 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 # Article 10(3): the four criteria are cumulative.
@@ -59,7 +60,7 @@ quality_criteria_met if {
 default setting_considered := false
 
 setting_considered if {
-	input.datasets.contextual_characteristics_considered == true
+	declarations.resolve(input, ["datasets", "contextual_characteristics_considered"]) == true
 }
 
 default allow := false

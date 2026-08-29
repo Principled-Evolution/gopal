@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.easa.v1.sora
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -23,11 +24,11 @@ metadata := {
 default allow := false
 
 allow if {
-	input.assessment.ground_risk_class >= 1
-	input.assessment.ground_risk_class <= 10
-	input.assessment.air_risk_class in {"a", "b", "c", "d"}
-	input.assessment.sail_determined == true
-	input.mitigations.adequate == true
+	declarations.resolve(input, ["assessment", "ground_risk_class"]) >= 1
+	declarations.resolve(input, ["assessment", "ground_risk_class"]) <= 10
+	declarations.resolve(input, ["assessment", "air_risk_class"]) in {"a", "b", "c", "d"}
+	declarations.resolve(input, ["assessment", "sail_determined"]) == true
+	declarations.resolve(input, ["mitigations", "adequate"]) == true
 }
 
 policy_metrics := {

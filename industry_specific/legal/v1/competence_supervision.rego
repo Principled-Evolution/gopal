@@ -9,6 +9,7 @@
 # RequiredParams: none
 package industry_specific.legal.v1.competence_supervision
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -28,45 +29,45 @@ metadata := {
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.practitioner.uses_ai_for_regulated_work)
+	is_boolean(declarations.resolve(input, ["practitioner", "uses_ai_for_regulated_work"]))
 }
 
 default in_scope := false
 
 in_scope if {
-	input.practitioner.uses_ai_for_regulated_work == true
+	declarations.resolve(input, ["practitioner", "uses_ai_for_regulated_work"]) == true
 }
 
 default competence_maintained := false
 
 competence_maintained if {
-	input.practitioner.technology_competence_maintained == true
-	input.practitioner.training_completed == true
+	declarations.resolve(input, ["practitioner", "technology_competence_maintained"]) == true
+	declarations.resolve(input, ["practitioner", "training_completed"]) == true
 }
 
 default assessed_before_adoption := false
 
 assessed_before_adoption if {
-	input.firm.ai_risk_assessment_before_adoption == true
+	declarations.resolve(input, ["firm", "ai_risk_assessment_before_adoption"]) == true
 }
 
 # Supervision has to be a system with someone named in it, not an aspiration.
 default supervision_effective := false
 
 supervision_effective if {
-	input.firm.supervision_system_in_place == true
-	input.firm.supervisor_named == true
+	declarations.resolve(input, ["firm", "supervision_system_in_place"]) == true
+	declarations.resolve(input, ["firm", "supervisor_named"]) == true
 }
 
 default client_informed := false
 
 client_informed if {
-	input.client.ai_use_material == false
+	declarations.resolve(input, ["client", "ai_use_material"]) == false
 }
 
 client_informed if {
-	input.client.ai_use_material == true
-	input.client.ai_use_disclosed_where_material == true
+	declarations.resolve(input, ["client", "ai_use_material"]) == true
+	declarations.resolve(input, ["client", "ai_use_disclosed_where_material"]) == true
 }
 
 default allow := false

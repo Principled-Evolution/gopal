@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.uk.v1.accountability_governance
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -39,26 +40,26 @@ allow if {
 default named_accountability := false
 
 named_accountability if {
-	input.governance.accountable_person_named == true
-	input.governance.lifecycle_roles_defined == true
+	declarations.resolve(input, ["governance", "accountable_person_named"]) == true
+	declarations.resolve(input, ["governance", "lifecycle_roles_defined"]) == true
 }
 
 default oversight_in_place := false
 
 oversight_in_place if {
-	input.governance.oversight_body_in_place == true
+	declarations.resolve(input, ["governance", "oversight_body_in_place"]) == true
 }
 
 default third_party_supply := false
 
 third_party_supply if {
-	input.governance.third_party_model_in_use == true
+	declarations.resolve(input, ["governance", "third_party_model_in_use"]) == true
 }
 
 default supply_chain_documented := false
 
 supply_chain_documented if {
-	input.governance.supply_chain_accountability_documented == true
+	declarations.resolve(input, ["governance", "supply_chain_accountability_documented"]) == true
 }
 
 policy_metrics := {

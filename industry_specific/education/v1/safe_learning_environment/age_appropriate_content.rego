@@ -1,5 +1,7 @@
 package industry_specific.education.v1.safe_learning_environment
 
+import data.helper_functions.declarations
+
 # @title Detailed Age-Appropriate Content
 # @description This policy evaluates whether AI-generated content is appropriate for the student's age and the educational context.
 # @version 1.1
@@ -11,19 +13,19 @@ default appropriate := false
 
 # Appropriate if the content's age rating is suitable for the student's age.
 appropriate if {
-	is_suitable_for_age(input.content.age_rating, input.student.age, age_rating_map)
+	is_suitable_for_age(declarations.resolve(input, ["content", "age_rating"]), declarations.resolve(input, ["student", "age"]), age_rating_map)
 }
 
 # Appropriate if the content has been explicitly approved by the instructor for this lesson.
 appropriate if {
-	input.content.id in input.lesson.approved_content_ids
+	declarations.resolve(input, ["content", "id"]) in declarations.resolve(input, ["lesson", "approved_content_ids"])
 }
 
 # --- Deny Messages ---
 
 deny contains msg if {
 	not appropriate
-	msg := sprintf("Content with age rating '%v' is not appropriate for a student of age %v.", [input.content.age_rating, input.student.age])
+	msg := sprintf("Content with age rating '%v' is not appropriate for a student of age %v.", [declarations.resolve(input, ["content", "age_rating"]), declarations.resolve(input, ["student", "age"])])
 }
 
 # --- Helper Functions ---

@@ -129,6 +129,56 @@ resolve_or(doc, canonical, fallback) := value if {
 
 # METADATA
 # description: |
+#   When each legacy spelling was deprecated, as a version rather than a date.
+#
+#   The timer lives here, in data, because a deprecation recorded only in a
+#   changelog is a deprecation somebody has to remember. scripts/check-deprecations.sh
+#   reads this and refuses to let a major version ship while matured entries
+#   remain, which is the one moment the question actually has to be answered.
+#
+#   Dates were the obvious alternative and are worse. This library releases when
+#   there is something to release, so a calendar deadline either arrives between
+#   releases and means nothing, or ages into a date nobody chose. Releases are
+#   what a consumer actually upgrades across.
+#
+#   A caveat worth stating plainly: GOPAL sends nothing anywhere, so we will
+#   never observe that somebody uses one of these. `deprecated` reports to the
+#   caller, not to us. Silence here is not evidence of disuse, it is the absence
+#   of evidence, and the window exists so that a user has a release in which to
+#   notice and object rather than so that we can measure anything.
+deprecated_since[name] := "1.4.0" if {
+	some canonical, paths in aliases
+	some path in paths
+	name := concat(".", path)
+	name != canonical
+}
+
+# METADATA
+# description: |
+#   The legacy spellings an input used, mapped to what it should send instead.
+#
+#   The alias table exists so that inputs written before this library had a
+#   shared vocabulary keep working. That is a debt, and one worth retiring: 18
+#   of the 20 legacy names have no user anywhere in this repository, and the
+#   policies themselves all read through `resolve` now.
+#
+#   Retiring them on taste would be guessing. This rule turns the question into
+#   evidence: a report can say which legacy name an input actually used, and
+#   after a release the ones nobody sends can go at the next major version,
+#   which is what `v1/` is a boundary for.
+#
+#   Empty when an input uses only canonical names, which is the state this is
+#   trying to reach.
+deprecated(doc) := {legacy: canonical |
+	some canonical, paths in aliases
+	some path in paths
+	concat(".", path) != canonical
+	object.get(doc, path, null) != null
+	legacy := concat(".", path)
+}
+
+# METADATA
+# description: |
 #   True when some spelling of the metric is present. Useful where a policy
 #   needs to distinguish "not supplied" from a supplied value, without
 #   inspecting the value itself.

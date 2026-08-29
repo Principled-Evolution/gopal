@@ -13,6 +13,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.gpai.downstream_transparency
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -33,27 +34,27 @@ metadata := {
 default is_gpai := false
 
 is_gpai if {
-	input.model.general_purpose == true
+	declarations.resolve(input, ["model", "general_purpose"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.model.general_purpose)
+	is_boolean(declarations.resolve(input, ["model", "general_purpose"]))
 }
 
 default systemic_risk := false
 
 systemic_risk if {
-	input.model.systemic_risk == true
+	declarations.resolve(input, ["model", "systemic_risk"]) == true
 }
 
 # Article 53(2) reaches (a) and (b) only, and never for systemic risk models.
 default downstream_exemption_applies := false
 
 downstream_exemption_applies if {
-	input.model.free_and_open_source == true
-	input.model.parameters_publicly_available == true
+	declarations.resolve(input, ["model", "free_and_open_source"]) == true
+	declarations.resolve(input, ["model", "parameters_publicly_available"]) == true
 	not systemic_risk
 }
 
@@ -64,23 +65,23 @@ downstream_information_met if {
 }
 
 downstream_information_met if {
-	input.downstream.annex_xii_information_provided == true
-	input.downstream.enables_downstream_compliance == true
+	declarations.resolve(input, ["downstream", "annex_xii_information_provided"]) == true
+	declarations.resolve(input, ["downstream", "enables_downstream_compliance"]) == true
 }
 
 # Article 53(1)(c) and (d) apply regardless of the licence.
 default copyright_policy_met := false
 
 copyright_policy_met if {
-	input.copyright.policy_in_place == true
-	input.copyright.respects_article_4_3_reservations == true
+	declarations.resolve(input, ["copyright", "policy_in_place"]) == true
+	declarations.resolve(input, ["copyright", "respects_article_4_3_reservations"]) == true
 }
 
 default training_summary_met := false
 
 training_summary_met if {
-	input.training_content.public_summary_available == true
-	input.training_content.summary_sufficiently_detailed == true
+	declarations.resolve(input, ["training_content", "public_summary_available"]) == true
+	declarations.resolve(input, ["training_content", "summary_sufficiently_detailed"]) == true
 }
 
 default allow := false

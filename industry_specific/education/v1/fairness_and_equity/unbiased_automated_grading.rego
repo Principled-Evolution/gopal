@@ -1,5 +1,7 @@
 package industry_specific.education.v1.fairness_and_equity
 
+import data.helper_functions.declarations
+
 # @title Detailed Unbiased Automated Grading
 # @description This policy evaluates automated grading systems to ensure they are fair and equitable across different demographic groups.
 # @version 1.1
@@ -11,7 +13,7 @@ default unbiased_automated_grading_compliant := false
 
 # Compliant if the model's bias metrics are within acceptable thresholds for all demographic groups.
 unbiased_automated_grading_compliant if {
-	every group in input.bias_report.demographic_groups {
+	every group in declarations.resolve(input, ["bias_report", "demographic_groups"]) {
 		every metric in group.fairness_metrics {
 			is_within_threshold(metric, thresholds)
 		}
@@ -23,7 +25,7 @@ unbiased_automated_grading_compliant if {
 deny contains msg if {
 	not unbiased_automated_grading_compliant
 	failing_metrics := {metric |
-		some group in input.bias_report.demographic_groups
+		some group in declarations.resolve(input, ["bias_report", "demographic_groups"])
 		some metric in group.fairness_metrics
 		not is_within_threshold(metric, thresholds)
 	}

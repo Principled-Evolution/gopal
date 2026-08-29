@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing yet.
+### Deprecated
+
+- The 20 legacy metric spellings in `helper_functions/metrics.rego` are deprecated as of 1.4.0. They keep working, and every policy reads through `metrics.resolve`, so no input needs to change yet. `data.helper_functions.metrics.deprecated(input)` reports which legacy names an input used and what to send instead. Removal is a breaking change and waits for 2.0.0, no sooner than two minor releases from now. [`docs/COMPATIBILITY.md`](docs/COMPATIBILITY.md) sets out the policy and `scripts/check-deprecations.sh` holds the timer.
+
+### Added
+
+- Declarations may carry provenance: who asserted a fact, against what evidence, and until when. An expired attestation resolves to undefined rather than to its value, so a stale claim stops counting without being mistaken for a refuted one. Bare values keep working unchanged. See [`docs/declarations.md`](docs/declarations.md).
+- `evaluated_at` on the input document supplies the evaluation clock, so an expiry check is reproducible: the same bundle and input give the same verdict whenever it runs.
+- `global/v1/documentation/model_card_score` scores a model card's documentation completeness, replacing a rubric that lived in AICertify's Python and had to be reimplemented in JavaScript to run in a browser.
+
+### Changed
+
+- Every policy reads declarations through `helper_functions/declarations`, 516 sites across 92 policies. Additive: a bare value resolves to itself, so existing inputs behave identically. Before this, supplying an attested declaration to a policy turned a passing check into a failing one, and in two policies silently stopped a `non_compliant` rule from firing.
 
 ## [1.3.1]: 2026-08-28
 

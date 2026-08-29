@@ -10,6 +10,7 @@
 #
 package global.v1.transparency
 
+import data.helper_functions.declarations
 import data.helper_functions.metrics
 import rego.v1
 
@@ -36,39 +37,39 @@ default allow := false
 # Allow if transparency requirements are satisfied
 allow if {
 	# Check if model cards exist and are complete
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 
 	# Check if explainability is provided
-	input.documentation.explainability.provided == true
+	declarations.resolve(input, ["documentation", "explainability", "provided"]) == true
 
 	# Check if limitations are documented
-	input.documentation.limitations.documented == true
+	declarations.resolve(input, ["documentation", "limitations", "documented"]) == true
 
 	# Check if use cases are clearly defined
-	input.documentation.use_cases.defined == true
+	declarations.resolve(input, ["documentation", "use_cases", "defined"]) == true
 }
 
 # Non-compliant rules for reporting
 non_compliant if {
-	input.documentation.model_card.exists == false
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == false
 }
 
 non_compliant if {
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness < object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 }
 
 non_compliant if {
-	input.documentation.explainability.provided == false
+	declarations.resolve(input, ["documentation", "explainability", "provided"]) == false
 }
 
 non_compliant if {
-	input.documentation.limitations.documented == false
+	declarations.resolve(input, ["documentation", "limitations", "documented"]) == false
 }
 
 non_compliant if {
-	input.documentation.use_cases.defined == false
+	declarations.resolve(input, ["documentation", "use_cases", "defined"]) == false
 }
 
 # Define the compliance report
@@ -89,41 +90,41 @@ compliance_report := {
 
 # Generate recommendations based on compliance issues
 recommendations := model_card_recs if {
-	input.documentation.model_card.exists == false
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == false
 }
 
 recommendations := model_card_completeness_recs if {
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness < object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
 }
 
 recommendations := explainability_recs if {
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
-	input.documentation.explainability.provided == false
+	declarations.resolve(input, ["documentation", "explainability", "provided"]) == false
 }
 
 recommendations := limitations_recs if {
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
-	input.documentation.explainability.provided == true
-	input.documentation.limitations.documented == false
+	declarations.resolve(input, ["documentation", "explainability", "provided"]) == true
+	declarations.resolve(input, ["documentation", "limitations", "documented"]) == false
 }
 
 recommendations := use_cases_recs if {
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
-	input.documentation.explainability.provided == true
-	input.documentation.limitations.documented == true
-	input.documentation.use_cases.defined == false
+	declarations.resolve(input, ["documentation", "explainability", "provided"]) == true
+	declarations.resolve(input, ["documentation", "limitations", "documented"]) == true
+	declarations.resolve(input, ["documentation", "use_cases", "defined"]) == false
 }
 
 recommendations := [] if {
-	input.documentation.model_card.exists == true
+	declarations.resolve(input, ["documentation", "model_card", "exists"]) == true
 	model_card_completeness >= object.get(input, ["params", "model_card_completeness_threshold"], 0.8)
-	input.documentation.explainability.provided == true
-	input.documentation.limitations.documented == true
-	input.documentation.use_cases.defined == true
+	declarations.resolve(input, ["documentation", "explainability", "provided"]) == true
+	declarations.resolve(input, ["documentation", "limitations", "documented"]) == true
+	declarations.resolve(input, ["documentation", "use_cases", "defined"]) == true
 }
 
 # Define recommendation values

@@ -7,6 +7,7 @@
 #   - max_noise_db (default 65)
 package industry_specific.aviation.v1.flight_operations.urban_air_mobility
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -24,9 +25,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.uam.vertiport_certified == true
-	input.uam.noise_db <= object.get(input, ["params", "max_noise_db"], 65)
-	input.uam.corridor_authorized == true
+	declarations.resolve(input, ["uam", "vertiport_certified"]) == true
+	declarations.resolve(input, ["uam", "noise_db"]) <= object.get(input, ["params", "max_noise_db"], 65)
+	declarations.resolve(input, ["uam", "corridor_authorized"]) == true
 }
 
 policy_metrics := {

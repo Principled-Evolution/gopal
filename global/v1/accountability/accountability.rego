@@ -10,6 +10,7 @@
 #
 package global.v1.accountability
 
+import data.helper_functions.declarations
 import data.helper_functions.metrics
 import rego.v1
 
@@ -36,39 +37,39 @@ default allow := false
 # Allow if accountability requirements are satisfied
 allow if {
 	# Check if system has human oversight
-	input.governance.human_oversight.enabled == true
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
 
 	# Check if system has audit logging
-	input.governance.audit_logging.enabled == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 
 	# Check if system has explicit responsibility assignment
-	input.governance.responsibility.clearly_assigned == true
+	declarations.resolve(input, ["governance", "responsibility", "clearly_assigned"]) == true
 
 	# Check if system has incident response process
-	input.governance.incident_response.process_defined == true
+	declarations.resolve(input, ["governance", "incident_response", "process_defined"]) == true
 }
 
 # Non-compliant rules for reporting
 non_compliant if {
-	input.governance.human_oversight.enabled == false
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == false
 }
 
 non_compliant if {
-	input.governance.audit_logging.enabled == false
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == false
 }
 
 non_compliant if {
-	input.governance.audit_logging.enabled == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
 non_compliant if {
-	input.governance.responsibility.clearly_assigned == false
+	declarations.resolve(input, ["governance", "responsibility", "clearly_assigned"]) == false
 }
 
 non_compliant if {
-	input.governance.incident_response.process_defined == false
+	declarations.resolve(input, ["governance", "incident_response", "process_defined"]) == false
 }
 
 # Define the compliance report
@@ -89,41 +90,41 @@ compliance_report := {
 
 # Generate recommendations based on compliance issues
 recommendations := human_oversight_recs if {
-	input.governance.human_oversight.enabled == false
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == false
 }
 
 recommendations := audit_logging_recs if {
-	input.governance.human_oversight.enabled == true
-	input.governance.audit_logging.enabled == false
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == false
 }
 
 recommendations := audit_logging_completeness_recs if {
-	input.governance.human_oversight.enabled == true
-	input.governance.audit_logging.enabled == true
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness < object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
 }
 
 recommendations := responsibility_recs if {
-	input.governance.human_oversight.enabled == true
-	input.governance.audit_logging.enabled == true
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
-	input.governance.responsibility.clearly_assigned == false
+	declarations.resolve(input, ["governance", "responsibility", "clearly_assigned"]) == false
 }
 
 recommendations := incident_response_recs if {
-	input.governance.human_oversight.enabled == true
-	input.governance.audit_logging.enabled == true
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
-	input.governance.responsibility.clearly_assigned == true
-	input.governance.incident_response.process_defined == false
+	declarations.resolve(input, ["governance", "responsibility", "clearly_assigned"]) == true
+	declarations.resolve(input, ["governance", "incident_response", "process_defined"]) == false
 }
 
 recommendations := [] if {
-	input.governance.human_oversight.enabled == true
-	input.governance.audit_logging.enabled == true
+	declarations.resolve(input, ["governance", "human_oversight", "enabled"]) == true
+	declarations.resolve(input, ["governance", "audit_logging", "enabled"]) == true
 	audit_logging_completeness >= object.get(input, ["params", "audit_logging_completeness_threshold"], 0.8)
-	input.governance.responsibility.clearly_assigned == true
-	input.governance.incident_response.process_defined == true
+	declarations.resolve(input, ["governance", "responsibility", "clearly_assigned"]) == true
+	declarations.resolve(input, ["governance", "incident_response", "process_defined"]) == true
 }
 
 # Define recommendation values

@@ -160,3 +160,40 @@ test_a_safety_score_never_resolves_as_toxicity if {
 test_the_evaluator_worst_case_spelling_resolves if {
 	metrics.resolve({"content_safety": {"max_toxicity": 0.42}}, "metrics.toxicity.max_toxicity") == 0.42
 }
+
+# The alias table is debt. 18 of its 20 legacy spellings have no user anywhere
+# in this repository, and every policy reads through resolve now, so they exist
+# for hypothetical external inputs. Retiring them on taste would be guessing;
+# this reports which are actually sent so the next major version can drop the
+# ones nobody uses, with evidence rather than a hunch.
+test_deprecated_names_what_was_sent_and_what_to_send if {
+	used := metrics.deprecated({
+		"content_safety_score": 0.9,
+		"evaluation": {"fairness_score": 0.8},
+	})
+	used.content_safety_score == "metrics.content_safety.score"
+	used["evaluation.fairness_score"] == "metrics.fairness.score"
+}
+
+# The state this is trying to reach. An input using only canonical names has
+# nothing to report, so an empty result is the success condition rather than a
+# missing check.
+test_canonical_input_reports_nothing if {
+	metrics.deprecated({"metrics": {"toxicity": {"score": 0.01}}}) == {}
+	metrics.deprecated({}) == {}
+}
+
+# The canonical path is the first entry in every alias list, so a naive
+# implementation reports it as a legacy spelling of itself.
+test_the_canonical_spelling_is_not_reported_as_legacy if {
+	used := metrics.deprecated({"metrics": {"content_safety": {"score": 0.9}}})
+	not "metrics.content_safety.score" in object.keys(used)
+}
+
+test_both_spellings_present_reports_only_the_legacy_one if {
+	used := metrics.deprecated({
+		"metrics": {"toxicity": {"score": 0.01}},
+		"evaluation": {"toxicity_score": 0.02},
+	})
+	used == {"evaluation.toxicity_score": "metrics.toxicity.score"}
+}

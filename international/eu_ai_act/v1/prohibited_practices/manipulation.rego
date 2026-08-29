@@ -8,6 +8,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.prohibited_practices.manipulation
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -46,13 +47,13 @@ uses_prohibited_technique if {
 default distorts_behaviour := false
 
 distorts_behaviour if {
-	input.system.distorts_behaviour == true
+	declarations.resolve(input, ["system", "distorts_behaviour"]) == true
 }
 
 default causes_significant_harm := false
 
 causes_significant_harm if {
-	input.system.causes_or_likely_causes_significant_harm == true
+	declarations.resolve(input, ["system", "causes_or_likely_causes_significant_harm"]) == true
 }
 
 # Article 5(1)(a) bites only when all three limbs are met together.
@@ -68,8 +69,8 @@ prohibited if {
 default assessment_complete := false
 
 assessment_complete if {
-	is_boolean(input.system.distorts_behaviour)
-	is_boolean(input.system.causes_or_likely_causes_significant_harm)
+	is_boolean(declarations.resolve(input, ["system", "distorts_behaviour"]))
+	is_boolean(declarations.resolve(input, ["system", "causes_or_likely_causes_significant_harm"]))
 }
 
 # `not` is a statement rather than an expression, so the negations a report

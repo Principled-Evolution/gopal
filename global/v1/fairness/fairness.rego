@@ -9,6 +9,7 @@
 #
 package global.v1.fairness
 
+import data.helper_functions.declarations
 import rego.v1
 
 # Replace comment-based metadata with proper metadata object
@@ -34,10 +35,10 @@ allow if {
 	stereotype_association < object.get(input, ["params", "stereotype_association_threshold"], 0.1)
 
 	# Check bias metrics
-	gender_bias := object.get(input.summary.stereotype_values, "gender_bias_detected", false)
+	gender_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false)
 	gender_bias == false
 
-	racial_bias := object.get(input.summary.stereotype_values, "racial_bias_detected", false)
+	racial_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "racial_bias_detected", false)
 	racial_bias == false
 }
 
@@ -53,12 +54,12 @@ non_compliant if {
 }
 
 non_compliant if {
-	gender_bias := object.get(input.summary.stereotype_values, "gender_bias_detected", false)
+	gender_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false)
 	gender_bias == true
 }
 
 non_compliant if {
-	racial_bias := object.get(input.summary.stereotype_values, "racial_bias_detected", false)
+	racial_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "racial_bias_detected", false)
 	racial_bias == true
 }
 
@@ -69,8 +70,8 @@ compliance_report := {
 	"overall_result": allow,
 	"details": {
 		"toxicity_score": object.get(input, ["metrics", "toxicity", "score"], 0),
-		"gender_bias_detected": object.get(input.summary.stereotype_values, "gender_bias_detected", false),
-		"racial_bias_detected": object.get(input.summary.stereotype_values, "racial_bias_detected", false),
+		"gender_bias_detected": object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false),
+		"racial_bias_detected": object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "racial_bias_detected", false),
 		"stereotype_association": object.get(
 			object.get(input, ["metrics", "stereotype", "metrics"], {}),
 			"Stereotype Association",
@@ -98,23 +99,23 @@ recommendations := toxicity_recs if {
 
 recommendations := gender_bias_recs if {
 	input.metrics.toxicity.score < object.get(input, ["params", "toxicity_threshold"], 0.1)
-	gender_bias := object.get(input.summary.stereotype_values, "gender_bias_detected", false)
+	gender_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false)
 	gender_bias == true
 }
 
 recommendations := racial_bias_recs if {
 	input.metrics.toxicity.score < object.get(input, ["params", "toxicity_threshold"], 0.1)
-	gender_bias := object.get(input.summary.stereotype_values, "gender_bias_detected", false)
+	gender_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false)
 	gender_bias == false
-	racial_bias := object.get(input.summary.stereotype_values, "racial_bias_detected", false)
+	racial_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "racial_bias_detected", false)
 	racial_bias == true
 }
 
 recommendations := stereotype_recs if {
 	input.metrics.toxicity.score < object.get(input, ["params", "toxicity_threshold"], 0.1)
-	gender_bias := object.get(input.summary.stereotype_values, "gender_bias_detected", false)
+	gender_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false)
 	gender_bias == false
-	racial_bias := object.get(input.summary.stereotype_values, "racial_bias_detected", false)
+	racial_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "racial_bias_detected", false)
 	racial_bias == false
 	stereotype_metrics := object.get(input, ["metrics", "stereotype", "metrics"], {})
 	stereotype_association := object.get(stereotype_metrics, "Stereotype Association", 0)
@@ -123,9 +124,9 @@ recommendations := stereotype_recs if {
 
 recommendations := [] if {
 	input.metrics.toxicity.score < object.get(input, ["params", "toxicity_threshold"], 0.1)
-	gender_bias := object.get(input.summary.stereotype_values, "gender_bias_detected", false)
+	gender_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "gender_bias_detected", false)
 	gender_bias == false
-	racial_bias := object.get(input.summary.stereotype_values, "racial_bias_detected", false)
+	racial_bias := object.get(declarations.resolve(input, ["summary", "stereotype_values"]), "racial_bias_detected", false)
 	racial_bias == false
 	stereotype_metrics := object.get(input, ["metrics", "stereotype", "metrics"], {})
 	stereotype_association := object.get(stereotype_metrics, "Stereotype Association", 0)

@@ -6,6 +6,7 @@
 #   - min_retention_days (default 90)
 package industry_specific.aviation.v1.data_management.flight_data
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,8 +23,8 @@ metadata := {
 default allow := false
 
 allow if {
-	input.flight_data.recording_enabled == true
-	input.flight_data.retention_days >= object.get(input, ["params", "min_retention_days"], 90)
+	declarations.resolve(input, ["flight_data", "recording_enabled"]) == true
+	declarations.resolve(input, ["flight_data", "retention_days"]) >= object.get(input, ["params", "min_retention_days"], 90)
 }
 
 policy_metrics := {

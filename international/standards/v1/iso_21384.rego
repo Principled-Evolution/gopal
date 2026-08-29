@@ -6,6 +6,7 @@
 # RequiredParams: none
 package international.standards.v1.iso_21384
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -23,9 +24,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.safety_management.system_established == true
-	input.safety_management.risk_assessment_completed == true
-	input.operations.procedures_documented == true
+	declarations.resolve(input, ["safety_management", "system_established"]) == true
+	declarations.resolve(input, ["safety_management", "risk_assessment_completed"]) == true
+	declarations.resolve(input, ["operations", "procedures_documented"]) == true
 }
 
 policy_metrics := {

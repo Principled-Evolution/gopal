@@ -1,5 +1,6 @@
 package international.nist.v1.manage
 
+import data.helper_functions.declarations
 import rego.v1
 
 metadata := {
@@ -25,10 +26,10 @@ default risk_mitigation := {"allow": false, "msg": "Risk mitigation requirements
 
 risk_mitigation := {"allow": true, "msg": "Risk mitigation requirements met."} if {
 	# Check for documented risk mitigation strategies
-	input.manage.risk_mitigation_strategies_documented
+	declarations.resolve(input, ["manage", "risk_mitigation_strategies_documented"])
 
 	# Check for implementation of risk mitigation strategies
-	input.manage.risk_mitigation_strategies_implemented
+	declarations.resolve(input, ["manage", "risk_mitigation_strategies_implemented"])
 }
 
 # Continuous Monitoring: Check for processes to continuously monitor the system
@@ -36,10 +37,10 @@ default continuous_monitoring := {"allow": false, "msg": "Continuous monitoring 
 
 continuous_monitoring := {"allow": true, "msg": "Continuous monitoring requirements met."} if {
 	# Check for a continuous monitoring plan
-	input.manage.continuous_monitoring_plan_in_place
+	declarations.resolve(input, ["manage", "continuous_monitoring_plan_in_place"])
 
 	# Check for regular execution of the monitoring plan
-	input.manage.continuous_monitoring_plan_executed
+	declarations.resolve(input, ["manage", "continuous_monitoring_plan_executed"])
 }
 
 # Incident Response: Check for a plan to respond to incidents
@@ -47,8 +48,8 @@ default incident_response := {"allow": false, "msg": "Incident response requirem
 
 incident_response := {"allow": true, "msg": "Incident response requirements met."} if {
 	# Check for an incident response plan
-	input.manage.incident_response_plan_in_place
+	declarations.resolve(input, ["manage", "incident_response_plan_in_place"])
 
 	# Check for regular testing of the incident response plan
-	input.manage.incident_response_plan_tested
+	declarations.resolve(input, ["manage", "incident_response_plan_tested"])
 }

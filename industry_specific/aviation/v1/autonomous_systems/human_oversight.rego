@@ -6,6 +6,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.autonomous_systems.human_oversight
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,9 +23,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.oversight.remote_pilot_monitoring == true
-	input.oversight.intervention_capability == true
-	input.oversight.handover_procedure_defined == true
+	declarations.resolve(input, ["oversight", "remote_pilot_monitoring"]) == true
+	declarations.resolve(input, ["oversight", "intervention_capability"]) == true
+	declarations.resolve(input, ["oversight", "handover_procedure_defined"]) == true
 }
 
 policy_metrics := {

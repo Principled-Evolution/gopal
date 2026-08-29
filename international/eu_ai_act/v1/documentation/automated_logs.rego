@@ -13,6 +13,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.documentation.automated_logs
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -31,30 +32,30 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 # Article 12(1) and 12(2).
 default baseline_logging := false
 
 baseline_logging if {
-	input.logging.automatic_recording_enabled == true
-	input.logging.covers_system_lifetime == true
-	input.logging.identifies_risk_situations == true
-	input.logging.supports_post_market_monitoring == true
+	declarations.resolve(input, ["logging", "automatic_recording_enabled"]) == true
+	declarations.resolve(input, ["logging", "covers_system_lifetime"]) == true
+	declarations.resolve(input, ["logging", "identifies_risk_situations"]) == true
+	declarations.resolve(input, ["logging", "supports_post_market_monitoring"]) == true
 }
 
 # Article 12(3) applies to Annex III point 1(a) biometric identification.
 default annex_iii_1_a := false
 
 annex_iii_1_a if {
-	input.system.annex_iii_1_a_biometric == true
+	declarations.resolve(input, ["system", "annex_iii_1_a_biometric"]) == true
 }
 
 biometric_fields := {
