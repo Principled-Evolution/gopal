@@ -6,6 +6,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.flight_operations.emergency_procedures
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,9 +23,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.emergency_procedures.lost_link_procedure_defined == true
-	input.emergency_procedures.contingency_landing_sites_identified == true
-	input.emergency_procedures.crew_trained == true
+	declarations.resolve(input, ["emergency_procedures", "lost_link_procedure_defined"]) == true
+	declarations.resolve(input, ["emergency_procedures", "contingency_landing_sites_identified"]) == true
+	declarations.resolve(input, ["emergency_procedures", "crew_trained"]) == true
 }
 
 policy_metrics := {

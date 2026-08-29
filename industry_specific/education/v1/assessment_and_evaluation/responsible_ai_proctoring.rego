@@ -1,5 +1,7 @@
 package industry_specific.education.v1.assessment_and_evaluation
 
+import data.helper_functions.declarations
+
 # @title Detailed Responsible AI Proctoring
 # @description This policy ensures that AI proctoring systems are used responsibly, respecting student privacy and providing due process.
 # @version 1.1
@@ -11,9 +13,9 @@ default responsible_ai_proctoring_compliant := false
 
 # Compliant if student consent is obtained, data handling is secure, and an appeals process exists.
 responsible_ai_proctoring_compliant if {
-	input.proctoring_session.student_consent_given == true
-	is_data_handling_secure(input.proctoring_session.data_handling)
-	has_human_review_and_appeals(input.proctoring_session.review_process)
+	declarations.resolve(input, ["proctoring_session", "student_consent_given"]) == true
+	is_data_handling_secure(declarations.resolve(input, ["proctoring_session", "data_handling"]))
+	has_human_review_and_appeals(declarations.resolve(input, ["proctoring_session", "review_process"]))
 }
 
 # --- Deny Messages ---
@@ -21,13 +23,13 @@ responsible_ai_proctoring_compliant if {
 deny contains msg if {
 	not responsible_ai_proctoring_compliant
 	failures := ({failure |
-		not input.proctoring_session.student_consent_given
+		not declarations.resolve(input, ["proctoring_session", "student_consent_given"])
 		failure := "Student consent not given"
 	} | {failure |
-		not is_data_handling_secure(input.proctoring_session.data_handling)
+		not is_data_handling_secure(declarations.resolve(input, ["proctoring_session", "data_handling"]))
 		failure := "Insecure data handling"
 	}) | {failure |
-		not has_human_review_and_appeals(input.proctoring_session.review_process)
+		not has_human_review_and_appeals(declarations.resolve(input, ["proctoring_session", "review_process"]))
 		failure := "Lack of human review or appeals process"
 	}
 	msg := sprintf("AI proctoring session is not compliant. Failures: %v", [failures])

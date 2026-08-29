@@ -6,6 +6,7 @@
 # RequiredParams: none
 package international.faa.v1.remote_id
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,25 +23,25 @@ metadata := {
 default allow := false
 
 allow if {
-	input.aircraft.standard_remote_id_equipped == true
+	declarations.resolve(input, ["aircraft", "standard_remote_id_equipped"]) == true
 }
 
 allow if {
-	input.aircraft.broadcast_module_attached == true
+	declarations.resolve(input, ["aircraft", "broadcast_module_attached"]) == true
 }
 
 allow if {
-	input.operation.within_fria == true
+	declarations.resolve(input, ["operation", "within_fria"]) == true
 }
 
 default compliance_method := "none"
 
 compliance_method := "standard_remote_id" if {
-	input.aircraft.standard_remote_id_equipped == true
+	declarations.resolve(input, ["aircraft", "standard_remote_id_equipped"]) == true
 } else := "broadcast_module" if {
-	input.aircraft.broadcast_module_attached == true
+	declarations.resolve(input, ["aircraft", "broadcast_module_attached"]) == true
 } else := "fria_exempt" if {
-	input.operation.within_fria == true
+	declarations.resolve(input, ["operation", "within_fria"]) == true
 }
 
 policy_metrics := {

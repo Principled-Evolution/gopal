@@ -1,5 +1,7 @@
 package industry_specific.education.v1.safe_learning_environment
 
+import data.helper_functions.declarations
+
 # @title Detailed Instructional Tool Vetting
 # @description This policy ensures that third-party AI tools are properly vetted against security, privacy, and pedagogical standards before use.
 # @version 1.1
@@ -11,9 +13,9 @@ default approved := false
 
 # Approved if the tool meets all vetting requirements.
 approved if {
-	has_passed_security_review(input.tool.vetting_report)
-	has_passed_privacy_review(input.tool.vetting_report)
-	has_passed_pedagogical_review(input.tool.vetting_report)
+	has_passed_security_review(declarations.resolve(input, ["tool", "vetting_report"]))
+	has_passed_privacy_review(declarations.resolve(input, ["tool", "vetting_report"]))
+	has_passed_pedagogical_review(declarations.resolve(input, ["tool", "vetting_report"]))
 }
 
 # --- Deny Messages ---
@@ -21,19 +23,19 @@ approved if {
 deny contains msg if {
 	not approved
 	failures := ({failure |
-		report := input.tool.vetting_report
+		report := declarations.resolve(input, ["tool", "vetting_report"])
 		not has_passed_security_review(report)
 		failure := "Security Review Failed"
 	} | {failure |
-		report := input.tool.vetting_report
+		report := declarations.resolve(input, ["tool", "vetting_report"])
 		not has_passed_privacy_review(report)
 		failure := "Privacy Review Failed"
 	}) | {failure |
-		report := input.tool.vetting_report
+		report := declarations.resolve(input, ["tool", "vetting_report"])
 		not has_passed_pedagogical_review(report)
 		failure := "Pedagogical Review Failed"
 	}
-	msg := sprintf("Instructional tool '%v' is not approved. Vetting failures: %v", [input.tool.name, failures])
+	msg := sprintf("Instructional tool '%v' is not approved. Vetting failures: %v", [declarations.resolve(input, ["tool", "name"]), failures])
 }
 
 # --- Helper Functions ---

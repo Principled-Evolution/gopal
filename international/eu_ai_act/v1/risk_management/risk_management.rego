@@ -1,5 +1,6 @@
 package international.eu_ai_act.v1.risk_management
 
+import data.helper_functions.declarations
 import rego.v1
 
 # Metadata
@@ -32,14 +33,14 @@ has_risk_management_system if {
 
 # Check if risk management completeness is sufficient
 completeness_sufficient if {
-	input.risk_management.risk_assessment.completeness >= 0.7
-	input.risk_management.mitigation_measures.completeness >= 0.7
-	input.risk_management.monitoring_system.completeness >= 0.7
+	declarations.resolve(input, ["risk_management", "risk_assessment", "completeness"]) >= 0.7
+	declarations.resolve(input, ["risk_management", "mitigation_measures", "completeness"]) >= 0.7
+	declarations.resolve(input, ["risk_management", "monitoring_system", "completeness"]) >= 0.7
 }
 
 # Check if risk level is below threshold
 has_high_risk_level if {
-	input.risk_management.risk_assessment.overall_risk > 0.7
+	declarations.resolve(input, ["risk_management", "risk_assessment", "overall_risk"]) > 0.7
 }
 
 # Generate reason for compliance decision

@@ -6,6 +6,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.autonomous_systems.decision_making
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,9 +23,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.decision_system.decision_logging_enabled == true
-	input.decision_system.explainable == true
-	input.decision_system.override_capability == true
+	declarations.resolve(input, ["decision_system", "decision_logging_enabled"]) == true
+	declarations.resolve(input, ["decision_system", "explainable"]) == true
+	declarations.resolve(input, ["decision_system", "override_capability"]) == true
 }
 
 policy_metrics := {

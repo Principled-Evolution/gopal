@@ -6,6 +6,7 @@
 # RequiredParams: none
 package international.icao.v1.doc_10019
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,26 +23,26 @@ metadata := {
 default allow := false
 
 allow if {
-	input.system.c2_link.lost_link_procedure_defined == true
-	input.system.detect_and_avoid.equipped == true
-	input.system.remote_pilot.qualified == true
+	declarations.resolve(input, ["system", "c2_link", "lost_link_procedure_defined"]) == true
+	declarations.resolve(input, ["system", "detect_and_avoid", "equipped"]) == true
+	declarations.resolve(input, ["system", "remote_pilot", "qualified"]) == true
 }
 
 policy_metrics := {
 	"lost_link_procedure_defined": {
 		"name": "Lost Link Procedure Defined",
-		"value": object.get(input.system.c2_link, "lost_link_procedure_defined", false),
-		"control_passed": object.get(input.system.c2_link, "lost_link_procedure_defined", false) == true,
+		"value": object.get(declarations.resolve(input, ["system", "c2_link"]), "lost_link_procedure_defined", false),
+		"control_passed": object.get(declarations.resolve(input, ["system", "c2_link"]), "lost_link_procedure_defined", false) == true,
 	},
 	"detect_and_avoid_equipped": {
 		"name": "Detect and Avoid Equipped",
-		"value": object.get(input.system.detect_and_avoid, "equipped", false),
-		"control_passed": object.get(input.system.detect_and_avoid, "equipped", false) == true,
+		"value": object.get(declarations.resolve(input, ["system", "detect_and_avoid"]), "equipped", false),
+		"control_passed": object.get(declarations.resolve(input, ["system", "detect_and_avoid"]), "equipped", false) == true,
 	},
 	"remote_pilot_qualified": {
 		"name": "Remote Pilot Qualified",
-		"value": object.get(input.system.remote_pilot, "qualified", false),
-		"control_passed": object.get(input.system.remote_pilot, "qualified", false) == true,
+		"value": object.get(declarations.resolve(input, ["system", "remote_pilot"]), "qualified", false),
+		"control_passed": object.get(declarations.resolve(input, ["system", "remote_pilot"]), "qualified", false) == true,
 	},
 }
 

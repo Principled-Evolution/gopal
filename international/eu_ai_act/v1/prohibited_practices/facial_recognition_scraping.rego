@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.prohibited_practices.facial_recognition_scraping
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -32,14 +33,14 @@ scraped_sources contains src if {
 default builds_database := false
 
 builds_database if {
-	input.system.builds_facial_recognition_database == true
+	declarations.resolve(input, ["system", "builds_facial_recognition_database"]) == true
 }
 
 default scrapes_untargeted := false
 
 scrapes_untargeted if {
-	input.system.scrapes_facial_images == true
-	input.system.scraping_is_targeted == false
+	declarations.resolve(input, ["system", "scrapes_facial_images"]) == true
+	declarations.resolve(input, ["system", "scraping_is_targeted"]) == false
 	count(scraped_sources) > 0
 }
 
@@ -59,8 +60,8 @@ not_prohibited if {
 default assessment_complete := false
 
 assessment_complete if {
-	is_boolean(input.system.builds_facial_recognition_database)
-	is_boolean(input.system.scrapes_facial_images)
+	is_boolean(declarations.resolve(input, ["system", "builds_facial_recognition_database"]))
+	is_boolean(declarations.resolve(input, ["system", "scrapes_facial_images"]))
 }
 
 default allow := false

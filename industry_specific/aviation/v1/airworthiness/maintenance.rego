@@ -6,6 +6,7 @@
 # RequiredParams: none
 package industry_specific.aviation.v1.airworthiness.maintenance
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -22,9 +23,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.maintenance.program_established == true
-	input.maintenance.inspection_current == true
-	input.maintenance.records_retained == true
+	declarations.resolve(input, ["maintenance", "program_established"]) == true
+	declarations.resolve(input, ["maintenance", "inspection_current"]) == true
+	declarations.resolve(input, ["maintenance", "records_retained"]) == true
 }
 
 policy_metrics := {

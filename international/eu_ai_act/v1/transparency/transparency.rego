@@ -1,5 +1,6 @@
 package international.eu_ai_act.v1.transparency
 
+import data.helper_functions.declarations
 import rego.v1
 
 # Metadata
@@ -47,9 +48,9 @@ has_documentation if {
 
 # Check if documentation completeness is sufficient
 documentation_completeness_sufficient if {
-	input.documentation.technical_documentation.completeness >= 0.7
-	input.documentation.model_card.completeness >= 0.7
-	input.documentation.explainability.completeness >= 0.7
+	declarations.resolve(input, ["documentation", "technical_documentation", "completeness"]) >= 0.7
+	declarations.resolve(input, ["documentation", "model_card", "completeness"]) >= 0.7
+	declarations.resolve(input, ["documentation", "explainability", "completeness"]) >= 0.7
 }
 
 # Check if toxicity is below threshold

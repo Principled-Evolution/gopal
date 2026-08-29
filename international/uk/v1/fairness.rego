@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.uk.v1.fairness
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -37,8 +38,8 @@ equality_act_characteristics := {
 default allow := false
 
 allow if {
-	input.fairness.bias_assessment_completed == true
-	input.fairness.legal_rights_review_completed == true
+	declarations.resolve(input, ["fairness", "bias_assessment_completed"]) == true
+	declarations.resolve(input, ["fairness", "legal_rights_review_completed"]) == true
 	all_characteristics_tested
 	disparity_within_threshold
 }

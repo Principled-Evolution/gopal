@@ -1,5 +1,6 @@
 package international.nist.v1.map
 
+import data.helper_functions.declarations
 import rego.v1
 
 metadata := {
@@ -25,10 +26,10 @@ default system_context := {"allow": false, "msg": "System context requirements n
 
 system_context := {"allow": true, "msg": "System context requirements met."} if {
 	# Check for documentation of the system's intended use
-	input.map.intended_use_documented
+	declarations.resolve(input, ["map", "intended_use_documented"])
 
 	# Check for documentation of the system's architecture
-	input.map.architecture_documented
+	declarations.resolve(input, ["map", "architecture_documented"])
 }
 
 # Data Provenance: Check for clear documentation of data sources and lineage
@@ -36,10 +37,10 @@ default data_provenance := {"allow": false, "msg": "Data provenance requirements
 
 data_provenance := {"allow": true, "msg": "Data provenance requirements met."} if {
 	# Check for documentation of data sources
-	input.map.data_sources_documented
+	declarations.resolve(input, ["map", "data_sources_documented"])
 
 	# Check for documentation of data processing steps
-	input.map.data_processing_documented
+	declarations.resolve(input, ["map", "data_processing_documented"])
 }
 
 # System Limitations: Check for clear documentation of the system's limitations
@@ -47,8 +48,8 @@ default system_limitations := {"allow": false, "msg": "System limitations requir
 
 system_limitations := {"allow": true, "msg": "System limitations requirements met."} if {
 	# Check for documentation of known limitations and potential failure modes
-	input.map.known_limitations_documented
+	declarations.resolve(input, ["map", "known_limitations_documented"])
 
 	# Check for documentation of out-of-scope use cases
-	input.map.out_of_scope_use_cases_documented
+	declarations.resolve(input, ["map", "out_of_scope_use_cases_documented"])
 }

@@ -11,6 +11,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.technical_robustness
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -30,35 +31,35 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 # Article 15(2): the metrics have to reach the deployer, not just exist.
 default accuracy_declared := false
 
 accuracy_declared if {
-	input.accuracy.metrics_declared == true
-	input.accuracy.declared_in_instructions == true
+	declarations.resolve(input, ["accuracy", "metrics_declared"]) == true
+	declarations.resolve(input, ["accuracy", "declared_in_instructions"]) == true
 }
 
 default resilient := false
 
 resilient if {
-	input.robustness.resilience_tested == true
-	input.robustness.fallback_or_fail_safe_documented == true
+	declarations.resolve(input, ["robustness", "resilience_tested"]) == true
+	declarations.resolve(input, ["robustness", "fallback_or_fail_safe_documented"]) == true
 }
 
 # Article 15(4): only engages where the system continues to learn in use.
 default continues_to_learn := false
 
 continues_to_learn if {
-	input.system.continues_to_learn_after_deployment == true
+	declarations.resolve(input, ["system", "continues_to_learn_after_deployment"]) == true
 }
 
 default feedback_loops_addressed := false
@@ -69,15 +70,15 @@ feedback_loops_addressed if {
 
 feedback_loops_addressed if {
 	continues_to_learn
-	input.robustness.feedback_loop_risk_addressed == true
+	declarations.resolve(input, ["robustness", "feedback_loop_risk_addressed"]) == true
 }
 
 # Article 15(5): conventional controls plus the AI-specific attack surface.
 default secured := false
 
 secured if {
-	input.cybersecurity.controls_in_place == true
-	input.cybersecurity.adversarial_attacks_addressed == true
+	declarations.resolve(input, ["cybersecurity", "controls_in_place"]) == true
+	declarations.resolve(input, ["cybersecurity", "adversarial_attacks_addressed"]) == true
 }
 
 default allow := false

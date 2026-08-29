@@ -7,6 +7,7 @@
 #   - min_surveillance_volume_nm (default 1.0)
 package international.standards.v1.rtca_do_365
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -23,9 +24,9 @@ metadata := {
 default allow := false
 
 allow if {
-	input.daa_system.equipped == true
-	input.daa_system.surveillance_volume_nm >= object.get(input, ["params", "min_surveillance_volume_nm"], 1.0)
-	input.daa_system.alert_timeliness_compliant == true
+	declarations.resolve(input, ["daa_system", "equipped"]) == true
+	declarations.resolve(input, ["daa_system", "surveillance_volume_nm"]) >= object.get(input, ["params", "min_surveillance_volume_nm"], 1.0)
+	declarations.resolve(input, ["daa_system", "alert_timeliness_compliant"]) == true
 }
 
 policy_metrics := {

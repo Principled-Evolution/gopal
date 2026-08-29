@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.easa.v1.regulation_2019_947
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -23,21 +24,21 @@ metadata := {
 default allow := false
 
 allow if {
-	input.operation.category == "open"
-	input.operator.registered == true
-	input.aircraft.class_marking in {"C0", "C1", "C2", "C3", "C4"}
+	declarations.resolve(input, ["operation", "category"]) == "open"
+	declarations.resolve(input, ["operator", "registered"]) == true
+	declarations.resolve(input, ["aircraft", "class_marking"]) in {"C0", "C1", "C2", "C3", "C4"}
 }
 
 allow if {
-	input.operation.category == "specific"
-	input.operator.registered == true
-	input.authorization.granted == true
+	declarations.resolve(input, ["operation", "category"]) == "specific"
+	declarations.resolve(input, ["operator", "registered"]) == true
+	declarations.resolve(input, ["authorization", "granted"]) == true
 }
 
 allow if {
-	input.operation.category == "certified"
-	input.operator.registered == true
-	input.aircraft.type_certificate_held == true
+	declarations.resolve(input, ["operation", "category"]) == "certified"
+	declarations.resolve(input, ["operator", "registered"]) == true
+	declarations.resolve(input, ["aircraft", "type_certificate_held"]) == true
 }
 
 policy_metrics := {

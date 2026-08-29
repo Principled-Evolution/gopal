@@ -10,6 +10,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.compliance.registration
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -30,40 +31,40 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 in_scope if {
-	input.system.annex_iii_exempt_under_article_6_3 == true
+	declarations.resolve(input, ["system", "annex_iii_exempt_under_article_6_3"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 default claims_exemption := false
 
 claims_exemption if {
-	input.system.annex_iii_exempt_under_article_6_3 == true
+	declarations.resolve(input, ["system", "annex_iii_exempt_under_article_6_3"]) == true
 }
 
 # Article 49(2) route: register the assessment.
 default exemption_registered := false
 
 exemption_registered if {
-	input.registration.exemption_assessment_registered == true
+	declarations.resolve(input, ["registration", "exemption_assessment_registered"]) == true
 }
 
 # Article 49(1) route: full registration before placing on the market.
 default fully_registered := false
 
 fully_registered if {
-	input.registration.provider_registered == true
-	input.registration.system_registered == true
-	input.registration.registered_before_placing_on_market == true
-	input.registration.annex_viii_information_complete == true
+	declarations.resolve(input, ["registration", "provider_registered"]) == true
+	declarations.resolve(input, ["registration", "system_registered"]) == true
+	declarations.resolve(input, ["registration", "registered_before_placing_on_market"]) == true
+	declarations.resolve(input, ["registration", "annex_viii_information_complete"]) == true
 }
 
 default allow := false

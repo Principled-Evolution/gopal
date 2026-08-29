@@ -16,6 +16,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.obligations.deployer_obligations
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -34,76 +35,76 @@ metadata := {
 default in_scope := false
 
 in_scope if {
-	input.system.high_risk == true
+	declarations.resolve(input, ["system", "high_risk"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.system.high_risk)
+	is_boolean(declarations.resolve(input, ["system", "high_risk"]))
 }
 
 # Article 26(1) to (6): the universal obligations.
 default uses_per_instructions := false
 
 uses_per_instructions if {
-	input.deployer.uses_per_instructions == true
+	declarations.resolve(input, ["deployer", "uses_per_instructions"]) == true
 }
 
 default oversight_assigned := false
 
 oversight_assigned if {
-	input.deployer.human_oversight_assigned == true
-	input.deployer.oversight_persons_trained_and_authorised == true
+	declarations.resolve(input, ["deployer", "human_oversight_assigned"]) == true
+	declarations.resolve(input, ["deployer", "oversight_persons_trained_and_authorised"]) == true
 }
 
 # Article 26(4): only to the extent the deployer controls the input data.
 default input_data_adequate := false
 
 input_data_adequate if {
-	input.deployer.controls_input_data == false
+	declarations.resolve(input, ["deployer", "controls_input_data"]) == false
 }
 
 input_data_adequate if {
-	input.deployer.controls_input_data == true
-	input.deployer.input_data_relevant == true
+	declarations.resolve(input, ["deployer", "controls_input_data"]) == true
+	declarations.resolve(input, ["deployer", "input_data_relevant"]) == true
 }
 
 default monitoring_in_place := false
 
 monitoring_in_place if {
-	input.deployer.monitors_operation == true
-	input.deployer.reports_serious_incidents == true
+	declarations.resolve(input, ["deployer", "monitors_operation"]) == true
+	declarations.resolve(input, ["deployer", "reports_serious_incidents"]) == true
 }
 
 default logs_kept := false
 
 logs_kept if {
-	input.deployer.logs_kept_six_months == true
+	declarations.resolve(input, ["deployer", "logs_kept_six_months"]) == true
 }
 
 # Article 26(7): conditional on workplace deployment.
 default workers_informed := false
 
 workers_informed if {
-	input.deployer.workplace_deployment == false
+	declarations.resolve(input, ["deployer", "workplace_deployment"]) == false
 }
 
 workers_informed if {
-	input.deployer.workplace_deployment == true
-	input.deployer.workers_informed == true
+	declarations.resolve(input, ["deployer", "workplace_deployment"]) == true
+	declarations.resolve(input, ["deployer", "workers_informed"]) == true
 }
 
 # Article 26(11): conditional on the system affecting natural persons.
 default affected_persons_informed := false
 
 affected_persons_informed if {
-	input.deployer.affects_natural_persons == false
+	declarations.resolve(input, ["deployer", "affects_natural_persons"]) == false
 }
 
 affected_persons_informed if {
-	input.deployer.affects_natural_persons == true
-	input.deployer.affected_persons_informed == true
+	declarations.resolve(input, ["deployer", "affects_natural_persons"]) == true
+	declarations.resolve(input, ["deployer", "affected_persons_informed"]) == true
 }
 
 default allow := false

@@ -11,6 +11,7 @@
 # RequiredParams: none
 package operational.corporate.v1.infosec
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -29,15 +30,15 @@ metadata := {
 default access_controlled := false
 
 access_controlled if {
-	input.access.least_privilege_enforced == true
-	input.access.authentication_required == true
+	declarations.resolve(input, ["access", "least_privilege_enforced"]) == true
+	declarations.resolve(input, ["access", "authentication_required"]) == true
 }
 
 default data_encrypted := false
 
 data_encrypted if {
-	input.data.encrypted_in_transit == true
-	input.data.encrypted_at_rest == true
+	declarations.resolve(input, ["data", "encrypted_in_transit"]) == true
+	declarations.resolve(input, ["data", "encrypted_at_rest"]) == true
 }
 
 # A credential pasted into a prompt is in the context window, the provider's
@@ -45,13 +46,13 @@ data_encrypted if {
 default secrets_managed := false
 
 secrets_managed if {
-	input.secrets.managed_outside_prompts == true
+	declarations.resolve(input, ["secrets", "managed_outside_prompts"]) == true
 }
 
 default untrusted_input_reaches_model := false
 
 untrusted_input_reaches_model if {
-	input.resilience.untrusted_input_reaches_model == true
+	declarations.resolve(input, ["resilience", "untrusted_input_reaches_model"]) == true
 }
 
 default injection_controls_adequate := false
@@ -62,13 +63,13 @@ injection_controls_adequate if {
 
 injection_controls_adequate if {
 	untrusted_input_reaches_model
-	input.resilience.prompt_injection_controls_in_place == true
+	declarations.resolve(input, ["resilience", "prompt_injection_controls_in_place"]) == true
 }
 
 default events_logged := false
 
 events_logged if {
-	input.logging.security_events_logged == true
+	declarations.resolve(input, ["logging", "security_events_logged"]) == true
 }
 
 default vulnerability_review_current := false

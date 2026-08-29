@@ -10,6 +10,7 @@
 # RequiredParams: none
 package industry_specific.bfs.v1.uk_fca_consumer_duty
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -32,13 +33,13 @@ metadata := {
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.firm.retail_customers_affected)
+	is_boolean(declarations.resolve(input, ["firm", "retail_customers_affected"]))
 }
 
 default in_scope := false
 
 in_scope if {
-	input.firm.retail_customers_affected == true
+	declarations.resolve(input, ["firm", "retail_customers_affected"]) == true
 }
 
 # PRIN 2A.2: act in good faith, avoid foreseeable harm, and enable and support
@@ -46,19 +47,19 @@ in_scope if {
 default cross_cutting_met := false
 
 cross_cutting_met if {
-	input.cross_cutting.good_faith_assessment_completed == true
-	input.cross_cutting.foreseeable_harm_assessment_completed == true
-	input.cross_cutting.supports_customer_objectives == true
+	declarations.resolve(input, ["cross_cutting", "good_faith_assessment_completed"]) == true
+	declarations.resolve(input, ["cross_cutting", "foreseeable_harm_assessment_completed"]) == true
+	declarations.resolve(input, ["cross_cutting", "supports_customer_objectives"]) == true
 }
 
 # PRIN 2A.3 to 2A.6: the four retail customer outcomes.
 default outcomes_met := false
 
 outcomes_met if {
-	input.outcomes.target_market_defined == true
-	input.outcomes.fair_value_assessment_completed == true
-	input.outcomes.communications_tested_for_understanding == true
-	input.outcomes.support_channels_free_of_unreasonable_barriers == true
+	declarations.resolve(input, ["outcomes", "target_market_defined"]) == true
+	declarations.resolve(input, ["outcomes", "fair_value_assessment_completed"]) == true
+	declarations.resolve(input, ["outcomes", "communications_tested_for_understanding"]) == true
+	declarations.resolve(input, ["outcomes", "support_channels_free_of_unreasonable_barriers"]) == true
 }
 
 # A firm that cannot articulate why a decision was reached, in terms the
@@ -66,7 +67,7 @@ outcomes_met if {
 default customer_facing := false
 
 customer_facing if {
-	input.ai.customer_facing == true
+	declarations.resolve(input, ["ai", "customer_facing"]) == true
 }
 
 default ai_explainability_met := false
@@ -77,16 +78,16 @@ ai_explainability_met if {
 
 ai_explainability_met if {
 	customer_facing
-	input.ai.decision_explainable_in_plain_language == true
-	input.ai.vulnerable_customer_handling_documented == true
-	input.ai.outcomes_monitoring_data_collected == true
+	declarations.resolve(input, ["ai", "decision_explainable_in_plain_language"]) == true
+	declarations.resolve(input, ["ai", "vulnerable_customer_handling_documented"]) == true
+	declarations.resolve(input, ["ai", "outcomes_monitoring_data_collected"]) == true
 }
 
 # SM&CR attaches individual accountability for the system to a named person.
 default accountability_met := false
 
 accountability_met if {
-	input.accountability.smf_owner_assigned == true
+	declarations.resolve(input, ["accountability", "smf_owner_assigned"]) == true
 }
 
 default allow := false

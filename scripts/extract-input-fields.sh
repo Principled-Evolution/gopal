@@ -92,6 +92,22 @@ def is_object_get:
 	and .value[0].value[0].value == "object"
 	and .value[0].value[1].value == "get";
 
+# declarations.resolve(input, ["a", "b"]) and resolve_or(input, [...], fallback).
+#
+# Declarations used to be read as plain refs, so the ref walk above found them.
+# Since they go through the helper, the path is an argument rather than a ref,
+# and a walk alone reports 54 fields for the EU framework where there are 185.
+# Everything downstream reads this: the coverage data, the question form in the
+# playground, and aicertify explain, all of which would quietly ask for almost
+# nothing.
+# opa parse leaves the import alias unresolved, so the call head is the two
+# terms declarations.resolve rather than the fully qualified package path.
+def is_declarations_resolve:
+	.value[0].type == "ref"
+	and (.value[0].value | length) == 2
+	and .value[0].value[0].value == "declarations"
+	and (.value[0].value[1].value | IN("resolve", "resolve_or"));
+
 def is_comparison:
 	.[0].type == "ref"
 	and (.[0].value | length) == 1
@@ -110,6 +126,33 @@ def is_comparison:
 		| (.value[2] | key_path) as $key
 		| select($base != null and $key != null)
 		| {path: ($base + $key), kind: (.value[3] | literal_kind)}
+	),
+
+	# declarations.resolve(input, <path>) — the path is the second argument.
+	(
+		.. | objects
+		| select(.type == "call" and (.value | type) == "array" and (.value | length) >= 3)
+		| select(is_declarations_resolve)
+		| (.value[1] | input_ref_path) as $base
+		| (.value[2] | key_path) as $key
+		| select($base != null and $key != null)
+		| {path: ($base + $key), kind: (.value[3] | literal_kind)}
+	),
+
+	# metrics.resolve(input, "metrics.a.b") — the canonical name is a string
+	# rather than a path array, so it needs its own branch. These reads were
+	# plain input refs before the metrics helper existed too.
+	(
+		.. | objects
+		| select(.type == "call" and (.value | type) == "array" and (.value | length) >= 3)
+		| select(
+			.value[0].type == "ref"
+			and (.value[0].value | length) == 2
+			and .value[0].value[0].value == "metrics"
+			and (.value[0].value[1].value | IN("resolve", "resolve_or"))
+		)
+		| select(.value[2].type == "string")
+		| {path: (.value[2].value | split(".")), kind: "number"}
 	),
 
 	# A comparison against a constant, in either argument order.

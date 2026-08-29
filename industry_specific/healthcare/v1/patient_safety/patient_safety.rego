@@ -13,6 +13,7 @@
 #
 package industry_specific.healthcare.v1.patient_safety
 
+import data.helper_functions.declarations
 import data.helper_functions.metrics
 import data.helper_functions.reporting
 import rego.v1
@@ -62,8 +63,8 @@ risk_assessment_met if {
 default oversight_met := false
 
 oversight_met if {
-	input.oversight.clinician_in_the_loop == true
-	input.oversight.adverse_event_reporting_in_place == true
+	declarations.resolve(input, ["oversight", "clinician_in_the_loop"]) == true
+	declarations.resolve(input, ["oversight", "adverse_event_reporting_in_place"]) == true
 }
 
 default allow := false

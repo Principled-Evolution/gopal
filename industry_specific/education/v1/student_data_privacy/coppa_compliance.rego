@@ -1,5 +1,7 @@
 package industry_specific.education.v1.student_data_privacy
 
+import data.helper_functions.declarations
+
 # @title Detailed COPPA Compliance
 # @description This policy ensures that the collection and processing of personal information from children under 13 complies with COPPA.
 # @version 1.1
@@ -11,26 +13,26 @@ default coppa_compliant := false
 
 # Allow if the user is 13 or older.
 coppa_compliant if {
-	input.user.age >= 13
+	declarations.resolve(input, ["user", "age"]) >= 13
 }
 
 # Allow if the user is under 13 but verifiable parental consent has been obtained.
 coppa_compliant if {
-	input.user.age < 13
+	declarations.resolve(input, ["user", "age"]) < 13
 	has_verifiable_parental_consent(input.user)
 }
 
 # Allow for internal operations of the service (e.g., analytics, debugging).
 coppa_compliant if {
-	input.request.purpose == "internal_operations"
+	declarations.resolve(input, ["request", "purpose"]) == "internal_operations"
 }
 
 # --- Deny Messages ---
 
 deny contains msg if {
-	input.user.age < 13
+	declarations.resolve(input, ["user", "age"]) < 13
 	not has_verifiable_parental_consent(input.user)
-	not input.request.purpose == "internal_operations"
+	not declarations.resolve(input, ["request", "purpose"]) == "internal_operations"
 	msg := "COPPA violation: Verifiable parental consent is required for users under 13."
 }
 

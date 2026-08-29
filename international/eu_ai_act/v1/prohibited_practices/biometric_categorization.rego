@@ -7,6 +7,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.prohibited_practices.biometric_categorization
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -39,7 +40,7 @@ inferred_sensitive contains attr if {
 default categorises_biometrically := false
 
 categorises_biometrically if {
-	input.system.performs_biometric_categorisation == true
+	declarations.resolve(input, ["system", "performs_biometric_categorisation"]) == true
 }
 
 default infers_sensitive_attribute := false
@@ -52,11 +53,11 @@ infers_sensitive_attribute if {
 default exemption_applies := false
 
 exemption_applies if {
-	input.system.dataset_labelling_only == true
+	declarations.resolve(input, ["system", "dataset_labelling_only"]) == true
 }
 
 exemption_applies if {
-	input.system.law_enforcement_use == true
+	declarations.resolve(input, ["system", "law_enforcement_use"]) == true
 }
 
 default prohibited := false
@@ -76,7 +77,7 @@ not_prohibited if {
 default assessment_complete := false
 
 assessment_complete if {
-	is_boolean(input.system.performs_biometric_categorisation)
+	is_boolean(declarations.resolve(input, ["system", "performs_biometric_categorisation"]))
 }
 
 default allow := false

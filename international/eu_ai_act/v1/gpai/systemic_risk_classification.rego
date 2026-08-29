@@ -11,6 +11,7 @@
 # RequiredParams: none
 package international.eu_ai_act.v1.gpai.systemic_risk_classification
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -33,13 +34,13 @@ flop_threshold := 1e25
 default is_gpai := false
 
 is_gpai if {
-	input.model.general_purpose == true
+	declarations.resolve(input, ["model", "general_purpose"]) == true
 }
 
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.model.general_purpose)
+	is_boolean(declarations.resolve(input, ["model", "general_purpose"]))
 }
 
 default exceeds_compute_threshold := false
@@ -51,7 +52,7 @@ exceeds_compute_threshold if {
 default commission_designated := false
 
 commission_designated if {
-	input.model.commission_designated_systemic_risk == true
+	declarations.resolve(input, ["model", "commission_designated_systemic_risk"]) == true
 }
 
 default systemic_risk := false
@@ -70,7 +71,7 @@ systemic_risk if {
 default commission_notified := false
 
 commission_notified if {
-	input.notification.commission_notified == true
+	declarations.resolve(input, ["notification", "commission_notified"]) == true
 }
 
 # Article 55 obligations, engaged by the classification.

@@ -9,6 +9,7 @@
 # RequiredParams: none
 package industry_specific.legal.v1.client_confidentiality
 
+import data.helper_functions.declarations
 import data.helper_functions.reporting
 import rego.v1
 
@@ -29,17 +30,17 @@ metadata := {
 default scope_determined := false
 
 scope_determined if {
-	is_boolean(input.data.client_confidential_information_entered)
+	is_boolean(declarations.resolve(input, ["data", "client_confidential_information_entered"]))
 }
 
 default confidential_material_involved := false
 
 confidential_material_involved if {
-	input.data.client_confidential_information_entered == true
+	declarations.resolve(input, ["data", "client_confidential_information_entered"]) == true
 }
 
 confidential_material_involved if {
-	input.data.privileged_material_entered == true
+	declarations.resolve(input, ["data", "privileged_material_entered"]) == true
 }
 
 # A public consumer assistant is never an acceptable destination for client
@@ -47,21 +48,21 @@ confidential_material_involved if {
 default public_consumer_tool := false
 
 public_consumer_tool if {
-	input.tool.public_consumer_tool == true
+	declarations.resolve(input, ["tool", "public_consumer_tool"]) == true
 }
 
 default tool_assessed := false
 
 tool_assessed if {
-	input.tool.vendor_assessed == true
+	declarations.resolve(input, ["tool", "vendor_assessed"]) == true
 }
 
 default safeguards_in_place := false
 
 safeguards_in_place if {
-	input.tool.contractual_safeguards == true
-	input.tool.technical_safeguards == true
-	input.tool.organisational_safeguards == true
+	declarations.resolve(input, ["tool", "contractual_safeguards"]) == true
+	declarations.resolve(input, ["tool", "technical_safeguards"]) == true
+	declarations.resolve(input, ["tool", "organisational_safeguards"]) == true
 }
 
 default tool_is_not_public := false
@@ -73,8 +74,8 @@ tool_is_not_public if {
 default data_contained := false
 
 data_contained if {
-	input.tool.trains_on_input == false
-	input.tool.data_remains_in_secure_environment == true
+	declarations.resolve(input, ["tool", "trains_on_input"]) == false
+	declarations.resolve(input, ["tool", "data_remains_in_secure_environment"]) == true
 }
 
 default allow := false
