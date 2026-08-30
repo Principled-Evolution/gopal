@@ -42,7 +42,7 @@ When adding new international policies:
 3. Use the package name `international.<framework>.v1.<policy_area>`
 4. Include a `# METADATA` block citing the specific article, section, or control the policy encodes
 
-Adding an entirely new framework (a jurisdiction not listed above)? See [`skills/add-framework/SKILL.md`](../docs/skills/add-framework/SKILL.md) for the scaffold, and update the count in this file, `docs/coverage/`, and the top-level README once it lands.
+To add an entirely new framework for a jurisdiction not listed above, see [`skills/add-framework/SKILL.md`](../docs/skills/add-framework/SKILL.md) for the scaffold, and update the count in this file, `docs/coverage/`, and the top-level README once it lands.
 
 ## Composition
 

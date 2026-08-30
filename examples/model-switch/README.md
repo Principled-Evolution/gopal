@@ -1,12 +1,11 @@
 # Example: a model change that fails the build
 
-Somebody swaps the model behind a support assistant. The prompts do not change,
-the classifier does not change, and the policy does not change. One rule reaches
-a different verdict and the merge stops.
+This example changes the model behind a support assistant while holding the
+prompts, the classifier and the policy fixed. Under those conditions one rule
+reaches a different verdict and the merge stops.
 
-That is the whole example. It runs in this repository's own CI on every push, so
-the badge on the README is a live statement rather than a screenshot of one good
-afternoon.
+The example runs in this repository's own CI on every push, so the badge on the
+README reports the current state of the check rather than a recorded result.
 
 ## Run it
 
@@ -17,29 +16,30 @@ afternoon.
 
 ![Two runs of check.sh: the production model passes, the swapped model fails with the offending output named](../../docs/demo/model-switch.svg)
 
-Exit code 0 and 1. In CI that is a green check and a blocked merge.
+The two runs exit 0 and 1 respectively, which in CI is a passing check and a
+blocked merge.
 
-## What is actually being demonstrated
+## What the example demonstrates
 
-Not the classifier. Detoxify scoring text is unremarkable, and swapping it for
-Perspective or your own model changes nothing here.
+The classifier is incidental. Detoxify scoring text is routine, and substituting
+Perspective or another model changes nothing here.
 
-What is worth looking at is that **the number is judged by a rule you can read,
-cite and version**, and that the same evaluation runs wherever you put it. The
-threshold is not a constant in this script. It is
-`params.toxicity_threshold` in
-[`global/v1/toxicity`](../../global/v1/toxicity/toxicity.rego), defaulting to
-0.1, and changing it is a pull request somebody reviews.
+The score is judged by **a rule that can be read, cited and versioned**, and the
+same evaluation runs in every environment. The threshold lives in the policy
+rather than in this script: `params.toxicity_threshold` in
+[`global/v1/toxicity`](../../global/v1/toxicity/toxicity.rego) defaults to 0.1,
+so changing it requires a reviewed pull request.
 
 **One bad answer among many is invisible in an average.** The regression here is
 a single output out of six. The aggregate moves from 0.0056 to 0.1373, which is
 enough to cross 0.1, but the worst output moves from 0.02 to 0.81. GOPAL keeps
 `metrics.toxicity.score` and `metrics.toxicity.max_toxicity` apart and compares
-them against 0.1 and 0.7 for exactly this reason. Report only the mean over a
-larger suite and the bad answer disappears into it.
+them against 0.1 and 0.7 for exactly this reason. Reporting only the mean over a
+larger suite conceals that output entirely.
 
-**Nobody had to remember to check.** The gate is a status check, so the argument
-happens on the pull request, with the article and the rule attached.
+**The check does not depend on anyone remembering to run it.** The gate is a
+status check, so the review happens on the pull request, with the article and
+the rule attached.
 
 ## The numbers
 
@@ -47,10 +47,10 @@ happens on the pull request, with the article and the rule attached.
 over the same prompt suite. They are checked in so the example is deterministic
 and needs no model download in CI.
 
-That is a real limitation and worth stating: this example does not run a model
-for you. It stages the situation after a model has been run and scored, which is
-the situation a policy actually sees. To produce the numbers yourself, AICertify
-ships a [Detoxify adapter](https://github.com/Principled-Evolution/aicertify/blob/main/docs/adapters.md)
+This is a limitation worth stating: the example does not run a model. It begins
+after a model has been run and scored, which is the state a policy actually
+observes. To produce the numbers yourself, AICertify ships a
+[Detoxify adapter](https://github.com/Principled-Evolution/aicertify/blob/main/docs/adapters.md)
 that emits exactly this shape, or see
 [supplying metrics](../../docs/tutorials/supplying-metrics.md) for the mapping
 written as plain JSON.
