@@ -1,3 +1,11 @@
+# RequiredMetrics:
+#   - documentation.technical_documentation.completeness
+#   - documentation.explainability.completeness
+#   - metrics.model_card.completeness
+#   - metrics.toxicity.max_toxicity
+#
+# RequiredParams: none
+#
 package international.eu_ai_act.v1.transparency
 
 import data.helper_functions.declarations

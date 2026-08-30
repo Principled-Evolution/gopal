@@ -1,3 +1,11 @@
+# RequiredMetrics:
+#   - risk_management.risk_assessment.completeness
+#   - risk_management.risk_assessment.overall_risk
+#   - risk_management.mitigation_measures.completeness
+#   - risk_management.monitoring_system.completeness
+#
+# RequiredParams: none
+#
 package international.eu_ai_act.v1.risk_management
 
 import data.helper_functions.declarations

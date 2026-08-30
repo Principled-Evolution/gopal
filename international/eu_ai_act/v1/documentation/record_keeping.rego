@@ -3,6 +3,7 @@
 #   - logs.retained
 #   - logs.retention_months
 #   - logs.role
+#   - logs.sectoral_minimum_months
 #
 # RequiredParams: none
 package international.eu_ai_act.v1.documentation.record_keeping
