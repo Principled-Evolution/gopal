@@ -89,6 +89,15 @@ jobs:
       # social-scoring gate and the suite still reported 604/604.
       - name: Check every policy has a test and an empty-input test
         run: scripts/check-test-coverage.sh
+
+      # opa check is static and opa test queries individual rules, so neither
+      # sees a conflict that only arises when a package is evaluated as a
+      # whole. Two education policies each defined a complete rule named
+      # `thresholds`, which made the entire package fail at eval time while
+      # both gates stayed green. A consumer queries data.<package>, so this
+      # asks each package the same question a consumer asks.
+      - name: Check every package evaluates without conflict
+        run: scripts/check-eval-conflicts.sh
         working-directory: ${{ github.workspace }}
 
       # The version appears in seven hand-maintained places, including a README

@@ -16,7 +16,7 @@ equitable_admissions_systems_compliant if {
 	not uses_prohibited_features(declarations.resolve(input, ["admissions_model", "features"]), prohibited_features)
 	every group in declarations.resolve(input, ["bias_report", "demographic_groups"]) {
 		every metric in group.fairness_metrics {
-			is_within_threshold(metric, thresholds)
+			admissions_metric_within_threshold(metric, admissions_thresholds)
 		}
 	}
 }
@@ -35,7 +35,7 @@ deny contains msg if {
 	failing_metrics := {metric |
 		some group in declarations.resolve(input, ["bias_report", "demographic_groups"])
 		some metric in group.fairness_metrics
-		not is_within_threshold(metric, thresholds)
+		not admissions_metric_within_threshold(metric, admissions_thresholds)
 	}
 	msg := sprintf("Admissions model is not compliant. Fairness metrics are not met: %v", [failing_metrics])
 }
@@ -55,11 +55,11 @@ uses_prohibited_features(features, prohibited) if {
 }
 
 # Defines acceptable thresholds for different fairness metrics.
-thresholds := {
+admissions_thresholds := {
 	"demographic_parity": 0.1,
 	"equalized_odds": 0.1,
 }
 
-is_within_threshold(metric, thresholds) if {
-	abs(metric.value) < thresholds[metric.name]
+admissions_metric_within_threshold(metric, admissions_thresholds) if {
+	abs(metric.value) < admissions_thresholds[metric.name]
 }
