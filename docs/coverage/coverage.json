@@ -8,6 +8,7 @@
     "policies": 92,
     "library_files": 7,
     "rego_files": 99,
+    "rego_files_including_tests": 198,
     "policies_with_tests": 92,
     "policies_with_empty_input_test": 92,
     "decision_rules": 327,

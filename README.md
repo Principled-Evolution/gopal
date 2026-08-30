@@ -277,7 +277,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**92 policies that reach a verdict, plus 7 shared libraries they import. 196 Rego files including tests.** These figures are generated from the tree by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI, so they cannot drift from the code. Run `jq .totals docs/coverage/coverage.json` for the current numbers.
+**92 policies that reach a verdict, plus 7 shared libraries they import. 198 Rego files including tests.** These figures are generated from the tree by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI, so they cannot drift from the code. Run `jq .totals docs/coverage/coverage.json` for the current numbers.
 
 ---
 

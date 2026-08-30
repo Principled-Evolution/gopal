@@ -42,7 +42,7 @@ AI システムのメタデータ、モデルカード、評価結果に対し�
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 91 ポリシー、国際規格、航空、業種別、共通原則の各カテゴリ" width="85%" />
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL のカバレッジ: 92 ポリシー、国際規格、航空、業種別、共通原則の各カテゴリ" width="85%" />
   </picture>
 </p>
 
@@ -199,7 +199,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**判定を返すポリシー 91 個と、それらが読み込む共有ライブラリ 7 個。テストを含む Rego ファイル 196 個。** これらの数値は [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) がツリーから生成し、CI で検証しているため、コードとずれることはありません。現在の値は `jq .totals docs/coverage/coverage.json` で確認できます。
+**判定を返すポリシー 92 個と、それらが読み込む共有ライブラリ 7 個。テストを含む Rego ファイル 198 個。** これらの数値は [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) がツリーから生成し、CI で検証しているため、コードとずれることはありません。現在の値は `jq .totals docs/coverage/coverage.json` で確認できます。
 
 ---
 
