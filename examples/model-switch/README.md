@@ -1,56 +1,60 @@
 # Example: a model change that fails the build
 
-Somebody swaps the model behind a support assistant. The prompts do not change,
-the classifier does not change, and the policy does not change. One rule reaches
-a different verdict and the merge stops.
+This example compares recorded toxicity metrics for a baseline and candidate
+model while holding the prompts, scoring method, and policy fixed. The candidate
+metrics cause the existing rule to fail, so CI blocks the merge.
 
-That is the whole example. It runs in this repository's own CI on every push, so
-the badge on the README is a live statement rather than a screenshot of one good
-afternoon.
+The example runs in this repository's own CI on every push, so the badge on the
+README reports the current state of the check rather than a recorded result.
 
 ## Run it
 
 ```bash
 ./check.sh outputs-baseline.json     # the model in production
-./check.sh outputs-candidate.json    # after the swap
+./check.sh outputs-candidate.json    # candidate model
 ```
 
 ![Two runs of check.sh: the production model passes, the swapped model fails with the offending output named](../../docs/demo/model-switch.svg)
 
-Exit code 0 and 1. In CI that is a green check and a blocked merge.
+The baseline and candidate runs exit 0 and 1 respectively. In CI, those exit
+codes produce a passing check and a blocked merge.
 
-## What is actually being demonstrated
+## What the example demonstrates
 
-Not the classifier. Detoxify scoring text is unremarkable, and swapping it for
-Perspective or your own model changes nothing here.
+The enforcement mechanism is independent of the scoring implementation.
+Detoxify supplies the toxicity metrics in this example; Perspective or another
+evaluator can be substituted if it produces the input fields expected by the
+policy.
 
-What is worth looking at is that **the number is judged by a rule you can read,
-cite and version**, and that the same evaluation runs wherever you put it. The
-threshold is not a constant in this script. It is
-`params.toxicity_threshold` in
-[`global/v1/toxicity`](../../global/v1/toxicity/toxicity.rego), defaulting to
-0.1, and changing it is a pull request somebody reviews.
+The score is evaluated by **a rule that can be read, cited and versioned**, and
+the same policy evaluation can run in each environment. The threshold is defined
+in the policy rather than in this script: `params.toxicity_threshold` in
+[`global/v1/toxicity`](../../global/v1/toxicity/toxicity.rego) defaults to 0.1,
+so changing it requires a reviewed pull request.
 
-**One bad answer among many is invisible in an average.** The regression here is
-a single output out of six. The aggregate moves from 0.0056 to 0.1373, which is
-enough to cross 0.1, but the worst output moves from 0.02 to 0.81. GOPAL keeps
-`metrics.toxicity.score` and `metrics.toxicity.max_toxicity` apart and compares
-them against 0.1 and 0.7 for exactly this reason. Report only the mean over a
-larger suite and the bad answer disappears into it.
+**Aggregate metrics can mask individual outliers.** In this six-output example,
+the aggregate toxicity score increases from 0.0056 to 0.1373 and exceeds its 0.1
+threshold. The maximum toxicity score increases from 0.02 to 0.81 and exceeds
+its 0.7 threshold. GOPAL keeps `metrics.toxicity.score` and
+`metrics.toxicity.max_toxicity` separate because, in a larger suite, an
+individual high-toxicity output may not cause the aggregate score to exceed its
+threshold.
 
-**Nobody had to remember to check.** The gate is a status check, so the argument
-happens on the pull request, with the article and the rule attached.
+CI runs the policy evaluation automatically as a status check. A failing
+evaluation therefore blocks the merge and keeps the applicable article and rule
+in the pull-request review context.
 
 ## The numbers
 
-`outputs-*.json` carry per-output toxicity scores recorded from Detoxify 0.5.2
+`outputs-*.json` contain per-output toxicity scores recorded from Detoxify 0.5.2
 over the same prompt suite. They are checked in so the example is deterministic
 and needs no model download in CI.
 
-That is a real limitation and worth stating: this example does not run a model
-for you. It stages the situation after a model has been run and scored, which is
-the situation a policy actually sees. To produce the numbers yourself, AICertify
-ships a [Detoxify adapter](https://github.com/Principled-Evolution/aicertify/blob/main/docs/adapters.md)
+This example does not execute either model. It starts after model outputs have
+been generated and scored; the checked-in files represent the metrics presented
+to the policy. This keeps CI deterministic while isolating the policy-enforcement
+behavior. To generate equivalent metrics yourself, AICertify ships a
+[Detoxify adapter](https://github.com/Principled-Evolution/aicertify/blob/main/docs/adapters.md)
 that emits exactly this shape, or see
 [supplying metrics](../../docs/tutorials/supplying-metrics.md) for the mapping
 written as plain JSON.
@@ -71,9 +75,9 @@ model-card equivalent.
 
 ## Which policies work like this
 
-Most of the EU AI Act is declarations a person signs, and no tool can measure
-whether a conformity assessment happened. Five policies in the library run
-entirely on measured metrics, and these are the ones worth automating first:
+Five policies in the current library can be evaluated entirely from measured
+metrics and are therefore suitable initial candidates for automated CI
+enforcement:
 
 | Policy | Reads | Supplied by |
 | --- | --- | --- |

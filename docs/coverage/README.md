@@ -2,15 +2,15 @@
 
 This directory documents, per framework, **which obligations are encoded in GOPAL** and **which are not yet**.
 
-The matrices are deliberately honest. A policy is only marked **Implemented** when the Rego rule actually validates input fields against the regulation's requirement. Many directories ship a **Scaffold** that establishes the package path and a `default allow := false` placeholder, useful as a starting point for contributors but not yet enforceable.
+The matrices record status conservatively. A policy is only marked **Implemented** when the Rego rule actually validates input fields against the regulation's requirement. Many directories ship a **Scaffold** that establishes the package path and a `default allow := false` placeholder, useful as a starting point for contributors but not yet enforceable.
 
 ## Test coverage
 
 Every policy has a sibling test file and asserts that its decision denies an empty input, as [CONTRIBUTING.md](../../.github/CONTRIBUTING.md) requires. That is now a CI gate rather than a convention: [`scripts/check-test-coverage.sh`](../../scripts/check-test-coverage.sh) fails the build if a policy has no test, or has one without an empty-input assertion. The seven libraries under `global/v1/common/` and `helper_functions/` are exempt, since they define helpers rather than decisions and have no `allow` to hand an empty input to.
 
-The gate exists because the convention was not enough. The gap had reached 22 of the 96 files then counted as policies with no test at all, including both Article 5 prohibited-practice policies — the ones gating the practices the Act bans outright. An external reviewer changed `default allow := false` to `default allow := true` in the social-scoring policy, turning that gate into a default allow, and the suite still reported 604/604. A green suite and a per-file count were disagreeing, and the uncovered files were the prohibitions rather than the paperwork.
+The CI gate exists because the convention alone was insufficient. When it was introduced, 22 of the 96 files counted as policies had no test, including both Article 5 prohibited-practice policies. An external review demonstrated the consequence: changing `default allow := false` to `default allow := true` in the untested social-scoring policy still left the aggregate suite reporting 604/604. The aggregate test count therefore did not establish per-policy coverage.
 
-The exact figures live in [`coverage.json`](coverage.json) under `totals`, and are regenerated from the `.rego` files rather than typed here, so they cannot drift:
+The exact figures live in [`coverage.json`](coverage.json) under `totals`. They are regenerated from the `.rego` files and verified in CI, keeping the reported totals synchronized with the policy tree:
 
 ```bash
 jq .totals docs/coverage/coverage.json
@@ -19,7 +19,7 @@ jq .totals docs/coverage/coverage.json
 Writing a test that does not yet exist for a *case* rather than a file is still one of the most useful contributions available, and it needs no new Rego logic. Two patterns are worth copying:
 
 - **Empty input.** `not policy.allow with input as {}`. In Rego an undefined value is not `false`, so a missing `default` or an undefined intermediate rule can let a system with no evidence pass.
-- **One required metric absent at a time.** This is strictly stronger, and it is what caught the most recent fail-open: a policy whose bias defaults correctly denied an empty input still approved a system whose toxicity had never been measured, because that one metric defaulted to the permissive answer. Empty input alone does not reach that path.
+- **One required metric absent at a time.** This is stronger than an empty-input test because it exercises partial-input paths. The most recent fail-open occurred on such a path: a policy whose bias defaults correctly denied an empty input still approved a system whose toxicity had never been measured because that metric defaulted to a permissive answer.
 
 A policy without a test is not necessarily wrong. It is unverified, which is a different claim from the ✅ marks below.
 
@@ -31,7 +31,7 @@ A policy without a test is not necessarily wrong. It is unverified, which is a d
 
 ## Implemented, matrix not yet written
 
-These frameworks already have real policies in the repo (not scaffolds); nobody has written the per-obligation matrix for them yet. Good first contribution if you want to help without writing Rego.
+These frameworks already have real policies in the repo rather than scaffolds; the per-obligation matrix for them has not been written yet. Writing one is a good first contribution and requires no Rego.
 
 - India Digital Policy: `international/india/v1/`
 - Brazil AI Governance Bill: `international/brazil/v1/`
@@ -44,7 +44,7 @@ These frameworks already have real policies in the repo (not scaffolds); nobody 
 
 ## Coming soon
 
-Nothing implemented yet. The UK pro-innovation principles used to sit in this list; they now have six policies and a [matrix](uk.md).
+Nothing in this section is implemented yet. The UK pro-innovation principles were previously listed here; they now have six policies and a [matrix](uk.md).
 
 - India DPDP Act (distinct from the Digital India Policy above)
 - MAS / HKMA banking AI guidance
@@ -55,9 +55,9 @@ If you want to help expand coverage for a framework, open an issue or send a PR.
 
 ## coverage.json
 
-[`coverage.json`](coverage.json) is generated by [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) and holds, for every policy: its package, title, references, decision rules, the `RequiredMetrics` and `RequiredParams` it declares, and whether it has a test and an empty-input test. CI fails if it is out of date, so it stays honest.
+[`coverage.json`](coverage.json) is generated by [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) and holds, for every policy: its package, title, references, decision rules, the `RequiredMetrics` and `RequiredParams` it declares, and whether it has a test and an empty-input test. CI fails if it is out of date, providing a mechanical consistency check against the policy tree.
 
-It exists because these matrices were hand-maintained and drifted. Use it to answer questions the prose cannot:
+It exists because the coverage matrices were previously hand-maintained and had drifted from the policy tree. The generated file makes that relationship mechanically checkable. Use it to answer questions the prose cannot:
 
 ```bash
 # Which policies need a metric I do not yet collect?
@@ -78,4 +78,4 @@ Each row is one obligation, control, or article in the source regulation. Column
 | **Status** | `Implemented` / `Scaffold` / `Planned` |
 | **Notes** | What the rule checks, or what's missing |
 
-`Implemented` rules are safe to run in CI and produce structured verdicts. `Scaffold` rules return placeholder denials; they exist so the package path is stable while the logic is fleshed out. `Planned` means there's no file yet.
+`Implemented` rules contain executable validation logic and produce structured verdicts suitable for CI evaluation. `Scaffold` rules return placeholder denials; they exist so the package path is stable while the logic is fleshed out. `Planned` means there's no file yet.

@@ -63,7 +63,7 @@ Recommendations:
   1. Improve the completeness of technical documentation, model cards, and explainability information
 ```
 
-Exit code `1`. In Actions the `::error::` line becomes an annotation on the pull request, so the reviewer sees the reason and the remediation inline on the **Files changed** tab rather than having to open the log.
+The exit code is `1`. In Actions the `::error::` line becomes an annotation on the pull request, so the reviewer sees the reason and the remediation inline on the **Files changed** tab rather than having to open the log.
 
 ## Dropping it into your own repo
 
@@ -113,6 +113,6 @@ Call the script once per policy. Each sets its own exit code, and `set -e` in th
 
 **The bundle checksum is verified before use.** This bundle decides whether a release can ship, so the workflow downloads the release's `checksums.txt` and compares before evaluating.
 
-**Undefined is not a pass.** The script distinguishes three outcomes: compliant (exit 0), non-compliant (exit 1), and failed-to-evaluate (exit 2). In Rego an undefined value is not `false`, so a policy that reached no verdict has told you nothing. Collapsing that into "not a failure" is how a compliance pipeline starts reporting green while checking nothing.
+**Undefined is not a pass.** The script distinguishes three outcomes: compliant (exit 0), non-compliant (exit 1), and failed-to-evaluate (exit 2). In Rego an undefined value is not `false`, so a policy that reached no verdict provides no information. Collapsing that into "not a failure" is how a compliance pipeline starts reporting green while checking nothing.
 
 **The report is uploaded even when the build fails**, via `if: always()`. The artifact is the evidence that the check ran and what it decided, which is the thing an auditor asks for.

@@ -18,7 +18,7 @@ One instrument in this directory *is* hard law. The automated decision-making re
 
 ## Where the UK diverges from the EU
 
-Worth knowing if you already evaluate against `international/eu_ai_act/`:
+These differences matter if you already evaluate against `international/eu_ai_act/`:
 
 - **No risk tiering by system class.** There is no UK equivalent of the EU's prohibited / high-risk / limited-risk classification. Obligations arrive through sector regulators instead.
 - **Automated decisions are permitted by default.** Under Articles 22A-22D a solely automated significant decision on ordinary personal data is lawful provided the Article 22C safeguards are in place. Special category data remains restricted and additionally needs an Article 9(2) condition.

@@ -35,7 +35,7 @@
 
 <br>
 
-**GOPAL: Governance Open Policy Agent Library.** Think of it as an open policy pack for AI regulation.
+**GOPAL: Governance Open Policy Agent Library.** An open policy pack for AI regulation.
 
 92 policies that translate published regulation into industry-standard policy-as-code, written in Rego for [OPA](https://www.openpolicyagent.org/). Each one takes a named instrument, encodes its obligations as executable rules, cites the article or control it enforces, ships with tests, and appears in a coverage matrix that states what is implemented and what is not. The EU AI Act, NIST AI RMF, aviation safety standards, FERPA and COPPA in education, fair-lending rules in banking, and more.
 
@@ -43,29 +43,27 @@ Run them against two kinds of input: facts you declare about the system and the 
 
 ## The problem
 
-An AI system changes weekly. A new model, an edited prompt, a rebuilt index. The document describing its compliance was written once and signed.
+AI systems in active development change on the order of days through model updates, prompt edits, or index rebuilds. A signed compliance document records an assessment at a point in time; it does not automatically reflect subsequent system changes. Without re-evaluation, the documented state can diverge from the system being operated. A vendor score does not solve the same problem when the policy logic behind it cannot be inspected, contested, or traced to the source provision.
 
-The two drift apart immediately, and nobody finds out until an audit, an incident, or a regulator asks. What runs in between, if anything, is usually a vendor's score: a number you cannot read, cannot argue with, and cannot trace to the provision it claims to cover.
+**A signed document records a point-in-time assessment. An executable rule can be re-evaluated whenever the governed system changes.**
 
-**A rule can run every time the system changes. A document cannot.**
-
-So the obligations are written as rules. Rego, in git, each citing the article it enforces, each with tests beside it, each returning a verdict you can take apart. The same rules run on a laptop, in a browser, and as a required status check on the pull request that changed the model:
+GOPAL expresses those obligations as versioned Rego rules held in git. Each rule cites the article or control it enforces, has tests beside it, and returns a verdict that can be decomposed. The same rules run on a laptop, in a browser, or in CI. When GOPAL is configured as a required status check, a failing evaluation blocks the merge.
 
 <p align="center">
   <img src="docs/demo/model-switch-animated.svg" alt="A terminal session. The production model scores 0.0056 against a 0.1 threshold and passes. After swapping the model, the aggregate is 0.1373, global.v1.toxicity.allow fails, and the output responsible is listed at 0.8106." width="88%" />
 </p>
 
 <p align="center">
-  <sub>Swap the model, keep the prompts and the classifier. A rule nobody edited stops the merge and names the output responsible. <a href="examples/model-switch">This example</a> runs in CI on every push, and asserts both directions.</sub>
+  <sub>The example compares checked-in baseline and candidate toxicity metrics while the prompts, scoring method, and policy remain fixed. The candidate metrics cause the unchanged rule to fail, which blocks the merge and identifies the responsible output. <a href="examples/model-switch">This example</a> runs in CI on every push and verifies both the passing and failing paths.</sub>
 </p>
 
 <p align="center">
   <sub>&nbsp;</sub>
 </p>
 
-This does not make compliance automatic, and anything claiming to is selling something. Most of what the EU AI Act obliges is a declaration nobody can measure: whether a conformity assessment was completed, whether a person can halt the system. Of the 185 fields these 29 EU policies read, **170 are declarations and 15 are measurements**.
+Policy as code does not make every compliance determination automatic. In GOPAL's current EU AI Act implementation, the 29 policies contain **185 input-field reads: 170 declarations and 15 measurements**. Declarations cover facts such as whether a conformity assessment was completed or whether a person can halt the system. Measurements cover values produced by evaluators.
 
-What changes is that the declaration becomes a versioned artefact re-checked on every commit instead of a PDF re-read once a year, and the 14 that can be measured are measured on every commit too. The [validation preview](https://principledevolution.ai/playground) shows both halves against your own system, in your browser, without sending us anything.
+The distinction matters: manually supplying a value is still an assertion unless the value is backed by the evaluator evidence that produced it. GOPAL makes both kinds of input explicit and versionable. When GOPAL is wired into CI, the selected policy set is re-evaluated on every change covered by that workflow, including updated declarations and measurements. The [validation preview](https://principledevolution.ai/playground) shows both input types against your own system, in your browser, without sending us anything.
 
 </p>
 
@@ -76,7 +74,7 @@ What changes is that the declaration becomes a versioned artefact re-checked on 
   </picture>
 </p>
 
-> **Tell us where this is wrong.** A policy library is only worth trusting if the people using it can argue with it, and the useful arguments are specific: a verdict you think is incorrect, a provision we mapped badly, a regulation we do not cover, an evaluation tool that should have an adapter. We corrected the model-card analysis once already because somebody did exactly that.
+> **Tell us where this is wrong.** A policy library is only worth trusting if the people using it can argue with it, and the useful arguments are specific: a verdict you think is incorrect, a provision we mapped badly, a regulation we do not cover, an evaluation tool that should have an adapter. The model-card analysis was corrected once already in response to exactly that kind of report.
 >
 > [Request a framework](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml) · [Request a policy](https://github.com/Principled-Evolution/gopal/issues/new?template=new_policy.yml) · [Report a wrong verdict](https://github.com/Principled-Evolution/gopal/issues/new?template=bug_report.yml) · [Start a discussion](https://github.com/Principled-Evolution/gopal/discussions)
 >
@@ -113,7 +111,7 @@ Use GOPAL when you want AI governance checks that are:
 
 The EU AI Act is in force. The NIST AI RMF is the de facto US baseline. The UK, India, Brazil, Singapore, and California are all moving. Aviation regulators are publishing AI/UAS guidance. Financial supervisors are issuing model-risk requirements.
 
-Engineering teams need AI governance checks that run in CI, not PDFs sitting on a shared drive or screenshots pasted into review-board decks.
+Engineering teams need AI governance checks that run in CI. Neither a PDF on a shared drive nor a screenshot pasted into a review-board deck can be run against the system as it currently stands.
 
 GOPAL ships executable Rego policies for each of those regimes. They are versioned, testable, and reviewable in pull requests. The same tooling your platform team already uses for Kubernetes admission control can now enforce AI-system requirements.
 
@@ -171,16 +169,16 @@ See [AICertify](https://github.com/Principled-Evolution/aicertify) for the full 
 
 ## Why GOPAL
 
-Most "AI governance" lives in slide decks. The few open implementations are either:
-
-- **Generic OPA bundles** (great for Kubernetes admission, not for the EU AI Act), or
-- **Closed SaaS** that hides the rules you're being judged against.
+Generic policy-as-code gives you the execution engine, but not an AI-regulatory policy library. Governance platforms can add inventory, workflow, and evidence management; where their decision logic is proprietary, that logic cannot be independently diffed or reproduced. GOPAL fills a different gap: **open, executable AI-governance policy that runs in standard OPA tooling.**
 
 Where GOPAL differs:
 
-1. **AI-specific by construction.** Every policy targets an AI-system concern: bias, transparency, human oversight, model risk, content safety, safety-critical certification. Not generic infrastructure.
-2. **Readable.** The rules are Rego. You can `cat` them, diff them in a PR, and reason about them. No black-box scorecards.
-3. **Versioned.** Every framework lives under `v1/` (then `v2/`, etc.) with explicit semver guarantees (see [COMPATIBILITY.md](docs/COMPATIBILITY.md)). When the EU AI Act amends, the old version stays put.
+1. **AI-specific policy content.** Policies target named AI regulations, standards, and sector requirements covering concerns such as bias, transparency, human oversight, model risk, content safety, and safety-critical certification.
+2. **Inspectable by default.** The rules are Rego, source provisions are cited, and verdicts expose their constituent checks rather than only an aggregate score.
+3. **Portable.** There is no proprietary policy DSL or hosted runtime requirement. Evaluate with `opa eval`, Conftest, an existing OPA server, or AICertify.
+4. **Versioned and testable.** Frameworks live under stable versioned paths (`v1/`, then `v2/`, etc.) with explicit semver guarantees (see [COMPATIBILITY.md](docs/COMPATIBILITY.md)), and policy changes are exercised by tests in CI.
+
+The policy semantics remain open and independently reproducible even when GOPAL is used inside a larger governance workflow.
 
 ---
 
@@ -214,21 +212,21 @@ Build them yourself with [`scripts/build-bundles.sh`](scripts/build-bundles.sh),
 
 ### Supplying measured metrics
 
-Policies read two kinds of input: facts a person declares, and metrics a tool measures. The measured half is where an integration has to do real work, and [Plug your evaluator into GOPAL](docs/tutorials/supplying-metrics.md) walks it end to end in plain `opa`: find what a policy reads, use the canonical name from [`helper_functions/metrics.rego`](helper_functions/metrics.rego), write the JSON, gate a build on the result. No Python, no framework.
+Policies read two kinds of input: declared facts and measured metrics. A declaration records what an accountable person or source asserts. A measured metric should carry provenance from the evaluator that produced it; typing the same number into JSON does not establish that the measurement occurred. [Plug your evaluator into GOPAL](docs/tutorials/supplying-metrics.md) walks the integration end to end in plain `opa`: find what a policy reads, use the canonical name from [`helper_functions/metrics.rego`](helper_functions/metrics.rego), write the JSON, and gate a build on the result. No Python and no framework are required.
 
-### What automation actually looks like
+### Automation in practice
 
-Change the model, keep everything else, and watch a rule stop the merge:
+With the prompts, scoring method, and policy held constant, the checked-in candidate metrics cause the existing rule to fail and block the merge:
 
 <p align="center">
   <img src="docs/demo/model-switch.svg" alt="Two runs of check.sh: the production model passes at 0.0056, the swapped model fails at 0.1373 with the offending output named" width="88%" />
 </p>
 
-[`examples/model-switch`](examples/model-switch) is the whole thing, and the **Compliance gate demo** badge above runs it on every push. It asserts both directions, because a gate that only ever passes is indistinguishable from a gate that is broken.
+[`examples/model-switch`](examples/model-switch) contains the complete deterministic example, and the **Compliance gate demo** badge above runs it on every push. The workflow verifies both the passing baseline and failing candidate so that the CI path exercises both outcomes.
 
-Most of the EU AI Act is declarations a person signs; nothing can measure whether a conformity assessment happened. Five policies run entirely on measured metrics, and those are the ones worth automating first: toxicity, Article 11 technical documentation, fair lending, diagnostic safety, and fairness. The example names each one and what supplies it.
+Five policies in the current library can be evaluated entirely from measured metrics: toxicity, Article 11 technical documentation, fair lending, diagnostic safety, and fairness. These are natural starting points for automated CI enforcement. Other EU AI Act policies also depend on declared facts, including facts such as whether a conformity assessment was completed. The example names each metric-based policy and what supplies it.
 
-If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify). It takes the scaffolding off you; it is not required to use any of this.
+If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify). It supplies that scaffolding; it is not required in order to use these policies.
 
 ---
 
@@ -414,7 +412,7 @@ See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the PR workflow.
 - **MAS / HKMA banking AI guidance** for APAC financial supervision
 - **Per-metric test coverage**: every policy is now tested against empty input, but the stronger check is removing one required metric at a time. That is what surfaced the most recent fail-open
 
-Need a framework that isn't here? [Ask for it](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml). You don't have to write any Rego to make the request.
+If a framework you need is not covered, [ask for it](https://github.com/Principled-Evolution/gopal/issues/new?template=new_framework.yml). Making the request does not require writing any Rego.
 
 ---
 
@@ -458,25 +456,28 @@ Contributions of any size are welcome; see [CONTRIBUTING.md](.github/CONTRIBUTIN
 
 ## How it fits together
 
-Two diagrams, because the commonest misunderstanding is that a policy library
-evaluates your model. It does not. It evaluates two kinds of statement that
-come from two different places and carry two different levels of proof.
+A policy library evaluates supplied evidence about a system rather than the
+model itself. GOPAL separates that evidence into declared facts and measured
+metrics because they establish different things.
 
 <p align="center">
   <img src="docs/diagrams/usage1_two_inputs.svg" alt="How a GOPAL policy gets its inputs: declared facts asserted by a person, and measured metrics produced by evaluators such as AICertify running DeepEval or LangFair, both feeding a Rego policy that returns satisfied, not satisfied, or no conclusion" width="70%">
 </p>
 
-Facts you **declare** are the ones no tool can measure: whether the CE marking
-was affixed, whether logs are retained for six months. Metrics an evaluator
-**measures** are the ones typing a number would not prove: toxicity, fairness
-disparity, content safety. A policy reads both.
+Facts you **declare** record assertions such as whether the CE marking was
+affixed or whether logs are retained for six months. Metrics an evaluator
+**measures** record results such as toxicity, fairness disparity, and content
+safety. Typing a number into the input is still a declaration unless it is
+backed by the evaluator evidence that produced the measurement. A policy can
+read both.
 
 <p align="center">
   <img src="docs/diagrams/usage2_ci_loop.svg" alt="GOPAL as a required status check: a pull request carries committed compliance facts, AICertify runs evaluators to add measured metrics, opa eval runs a pinned GOPAL bundle, and the status check passes with a retained report or fails naming the article and control" width="70%">
 </p>
 
-Policy as code only means something once a policy can fail a pull request the
-way a unit test does. Sources for both diagrams are in
+When GOPAL is configured as a required CI status check, a failing policy
+evaluation blocks the pull request in the same review workflow as other required
+checks. Sources for both diagrams are in
 [`docs/diagrams/src/`](docs/diagrams/src), rendered with
 [`render-all.sh`](docs/diagrams/src/render-all.sh).
 
