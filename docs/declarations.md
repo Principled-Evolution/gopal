@@ -117,8 +117,12 @@ that consumes it.
 
 ### 2. Separate what is declared once from what is declared per release
 
-Of the 150 unique declared fields, **57 are organisation or product level** and
-93 are per system.
+Of the 150 unique declared fields, roughly a third look to be organisation or
+product level rather than per system. That proportion is an estimate and is
+being replaced by a field-by-field classification with reasons, tracked in
+[issue #93](https://github.com/Principled-Evolution/gopal/issues/93); every
+other figure in this document regenerates from the playground manifest, and
+this one should too.
 
 `ce_marking.affixed`, `declaration.drawn_up`, `provider.quality_management_system`
 are properties of a company or a product line, not of this week's build. They
