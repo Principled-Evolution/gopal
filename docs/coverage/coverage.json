@@ -2601,7 +2601,8 @@
             "system.high_risk",
             "logs.retained",
             "logs.retention_months",
-            "logs.role"
+            "logs.role",
+            "logs.sectoral_minimum_months"
           ],
           "provided_metrics": [],
           "required_params": [],
@@ -3823,7 +3824,12 @@
               "default": false
             }
           ],
-          "required_metrics": [],
+          "required_metrics": [
+            "risk_management.risk_assessment.completeness",
+            "risk_management.risk_assessment.overall_risk",
+            "risk_management.mitigation_measures.completeness",
+            "risk_management.monitoring_system.completeness"
+          ],
           "provided_metrics": [],
           "required_params": [],
           "input_fields": [
@@ -3898,7 +3904,8 @@
             "robustness.fallback_or_fail_safe_documented",
             "robustness.feedback_loop_risk_addressed",
             "cybersecurity.controls_in_place",
-            "cybersecurity.adversarial_attacks_addressed"
+            "cybersecurity.adversarial_attacks_addressed",
+            "system.continues_to_learn_after_deployment"
           ],
           "provided_metrics": [],
           "required_params": [],
@@ -3942,7 +3949,12 @@
               "default": false
             }
           ],
-          "required_metrics": [],
+          "required_metrics": [
+            "documentation.technical_documentation.completeness",
+            "documentation.explainability.completeness",
+            "metrics.model_card.completeness",
+            "metrics.toxicity.max_toxicity"
+          ],
           "provided_metrics": [],
           "required_params": [],
           "input_fields": [
