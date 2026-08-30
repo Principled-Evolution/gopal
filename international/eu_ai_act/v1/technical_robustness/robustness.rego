@@ -7,6 +7,7 @@
 #   - robustness.feedback_loop_risk_addressed
 #   - cybersecurity.controls_in_place
 #   - cybersecurity.adversarial_attacks_addressed
+#   - system.continues_to_learn_after_deployment
 #
 # RequiredParams: none
 package international.eu_ai_act.v1.technical_robustness
