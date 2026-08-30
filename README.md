@@ -63,7 +63,7 @@ GOPAL expresses those obligations as versioned Rego rules held in git. Each rule
 
 Policy as code does not make every compliance determination automatic. In GOPAL's current EU AI Act implementation, the 29 policies contain **185 input-field reads: 170 declarations and 15 measurements**. Declarations cover facts such as whether a conformity assessment was completed or whether a person can halt the system. Measurements cover values produced by evaluators.
 
-The distinction matters: manually supplying a value is still an assertion unless the value is backed by the evaluator evidence that produced it. GOPAL makes both kinds of input explicit and versionable. When GOPAL is wired into CI, the selected policy set is re-evaluated on every change covered by that workflow, including updated declarations and measurements. The [validation preview](https://principledevolution.ai/playground) shows both input types against your own system, in your browser, without sending us anything.
+Manually supplying a value is still an assertion unless the value is backed by the evaluator evidence that produced it. GOPAL makes both kinds of input explicit and versionable. When GOPAL is wired into CI, the selected policy set is re-evaluated on every change covered by that workflow, including updated declarations and measurements. The [validation preview](https://principledevolution.ai/playground) shows both input types against your own system, in your browser, without sending us anything.
 
 </p>
 
@@ -224,7 +224,7 @@ With the prompts, scoring method, and policy held constant, the checked-in candi
 
 [`examples/model-switch`](examples/model-switch) contains the complete deterministic example, and the **Compliance gate demo** badge above runs it on every push. The workflow verifies both the passing baseline and failing candidate so that the CI path exercises both outcomes.
 
-Five policies in the current library can be evaluated entirely from measured metrics: toxicity, Article 11 technical documentation, fair lending, diagnostic safety, and fairness. These are natural starting points for automated CI enforcement. Other EU AI Act policies also depend on declared facts, including facts such as whether a conformity assessment was completed. The example names each metric-based policy and what supplies it.
+Five policies in the current library can be evaluated entirely from measured metrics: toxicity, Article 11 technical documentation, fair lending, diagnostic safety, and fairness. These are the starting points for automated CI enforcement. Most EU AI Act obligations rest on declared facts instead: 170 of the 185 input-field reads across the 29 policies are declarations, including whether a conformity assessment was completed. The example names each metric-based policy and what supplies it.
 
 If you want a Python framework that handles input capture and PDF/Markdown report generation on top, see [AICertify](https://github.com/Principled-Evolution/aicertify). It supplies that scaffolding; it is not required in order to use these policies.
 
