@@ -114,6 +114,7 @@ fi
 POLICIES="$(jq -r '.totals.policies' "${COVERAGE}")"
 FRAMEWORKS="$(jq -r '[.frameworks[] | select(.id | startswith("international"))] | length' "${COVERAGE}")"
 INDUSTRIES="$(jq -r '[.frameworks[] | select(.id | startswith("industry_specific"))] | length' "${COVERAGE}")"
+TOTAL_FILES="$(jq -r '.totals.rego_files_including_tests' "${COVERAGE}")"
 
 echo ""
 echo "Coverage data says ${POLICIES} policies, ${FRAMEWORKS} frameworks, ${INDUSTRIES} industries. Checking every reference agrees."
@@ -123,6 +124,7 @@ check_count() {
 	local expected="${template//%P%/${POLICIES}}"
 	expected="${expected//%F%/${FRAMEWORKS}}"
 	expected="${expected//%I%/${INDUSTRIES}}"
+	expected="${expected//%T%/${TOTAL_FILES}}"
 	if [ ! -f "${file}" ]; then
 		echo "  MISSING FILE  ${file}" >&2
 		failures=$((failures + 1))
@@ -153,11 +155,35 @@ check_count docs/diagrams/diagram1_hero_numbers_dark.svg '<desc>%P% production R
 # on the page still read 91. Checking only the accessible text would have
 # passed that.
 check_count docs/diagrams/diagram1_hero_numbers_light.svg 'text-anchor="middle">%P%</text>' "numbers diagram figure, light"
+
+# The count of Rego files including tests was hand-maintained and read 196
+# while the tree held 198, inside the very sentence that says these figures
+# are generated and cannot drift. It is now in coverage.json, so it can be
+# checked like the rest.
+check_count README.md '198 Rego files including tests.' "README total file count"
+
+# The translated front pages carried the previous count long after the English
+# one moved: four of them said 91 policies, including in the alt text that a
+# screen reader announces for a diagram rendering 92. A reader arriving in
+# Chinese, Japanese, Korean or Hindi saw a different number than a reader
+# arriving in English, on the same repository.
+check_count docs/i18n/README.zh-CN.md '%P% 条策略' "zh-CN hero alt text"
+check_count docs/i18n/README.ja-JP.md '%P% ポリシー' "ja-JP hero alt text"
+check_count docs/i18n/README.ko-KR.md '%P%개' "ko-KR hero alt text"
+check_count docs/i18n/README.hi-IN.md '%P% पॉलिसीज़' "hi-IN hero alt text"
+
+# The agent-facing files are read by Claude Code and Codex before they touch
+# the tree, so a stale count there is repeated into new work. AGENTS.md said
+# 85 policies and 124 files against an actual 92 and 198.
+check_count AGENTS.md '**%P% production policies. %T% Rego files including tests.**' "AGENTS.md counts"
+check_count CLAUDE.md 'a %P%-policy Rego library' "CLAUDE.md policy count"
+
 check_count docs/diagrams/diagram1_hero_numbers_dark.svg 'text-anchor="middle">%P%</text>' "numbers diagram figure, dark"
 
 if [ "${failures}" -gt 0 ]; then
-	echo "${failures} version reference(s) disagree with VERSION (${VERSION})." >&2
-	echo "Bump them, or update scripts/check-version-refs.sh if a reference moved." >&2
+	echo "${failures} reference(s) disagree with the generated data:" >&2
+	echo "  VERSION is ${VERSION}; coverage.json says ${POLICIES} policies, ${TOTAL_FILES} Rego files." >&2
+	echo "Bump the stale reference, or update scripts/check-version-refs.sh if one moved." >&2
 	exit 1
 fi
 echo "All enforced version references agree with ${VERSION}, and all published counts agree with the coverage data."

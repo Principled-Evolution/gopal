@@ -61,6 +61,19 @@ policy_files() {
 		sed 's|^\./||' | LC_ALL=C sort
 }
 
+# The sibling test files, found the same way. The published figure for "Rego
+# files including tests" was hand-maintained and read 196 while the tree held
+# 198, in the same sentence that claims these numbers cannot drift from the
+# code. Counting them here makes that sentence true.
+
+test_files() {
+	find . -type f -name '*_test.rego' \
+		-not -path './custom/*' \
+		-not -path './.venv-diagrams/*' \
+		-not -path './.git/*' |
+		sed 's|^\./||' | LC_ALL=C sort
+}
+
 # Pull an indented "# - value" list that follows a "# Header:" line.
 comment_list() {
 	local file="$1" header="$2"
@@ -263,11 +276,14 @@ test_total="$(opa test "${OPA_IGNORES[@]}" . 2>/dev/null |
 # ---------------------------------------------------------------------------
 # 5. Assemble.
 # ---------------------------------------------------------------------------
+test_file_total="$(test_files | wc -l | tr -d " ")"
+
 jq -n >"${TMP}/coverage.json" \
 	--slurpfile policies <(jq -s '.' "${TMP}/policies.ndjson") \
 	--slurpfile frameworks <(jq -s '.' "${TMP}/frameworks.ndjson") \
 	--slurpfile metadata "${TMP}/metadata_map.json" \
 	--argjson test_total "${test_total}" \
+	--argjson test_file_total "${test_file_total}" \
 	'
 	($policies[0]) as $pols
 	| ($frameworks[0]) as $fws
@@ -339,6 +355,7 @@ jq -n >"${TMP}/coverage.json" \
 			policies: ($enriched | map(select(.is_library | not)) | length),
 			library_files: ($enriched | map(select(.is_library)) | length),
 			rego_files: ($enriched | length),
+			rego_files_including_tests: (($enriched | length) + $test_file_total),
 
 			policies_with_tests: ($enriched | map(select((.is_library | not) and .has_test)) | length),
 			policies_with_empty_input_test: ($enriched | map(select((.is_library | not) and .has_empty_input_test)) | length),

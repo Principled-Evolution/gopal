@@ -42,7 +42,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:91 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 覆盖范围:92 条策略,涵盖国际标准、航空、行业垂直领域与跨领域原则" width="85%" />
   </picture>
 </p>
 
@@ -199,7 +199,7 @@ gopal/
 └── custom/               您的私有策略(已 git-ignore,CI 跳过)
 ```
 
-**91 条能给出判定的策略,以及它们所引用的 7 个共享库。包括测试在内共 196 个 Rego 文件。** 这些数字由 [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) 从目录树生成,并在 CI 中校验,因此不会与代码脱节。运行 `jq .totals docs/coverage/coverage.json` 可查看当前数值。
+**92 条能给出判定的策略,以及它们所引用的 7 个共享库。包括测试在内共 198 个 Rego 文件。** 这些数字由 [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh) 从目录树生成,并在 CI 中校验,因此不会与代码脱节。运行 `jq .totals docs/coverage/coverage.json` 可查看当前数值。
 
 ---
 

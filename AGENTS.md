@@ -37,7 +37,7 @@ gopal/
 └── .github/workflows/        OPA + Regal CI
 ```
 
-**85 production policies. 124 Rego files including tests.**
+**92 production policies. 198 Rego files including tests.**
 
 ## Useful commands
 

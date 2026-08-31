@@ -15,7 +15,7 @@ default unbiased_automated_grading_compliant := false
 unbiased_automated_grading_compliant if {
 	every group in declarations.resolve(input, ["bias_report", "demographic_groups"]) {
 		every metric in group.fairness_metrics {
-			is_within_threshold(metric, thresholds)
+			grading_metric_within_threshold(metric, grading_thresholds)
 		}
 	}
 }
@@ -27,7 +27,7 @@ deny contains msg if {
 	failing_metrics := {metric |
 		some group in declarations.resolve(input, ["bias_report", "demographic_groups"])
 		some metric in group.fairness_metrics
-		not is_within_threshold(metric, thresholds)
+		not grading_metric_within_threshold(metric, grading_thresholds)
 	}
 	msg := sprintf("Automated grading model is not compliant. Fairness metrics are not met: %v", [failing_metrics])
 }
@@ -35,19 +35,19 @@ deny contains msg if {
 # --- Helper Functions ---
 
 # Defines acceptable thresholds for different fairness metrics.
-thresholds := {
+grading_thresholds := {
 	"equal_opportunity_difference": 0.05,
 	"average_odds_difference": 0.05,
 	"disparate_impact": 0.8, # Should be above this value
 }
 
 # Checks if a given metric is within its acceptable threshold.
-is_within_threshold(metric, thresholds) if {
+grading_metric_within_threshold(metric, grading_thresholds) if {
 	metric.name == "disparate_impact"
-	metric.value >= thresholds[metric.name]
+	metric.value >= grading_thresholds[metric.name]
 }
 
-is_within_threshold(metric, thresholds) if {
+grading_metric_within_threshold(metric, grading_thresholds) if {
 	metric.name != "disparate_impact"
-	abs(metric.value) < thresholds[metric.name]
+	abs(metric.value) < grading_thresholds[metric.name]
 }

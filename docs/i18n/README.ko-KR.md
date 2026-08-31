@@ -42,7 +42,7 @@ Rego로 작성된 [OPA](https://www.openpolicyagent.org/) 정책을 엄선한 �
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="../diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 91개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
+    <img src="../diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL 커버리지: 92개 정책, 국제 표준·항공·산업 수직 영역·공통 원칙" width="85%" />
   </picture>
 </p>
 
@@ -199,7 +199,7 @@ gopal/
 └── custom/               비공개 정책 (git-ignored, CI 제외)
 ```
 
-**판정을 내리는 정책 91개와 이들이 가져다 쓰는 공유 라이브러리 7개. 테스트를 포함해 총 196개의 Rego 파일.** 이 수치는 [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh)가 트리에서 생성하고 CI에서 검증하므로 코드와 어긋날 수 없습니다. 현재 값은 `jq .totals docs/coverage/coverage.json`으로 확인하세요.
+**판정을 내리는 정책 92개와 이들이 가져다 쓰는 공유 라이브러리 7개. 테스트를 포함해 총 198개의 Rego 파일.** 이 수치는 [`scripts/generate-coverage.sh`](../../scripts/generate-coverage.sh)가 트리에서 생성하고 CI에서 검증하므로 코드와 어긋날 수 없습니다. 현재 값은 `jq .totals docs/coverage/coverage.json`으로 확인하세요.
 
 ---
 

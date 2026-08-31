@@ -4,7 +4,7 @@
 
 ## What you're working on
 
-**GOPAL** is an 85-policy Rego library for AI compliance. The user evaluates inputs (model cards, AI-system metadata, eval results) against named regulations (EU AI Act, NIST RMF, aviation standards, FERPA/COPPA, etc.) and gets back structured compliance verdicts.
+**GOPAL** is a 92-policy Rego library for AI compliance. The user evaluates inputs (model cards, AI-system metadata, eval results) against named regulations (EU AI Act, NIST RMF, aviation standards, FERPA/COPPA, etc.) and gets back structured compliance verdicts.
 
 ## Fast orientation
 
