@@ -5,10 +5,10 @@ Thanks for considering a contribution. GOPAL is an open, community-curated libra
 ## What we welcome
 
 - **New policies** for an existing framework (e.g. an additional EU AI Act article)
-- **New frameworks** (e.g. UK AI Principles, California SB-1047 successor, MAS banking AI guidance)
+- **New frameworks** backed by a named governance instrument (e.g. MAS FEAT or scoped EU GDPR articles)
 - **New industry verticals** (e.g. media, energy, defence)
 - **Fixes** for bugs in existing policy logic
-- **Tests.** Every policy should have a sibling `*_test.rego`. Missing tests on existing policies are open invitations.
+- **Tests.** Every policy has a sibling `*_test.rego`; regression tests for uncovered edge cases and stronger allow/deny cases are welcome.
 - **Translations.** The README ships in 5 languages, and a native speaker's review of any of them helps a lot.
 - **Documentation** improvements (CONTRIBUTING, README, AGENTS, STYLE)
 
@@ -25,21 +25,30 @@ Thanks for considering a contribution. GOPAL is an open, community-curated libra
 ```bash
 # One-time setup
 pip install pre-commit
-curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64 \
+curl -L -o opa https://openpolicyagent.org/downloads/v1.20.1/opa_linux_amd64 \
   && chmod +x opa && sudo mv opa /usr/local/bin/
-curl -L -o regal https://github.com/open-policy-agent/regal/releases/latest/download/regal_Linux_x86_64 \
+curl -L -o regal https://github.com/open-policy-agent/regal/releases/download/v0.42.0/regal_Linux_x86_64 \
   && chmod +x regal && sudo mv regal /usr/local/bin/
 pre-commit install
 
 # Run the checks CI runs
 opa check --ignore custom/ --ignore dist .
 regal lint --ignore-files custom/ .
+opa test --ignore custom/ --ignore dist --ignore '*.yml' --ignore '*.yaml' --ignore '*.json' .
+scripts/generate-coverage.sh --check
+scripts/check-deprecations.sh
+scripts/check-anchors.sh
+scripts/check-test-coverage.sh
+scripts/check-eval-conflicts.sh
+scripts/check-version-refs.sh
+scripts/model-card-coverage.sh --check
+scripts/build-playground.sh --verify
 
-# Run tests for a specific package
+# During development, run a narrower package test as needed
 opa test international/eu_ai_act/v1/
 ```
 
-If `opa check` fails it usually means a typo in a package path or an undeclared rule. If `regal lint` fails, run with `--format pretty` for human-readable advice on the issue.
+The YAML and JSON ignores keep `opa test` from loading issue templates and example inputs as data. If `opa check` fails it usually means a typo in a package path or an undeclared rule. If `regal lint` fails, run with `--format pretty` for human-readable advice on the issue.
 
 ## Policy authoring conventions
 
