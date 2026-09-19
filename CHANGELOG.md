@@ -5,6 +5,12 @@ All notable changes to **GOPAL** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [COMPATIBILITY.md](docs/COMPATIBILITY.md) for the versioning model applied to individual policy directories.
 
+## [Unreleased]
+
+### Changed
+
+- Refreshed the contributor guide to match the current test coverage, pinned CI tool versions, and full local check set.
+
 ## [2.0.0]: 2026-08-29
 
 Breaking. One input format goes away and three policies get stricter. If you
