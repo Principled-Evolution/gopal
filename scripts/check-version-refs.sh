@@ -160,7 +160,7 @@ check_count docs/diagrams/diagram1_hero_numbers_light.svg 'text-anchor="middle">
 # while the tree held 198, inside the very sentence that says these figures
 # are generated and cannot drift. It is now in coverage.json, so it can be
 # checked like the rest.
-check_count README.md '198 Rego files including tests.' "README total file count"
+check_count README.md '%T% Rego files including tests.' "README total file count"
 
 # The translated front pages carried the previous count long after the English
 # one moved: four of them said 91 policies, including in the alt text that a

@@ -37,7 +37,7 @@
 
 **GOPAL: Governance Open Policy Agent Library.** An open policy pack for AI regulation.
 
-92 policies that translate published regulation into industry-standard policy-as-code, written in Rego for [OPA](https://www.openpolicyagent.org/). Each one takes a named instrument, encodes its obligations as executable rules, cites the article or control it enforces, ships with tests, and appears in a coverage matrix that states what is implemented and what is not. The EU AI Act, NIST AI RMF, aviation safety standards, FERPA and COPPA in education, fair-lending rules in banking, and more.
+93 policies that translate published regulation into industry-standard policy-as-code, written in Rego for [OPA](https://www.openpolicyagent.org/). Each one takes a named instrument, encodes its obligations as executable rules, cites the article or control it enforces, ships with tests, and appears in a coverage matrix that states what is implemented and what is not. The EU AI Act, NIST AI RMF, aviation safety standards, FERPA and COPPA in education, fair-lending rules in banking, and more.
 
 Run them against two kinds of input: facts you declare about the system and the organisation around it, and metrics an evaluator measures. You get back a structured, machine-readable verdict you can drop into CI, an audit log, or a regulator submission.
 
@@ -70,7 +70,7 @@ Manually supplying a value is still an assertion unless the value is backed by t
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/diagram1_hero_numbers_dark.svg">
-    <img src="docs/diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 92 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
+    <img src="docs/diagrams/diagram1_hero_numbers_light.svg" alt="GOPAL coverage: 93 policies across international standards, aviation, industry verticals, and cross-cutting principles" width="85%" />
   </picture>
 </p>
 
@@ -277,7 +277,7 @@ gopal/
 └── custom/               Your private policies (git-ignored, CI-skipped)
 ```
 
-**92 policies that reach a verdict, plus 7 shared libraries they import. 198 Rego files including tests.** These figures are generated from the tree by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI, so they cannot drift from the code. Run `jq .totals docs/coverage/coverage.json` for the current numbers.
+**93 policies that reach a verdict, plus 7 shared libraries they import. 200 Rego files including tests.** These figures are generated from the tree by [`scripts/generate-coverage.sh`](scripts/generate-coverage.sh) and checked in CI, so they cannot drift from the code. Run `jq .totals docs/coverage/coverage.json` for the current numbers.
 
 ---
 

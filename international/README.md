@@ -28,7 +28,13 @@ This directory contains policies for named regulatory frameworks that cross a si
 - **standards/**: Aviation industry standards (not tied to one regulator)
   - **v1/**: 2 policies: `rtca_do_365.rego` (Detect and Avoid MOPS), `iso_21384.rego` (UAS general requirements)
 
-43 policies total across 8 frameworks.
+- **uk/**: United Kingdom AI governance and automated decision-making
+  - **v1/**: 6 policies covering the five cross-sectoral principles plus UK GDPR automated decision-making
+
+- **eu_copyright_dsm/**: Directive (EU) 2019/790 on copyright in the Digital Single Market
+  - **v1/**: `article_4_tdm_eligibility.rego` (Directive-level Article 4 TDM exception eligibility on supplied facts)
+
+50 policies total across 10 frameworks.
 
 ## Usage
 
