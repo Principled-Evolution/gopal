@@ -7,6 +7,7 @@
 package international.eu_copyright_dsm.v1.article_4_tdm_eligibility
 
 import data.helper_functions.declarations
+import data.helper_functions.reporting
 import rego.v1
 
 metadata := {
@@ -95,9 +96,22 @@ unresolved_conditions contains "reservation_status_unrecognized" if {
 	}
 }
 
-report := {
-	"policy": "eu_copyright_dsm.article_4_tdm_eligibility",
-	"result": eligible,
-	"unresolved_conditions": sort(unresolved_conditions),
-	"scope": "Directive-level Article 4 exception eligibility on supplied facts only",
+policy_metrics := {
+	"eligibility": {
+		"name": "Article 4 exception eligibility",
+		"value": eligible,
+		"control_passed": eligible,
+	},
+	"unresolved_conditions": {
+		"name": "Unresolved Article 4 conditions",
+		"value": sort(unresolved_conditions),
+		"control_passed": count(unresolved_conditions) == 0,
+	},
+	"scope": {
+		"name": "Evaluation scope",
+		"value": "Directive-level Article 4 exception eligibility on supplied facts only",
+		"control_passed": true,
+	},
 }
+
+report := reporting.compose_report("eu_copyright_dsm.article_4_tdm_eligibility", eligible, policy_metrics)

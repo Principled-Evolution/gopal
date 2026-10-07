@@ -155,6 +155,8 @@ check_count docs/diagrams/diagram1_hero_numbers_dark.svg '<desc>%P% production R
 # on the page still read 91. Checking only the accessible text would have
 # passed that.
 check_count docs/diagrams/diagram1_hero_numbers_light.svg 'text-anchor="middle">%P%</text>' "numbers diagram figure, light"
+check_count docs/diagrams/diagram1_hero_numbers_light.svg '<text x="340" y="60" font-size="36" font-weight="500" fill="#d97706" text-anchor="middle">%F%</text>' "framework figure, light"
+check_count docs/diagrams/diagram1_hero_numbers_dark.svg '<text x="340" y="60" font-size="36" font-weight="500" fill="#fbbf24" text-anchor="middle">%F%</text>' "framework figure, dark"
 
 # The count of Rego files including tests was hand-maintained and read 196
 # while the tree held 198, inside the very sentence that says these figures
