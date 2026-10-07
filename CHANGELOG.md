@@ -5,6 +5,12 @@ All notable changes to **GOPAL** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). See [COMPATIBILITY.md](docs/COMPATIBILITY.md) for the versioning model applied to individual policy directories.
 
+## Unreleased
+
+### Added
+
+- Directive (EU) 2019/790 Article 4 text-and-data-mining exception eligibility policy with provider-neutral attested inputs and fail-closed unresolved-condition reporting.
+
 ## [2.0.0]: 2026-08-29
 
 Breaking. One input format goes away and three policies get stricter. If you
