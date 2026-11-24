@@ -118,7 +118,7 @@ that consumes it.
 ### 2. Separate organisation or product facts from per-system facts
 
 <!-- DECLARATION_SCOPE_SUMMARY:START -->
-The first field-by-field batch classifies **20 of 150 unique declared fields**: **9 organisation/product-level** and **11 per-system**. **8 cases are marked uncertain** for review; 130 fields remain unclassified. See the [generated field-by-field classification](declaration-scope.md).
+The first field-by-field batch classifies **10 of 150 unique declared fields**: **5 organisation/product-level** and **5 per-system**. **5 cases are marked uncertain** for review; 140 fields remain unclassified. See the [generated field-by-field classification](declaration-scope.md).
 <!-- DECLARATION_SCOPE_SUMMARY:END -->
 
 `ce_marking.affixed` and `declaration.drawn_up` may be recorded once for a

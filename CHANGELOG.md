@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Add a manifest-backed, field-by-field scope classification for the first batch of EU AI Act declarations.
+- Add a manifest-backed, field-by-field scope classification for ten EU AI Act provider fields.
 
 ## [2.0.0]: 2026-08-29
 
