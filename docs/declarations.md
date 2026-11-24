@@ -115,20 +115,18 @@ will feel like a compliance questionnaire because that is what it has become.
 The applicability model is already in the policies. What is missing is anything
 that consumes it.
 
-### 2. Separate what is declared once from what is declared per release
+### 2. Separate organisation or product facts from per-system facts
 
-Of the 150 unique declared fields, roughly a third look to be organisation or
-product level rather than per system. That proportion is an estimate and is
-being replaced by a field-by-field classification with reasons, tracked in
-[issue #93](https://github.com/Principled-Evolution/gopal/issues/93); every
-other figure in this document regenerates from the playground manifest, and
-this one should too.
+<!-- DECLARATION_SCOPE_SUMMARY:START -->
+The first field-by-field batch classifies **10 of 150 unique declared fields**: **5 organisation/product-level** and **5 per-system**. **5 cases are marked uncertain** for review; 140 fields remain unclassified. See the [generated field-by-field classification](declaration-scope.md).
+<!-- DECLARATION_SCOPE_SUMMARY:END -->
 
-`ce_marking.affixed`, `declaration.drawn_up`, `provider.quality_management_system`
-are properties of a company or a product line, not of this week's build. They
-should be asserted once, in one document, and inherited by every system that
-company ships. Re-asking them per system is most of the perceived burden and
-none of the value.
+`ce_marking.affixed` and `declaration.drawn_up` may be recorded once for a
+marketed product and reused across deployments of that same system, subject to
+its conformity scope. They should not be inherited automatically by materially
+different systems or product variants. `provider.quality_management_system`
+is maintained by the provider and can cover multiple products. Re-asking these
+facts for every deployment can add burden without adding useful information.
 
 ### 3. Derive what is actually observable
 

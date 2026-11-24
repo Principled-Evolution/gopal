@@ -107,6 +107,12 @@ jobs:
         run: scripts/check-version-refs.sh
         working-directory: ${{ github.workspace }}
 
+      # The organisation/product versus per-system counts in declarations.md
+      # are generated from the current manifest and reject stale field names.
+      - name: Check the declaration scope classification is current
+        run: scripts/declaration-scope-coverage.sh --check
+        working-directory: ${{ github.workspace }}
+
       # The published claim that a model card answers 8 of 184 declared facts
       # has to stay checkable. This regenerates the analysis and fails if the
       # committed document is stale, or if the classification names a field no
